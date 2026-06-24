@@ -4,6 +4,7 @@ import { useMZStore } from '@/stores/useMZStore';
 import ControlPanel, { SliderControl, InfoItem } from '@/components/common/ControlPanel';
 import MZCanvas from '@/components/mz-modulator/MZCanvas';
 import { mzOutputPower, mzTransferFunction } from '@/utils/modulationMath';
+import MathRenderer from '@/components/common/MathRenderer';
 
 export default function MZModulatorPage() {
   const {
@@ -120,7 +121,7 @@ export default function MZModulatorPage() {
               通过电光效应改变其中一臂的折射率，从而控制两臂的相位差。
             </p>
             <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
-              {'$E_{out} = E_{in} \\cdot \\cos\\left(\\frac{\\Delta\\phi}{2}\\right)$'}
+              <MathRenderer>{'$E_{out} = E_{in} \\cdot \\cos\\left(\\frac{\\Delta\\phi}{2}\\right)$'}</MathRenderer>
             </div>
           </div>
           <div>
@@ -130,7 +131,7 @@ export default function MZModulatorPage() {
               通过施加电压控制相位，实现对光强的调制。
             </p>
             <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
-              {'$$P_{out} = P_{in} \\cdot \\cos^2\\left(\\frac{\\pi V}{2V_\\pi}\\right)$$'}
+              <MathRenderer>{'$$P_{out} = P_{in} \\cdot \\cos^2\\left(\\frac{\\pi V}{2V_\\pi}\\right)$$'}</MathRenderer>
             </div>
           </div>
         </div>

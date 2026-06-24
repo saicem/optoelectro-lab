@@ -4,6 +4,7 @@ import { useInterferenceStore } from '@/stores/useInterferenceStore';
 import ControlPanel, { SliderControl, InfoItem } from '@/components/common/ControlPanel';
 import InterferenceCanvas from '@/components/interference/InterferenceCanvas';
 import { wavelengthToColor, interferenceIntensity } from '@/utils/waveMath';
+import MathRenderer from '@/components/common/MathRenderer';
 
 export default function InterferencePage() {
   const {
@@ -124,7 +125,7 @@ export default function InterferencePage() {
               当两列或多列波在空间相遇时，在相遇区域内每一点的振动是各列波单独作用于该点所产生的振动的合成。
             </p>
             <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
-              {'$E = E_1 + E_2 = A_1\\cos(\\omega t + \\phi_1) + A_2\\cos(\\omega t + \\phi_2)$'}
+              <MathRenderer>{'$E = E_1 + E_2 = A_1\\cos(\\omega t + \\phi_1) + A_2\\cos(\\omega t + \\phi_2)$'}</MathRenderer>
             </div>
           </div>
           <div>
@@ -133,7 +134,7 @@ export default function InterferencePage() {
               两束相干光叠加后的光强不仅取决于各自的强度，还与它们之间的相位差有关。
             </p>
             <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
-              {'$$I = I_1 + I_2 + 2\\sqrt{I_1 I_2}\\cos(\\Delta\\phi)$$'}
+              <MathRenderer>{'$$I = I_1 + I_2 + 2\\sqrt{I_1 I_2}\\cos(\\Delta\\phi)$$'}</MathRenderer>
             </div>
           </div>
         </div>

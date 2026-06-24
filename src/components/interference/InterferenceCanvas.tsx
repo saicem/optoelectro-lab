@@ -128,7 +128,7 @@ export default function InterferenceCanvas() {
       const barHeight = intensity * 40;
 
       const gradient = ctx.createLinearGradient(0, intensityY, 0, intensityY - barHeight);
-      gradient.addColorStop(0, color + '40');
+      gradient.addColorStop(0, color + '66');
       gradient.addColorStop(1, color);
       ctx.fillStyle = gradient;
       ctx.fillRect(x, intensityY - barHeight, barWidth, barHeight);

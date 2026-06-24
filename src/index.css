@@ -52,3 +52,51 @@ body {
 .glow-text {
   text-shadow: 0 0 10px currentColor;
 }
+
+/* KaTeX math rendering styles */
+.katex {
+  font-size: 1.1em;
+  color: #e2e8f0;
+}
+
+.katex-display {
+  margin: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+.katex-display > .katex {
+  text-align: center;
+}
+
+.katex .base {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.katex .mord {
+  color: #e2e8f0;
+}
+
+.katex .mop {
+  color: #94a3b8;
+}
+
+.katex .mbin {
+  color: #00ff88;
+}
+
+.katex .mrel {
+  color: #00d4ff;
+}
+
+.katex .mopen,
+.katex .mclose {
+  color: #94a3b8;
+}
+
+.katex .mpunct {
+  color: #94a3b8;
+}

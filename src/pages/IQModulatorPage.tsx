@@ -148,9 +148,9 @@ export default function IQModulatorPage() {
               IQ 调制将两个独立的基带信号（I 路和 Q 路）分别调制到相位相差 90° 的两个载波上，
               然后合成为一个信号传输，频谱效率翻倍。
             </p>
-            <p className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg inline-block">
-              s(t) = I·cos(ωt) + Q·sin(ωt)
-            </p>
+            <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
+              $$s(t) = I\cos(\omega t) + Q\sin(\omega t)$$
+            </div>
           </div>
           <div>
             <p className="mb-2">
@@ -158,9 +158,9 @@ export default function IQModulatorPage() {
               以 I 为横轴、Q 为纵轴的复平面表示。每个符号对应星座图上的一个点，
               其位置决定了信号的幅度和相位。
             </p>
-            <p className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg inline-block">
-              A = √(I² + Q²),  φ = arctan(Q/I)
-            </p>
+            <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
+              $$A = \sqrt{I^2 + Q^2}, \quad \phi = \arctan\left(\frac{Q}{I}\right)$$
+            </div>
           </div>
         </div>
       </div>

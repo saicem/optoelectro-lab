@@ -165,9 +165,9 @@ export default function PolarizationPage() {
               完全偏振光的偏振态可由斯托克斯矢量 (S₀, S₁, S₂, S₃) 描述，
               对应庞加莱球面上的一个点。偏振度 DOP 表示光的偏振程度。
             </p>
-            <p className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg inline-block">
-              DOP = √(S₁² + S₂² + S₃²) / S₀
-            </p>
+            <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
+              $$\text{DOP} = \frac{\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}$$
+            </div>
           </div>
           <div>
             <p className="mb-2">
@@ -175,9 +175,9 @@ export default function PolarizationPage() {
               利用光的两个正交偏振态（X 和 Y）作为独立信道传输数据，
               可使光纤通信系统的容量翻倍，是现代高速光通信的关键技术。
             </p>
-            <p className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg inline-block">
-              E(t) = Eₓ·cos(ωt)·x̂ + E_y·cos(ωt+δ)·ŷ
-            </p>
+            <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
+              $$\vec{E}(t) = E_x\cos(\omega t)\hat{x} + E_y\cos(\omega t + \delta)\hat{y}$$
+            </div>
           </div>
         </div>
       </div>

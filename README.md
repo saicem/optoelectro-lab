@@ -1,57 +1,124 @@
-# React + TypeScript + Vite
+# 光电效应可视化平台
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个基于 React 的交互式光学可视化平台，通过精美的动画和实时参数控制，帮助理解光电子器件的工作原理。
 
-Currently, two official plugins are available:
+![平台预览](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Vite](https://img.shields.io/badge/Vite-5-purple) ![License](https://img.shields.io/badge/license-MIT-green)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 在线访问
 
-## Expanding the ESLint configuration
+**GitHub Pages**: https://username.github.io/opto-electronic-visualizer/
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 功能模块
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 1. 光波干涉
+
+实时演示双光束干涉现象，支持调节波长、振幅和相位差。
+
+**核心公式**：
+
+双光束干涉强度：
+$$I = I_1 + I_2 + 2\sqrt{I_1 I_2}\cos(\Delta\phi)$$
+
+其中相位差：
+$$\Delta\phi = \frac{2\pi}{\lambda}\Delta x + \Delta\phi_0$$
+
+条纹可见度：
+$$V = \frac{I_{max} - I_{min}}{I_{max} + I_{min}}$$
+
+### 2. MZ 调制器
+
+马赫-曾德电光调制器原理演示，展示光信号调制过程。
+
+**核心公式**：
+
+输出电场：
+$$E_{out} = E_{in} \cdot \cos\left(\frac{\Delta\phi}{2}\right) e^{i\Delta\phi/2}$$
+
+输出功率：
+$$P_{out} = P_{in} \cdot \cos^2\left(\frac{\Delta\phi}{2}\right)$$
+
+调制关系：
+$$\Delta\phi = \frac{\pi V}{V_\pi}$$
+
+### 3. IQ 调制器
+
+正交幅度调制可视化，支持 QPSK、16QAM、64QAM 等调制格式。
+
+**核心公式**：
+
+IQ 调制信号：
+$$s(t) = I \cdot \cos(\omega t) + Q \cdot \sin(\omega t) = A \cdot \cos(\omega t - \phi)$$
+
+幅度与相位：
+$$A = \sqrt{I^2 + Q^2}, \quad \phi = \arctan\left(\frac{Q}{I}\right)$$
+
+### 4. XY 偏振复用
+
+偏振态可视化与双通道复用技术，基于斯托克斯矢量分析。
+
+**核心公式**：
+
+斯托克斯矢量：
+$$S_0 = E_x^2 + E_y^2$$
+$$S_1 = E_x^2 - E_y^2$$
+$$S_2 = 2E_x E_y \cos\delta$$
+$$S_3 = 2E_x E_y \sin\delta$$
+
+偏振度（DOP）：
+$$DOP = \frac{\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}$$
+
+## 技术栈
+
+| 技术 | 用途 |
+|------|------|
+| React 18 | UI 框架 |
+| TypeScript | 类型安全 |
+| Vite 5 | 构建工具 |
+| Tailwind CSS | 样式框架 |
+| Zustand | 状态管理 |
+| Framer Motion | 动画效果 |
+| Canvas API | 图形渲染 |
+
+## 快速开始
+
+```bash
+# 安装依赖
+pnpm install
+
+# 开发模式
+pnpm dev
+
+# 构建生产版本
+pnpm build
+
+# 预览生产版本
+pnpm preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 项目结构
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  extends: [
-    // other configs...
-    // Enable lint rules for React
-    reactX.configs['recommended-typescript'],
-    // Enable lint rules for React DOM
-    reactDom.configs.recommended,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
+src/
+├── components/
+│   ├── common/          # 通用组件（导航栏、控制面板、模块卡片）
+│   ├── interference/    # 干涉模块 Canvas 组件
+│   ├── mz-modulator/    # MZ 调制器 Canvas 组件
+│   ├── iq-modulator/    # IQ 调制器 Canvas 组件
+│   └── polarization/    # 偏振复用 Canvas 组件
+├── pages/               # 页面组件
+├── stores/              # Zustand 状态管理
+├── hooks/               # 自定义 Hooks
+├── utils/               # 数学公式与工具函数
+└── App.tsx              # 应用入口
+```
+
+## 设计特点
+
+- **深色科技主题**：模拟光学实验室环境
+- **激光配色方案**：红、绿、蓝、青、紫五种强调色
+- **流畅动画**：60fps Canvas 渲染
+- **响应式布局**：适配桌面端和移动端
+
+## License
+
+MIT License

@@ -119,9 +119,9 @@ export default function MZModulatorPage() {
               输入光通过分束器分成两束，分别经过两臂传输后在合束器重新汇合。
               通过电光效应改变其中一臂的折射率，从而控制两臂的相位差。
             </p>
-            <p className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg inline-block">
-              E_out = E_in · cos(Δφ/2)
-            </p>
+            <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
+              $E_{out} = E_{in} \cdot \cos\left(\frac{\Delta\phi}{2}\right)$
+            </div>
           </div>
           <div>
             <p className="mb-2">
@@ -129,9 +129,9 @@ export default function MZModulatorPage() {
               输出光强随相位差呈余弦平方关系，这就是 MZ 调制器的转移函数。
               通过施加电压控制相位，实现对光强的调制。
             </p>
-            <p className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg inline-block">
-              P_out = P_in · cos²(πV/(2V_π))
-            </p>
+            <div className="font-mono text-lab-text bg-lab-bg/50 px-3 py-2 rounded-lg overflow-x-auto text-sm">
+              $$P_{out} = P_{in} \cdot \cos^2\left(\frac{\pi V}{2V_\pi}\right)$$
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
 
 ## 在线访问
 
-**GitHub Pages**: https://username.github.io/opto-electronic-visualizer/
+**GitHub Pages**: https://saicem.github.io/opto-electronic-visualizer/
 
 ## 功能模块
 
@@ -67,18 +67,6 @@ $$S_3 = 2E_x E_y \sin\delta$$
 偏振度（DOP）：
 $$DOP = \frac{\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}$$
 
-## 技术栈
-
-| 技术 | 用途 |
-|------|------|
-| React 18 | UI 框架 |
-| TypeScript | 类型安全 |
-| Vite 5 | 构建工具 |
-| Tailwind CSS | 样式框架 |
-| Zustand | 状态管理 |
-| Framer Motion | 动画效果 |
-| Canvas API | 图形渲染 |
-
 ## 快速开始
 
 ```bash
@@ -111,13 +99,6 @@ src/
 ├── utils/               # 数学公式与工具函数
 └── App.tsx              # 应用入口
 ```
-
-## 设计特点
-
-- **深色科技主题**：模拟光学实验室环境
-- **激光配色方案**：红、绿、蓝、青、紫五种强调色
-- **流畅动画**：60fps Canvas 渲染
-- **响应式布局**：适配桌面端和移动端
 
 ## License
 

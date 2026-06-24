@@ -31,6 +31,8 @@ export default function PolarizationPage() {
   const stokes = getStokes();
   const dop = calculateDOP(stokes);
 
+  const formatPiRad = (v: number) => (v / Math.PI).toFixed(2) + ' π rad';
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -96,9 +98,9 @@ export default function PolarizationPage() {
               min={0}
               max={Math.PI * 2}
               step={0.01}
-              unit=" rad"
               onChange={setDelta}
               color="#a855f7"
+              valueFormatter={formatPiRad}
             />
             <SliderControl
               label="偏振旋转角"
@@ -106,9 +108,9 @@ export default function PolarizationPage() {
               min={0}
               max={Math.PI}
               step={0.01}
-              unit=" rad"
               onChange={setRotationAngle}
               color="#00ff88"
+              valueFormatter={formatPiRad}
             />
 
             {multiplexing && (

@@ -68,6 +68,7 @@ interface SliderControlProps {
   unit?: string;
   onChange: (v: number) => void;
   color?: string;
+  valueFormatter?: (v: number) => string;
 }
 
 export function SliderControl({
@@ -79,16 +80,19 @@ export function SliderControl({
   unit = '',
   onChange,
   color = '#00d4ff',
+  valueFormatter,
 }: SliderControlProps) {
   const percentage = ((value - min) / (max - min)) * 100;
+  const displayValue = valueFormatter
+    ? valueFormatter(value)
+    : value.toFixed(step < 1 ? 2 : 0) + unit;
 
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
         <label className="text-sm text-lab-muted">{label}</label>
         <span className="text-sm font-mono text-lab-text">
-          {value.toFixed(step < 1 ? 2 : 0)}
-          {unit}
+          {displayValue}
         </span>
       </div>
       <div className="relative h-2 bg-lab-bg rounded-full overflow-hidden border border-lab-border">

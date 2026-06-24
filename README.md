@@ -6,7 +6,7 @@
 
 ## 在线访问
 
-**GitHub Pages**: https://saicem.github.io/opto-electronic-visualizer/
+**GitHub Pages**: https://saicem.github.io/photoelectricity-visualization/
 
 ## 功能模块
 

@@ -25,6 +25,8 @@ export default function MZModulatorPage() {
   const outputPower = mzOutputPower(inputPower, currentPhase);
   const extinctionRatio = inputPower > 0 ? 10 * Math.log10(inputPower / Math.max(outputPower, 0.001)) : 0;
 
+  const formatPiRad = (v: number) => (v / Math.PI).toFixed(2) + ' π rad';
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -60,9 +62,9 @@ export default function MZModulatorPage() {
               min={0}
               max={Math.PI}
               step={0.01}
-              unit=" rad"
               onChange={setModulationDepth}
               color="#f59e0b"
+              valueFormatter={formatPiRad}
             />
             <SliderControl
               label="直流偏置"
@@ -70,9 +72,9 @@ export default function MZModulatorPage() {
               min={0}
               max={Math.PI * 2}
               step={0.01}
-              unit=" rad"
               onChange={setPhaseShift}
               color="#00d4ff"
+              valueFormatter={formatPiRad}
             />
             <SliderControl
               label="输入光功率"
@@ -103,7 +105,7 @@ export default function MZModulatorPage() {
             </div>
             <div className="space-y-1">
               <InfoItem label="输出光功率" value={outputPower.toFixed(3) + ' mW'} color="#00ff88" />
-              <InfoItem label="相对相移" value={currentPhase.toFixed(2) + ' rad'} color="#f59e0b" />
+              <InfoItem label="相对相移" value={formatPiRad(currentPhase)} color="#f59e0b" />
               <InfoItem label="消光比" value={extinctionRatio.toFixed(1) + ' dB'} color="#ff3366" />
               <InfoItem label="调制效率" value={((outputPower / Math.max(inputPower, 0.001)) * 100).toFixed(1) + '%'} color="#00d4ff" />
             </div>

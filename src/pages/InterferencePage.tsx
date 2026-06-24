@@ -24,11 +24,14 @@ export default function InterferencePage() {
   const color = wavelengthToColor(wavelength);
   const I1 = amplitude1 ** 2;
   const I2 = amplitude2 ** 2;
+  const currentIntensity = interferenceIntensity(I1, I2, phaseDiff);
   const maxIntensity = interferenceIntensity(I1, I2, 0);
   const minIntensity = interferenceIntensity(I1, I2, Math.PI);
   const visibility = maxIntensity + minIntensity > 0
     ? (maxIntensity - minIntensity) / (maxIntensity + minIntensity)
     : 0;
+
+  const formatPiRad = (v: number) => (v / Math.PI).toFixed(2) + ' π rad';
 
   return (
     <motion.div
@@ -93,9 +96,9 @@ export default function InterferencePage() {
               min={0}
               max={Math.PI * 2}
               step={0.01}
-              unit=" rad"
               onChange={setPhaseDiff}
               color="#00ff88"
+              valueFormatter={formatPiRad}
             />
           </ControlPanel>
 
@@ -108,9 +111,10 @@ export default function InterferencePage() {
               <InfoItem label="频率" value={(3e8 / (wavelength * 1e-9) / 1e12).toFixed(2) + ' THz'} />
               <InfoItem label="强度 1 (I₁)" value={I1.toFixed(3)} color={color} />
               <InfoItem label="强度 2 (I₂)" value={I2.toFixed(3)} color="#a855f7" />
-              <InfoItem label="最大强度" value={maxIntensity.toFixed(3)} color="#00ff88" />
+              <InfoItem label="叠加波光强" value={currentIntensity.toFixed(3)} color="#00ff88" />
+              <InfoItem label="最大强度" value={maxIntensity.toFixed(3)} color="#00d4ff" />
               <InfoItem label="最小强度" value={minIntensity.toFixed(3)} color="#ff3366" />
-              <InfoItem label="条纹可见度" value={(visibility * 100).toFixed(1) + '%'} color="#00d4ff" />
+              <InfoItem label="条纹可见度" value={(visibility * 100).toFixed(1) + '%'} color="#a855f7" />
             </div>
           </div>
         </div>

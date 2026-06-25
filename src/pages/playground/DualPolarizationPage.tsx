@@ -77,7 +77,7 @@ export default function DualPolarizationPage() {
       </div>
 
       <div className="grid lg:grid-cols-[1fr_340px] gap-4">
-        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-3 h-[480px]">
+        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-3 h-[560px]">
           <DualPolarizationCanvas />
         </div>
 

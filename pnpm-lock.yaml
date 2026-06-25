@@ -12,7 +12,7 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       framer-motion:
-        specifier: ^11.15.0
+        specifier: ^11.18.2
         version: 11.18.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       katex:
         specifier: ^0.17.0
@@ -27,62 +27,62 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-router-dom:
-        specifier: ^7.3.0
+        specifier: ^7.18.0
         version: 7.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
-        specifier: ^3.0.2
+        specifier: ^3.6.0
         version: 3.6.0
       zustand:
-        specifier: ^5.0.3
+        specifier: ^5.0.14
         version: 5.0.14(@types/react@18.3.31)(react@18.3.1)
     devDependencies:
       '@eslint/js':
-        specifier: ^9.25.0
+        specifier: ^9.39.4
         version: 9.39.4
       '@types/node':
-        specifier: ^22.15.30
+        specifier: ^22.20.0
         version: 22.20.0
       '@types/react':
-        specifier: ^18.3.12
+        specifier: ^18.3.31
         version: 18.3.31
       '@types/react-dom':
-        specifier: ^18.3.1
+        specifier: ^18.3.7
         version: 18.3.7(@types/react@18.3.31)
       '@vitejs/plugin-react':
-        specifier: ^4.4.1
+        specifier: ^4.7.0
         version: 4.7.0(vite@6.4.3(@types/node@22.20.0)(jiti@1.21.7))
       autoprefixer:
-        specifier: ^10.4.21
-        version: 10.5.1(postcss@8.5.15)
+        specifier: ^10.5.2
+        version: 10.5.2(postcss@8.5.15)
       babel-plugin-react-dev-locator:
-        specifier: ^1.0.0
+        specifier: ^1.0.6
         version: 1.0.6
       eslint:
-        specifier: ^9.25.0
+        specifier: ^9.39.4
         version: 9.39.4(jiti@1.21.7)
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.39.4(jiti@1.21.7))
       eslint-plugin-react-refresh:
-        specifier: ^0.4.19
+        specifier: ^0.4.26
         version: 0.4.26(eslint@9.39.4(jiti@1.21.7))
       globals:
-        specifier: ^16.0.0
+        specifier: ^16.5.0
         version: 16.5.0
       postcss:
-        specifier: ^8.5.3
+        specifier: ^8.5.15
         version: 8.5.15
       tailwindcss:
-        specifier: ^3.4.17
+        specifier: ^3.4.19
         version: 3.4.19
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
       typescript-eslint:
-        specifier: ^8.30.1
+        specifier: ^8.62.0
         version: 8.62.0(eslint@9.39.4(jiti@1.21.7))(typescript@5.8.3)
       vite:
-        specifier: ^6.3.5
+        specifier: ^6.4.3
         version: 6.4.3(@types/node@22.20.0)(jiti@1.21.7)
       vite-tsconfig-paths:
         specifier: ^5.1.4
@@ -674,8 +674,8 @@ packages:
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  autoprefixer@10.5.1:
-    resolution: {integrity: sha512-jwM2pcTuCWUoN70FEvf5XrXyDbUgRURK4FnU8v0jWZZYU/KkVvN9T33mu1sVLFY9JW3kTWzKheEpn6xYLRc/VA==}
+  autoprefixer@10.5.2:
+    resolution: {integrity: sha512-rD5t5DwOjJdmSORcTq64j8MawTC+tbQ+HHqjR4NDumamy/ambn1UJrlKL+KdwujWxMkFjPM3pPHOEA9tl4767Q==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -1113,8 +1113,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  node-releases@2.0.49:
-    resolution: {integrity: sha512-f06bl1D+8ZDkn2oOQQKAh5/otFWqVnM1Q5oerA8Pex7UfT66Tx4IPHIqVVFKqFT3FUtaDstdgkM7yT7JWhqxfw==}
+  node-releases@2.0.50:
+    resolution: {integrity: sha512-J6l92tKHX6w8Jy5nO1Vuc01NoIiRGi/d6qBKVxh+IQ8Cr3b6HbVNfKiF8ZpFKufTwpwxMmce2W3iQZ861ZRyTg==}
     engines: {node: '>=18'}
 
   normalize-path@3.0.0:
@@ -2029,7 +2029,7 @@ snapshots:
 
   argparse@2.0.1: {}
 
-  autoprefixer@10.5.1(postcss@8.5.15):
+  autoprefixer@10.5.2(postcss@8.5.15):
     dependencies:
       browserslist: 4.28.4
       caniuse-lite: 1.0.30001799
@@ -2074,7 +2074,7 @@ snapshots:
       baseline-browser-mapping: 2.10.38
       caniuse-lite: 1.0.30001799
       electron-to-chromium: 1.5.378
-      node-releases: 2.0.49
+      node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.4)
 
   callsites@3.1.0: {}
@@ -2448,7 +2448,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  node-releases@2.0.49: {}
+  node-releases@2.0.50: {}
 
   normalize-path@3.0.0: {}
 

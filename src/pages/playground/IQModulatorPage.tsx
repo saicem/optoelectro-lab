@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useIQStore } from '@/stores/useIQStore';
 import ControlPanel, { SliderControl, SelectControl, InfoItem } from '@/components/common/ControlPanel';
 import IQCanvas from '@/components/iq-modulator/IQCanvas';
-import { getSymbols, iqAmplitude, iqPhase } from '@/utils/modulationMath';
+import { getSymbols, iqAmplitude } from '@/utils/modulationMath';
 import type { ModulationFormat } from '@/utils/modulationMath';
 import MathRenderer from '@/components/common/MathRenderer';
 
@@ -17,19 +17,24 @@ export default function IQModulatorPage() {
     iComponent,
     qComponent,
     isPlaying,
+    pPhaseDiff,
     setModulationFormat,
     setSymbolIndex,
     setAutoCycle,
     setIComponent,
     setQComponent,
     setIsPlaying,
+    setPPhaseDiff,
     reset,
   } = useIQStore();
 
   const symbols = getSymbols(modulationFormat);
-  const amplitude = iqAmplitude(iComponent, qComponent);
-  const phase = iqPhase(iComponent, qComponent);
+  const decodedI = iComponent + qComponent * Math.cos(pPhaseDiff);
+  const decodedQ = qComponent * Math.sin(pPhaseDiff);
+  const amplitude = iqAmplitude(decodedI, decodedQ);
   const bitsPerSymbol = { QPSK: 2, '16QAM': 4, '64QAM': 6 }[modulationFormat];
+
+  const signalValue = symbolIndex.toString(2).padStart(bitsPerSymbol, '0');
 
   return (
     <motion.div
@@ -58,7 +63,7 @@ export default function IQModulatorPage() {
       </div>
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-6">
-        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-4 h-[480px]">
+        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-4 min-h-[900px]">
           <IQCanvas />
         </div>
 
@@ -111,7 +116,7 @@ export default function IQModulatorPage() {
             <div className="pt-2 border-t border-lab-border/50">
               <p className="text-xs text-lab-muted mb-3 flex items-center gap-1">
                 <Shuffle className="w-3 h-3" />
-                手动调节分量
+                手动调节
               </p>
               <SliderControl
                 label="I 分量"
@@ -131,6 +136,16 @@ export default function IQModulatorPage() {
                 onChange={setQComponent}
                 color="#a855f7"
               />
+              <SliderControl
+                label="P 相位差"
+                value={pPhaseDiff / Math.PI}
+                min={0}
+                max={1}
+                step={0.01}
+                onChange={(v) => setPPhaseDiff(v * Math.PI)}
+                color="#f59e0b"
+                valueFormatter={(v) => v.toFixed(2) + 'π'}
+              />
             </div>
           </ControlPanel>
 
@@ -140,10 +155,8 @@ export default function IQModulatorPage() {
               <h3 className="font-display font-semibold text-lab-text">信号参数</h3>
             </div>
             <div className="space-y-1">
-              <InfoItem label="I 分量" value={iComponent.toFixed(3)} color="#00d4ff" />
-              <InfoItem label="Q 分量" value={qComponent.toFixed(3)} color="#a855f7" />
               <InfoItem label="幅度" value={amplitude.toFixed(3)} color="#00ff88" />
-              <InfoItem label="相位" value={(phase * 180 / Math.PI).toFixed(1) + '°'} color="#f59e0b" />
+              <InfoItem label="信号值" value={signalValue} color="#00ff88" />
               <InfoItem label="星座点数" value={symbols.length.toString()} />
               <InfoItem label="每符号比特" value={bitsPerSymbol + ' bit'} color="#ff3366" />
             </div>
@@ -157,11 +170,14 @@ export default function IQModulatorPage() {
           <div>
             <p className="mb-2">
               <span className="text-laser-purple font-semibold">调制（发送端）：</span>
-              IQ 调制将两个独立的基带信号（I 路和 Q 路）分别调制到相位相差 90° 的两个载波上，
+              IQ 调制将两个独立的基带信号（I 路和 Q 路）分别调制到相位相差 π/2 的两个载波上，
               然后合成为一个信号传输，频谱效率翻倍。
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-              <MathRenderer>{'$$s(t) = I\\cos(\\omega t) + Q\\sin(\\omega t)$$'}</MathRenderer>
+              <MathRenderer>{'$$s(t) = I\\cos(\\omega t) + Q\\cos(\\omega t - \\Delta\\phi)$$'}</MathRenderer>
+              <div className="text-xs text-lab-muted mt-1">
+                当 Δφ = π/2 时，cos(ωt - π/2) = sin(ωt)，退化为标准 IQ 调制形式
+              </div>
             </div>
           </div>
           <div>

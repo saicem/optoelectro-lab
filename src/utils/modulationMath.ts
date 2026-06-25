@@ -24,10 +24,10 @@ export function iqPhase(i: number, q: number): number {
 }
 
 export const qpskSymbols: IQPoint[] = [
-  { i: 1, q: 1 },
-  { i: -1, q: 1 },
   { i: -1, q: -1 },
+  { i: -1, q: 1 },
   { i: 1, q: -1 },
+  { i: 1, q: 1 },
 ];
 
 export const qam16Symbols: IQPoint[] = [];

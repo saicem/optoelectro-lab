@@ -17,7 +17,6 @@ import InterferencePage from "@/pages/playground/InterferencePage";
 import MZModulatorPage from "@/pages/playground/MZModulatorPage";
 import IQModulatorPage from "@/pages/playground/IQModulatorPage";
 import PolarizationPage from "@/pages/playground/PolarizationPage";
-import DualPolarizationPage from "@/pages/playground/DualPolarizationPage";
 import ReceiverPage from "@/pages/playground/ReceiverPage";
 
 function AnimatedRoutes() {
@@ -42,7 +41,6 @@ function AnimatedRoutes() {
           <Route path="/playground/mz-modulator" element={<MZModulatorPage />} />
           <Route path="/playground/iq-modulator" element={<IQModulatorPage />} />
           <Route path="/playground/polarization" element={<PolarizationPage />} />
-          <Route path="/playground/dual-polarization" element={<DualPolarizationPage />} />
           <Route path="/playground/receiver" element={<ReceiverPage />} />
         </Route>
       </Routes>

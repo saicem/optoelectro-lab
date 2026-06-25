@@ -19,6 +19,7 @@ export default {
         'laser-blue': '#3366ff',
         'laser-cyan': '#00d4ff',
         'laser-purple': '#a855f7',
+        'laser-orange': '#ff8800',
       },
       fontFamily: {
         display: ['"Orbitron"', '"Rajdhani"', 'sans-serif'],

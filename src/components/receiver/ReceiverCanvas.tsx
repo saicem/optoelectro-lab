@@ -437,7 +437,7 @@ export default function ReceiverCanvas() {
     ctx.fillStyle = '#94a3b8';
     ctx.font = '11px JetBrains Mono, monospace';
     ctx.fillText(`幅度: ${symAmp.toFixed(3)}`, waveformX, outWaveY + waveH + 18);
-    ctx.fillText(`相位: ${(symPhase * 180 / Math.PI).toFixed(1)}°`, waveformX + 110, outWaveY + waveH + 18);
+    ctx.fillText(`相位: ${(symPhase / Math.PI).toFixed(2)}π`, waveformX + 110, outWaveY + waveH + 18);
     ctx.fillText(`SNR: ${snr.toFixed(1)} dB`, waveformX + 240, outWaveY + waveH + 18);
     ctx.fillText(`采样数: ${receivedPoints.length}`, waveformX + 370, outWaveY + waveH + 18);
 

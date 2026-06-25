@@ -10,6 +10,7 @@ interface IQState {
   qComponent: number;
   isPlaying: boolean;
   time: number;
+  pPhaseDiff: number;
   setModulationFormat: (v: ModulationFormat) => void;
   setSymbolIndex: (v: number) => void;
   setAutoCycle: (v: boolean) => void;
@@ -17,20 +18,26 @@ interface IQState {
   setQComponent: (v: number) => void;
   setIsPlaying: (v: boolean) => void;
   setTime: (v: number) => void;
+  setPPhaseDiff: (v: number) => void;
   reset: () => void;
 }
 
-export const useIQStore = create<IQState>((set, get) => ({
-  modulationFormat: '16QAM',
-  symbolIndex: 5,
+export const useIQStore = create<IQState>((set, get) => {
+  const defaultFormat: ModulationFormat = 'QPSK';
+  const defaultSymbols = getSymbols(defaultFormat);
+  const defaultSymbol = defaultSymbols[0];
+  return {
+  modulationFormat: defaultFormat,
+  symbolIndex: 0,
   autoCycle: false,
-  iComponent: 0.33,
-  qComponent: 0.33,
+  iComponent: defaultSymbol.i,
+  qComponent: defaultSymbol.q,
   isPlaying: true,
   time: 0,
+  pPhaseDiff: Math.PI / 2,
   setModulationFormat: (v) => {
     const symbols = getSymbols(v);
-    const idx = Math.min(get().symbolIndex, symbols.length - 1);
+    const idx = Math.min(0, symbols.length - 1);
     const s = symbols[idx];
     set({ modulationFormat: v, symbolIndex: idx, iComponent: s.i, qComponent: s.q });
   },
@@ -45,17 +52,20 @@ export const useIQStore = create<IQState>((set, get) => ({
   setQComponent: (v) => set({ qComponent: v }),
   setIsPlaying: (v) => set({ isPlaying: v }),
   setTime: (v) => set({ time: v }),
+  setPPhaseDiff: (v) => set({ pPhaseDiff: v }),
   reset: () => {
-    const symbols = getSymbols('16QAM');
-    const s = symbols[5];
+    const symbols = getSymbols(defaultFormat);
+    const s = symbols[0];
     set({
-      modulationFormat: '16QAM',
-      symbolIndex: 5,
+      modulationFormat: defaultFormat,
+      symbolIndex: 0,
       autoCycle: false,
       iComponent: s.i,
       qComponent: s.q,
       isPlaying: true,
       time: 0,
+      pPhaseDiff: Math.PI / 2,
     });
   },
-}));
+  };
+});

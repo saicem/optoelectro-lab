@@ -1,8 +1,10 @@
-# 光电效应可视化平台
+# 光通信调制实验室
 
-一个基于 React 的交互式光学可视化平台，通过精美的动画和实时参数控制，帮助理解光电子器件的工作原理。
+一个基于 React 的交互式光通信学习与实验平台，通过精美的动画和实时参数控制，帮助理解光调制器件的工作原理。
 
-![平台预览](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Vite](https://img.shields.io/badge/Vite-5-purple) ![License](https://img.shields.io/badge/license-MIT-green)
+分为 **Learn（学习）** 和 **Playground（实验）** 两大部分，从基础概念到高阶调制技术，循序渐进。
+
+![React](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Vite](https://img.shields.io/badge/Vite-5-purple)
 
 ## 在线访问
 
@@ -10,62 +12,45 @@
 
 ## 功能模块
 
-### 1. 光波干涉
+### 📚 Learn · 学习路径
 
-实时演示双光束干涉现象，支持调节波长、振幅和相位差。
+共 9 个章节，从光波基础到光接收器，形成完整学习路径：
 
-**核心公式**：
+| 章节 | 内容 |
+|------|------|
+| 光波基础 | 光的本质、电磁波模型、波长与频率 |
+| 激光器 | 受激辐射、粒子数反转、谐振腔原理 |
+| 干涉原理 | 双光束干涉、相干条件、条纹可见度 |
+| MZ 调制器 | 马赫-曾德干涉仪、电光效应、强度调制 |
+| IQ 调制器 | 正交幅度调制、星座图、调制格式 |
+| 偏振复用 | 斯托克斯矢量、庞加莱球、偏振态 |
+| 双偏振 IQ | DP-IQM 结构、偏振旋转、双通道调制 |
+| 光接收器 | 相干接收、SNR、BER、EVM |
+| 术语表 | 30+ 光通信常用术语查询 |
 
-双光束干涉强度：
-$$I = I_1 + I_2 + 2\sqrt{I_1 I_2}\cos(\Delta\phi)$$
+### 🧪 Playground · 交互实验
 
-其中相位差：
-$$\Delta\phi = \frac{2\pi}{\lambda}\Delta x + \Delta\phi_0$$
+6 个可交互的仿真实验，支持实时参数调节：
 
-条纹可见度：
-$$V = \frac{I_{max} - I_{min}}{I_{max} + I_{min}}$$
+| 实验 | 功能特点 |
+|------|----------|
+| 光波干涉 | 调节波长/振幅/相位差，观察干涉条纹变化 |
+| MZ 调制器 | 电光调制原理演示，转移曲线实时绘制 |
+| IQ 调制器 | QPSK/16QAM/64QAM 星座图，编码解码可视化 |
+| 偏振复用 | 庞加莱球与偏振椭圆，斯托克斯参数实时计算 |
+| 双偏振 IQ | 加热器电压调节，偏振旋转与串扰分析 |
+| 光接收器 | AWGN 信道、BER vs SNR 曲线、EVM 计算 |
 
-### 2. MZ 调制器
+## 技术栈
 
-马赫-曾德电光调制器原理演示，展示光信号调制过程。
-
-**核心公式**：
-
-输出电场：
-$$E_{out} = E_{in} \cdot \cos\left(\frac{\Delta\phi}{2}\right) e^{i\Delta\phi/2}$$
-
-输出功率：
-$$P_{out} = P_{in} \cdot \cos^2\left(\frac{\Delta\phi}{2}\right)$$
-
-调制关系：
-$$\Delta\phi = \frac{\pi V}{V_\pi}$$
-
-### 3. IQ 调制器
-
-正交幅度调制可视化，支持 QPSK、16QAM、64QAM 等调制格式。
-
-**核心公式**：
-
-IQ 调制信号：
-$$s(t) = I \cdot \cos(\omega t) + Q \cdot \sin(\omega t) = A \cdot \cos(\omega t - \phi)$$
-
-幅度与相位：
-$$A = \sqrt{I^2 + Q^2}, \quad \phi = \arctan\left(\frac{Q}{I}\right)$$
-
-### 4. XY 偏振复用
-
-偏振态可视化与双通道复用技术，基于斯托克斯矢量分析。
-
-**核心公式**：
-
-斯托克斯矢量：
-$$S_0 = E_x^2 + E_y^2$$
-$$S_1 = E_x^2 - E_y^2$$
-$$S_2 = 2E_x E_y \cos\delta$$
-$$S_3 = 2E_x E_y \sin\delta$$
-
-偏振度（DOP）：
-$$DOP = \frac{\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}$$
+- **前端框架**：React 18 + TypeScript
+- **构建工具**：Vite 5
+- **状态管理**：Zustand
+- **样式方案**：Tailwind CSS
+- **动画库**：Framer Motion
+- **数学渲染**：KaTeX
+- **路由管理**：React Router v6 (HashRouter)
+- **可视化**：Canvas 2D + requestAnimationFrame
 
 ## 快速开始
 
@@ -76,6 +61,12 @@ pnpm install
 # 开发模式
 pnpm dev
 
+# 代码检查
+pnpm lint
+
+# 类型检查
+pnpm check
+
 # 构建生产版本
 pnpm build
 
@@ -83,23 +74,6 @@ pnpm build
 pnpm preview
 ```
 
-## 项目结构
+## 部署
 
-```
-src/
-├── components/
-│   ├── common/          # 通用组件（导航栏、控制面板、模块卡片）
-│   ├── interference/    # 干涉模块 Canvas 组件
-│   ├── mz-modulator/    # MZ 调制器 Canvas 组件
-│   ├── iq-modulator/    # IQ 调制器 Canvas 组件
-│   └── polarization/    # 偏振复用 Canvas 组件
-├── pages/               # 页面组件
-├── stores/              # Zustand 状态管理
-├── hooks/               # 自定义 Hooks
-├── utils/               # 数学公式与工具函数
-└── App.tsx              # 应用入口
-```
-
-## License
-
-MIT License
+项目通过 GitHub Actions 自动部署到 GitHub Pages，详见 [.github/workflows/deploy.yml](.github/workflows/deploy.yml)。

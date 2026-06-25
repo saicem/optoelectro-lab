@@ -45,7 +45,7 @@ export default function MZModulatorPage() {
       </div>
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-6">
-        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-4 aspect-video min-h-[450px] lg:min-h-[500px]">
+        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-4 h-[50vh] lg:h-[60vh]">
           <MZCanvas />
         </div>
 

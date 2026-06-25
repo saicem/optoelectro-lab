@@ -1,36 +1,87 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Waves, CircuitBoard, BarChart3, Compass, Sparkles, Zap, Target } from 'lucide-react';
-import ModuleCard from '@/components/common/ModuleCard';
+import { BookOpen, FlaskConical, Waves, CircuitBoard, BarChart3, Compass, Lightbulb, Sparkles, Zap, Target, ArrowRight } from 'lucide-react';
 
-const modules = [
+const learnModules = [
   {
-    title: '光波干涉',
-    description: '探索双缝干涉现象，观察波长、振幅和相位差如何影响干涉图样的形成。',
-    icon: <Waves className="w-7 h-7" />,
+    title: '光波基础',
+    description: '从光的本质出发，理解电磁波、波长、频率与相位的基本概念。',
+    icon: <Lightbulb className="w-7 h-7" />,
     color: '#00d4ff',
-    path: '/interference',
+    path: '/learn/light-basics',
+  },
+  {
+    title: '干涉原理',
+    description: '理解光波的叠加与干涉现象，这是光调制器的物理基础。',
+    icon: <Waves className="w-7 h-7" />,
+    color: '#00ff88',
+    path: '/learn/interference',
   },
   {
     title: 'MZ 调制器',
-    description: '马赫-曾德干涉电光调制器原理演示，理解相位调制与强度调制的转换。',
+    description: '马赫-曾德电光调制器的工作原理、结构与性能指标。',
     icon: <CircuitBoard className="w-7 h-7" />,
-    color: '#00ff88',
-    path: '/mz-modulator',
+    color: '#a855f7',
+    path: '/learn/mz-modulator',
   },
   {
     title: 'IQ 调制器',
-    description: '同相正交调制可视化，IQ 星座图与矢量分析，支持多种调制格式。',
+    description: '正交幅度调制、星座图与高阶调制格式，现代光通信的核心。',
     icon: <BarChart3 className="w-7 h-7" />,
-    color: '#a855f7',
-    path: '/iq-modulator',
+    color: '#f59e0b',
+    path: '/learn/iq-modulator',
   },
   {
-    title: 'XY 偏振复用',
-    description: '偏振态可视化与斯托克斯矢量，双通道独立调制的偏振复用技术。',
+    title: '偏振复用',
+    description: '光的偏振态、斯托克斯矢量与偏振复用技术。',
     icon: <Compass className="w-7 h-7" />,
     color: '#ff3366',
-    path: '/polarization',
+    path: '/learn/polarization',
+  },
+  {
+    title: '双偏振 IQ',
+    description: 'DP-IQM：集成偏振复用与 IQ 调制的现代高速光通信核心。',
+    icon: <BarChart3 className="w-7 h-7" />,
+    color: '#06b6d4',
+    path: '/learn/dual-polarization',
+  },
+];
+
+const playgroundModules = [
+  {
+    title: '光波干涉',
+    description: '双光束干涉的实时可视化，调节波长、振幅和相位差。',
+    icon: <Waves className="w-7 h-7" />,
+    color: '#00d4ff',
+    path: '/playground/interference',
+  },
+  {
+    title: 'MZ 调制器',
+    description: '马赫-曾德调制器交互实验，观察转移函数和输出波形。',
+    icon: <CircuitBoard className="w-7 h-7" />,
+    color: '#00ff88',
+    path: '/playground/mz-modulator',
+  },
+  {
+    title: 'IQ 调制器',
+    description: 'IQ 星座图与矢量分析，支持 QPSK/16QAM/64QAM。',
+    icon: <BarChart3 className="w-7 h-7" />,
+    color: '#a855f7',
+    path: '/playground/iq-modulator',
+  },
+  {
+    title: '偏振复用',
+    description: '偏振态可视化与斯托克斯矢量，偏振椭圆与庞加莱球。',
+    icon: <Compass className="w-7 h-7" />,
+    color: '#ff3366',
+    path: '/playground/polarization',
+  },
+  {
+    title: '双偏振 IQ',
+    description: 'DP-IQM 交互实验：调节加热器电压，观察输出变化。',
+    icon: <BarChart3 className="w-7 h-7" />,
+    color: '#06b6d4',
+    path: '/playground/dual-polarization',
   },
 ];
 
@@ -84,8 +135,8 @@ export default function HomePage() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg text-lab-muted max-w-2xl mx-auto mb-8"
         >
-          通过精美的交互式动画，深入理解光电效应与光调制技术。
-          从基础的光波干涉到先进的偏振复用，一站式学习体验。
+          从理论学习到动手实践，一站式掌握光调制技术。
+          系统学习从光波基础到双偏振 IQ 调制的完整知识体系。
         </motion.p>
 
         <motion.div
@@ -95,55 +146,128 @@ export default function HomePage() {
           className="flex flex-wrap justify-center gap-4"
         >
           <button
-            onClick={() => navigate('/interference')}
-            className="px-6 py-3 bg-laser-cyan text-lab-bg font-semibold rounded-xl hover:bg-laser-cyan/90 transition-all hover:shadow-glow-cyan"
+            onClick={() => navigate('/learn/light-basics')}
+            className="flex items-center gap-2 px-6 py-3 bg-laser-cyan text-lab-bg font-semibold rounded-xl hover:bg-laser-cyan/90 transition-all hover:shadow-glow-cyan"
           >
-            开始探索
+            <BookOpen className="w-5 h-5" />
+            开始学习
+            <ArrowRight className="w-4 h-4" />
           </button>
           <button
-            onClick={() => navigate('/mz-modulator')}
-            className="px-6 py-3 bg-lab-surface border border-lab-border text-lab-text font-semibold rounded-xl hover:border-laser-cyan/50 hover:text-laser-cyan transition-all"
+            onClick={() => navigate('/playground/interference')}
+            className="flex items-center gap-2 px-6 py-3 bg-lab-surface border border-lab-border text-lab-text font-semibold rounded-xl hover:border-laser-purple/50 hover:text-laser-purple transition-all"
           >
-            查看调制器
+            <FlaskConical className="w-5 h-5" />
+            进入实验室
           </button>
         </motion.div>
       </section>
 
-      <section>
+      <section className="grid md:grid-cols-2 gap-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
         >
-          <h2 className="text-2xl md:text-3xl font-bold font-display mb-3">
-            可视化模块
-          </h2>
-          <p className="text-lab-muted">
-            选择一个模块开始交互式学习
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-laser-cyan/20 text-laser-cyan flex items-center justify-center">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold font-display text-lab-text">Learn</h2>
+              <p className="text-sm text-lab-muted">系统学习光调制原理</p>
+            </div>
+          </div>
+          <p className="text-lab-muted mb-6 text-sm">
+            从光波基础开始，逐步深入到干涉原理、MZ 调制器、IQ 调制、偏振复用，
+            最终掌握双偏振 IQ 调制器的完整知识体系。每一章都为下一章打下基础。
           </p>
+          <div className="space-y-3">
+            {learnModules.map((mod, index) => (
+              <motion.div
+                key={mod.path}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+              >
+                <button
+                  onClick={() => navigate(mod.path)}
+                  className="w-full flex items-center gap-4 p-4 bg-lab-surface/30 border border-lab-border/50 rounded-xl hover:border-laser-cyan/30 hover:bg-lab-surface/50 transition-all group text-left"
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${mod.color}15`, color: mod.color }}
+                  >
+                    {mod.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono text-lab-muted">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="font-semibold text-lab-text group-hover:text-laser-cyan transition-colors">
+                        {mod.title}
+                      </span>
+                    </div>
+                    <p className="text-xs text-lab-muted mt-0.5">{mod.description}</p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-lab-muted group-hover:text-laser-cyan group-hover:translate-x-1 transition-all flex-shrink-0" />
+                </button>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {modules.map((mod, index) => (
-            <motion.div
-              key={mod.path}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <ModuleCard
-                title={mod.title}
-                description={mod.description}
-                icon={mod.icon}
-                color={mod.color}
-                onClick={() => navigate(mod.path)}
-              />
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-laser-purple/20 text-laser-purple flex items-center justify-center">
+              <FlaskConical className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold font-display text-lab-text">Playground</h2>
+              <p className="text-sm text-lab-muted">动手实验，直观感受</p>
+            </div>
+          </div>
+          <p className="text-lab-muted mb-6 text-sm">
+            通过交互式动画深入理解各种光调制现象。实时调节参数，
+            观察输出变化，在实践中巩固理论知识。
+          </p>
+          <div className="space-y-3">
+            {playgroundModules.map((mod, index) => (
+              <motion.div
+                key={mod.path}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+              >
+                <button
+                  onClick={() => navigate(mod.path)}
+                  className="w-full flex items-center gap-4 p-4 bg-lab-surface/30 border border-lab-border/50 rounded-xl hover:border-laser-purple/30 hover:bg-lab-surface/50 transition-all group text-left"
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${mod.color}15`, color: mod.color }}
+                  >
+                    {mod.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="font-semibold text-lab-text group-hover:text-laser-purple transition-colors">
+                      {mod.title}
+                    </span>
+                    <p className="text-xs text-lab-muted mt-0.5">{mod.description}</p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-lab-muted group-hover:text-laser-purple group-hover:translate-x-1 transition-all flex-shrink-0" />
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       <section>

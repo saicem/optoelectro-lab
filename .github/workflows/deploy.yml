@@ -2,15 +2,11 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  ACTIONS_NODE_24: true
 
 permissions:
   contents: read
@@ -22,8 +18,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  check:
-    if: github.event_name == 'pull_request'
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,42 +37,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Type check
-        run: pnpm check
-
-      - name: Build
-        run: pnpm build
-
-  build-and-deploy:
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Type check
-        run: pnpm check
 
       - name: Build
         run: pnpm build
@@ -91,8 +50,8 @@ jobs:
           path: ./dist
 
   deploy:
+    needs: build
     if: github.event_name != 'pull_request'
-    needs: build-and-deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

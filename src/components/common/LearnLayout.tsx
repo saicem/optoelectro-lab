@@ -20,11 +20,13 @@ interface LearnLayoutProps {
 
 const chapters = [
   { path: '/learn/light-basics', title: '光波基础' },
+  { path: '/learn/laser', title: '激光器' },
   { path: '/learn/interference', title: '干涉原理' },
   { path: '/learn/mz-modulator', title: 'MZ 调制器' },
   { path: '/learn/iq-modulator', title: 'IQ 调制器' },
   { path: '/learn/polarization', title: '偏振复用' },
   { path: '/learn/dual-polarization', title: '双偏振 IQ' },
+  { path: '/learn/receiver', title: '光接收器' },
 ];
 
 export default function LearnLayout({

@@ -38,6 +38,98 @@ export default function LearnInterference() {
 
       <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
         <h2 className="text-xl font-bold font-display text-lab-text mb-4">
+          相干条件与相干长度
+        </h2>
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            要观察到稳定的干涉现象，两束光必须满足三个<span className="text-laser-cyan font-semibold">相干条件</span>：
+          </p>
+          <div className="grid md:grid-cols-3 gap-4 mt-4">
+            <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-cyan mb-2">频率相同</h4>
+              <p className="text-sm">
+                两束光的频率必须完全相同，否则相位差会随时间变化，干涉条纹无法稳定。
+              </p>
+            </div>
+            <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-green mb-2">振动方向相同</h4>
+              <p className="text-sm">
+                两束光的电场振动方向必须平行，否则干涉项会减弱。
+                垂直振动的两束光不产生干涉。
+              </p>
+            </div>
+            <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-purple mb-2">相位差恒定</h4>
+              <p className="text-sm">
+                相位差 Δφ 必须在观测时间内保持恒定，
+                否则干涉项会平均为零，看不到条纹。
+              </p>
+            </div>
+          </div>
+
+          {/* 相干长度 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3"><TermNote term="相干长度" />与时间相干性</h4>
+            <p className="text-sm mb-3">
+              实际光源发出的光不是严格单色的，具有一定的谱线宽度 Δλ。
+              这限制了能够产生干涉的最大光程差，称为相干长度。
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <div className="font-semibold text-laser-cyan mb-1">相干长度公式</div>
+                <MathRenderer>{'$$L_c = \\frac{\\lambda^2}{\\Delta\\lambda}$$'}</MathRenderer>
+                <p className="text-xs text-lab-muted mt-2">
+                  Δλ 越小（单色性越好），相干长度越长。
+                </p>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <div className="font-semibold text-laser-green mb-1">相干时间公式</div>
+                <MathRenderer>{'$$t_c = \\frac{L_c}{c} = \\frac{1}{\\Delta f}$$'}</MathRenderer>
+                <p className="text-xs text-lab-muted mt-2">
+                  相干时间是光保持相位相关的最大时间。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* 时间相干性与空间相干性 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">时间相干性 vs 空间相干性</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-cyan mb-2">时间相干性</h5>
+                <p className="text-sm">
+                  描述光源在不同时刻发出的光之间的相位相关性。
+                  与光源的谱线宽度（单色性）有关。
+                </p>
+                <ul className="text-xs space-y-1 mt-2">
+                  <li><span className="text-laser-cyan">•</span> 激光：相干长度可达数米甚至数公里</li>
+                  <li><span className="text-lab-muted">•</span> 白光：相干长度仅几微米</li>
+                </ul>
+              </div>
+              <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-green mb-2">空间相干性</h5>
+                <p className="text-sm">
+                  描述光源不同空间位置发出的光之间的相位相关性。
+                  与光源的大小和形状有关。
+                </p>
+                <ul className="text-xs space-y-1 mt-2">
+                  <li><span className="text-laser-green">•</span> 点光源：空间相干性最好</li>
+                  <li><span className="text-lab-muted">•</span> 扩展光源：空间相干性受限</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-4">
+            <span className="text-laser-red font-semibold">激光</span>同时具有极好的时间相干性（窄线宽）
+            和空间相干性（小光斑），因此是产生清晰干涉现象的理想光源。
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
+        <h2 className="text-xl font-bold font-display text-lab-text mb-4">
           双光束干涉
         </h2>
         <div className="space-y-4 text-lab-muted leading-relaxed">

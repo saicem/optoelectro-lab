@@ -117,11 +117,130 @@ export default function LearnPolarization() {
               </p>
             </div>
           </div>
-          <p className="mt-4">
-            <span className="text-laser-purple font-semibold">庞加莱球 (Poincaré Sphere)</span>
-            是偏振态的几何表示：将归一化的 (S₁, S₂, S₃) 作为三维坐标，
-            所有完全偏振态都分布在单位球面上。球面上的每一个点对应一种偏振态，
-            两个对径点对应正交的偏振态。
+
+          {/* 庞加莱球示意图 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">庞加莱球：偏振态的几何表示</h4>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="flex justify-center items-center">
+                {/* 简化的庞加莱球示意图 */}
+                <div className="relative w-32 h-32">
+                  <div className="absolute inset-0 rounded-full border-2 border-laser-purple/50 bg-laser-purple/10" />
+                  {/* 坐标轴 */}
+                  <div className="absolute top-1/2 left-0 w-full flex justify-center">
+                    <span className="absolute left-0 text-xs text-laser-cyan">S₁</span>
+                    <span className="absolute right-0 text-xs text-laser-cyan">-S₁</span>
+                  </div>
+                  <div className="absolute top-0 left-1/2 h-full flex flex-col justify-center">
+                    <span className="absolute top-0 text-xs text-laser-green">S₂</span>
+                    <span className="absolute bottom-0 text-xs text-laser-green">-S₂</span>
+                  </div>
+                  <span className="absolute top-1/2 left-1/2 text-xs text-laser-red">S₃</span>
+                  {/* 特殊点标注 */}
+                  <div className="absolute top-1/2 left-1 w-2 h-2 rounded-full bg-laser-cyan" title="水平线偏振" />
+                  <div className="absolute top-1/2 right-1 w-2 h-2 rounded-full bg-laser-cyan" title="垂直线偏振" />
+                </div>
+              </div>
+              <div className="space-y-3 text-sm">
+                <p>
+                  <span className="text-laser-purple font-semibold">庞加莱球 (Poincaré Sphere)</span>
+                  是偏振态的几何表示：将归一化的 (S₁, S₂, S₃) 作为三维坐标，
+                  所有完全偏振态都分布在单位球面上。
+                </p>
+                <div className="bg-lab-surface/50 p-3 rounded-lg">
+                  <h5 className="font-medium text-lab-text mb-1">球面上特殊点：</h5>
+                  <ul className="text-xs space-y-1">
+                    <li><span className="text-laser-cyan">• 赤道上：</span>各种线偏振态</li>
+                    <li><span className="text-laser-cyan">• 北极 (S₃=1)：</span>右旋圆偏振</li>
+                    <li><span className="text-laser-cyan">• 南极 (S₃=-1)：</span>左旋圆偏振</li>
+                    <li><span className="text-laser-cyan">• 其他点：</span>椭圆偏振态</li>
+                    <li><span className="text-lab-muted">• 对径点：</span>正交偏振态（如 X 和 Y）</li>
+                  </ul>
+                </div>
+                <p className="text-xs text-lab-muted">
+                  偏振态的变化可以用球面上的轨迹表示，
+                  光纤中的偏振演化对应于球面上的旋转。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
+        <h2 className="text-xl font-bold font-display text-lab-text mb-4">
+          偏振控制器件
+        </h2>
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            在光通信系统中，经常需要对光的偏振态进行控制和转换。
+            以下是几种常见的偏振控制器件：
+          </p>
+          <div className="grid md:grid-cols-3 gap-4 mt-4">
+            <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-cyan mb-2">偏振片 (Polarizer)</h4>
+              <p className="text-sm">
+                只允许特定方向的线偏振光通过，将任意偏振态转换为线偏振光。
+                常用于偏振分析和偏振分束器中。
+              </p>
+              <p className="text-xs text-lab-muted mt-2">
+                透过轴方向决定输出偏振方向。
+              </p>
+            </div>
+            <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-green mb-2">λ/4 波片 (Quarter-Wave Plate)</h4>
+              <p className="text-sm">
+                对两个正交偏振分量产生 π/2 (90°) 的相位差。
+                可以将线偏振转换为圆偏振，或反过来。
+              </p>
+              <p className="text-xs text-lab-muted mt-2">
+                轴与入射线偏振成 45° 时，输出为圆偏振。
+              </p>
+            </div>
+            <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-purple mb-2">λ/2 波片 (Half-Wave Plate)</h4>
+              <p className="text-sm">
+                对两个正交偏振分量产生 π (180°) 的相位差。
+                可以旋转线偏振的方向，不改变偏振类型。
+              </p>
+              <p className="text-xs text-lab-muted mt-2">
+                轴与入射偏振成 θ 时，输出偏振旋转 2θ。
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">偏振控制器与偏振分束器</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-lab-surface/50 p-4 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-2">偏振控制器 (PC)</h5>
+                <p className="text-sm">
+                  由多个波片（或光纤挤压元件）组成的可调器件，
+                  可以将任意输入偏振态转换为所需的输出偏振态。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  在光通信中用于手动或自动调整信号偏振，
+                  使其与接收机的偏振要求匹配。
+                </p>
+              </div>
+              <div className="bg-lab-surface/50 p-4 rounded-lg">
+                <h5 className="font-medium text-laser-green mb-2">偏振分束器 (PBS)</h5>
+                <p className="text-sm">
+                  将输入光分解为两个正交的线偏振分量，
+                  分别从两个端口输出。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  在偏振复用系统中用于分离 X 和 Y 偏振信号，
+                  或将它们合路。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm">
+            <span className="text-laser-red font-medium">保偏光纤 (PM Fiber)</span>
+            是一种特殊光纤，其结构设计使得光在其中传播时保持特定的偏振态。
+            常用于需要偏振稳定性的应用，如光纤传感器和某些调制器。
           </p>
         </div>
       </section>

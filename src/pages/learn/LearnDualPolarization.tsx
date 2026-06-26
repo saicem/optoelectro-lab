@@ -123,6 +123,58 @@ export default function LearnDualPolarization() {
           <div className="bg-lab-bg/40 p-4 rounded-lg">
             <MathRenderer>{'$$H(f) = \\begin{cases} T, & |f| \\leq \\frac{1-\\alpha}{2T} \\\\ \\frac{T}{2} \\left[ 1 + \\cos\\left( \\frac{\\pi T}{\\alpha} \\left( |f| - \\frac{1-\\alpha}{2T} \\right) \\right) \\right], & \\frac{1-\\alpha}{2T} < |f| \\leq \\frac{1+\\alpha}{2T} \\\\ 0, & \\text{otherwise} \\end{cases}$$'}</MathRenderer>
           </div>
+
+          {/* 升余弦滤波器时域波形示意图 */}
+          <div className="bg-lab-bg/40 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">升余弦滤波器时域波形示意</h4>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="bg-laser-cyan/10 p-4 rounded-lg border border-laser-cyan/30">
+                  <div className="text-sm font-semibold text-laser-cyan mb-2">α = 0（理想 Nyquist）</div>
+                  {/* 简化的波形示意图 */}
+                  <div className="h-16 relative flex items-center justify-center">
+                    <div className="text-xs text-lab-muted">
+                      sinc(t/T) 波形
+                      <br />
+                      在 t = ±T, ±2T... 处为零
+                    </div>
+                  </div>
+                  <div className="text-xs text-lab-muted mt-2">带宽最小，但衰减慢</div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-green/10 p-4 rounded-lg border border-laser-green/30">
+                  <div className="text-sm font-semibold text-laser-green mb-2">α = 0.1（常用）</div>
+                  <div className="h-16 relative flex items-center justify-center">
+                    <div className="text-xs text-lab-muted">
+                      升余弦波形
+                      <br />
+                      平滑过渡，快速衰减
+                    </div>
+                  </div>
+                  <div className="text-xs text-lab-muted mt-2">频谱效率高，实用首选</div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-purple/10 p-4 rounded-lg border border-laser-purple/30">
+                  <div className="text-sm font-semibold text-laser-purple mb-2">α = 1（最大滚降）</div>
+                  <div className="h-16 relative flex items-center justify-center">
+                    <div className="text-xs text-lab-muted">
+                      最平滑波形
+                      <br />
+                      衰减最快
+                    </div>
+                  </div>
+                  <div className="text-xs text-lab-muted mt-2">带宽翻倍，抗定时误差强</div>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-center text-lab-muted mt-4">
+              关键特性：在采样点 t = 0, T, 2T, 3T... 处，所有波形值都在零点，
+              因此相邻符号在该点不产生干扰 → 消除 ISI
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-lab-bg/40 p-4 rounded-xl">
               <h4 className="font-semibold text-lab-text mb-2"><TermNote term="滚降因子 α" /></h4>
@@ -155,6 +207,45 @@ export default function LearnDualPolarization() {
             是一种多载波调制技术，它将高速数据流分配到多个<strong>正交子载波</strong>上并行传输。
             每个子载波上的符号速率较低，因此对<TermNote term="色散" />和<TermNote term="偏振模色散 (PMD)" />有天然的容忍度。
           </p>
+
+          {/* OFDM 子载波频谱示意图 */}
+          <div className="bg-lab-bg/40 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">OFDM 子载波频谱示意</h4>
+            <div className="flex justify-center items-end gap-1 h-24 mb-4">
+              {/* 简化的子载波示意 */}
+              {['f₁', 'f₂', 'f₃', 'f₄', 'f₅', 'f₆', 'f₇', 'f₈'].map((carrier, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <div
+                    className="bg-laser-purple/40 rounded-t-sm w-8"
+                    style={{
+                      height: '60px',
+                      borderTop: '3px solid',
+                      borderTopColor: idx % 2 === 0 ? 'rgb(168, 85, 247)' : 'rgb(139, 92, 246)'
+                    }}
+                  />
+                  <div className="text-xs text-lab-muted mt-1">{carrier}</div>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-center text-lab-muted">
+              每个子载波的频谱峰值与其他子载波的零点位置重合 → 正交性保证无干扰
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 mt-4">
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-semibold text-lab-text text-sm mb-1">正交条件</h5>
+                <p className="text-xs text-lab-muted">
+                  子载波间隔 Δf = 1/T_symbol，每个子载波的频谱在其他子载波中心频率处恰好为零。
+                </p>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-semibold text-lab-text text-sm mb-1">循环前缀 (CP)</h5>
+                <p className="text-xs text-lab-muted">
+                  将符号尾部的一部分复制到头部，用于抵抗多径效应和定时误差。
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-4 mt-4">
             <div className="bg-lab-bg/40 p-4 rounded-xl">
               <h4 className="font-semibold text-lab-text mb-2"><TermNote term="CO-OFDM" /></h4>
@@ -194,12 +285,90 @@ export default function LearnDualPolarization() {
             <TermNote term="星座点" />等概率出现。
             PCS 的核心思想是：<strong>内部星座点出现概率更高，外部星座点出现概率更低</strong>。
           </p>
+
+          {/* 星座点概率分布示意图 */}
+          <div className="bg-lab-bg/40 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">16QAM 星座点概率分布对比</h4>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="text-center">
+                <div className="bg-laser-cyan/10 p-4 rounded-lg border border-laser-cyan/30">
+                  <div className="text-sm font-semibold text-laser-cyan mb-2">传统均匀分布</div>
+                  <div className="grid grid-cols-4 gap-1 w-16 mx-auto">
+                    {Array.from({ length: 16 }).map((_, idx) => (
+                      <div key={idx} className="w-3 h-3 rounded-full bg-laser-cyan/60" />
+                    ))}
+                  </div>
+                  <div className="text-xs text-lab-muted mt-2">每个星座点概率 = 1/16 = 6.25%</div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-red/10 p-4 rounded-lg border border-laser-red/30">
+                  <div className="text-sm font-semibold text-laser-red mb-2">PCS 不均匀分布</div>
+                  <div className="grid grid-cols-4 gap-1 w-16 mx-auto">
+                    {/* 内部4点高概率 */}
+                    {[0,3,12,15].map(idx => (
+                      <div key={idx} className="w-3 h-3 rounded-full bg-laser-red" style={{ opacity: 0.9 }} />
+                    ))}
+                    {/* 中间8点中等概率 */}
+                    {[1,2,4,7,8,11,13,14].map(idx => (
+                      <div key={idx} className="w-3 h-3 rounded-full bg-laser-red" style={{ opacity: 0.5 }} />
+                    ))}
+                    {/* 外部4点低概率 */}
+                    {[5,6,9,10].map(idx => (
+                      <div key={idx} className="w-3 h-3 rounded-full bg-laser-red" style={{ opacity: 0.2 }} />
+                    ))}
+                  </div>
+                  <div className="text-xs text-lab-muted mt-2">内部点概率更高（深色），外部点概率更低（浅色）</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="bg-lab-bg/40 p-4 rounded-lg">
             <MathRenderer>{'$$P(x_i) = \\frac{e^{-\\lambda |x_i|^2}}{\\sum_j e^{-\\lambda |x_j|^2}} \\quad \\text{(Maxwell-Boltzmann 分布)}$$'}</MathRenderer>
+            <p className="text-sm mt-2">
+              其中 λ 是整形参数（决定概率分布的陡峭程度），|x_i|² 是星座点到原点的距离平方（能量）。
+              λ 越大，内部点概率占比越高，成形增益越大，但速率损失也越大。
+            </p>
           </div>
+
+          {/* 成形增益的来源解释 */}
+          <div className="bg-lab-bg/40 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">成形增益的物理来源</h4>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded bg-laser-cyan/20 text-laser-cyan flex items-center justify-center flex-shrink-0 text-xs font-bold">1</div>
+                <div>
+                  <span className="text-lab-text font-medium">平均能量降低：</span>
+                  <span className="text-lab-muted"> 内部星座点（低能量）出现概率高，外部星座点（高能量）出现概率低，
+                  使得平均符号能量降低，在相同发射功率下可传输更远。</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded bg-laser-green/20 text-laser-green flex items-center justify-center flex-shrink-0 text-xs font-bold">2</div>
+                <div>
+                  <span className="text-lab-text font-medium">逼近球形星座：</span>
+                  <span className="text-lab-muted"> 理论证明，最优星座分布应使星座点均匀分布在球面上。
+                  PCS 通过概率加权使均匀 QAM 星座的"平均形状"接近球形。</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded bg-laser-purple/20 text-laser-purple flex items-center justify-center flex-shrink-0 text-xs font-bold">3</div>
+                <div>
+                  <span className="text-lab-text font-medium">香农极限：</span>
+                  <span className="text-lab-muted"> 球形星座整形可以达到 <TermNote term="香农极限" /> 的理论增益上限 1.53 dB（二维），
+                  这是所有星座整形技术的理论最优值。</span>
+                </div>
+              </div>
+            </div>
+            <div className="bg-lab-surface/50 p-3 rounded-lg mt-3">
+              <MathRenderer>{'$$\\text{成形增益} = \\frac{E_{uniform}}{E_{PCS}} = 1.53 \\text{ dB (理论上限)}$$'}</MathRenderer>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-lab-bg/40 p-4 rounded-xl">
-              <h4 className="font-semibold text-lab-text mb-2"><TermNote term="成形增益" />的来源</h4>
+              <h4 className="font-semibold text-lab-text mb-2"><TermNote term="成形增益" />的实际值</h4>
               <ul className="space-y-1 text-sm">
                 <li className="flex items-start gap-2"><span className="text-laser-cyan">•</span><span><strong>1.53 dB</strong>：二维理想成形增益上限</span></li>
                 <li className="flex items-start gap-2"><span className="text-laser-green">•</span><span><strong>~1 dB</strong>：PCS-16QAM 实际成形增益</span></li>

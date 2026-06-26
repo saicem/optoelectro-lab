@@ -135,9 +135,44 @@ export default function LearnLightBasics() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             在光通信系统中，我们需要将电信号加载到光载波上进行传输，
-            这个过程就叫做<span className="text-laser-purple font-semibold"><TermNote term="光调制器" /></span>。
-            光调制器是实现这一功能的核心器件。
+            这个过程就叫做<span className="text-laser-purple font-semibold">光调制</span>。
+            光调制器是实现这一功能的核心器件，它利用光的可控属性来编码信息。
           </p>
+
+          {/* 光调制的三个维度 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">光调制的三个维度</h4>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="bg-laser-cyan/10 p-4 rounded-lg border border-laser-cyan/30">
+                  <div className="text-sm font-semibold text-laser-cyan mb-2">强度（幅度）</div>
+                  <p className="text-xs text-lab-muted">
+                    最简单的调制方式。控制光的亮/暗来表示 0/1。
+                    直接调制和强度调制器都属于这类。
+                  </p>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-green/10 p-4 rounded-lg border border-laser-green/30">
+                  <div className="text-sm font-semibold text-laser-green mb-2">相位</div>
+                  <p className="text-xs text-lab-muted">
+                    控制光的相位来编码信息。结合强度调制可实现 IQ 正交调制，
+                    大幅提升频谱效率。
+                  </p>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-purple/10 p-4 rounded-lg border border-laser-purple/30">
+                  <div className="text-sm font-semibold text-laser-purple mb-2">偏振</div>
+                  <p className="text-xs text-lab-muted">
+                    利用光的两个正交偏振态作为独立信道。
+                    偏振复用可使容量再翻一倍。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-lg bg-laser-cyan/20 text-laser-cyan flex items-center justify-center flex-shrink-0">
@@ -146,7 +181,7 @@ export default function LearnLightBasics() {
               <div>
                 <h4 className="font-semibold text-lab-text"><TermNote term="直接调制" /> vs <TermNote term="外部调制" /></h4>
                 <p className="text-sm">
-                  直接调制通过改变激光器的注入电流来调制光强，简单但速率受限。
+                  直接调制通过改变激光器的注入电流来调制光强，简单但速率受限、会产生<TermNote term="啁啾" />。
                   外部调制器则对连续输出的激光进行调制，可实现更高的调制速率和更好的性能。
                 </p>
               </div>
@@ -156,11 +191,20 @@ export default function LearnLightBasics() {
                 <span className="font-bold">2</span>
               </div>
               <div>
-                <h4 className="font-semibold text-lab-text">电光效应</h4>
+                <h4 className="font-semibold text-lab-text">电光效应简介</h4>
                 <p className="text-sm">
-                  大多数光调制器基于电光效应：某些晶体材料（如铌酸锂 LiNbO₃、硅）
-                  的折射率会随外加电场变化，从而改变光的相位。通过巧妙的结构设计，
-                  可以将相位调制转化为强度调制、偏振调制等。
+                  大多数光调制器基于<span className="text-laser-green font-medium">电光效应</span>：
+                  当外加电场作用于某些晶体材料时，材料的折射率会发生变化，从而改变光的相位。
+                </p>
+                <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
+                  <MathRenderer>{'$$\\Delta n = -\\frac{1}{2} n^3 r E$$'}</MathRenderer>
+                  <p className="text-lab-muted mt-1">
+                    n 是折射率，r 是电光系数（材料特性），E 是电场强度。
+                  </p>
+                </div>
+                <p className="text-sm mt-2">
+                  通过巧妙的结构设计（如马赫-曾德干涉仪），可以将相位调制转化为强度调制。
+                  后续章节将详细讲解这一原理。
                 </p>
               </div>
             </div>
@@ -169,14 +213,27 @@ export default function LearnLightBasics() {
                 <span className="font-bold">3</span>
               </div>
               <div>
-                <h4 className="font-semibold text-lab-text">调制器的发展</h4>
+                <h4 className="font-semibold text-lab-text">调制技术的发展路径</h4>
                 <p className="text-sm">
-                  从简单的强度调制，到复杂的 IQ 正交调制，再到偏振复用，
-                  光调制技术不断进步，使得单根光纤的传输容量从 Gb/s 量级提升到 Pb/s 量级。
+                  从简单的强度调制（OOK），到复杂的 IQ 正交调制（QPSK/QAM），再到偏振复用（PDM），
+                  光调制技术不断进步，使得单根光纤的传输容量从 Gb/s 量级提升到 Tb/s 甚至 Pb/s 量级。
                 </p>
+                <div className="flex items-center gap-2 mt-2 text-xs">
+                  <span className="px-2 py-1 bg-laser-cyan/10 rounded">OOK</span>
+                  <span className="text-laser-cyan">→</span>
+                  <span className="px-2 py-1 bg-laser-green/10 rounded">QPSK</span>
+                  <span className="text-laser-cyan">→</span>
+                  <span className="px-2 py-1 bg-laser-purple/10 rounded">16QAM</span>
+                  <span className="text-laser-cyan">→</span>
+                  <span className="px-2 py-1 bg-laser-red/10 rounded">PDM-16QAM</span>
+                </div>
               </div>
             </div>
           </div>
+          <p className="mt-4 text-sm">
+            接下来的章节，我们将从光源开始，逐步学习激光器原理、干涉现象，
+            最终理解各种光调制器的工作原理。
+          </p>
         </div>
       </section>
     </LearnLayout>

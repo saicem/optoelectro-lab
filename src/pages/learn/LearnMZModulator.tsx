@@ -16,6 +16,100 @@ export default function LearnMZModulator() {
     >
       <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
         <h2 className="text-xl font-bold font-display text-lab-text mb-4 flex items-center gap-2">
+          <Zap className="w-5 h-5 text-laser-cyan" />
+          电光效应：调制器的物理基础
+        </h2>
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            MZ 调制器的核心物理机制是<span className="text-laser-cyan font-semibold">电光效应 (Electro-Optic Effect)</span>。
+            当外加电场作用于某些晶体材料时，材料的折射率会发生变化，从而改变光在其中传播的相位。
+          </p>
+          <div className="grid md:grid-cols-2 gap-6 mt-4">
+            <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-cyan mb-2">Pockels 效应（线性电光效应）</h4>
+              <p className="text-sm">
+                折射率变化与外加电场成正比。这是高速光调制器的主要工作机制，
+                响应速度快（ps 级），适用于铌酸锂（LiNbO₃）、砷化镓（GaAs）等晶体。
+              </p>
+              <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2 text-xs">
+                <MathRenderer>{'$$\\Delta n = -\\frac{1}{2} n^3 r E$$'}</MathRenderer>
+              </div>
+              <p className="text-xs mt-2">
+                其中 n 是原始折射率，r 是电光系数（材料特性），E 是外加电场强度。
+              </p>
+            </div>
+            <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-purple mb-2">Kerr 效应（二次电光效应）</h4>
+              <p className="text-sm">
+                折射率变化与外加电场的平方成正比。硅材料主要依赖 Kerr 效应，
+                效果较弱，需要较高的驱动电压或特殊的结构设计。
+              </p>
+              <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2 text-xs">
+                <MathRenderer>{'$$\\Delta n = -\\frac{1}{2} n^3 K E^2$$'}</MathRenderer>
+              </div>
+            </div>
+          </div>
+          <p className="mt-4">
+            由电光效应产生的相位变化量与电压成正比：
+          </p>
+          <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
+            <MathRenderer>{'$$\\Delta\\phi = \\frac{\\pi V}{V_\\pi}$$'}</MathRenderer>
+            <p className="text-sm mt-2">
+              其中 <span className="text-laser-cyan font-mono">V_π</span> 是半波电压，
+              使相位变化 π 所需的电压。V_π 越小，调制效率越高。
+            </p>
+          </div>
+          <div className="bg-lab-bg/50 p-4 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-2">常见材料的电光特性对比：</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-lab-border">
+                    <th className="text-left py-2 text-lab-muted font-medium">材料</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">电光系数 r (pm/V)</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">折射率 n</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">典型 V_π</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">优势</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-lab-text">铌酸锂 (LiNbO₃)</td>
+                    <td className="py-2 text-center text-laser-cyan">~30</td>
+                    <td className="py-2 text-center">~2.2</td>
+                    <td className="py-2 text-center">3-5 V</td>
+                    <td className="py-2 text-center text-xs">成熟、高速</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-lab-text">砷化镓 (GaAs)</td>
+                    <td className="py-2 text-center text-laser-green">~1.2</td>
+                    <td className="py-2 text-center">~3.5</td>
+                    <td className="py-2 text-center">5-10 V</td>
+                    <td className="py-2 text-center text-xs">集成度高</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-lab-text">硅 (Si)</td>
+                    <td className="py-2 text-center text-laser-purple">Kerr 效应</td>
+                    <td className="py-2 text-center">~3.5</td>
+                    <td className="py-2 text-center">10-20 V</td>
+                    <td className="py-2 text-center text-xs">CMOS 兼容</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-lab-text">磷化铟 (InP)</td>
+                    <td className="py-2 text-center text-laser-red">~1.5</td>
+                    <td className="py-2 text-center">~3.2</td>
+                    <td className="py-2 text-center">2-4 V</td>
+                    <td className="py-2 text-center text-xs">可集成激光器</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
+        <h2 className="text-xl font-bold font-display text-lab-text mb-4 flex items-center gap-2">
           <CircuitBoard className="w-5 h-5 text-laser-green" />
           <TermNote term="MZ 调制器" />的基本结构
         </h2>
@@ -27,18 +121,55 @@ export default function LearnMZModulator() {
           </p>
           <div className="bg-lab-bg/50 p-6 rounded-xl">
             <div className="text-center mb-4 font-semibold text-lab-text">MZM 结构示意图</div>
-            <div className="flex items-center justify-center gap-2">
-              <div className="text-lab-muted">输入</div>
-              <div className="w-6 h-6 rounded bg-laser-cyan/30 border border-laser-cyan/50" title="分束器" />
-              <div className="grid grid-rows-2 gap-3">
-                <div className="h-1 w-16 bg-laser-green/50 rounded" />
-                <div className="h-1 w-16 bg-laser-purple/50 rounded" />
+            <div className="space-y-4">
+              {/* 输入和分束器 */}
+              <div className="flex items-center justify-center gap-3">
+                <div className="text-lab-muted text-sm w-16 text-right">输入光 E_in</div>
+                <div className="text-laser-cyan">→</div>
+                <div className="px-3 py-2 border border-laser-cyan/50 rounded-lg bg-laser-cyan/10 text-sm font-semibold text-laser-cyan">
+                  3dB 分束器
+                </div>
+                <div className="text-laser-cyan">→</div>
               </div>
-              <div className="w-6 h-6 rounded bg-laser-cyan/30 border border-laser-cyan/50" title="合束器" />
-              <div className="text-lab-muted">输出</div>
-            </div>
-            <div className="text-xs text-lab-muted text-center mt-3">
-              上臂（相位调制臂） 下臂（相位调制臂）
+              {/* 两臂 */}
+              <div className="flex items-center justify-center gap-6">
+                <div className="flex items-center gap-2">
+                  <div className="text-laser-green text-sm">↓</div>
+                  <div className="flex flex-col items-center">
+                    <div className="h-2 w-20 bg-laser-green/50 rounded mb-1" />
+                    <div className="px-2 py-1 border border-laser-green/30 rounded bg-laser-green/5 text-xs text-laser-green">
+                      上臂 + 电极 V₁
+                    </div>
+                    <div className="text-xs text-lab-muted mt-1">相位 φ₁ = πV₁/V_π</div>
+                  </div>
+                  <div className="text-laser-green text-sm">↓</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="text-laser-purple text-sm">↓</div>
+                  <div className="flex flex-col items-center">
+                    <div className="h-2 w-20 bg-laser-purple/50 rounded mb-1" />
+                    <div className="px-2 py-1 border border-laser-purple/30 rounded bg-laser-purple/5 text-xs text-laser-purple">
+                      下臂 + 电极 V₂
+                    </div>
+                    <div className="text-xs text-lab-muted mt-1">相位 φ₂ = πV₂/V_π</div>
+                  </div>
+                  <div className="text-laser-purple text-sm">↓</div>
+                </div>
+              </div>
+              {/* 合束器和输出 */}
+              <div className="flex items-center justify-center gap-3">
+                <div className="text-laser-cyan">→</div>
+                <div className="px-3 py-2 border border-laser-cyan/50 rounded-lg bg-laser-cyan/10 text-sm font-semibold text-laser-cyan">
+                  3dB 合束器
+                </div>
+                <div className="text-laser-cyan">→</div>
+                <div className="text-lab-muted text-sm w-16">输出光 E_out</div>
+              </div>
+              {/* 公式 */}
+              <div className="text-center mt-4 bg-lab-surface/50 p-3 rounded-lg">
+                <MathRenderer>{'$$E_{out} = \\frac{E_{in}}{2} \\left( e^{j\\phi_1} + e^{j\\phi_2} \\right)$$'}</MathRenderer>
+                <p className="text-xs text-lab-muted mt-2">两束光在合束器处产生干涉，输出强度取决于相位差 Δφ = φ₁ - φ₂</p>
+              </div>
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">

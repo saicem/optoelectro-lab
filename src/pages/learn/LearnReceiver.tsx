@@ -198,6 +198,78 @@ export default function LearnReceiver() {
 
       <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
         <h2 className="text-xl font-bold font-display text-lab-text mb-4">
+          接收机噪声分析
+        </h2>
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            光接收机的性能极限主要受噪声影响。了解噪声来源对于理解灵敏度限制至关重要。
+          </p>
+          <div className="grid md:grid-cols-3 gap-4 mt-4">
+            <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-cyan mb-2">散粒噪声 (Shot Noise)</h4>
+              <p className="text-sm mb-2">
+                由光子到达的随机性产生。每个光子产生的电子-空穴对数目具有统计波动。
+              </p>
+              <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
+                <MathRenderer>{'$$\\langle i_s^2 \\rangle = 2e I B$$'}</MathRenderer>
+              </div>
+              <p className="text-xs text-lab-muted mt-2">
+                e 是电子电荷，I 是平均光电流，B 是带宽。
+              </p>
+            </div>
+            <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-green mb-2">热噪声 (Thermal Noise)</h4>
+              <p className="text-sm mb-2">
+                由接收电路中载流子的热运动产生。与温度成正比，与光功率无关。
+              </p>
+              <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
+                <MathRenderer>{'$$\\langle i_T^2 \\rangle = \\frac{4kTB}{R}$$'}</MathRenderer>
+              </div>
+              <p className="text-xs text-lab-muted mt-2">
+                k 是玻尔兹曼常数，T 是温度，R 是负载电阻。
+              </p>
+            </div>
+            <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-purple mb-2"><TermNote term="噪声等效功率" /> (NEP)</h4>
+              <p className="text-sm mb-2">
+                产生与噪声电流相同大小的信号所需的光功率，是接收机噪声的综合指标。
+              </p>
+              <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
+                <MathRenderer>{'$$\\text{NEP} = \\frac{\\sqrt{\\langle i_n^2 \\rangle}}{R} \\quad (\\text{W/}\\sqrt{\\text{Hz}})$$'}</MathRenderer>
+              </div>
+            </div>
+          </div>
+
+          {/* 信噪比与灵敏度 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">信噪比 (SNR) 与接收灵敏度</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-2">SNR 定义</h5>
+                <MathRenderer>{'$$\\text{SNR} = \\frac{\\langle i_{sig}^2 \\rangle}{\\langle i_{shot}^2 \\rangle + \\langle i_{thermal}^2 \\rangle}$$'}</MathRenderer>
+                <p className="text-xs text-lab-muted mt-2">
+                  对于相干接收，主要受散粒噪声限制（本振光功率足够大时）。
+                </p>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-green mb-2">灵敏度估算</h5>
+                <MathRenderer>{'$$P_{min} \\approx \\frac{Q \\cdot \\sqrt{2eB}}{R} \\quad (\\text{直接检测})$$'}</MathRenderer>
+                <p className="text-xs text-lab-muted mt-2">
+                  Q 值由目标 BER 决定（BER = 10⁻¹² → Q ≈ 7）。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm">
+            相干接收利用本振光的放大作用，使散粒噪声成为主导噪声源，从而获得更高的灵敏度。
+            这就是相干接收比直接检测灵敏度更好的主要原因。
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
+        <h2 className="text-xl font-bold font-display text-lab-text mb-4">
           <TermNote term="数字信号处理 (DSP)" />
         </h2>
         <div className="space-y-4 text-lab-muted leading-relaxed">
@@ -205,6 +277,53 @@ export default function LearnReceiver() {
             现代相干光通信系统中，大部分信号处理工作都在数字域完成。
             DSP 芯片是接收机的"大脑"，负责补偿各种传输损伤，恢复原始数据。
           </p>
+
+          {/* DSP 处理流程 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">DSP 信号处理流程</h4>
+            <div className="flex flex-wrap justify-center items-center gap-2 text-xs">
+              <span className="px-2 py-1 bg-laser-cyan/10 border border-laser-cyan/30 rounded">ADC 采样</span>
+              <span className="text-laser-cyan">→</span>
+              <span className="px-2 py-1 bg-laser-green/10 border border-laser-green/30 rounded">色散补偿</span>
+              <span className="text-laser-cyan">→</span>
+              <span className="px-2 py-1 bg-laser-purple/10 border border-laser-purple/30 rounded">偏振解复用</span>
+              <span className="text-laser-cyan">→</span>
+              <span className="px-2 py-1 bg-laser-red/10 border border-laser-red/30 rounded">载波恢复</span>
+              <span className="text-laser-cyan">→</span>
+              <span className="px-2 py-1 bg-amber-500/10 border border-amber-500/30 rounded">符号判决</span>
+              <span className="text-laser-cyan">→</span>
+              <span className="px-2 py-1 bg-lab-surface/50 border border-lab-border/30 rounded">FEC 解码</span>
+            </div>
+          </div>
+
+          {/* 均衡算法详细说明 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">自适应均衡算法详解</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-cyan mb-2">恒模算法 (CMA)</h5>
+                <p className="text-sm">
+                  最常用的偏振解复用算法。利用星座点的恒定模值特性（如 QPSK），通过最小化输出模值的波动来分离两个偏振态。
+                </p>
+                <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
+                  <MathRenderer>{'$$\\vec{h}_{n+1} = \\vec{h}_n - \\mu \\cdot \\vec{x}_n \\cdot (|y_n|^2 - R^2)$$'}</MathRenderer>
+                </div>
+                <p className="text-xs text-lab-muted mt-2">
+                  μ 是步长参数，R² 是目标模值，y_n 是输出信号。
+                </p>
+              </div>
+              <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-purple mb-2">多模算法 (MMA)</h5>
+                <p className="text-sm">
+                  用于高阶 QAM（如 16QAM、64QAM）。星座点模值不恒定，需要根据符号的实际模值进行判决导向均衡。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  MMA 在星座点的多个模值层之间进行判决，适应非恒模信号。
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-lab-bg/50 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-cyan mb-2">色散补偿</h4>
@@ -224,7 +343,7 @@ export default function LearnReceiver() {
               <h4 className="font-semibold text-laser-purple mb-2">载波恢复</h4>
               <p className="text-sm">
                 包括频率偏移估计和相位噪声估计，恢复光载波的频率和相位，
-                以便正确解调星座点。
+                以便正确解调星座点。常用 Viterbi-Viterbi 算法。
               </p>
             </div>
             <div className="bg-lab-bg/50 p-4 rounded-xl">

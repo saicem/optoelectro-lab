@@ -139,17 +139,78 @@ export default function LearnIQModulator() {
             是表示 IQ 调制信号的一种直观方式。它以 I 为横轴、Q 为纵轴建立复平面，
             每个符号对应星座图上的一个点，其位置由 I 和 Q 的值决定。
           </p>
+
+          {/* IQ 信号与星座点映射 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">IQ 信号与星座点的映射关系</h4>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h5 className="font-medium text-laser-cyan mb-2">QPSK 映射示例</h5>
+                <div className="bg-lab-surface/50 p-4 rounded-lg">
+                  <div className="text-xs mb-3 text-center">
+                    {/* 简化的 QPSK 星座图 */}
+                    <div className="flex justify-center">
+                      <div className="relative w-24 h-24">
+                        {/* 坐标轴 */}
+                        <div className="absolute top-1/2 left-0 w-full h-px bg-lab-border" />
+                        <div className="absolute top-0 left-1/2 h-full w-px bg-lab-border" />
+                        {/* 星座点 */}
+                        <div className="absolute top-3 left-3 w-4 h-4 rounded-full bg-laser-cyan text-xs flex items-center justify-center" title="00">00</div>
+                        <div className="absolute top-3 right-3 w-4 h-4 rounded-full bg-laser-green text-xs flex items-center justify-center" title="01">01</div>
+                        <div className="absolute bottom-3 left-3 w-4 h-4 rounded-full bg-laser-purple text-xs flex items-center justify-center" title="10">10</div>
+                        <div className="absolute bottom-3 right-3 w-4 h-4 rounded-full bg-laser-red text-xs flex items-center justify-center" title="11">11</div>
+                        {/* 轴标签 */}
+                        <span className="absolute left-0 top-1/2 text-xs">-I</span>
+                        <span className="absolute right-0 top-1/2 text-xs">+I</span>
+                        <span className="absolute top-0 left-1/2 text-xs">+Q</span>
+                        <span className="absolute bottom-0 left-1/2 text-xs">-Q</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-xs text-lab-muted mt-2">
+                    <p><span className="text-laser-cyan">00</span> → I=-1, Q=-1 → 相位 225°</p>
+                    <p><span className="text-laser-green">01</span> → I=+1, Q=-1 → 相位 315°</p>
+                    <p><span className="text-laser-purple">10</span> → I=-1, Q=+1 → 相位 135°</p>
+                    <p><span className="text-laser-red">11</span> → I=+1, Q=+1 → 相位 45°</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h5 className="font-medium text-laser-green mb-2">16QAM 映射原理</h5>
+                <div className="bg-lab-surface/50 p-4 rounded-lg">
+                  <p className="text-sm mb-2">
+                    16QAM 使用 4 个电平（±1, ±3）来表示 16 个星座点：
+                  </p>
+                  <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
+                    <MathRenderer>{'$$I, Q \\in \\{-3, -1, +1, +3\\}$$'}</MathRenderer>
+                  </div>
+                  <p className="text-xs text-lab-muted mt-2">
+                    每个星座点的坐标 (I, Q) 由 2 bit 决定：
+                    <br />
+                    • 第 1-2 bit → I 值（00=-3, 01=-1, 11=+1, 10=+3）
+                    <br />
+                    • 第 3-4 bit → Q 值（同上）
+                  </p>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-center text-lab-muted mt-4">
+              驱动电压 V_I 和 V_Q 与 I/Q 值成正比。
+              例如，对于 QPSK：V_I = +Vπ/2 或 -Vπ/2 分别对应 I = +1 或 -1。
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <h3 className="font-semibold text-lab-text mb-2">星座图的信息：</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2">
                   <span className="text-laser-cyan">•</span>
-                  <span><span className="text-laser-cyan font-medium">幅度：</span>点到原点的距离</span>
+                  <span><span className="text-laser-cyan font-medium">幅度：</span>点到原点的距离 = √(I²+Q²)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-laser-green">•</span>
-                  <span><span className="text-laser-green font-medium">相位：</span>点与横轴的夹角</span>
+                  <span><span className="text-laser-green font-medium">相位：</span>点与横轴的夹角 = arctan(Q/I)</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-laser-purple">•</span>
@@ -290,6 +351,102 @@ export default function LearnIQModulator() {
             由于温度变化、老化等因素，偏置点会发生漂移。
             因此商用 IQ 调制器都配有自动偏置控制 (ABC) 电路，
             通过监测输出光的特性来动态调整偏置电压，维持最佳工作状态。
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-lab-surface/30 border border-lab-border/50 rounded-2xl p-6">
+        <h2 className="text-xl font-bold font-display text-lab-text mb-4">
+          IQ 不平衡及其影响
+        </h2>
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            实际 IQ 调制器中，I 和 Q 两路可能存在幅度或相位的不平衡，
+            这会导致星座图畸变，降低系统性能。
+          </p>
+
+          {/* IQ 不平衡类型 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">IQ 不平衡的两种类型</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-cyan mb-2">幅度不平衡 (Gain Imbalance)</h5>
+                <p className="text-sm">
+                  I 路和 Q 路的增益不同，导致星座图在某一方向拉伸或压缩。
+                </p>
+                <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
+                  <MathRenderer>{'$$g = \\frac{|I|}{|Q|} \\neq 1$$'}</MathRenderer>
+                </div>
+                <p className="text-xs text-lab-muted mt-2">
+                  表现为星座图椭圆化，两个轴的半径不相等。
+                </p>
+              </div>
+              <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-purple mb-2">相位不平衡 (Phase Imbalance)</h5>
+                <p className="text-sm">
+                  I 路和 Q 路之间的相位差偏离 90°，导致星座图旋转或扭曲。
+                </p>
+                <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
+                  <MathRenderer>{'$$\\theta \\neq 90^\\circ$$'}</MathRenderer>
+                </div>
+                <p className="text-xs text-lab-muted mt-2">
+                  表现为星座点偏离理想位置，形成菱形或不规则形状。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* IQ 不平衡的影响 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">IQ 不平衡的影响</h4>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start gap-2">
+                <span className="text-laser-red">•</span>
+                <span><span className="text-laser-red font-medium">镜像干扰：</span>
+                IQ 不平衡会产生镜像信号，在解调时干扰原始信号。
+                镜像抑制比 (IRR) 用于衡量这一影响：
+                <div className="bg-lab-surface/50 px-3 py-1.5 rounded-lg mt-1 text-xs inline-block">
+                  <MathRenderer>{'$$\\text{IRR} = \\frac{P_{image}}{P_{signal}}$$'}</MathRenderer>
+                </div>
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-laser-green">•</span>
+                <span><span className="text-laser-green font-medium">误码率升高：</span>
+                星座点偏离理想位置，判决边界不准确，导致误判概率增加。</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-laser-purple">•</span>
+                <span><span className="text-laser-purple font-medium">频谱效率下降：</span>
+                为补偿 IQ 不平衡，可能需要降低调制阶数或增加纠错码开销。</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* 补偿方法 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">IQ 不平衡补偿方法</h4>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-1">发射端预补偿</h5>
+                <p className="text-xs text-lab-muted">
+                  在驱动信号中预先加入反向不平衡，抵消调制器的非理想特性。
+                  需要精确测量调制器的不平衡参数。
+                </p>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-green mb-1">接收端后补偿</h5>
+                <p className="text-xs text-lab-muted">
+                  在 DSP 中使用自适应算法估计和补偿 IQ 不平衡。
+                  CMA/MMA 算法可以同时均衡信道和补偿 IQ 不平衡。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-sm">
+            高性能 IQ 调制器通常将 IQ 不平衡控制在 &lt; 1% 范围内，
+            配合接收端 DSP 补偿，可以有效抑制其影响。
           </p>
         </div>
       </section>

@@ -67,6 +67,27 @@ export default function LearnLaser() {
             <span className="text-laser-red font-semibold"> 高能级的粒子数多于低能级</span>，
             这就是<span className="text-laser-red font-semibold"><TermNote term="粒子数反转" /></span>。
           </p>
+
+          {/* 玻尔兹曼分布公式 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">玻尔兹曼分布（热平衡状态）</h4>
+            <MathRenderer>{'$$\\frac{N_2}{N_1} = \\frac{g_2}{g_1} \\exp\\left( -\\frac{E_2 - E_1}{kT} \\right)$$'}</MathRenderer>
+            <div className="grid md:grid-cols-2 gap-4 mt-3">
+              <div className="text-xs space-y-1">
+                <p><span className="text-laser-cyan font-mono">N₁, N₂</span> — 低/高能级的粒子数</p>
+                <p><span className="text-laser-green font-mono">g₁, g₂</span> — 低/高能级的统计权重（简并度）</p>
+              </div>
+              <div className="text-xs space-y-1">
+                <p><span className="text-laser-purple font-mono">E₁, E₂</span> — 低/高能级的能量</p>
+                <p><span className="text-laser-red font-mono">k</span> — 玻尔兹曼常数 (1.38×10⁻²³ J/K)</p>
+              </div>
+            </div>
+            <p className="text-sm mt-3">
+              由于 E₂ &gt; E₁，指数项永远小于 1，所以 N₂ &lt; N₁。
+              温度越高，高能级粒子占比越多，但永远无法超过低能级。
+            </p>
+          </div>
+
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <div className="text-center mb-3 font-semibold text-lab-text">粒子数反转示意</div>
             <div className="grid grid-cols-2 gap-8">
@@ -96,10 +117,57 @@ export default function LearnLaser() {
               </div>
             </div>
           </div>
-          <p>
-            实现粒子数反转需要外部能量源（称为<TermNote term="泵浦" />）将粒子从低能级"抽运"到高能级。
-            泵浦方式包括光泵浦、电泵浦、化学泵浦等。
-          </p>
+
+          {/* 泵浦方式详细介绍 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">泵浦方式详解</h4>
+            <p className="text-sm mb-3">
+              实现粒子数反转需要外部能量源（称为<TermNote term="泵浦" />）将粒子从低能级"抽运"到高能级。
+              常见的泵浦方式包括：
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-cyan mb-2">光泵浦</h5>
+                <p className="text-sm">
+                  使用强光照射增益介质，光子能量等于或大于两个能级的能量差。
+                  常用于固体激光器（如红宝石激光器用闪光灯泵浦）和光纤激光器。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  例如：掺铒光纤激光器用 980 nm 或 1480 nm 光泵浦。
+                </p>
+              </div>
+              <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-green mb-2">电泵浦</h5>
+                <p className="text-sm">
+                  通过注入电流直接激发增益介质。半导体激光器的主要泵浦方式，
+                  效率高、结构紧凑、可直接调制。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  例如：DFB 激光器、VCSEL 都采用电泵浦。
+                </p>
+              </div>
+              <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-purple mb-2">化学泵浦</h5>
+                <p className="text-sm">
+                  利用化学反应释放的能量激发粒子。适用于某些特殊气体激光器，
+                  功率密度高但控制复杂。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  例如：化学氧碘激光器（COIL）。
+                </p>
+              </div>
+              <div className="border border-laser-red/30 bg-laser-red/5 p-4 rounded-xl">
+                <h5 className="font-semibold text-laser-red mb-2">气体放电泵浦</h5>
+                <p className="text-sm">
+                  在气体激光器中，通过气体放电产生的高能电子碰撞激发原子。
+                  常用于 He-Ne 激光器、CO₂ 激光器等。
+                </p>
+                <p className="text-xs text-lab-muted mt-2">
+                  He-Ne 激光器中，氦原子通过放电获得能量后碰撞传递给氖原子。
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

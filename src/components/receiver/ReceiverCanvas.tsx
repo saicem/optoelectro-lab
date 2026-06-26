@@ -314,7 +314,7 @@ export default function ReceiverCanvas() {
 
       const snrMin = 0;
       const snrMax = 30;
-      const berMin = 1e-2;
+      const berMin = 0;
       const berMax = 0.5;
 
       ctx.strokeStyle = 'rgba(51, 65, 85, 0.5)';
@@ -333,10 +333,10 @@ export default function ReceiverCanvas() {
         ctx.textAlign = 'left';
       }
 
-      const berTicks = [1e-2, 1e-1, 0.5];
+      const berTicks = [0, 0.1, 0.2, 0.3, 0.4, 0.5];
       berTicks.forEach((ber) => {
-        const logRatio = (Math.log10(ber) - Math.log10(berMin)) / (Math.log10(berMax) - Math.log10(berMin));
-        const py = chartY + chartH - logRatio * chartH;
+        const ratio = (ber - berMin) / (berMax - berMin);
+        const py = chartY + chartH - ratio * chartH;
         if (py >= chartY && py <= chartY + chartH) {
           ctx.strokeStyle = 'rgba(51, 65, 85, 0.5)';
           ctx.beginPath();
@@ -347,12 +347,7 @@ export default function ReceiverCanvas() {
           ctx.fillStyle = '#64748b';
           ctx.font = '9px JetBrains Mono, monospace';
           ctx.textAlign = 'right';
-          if (ber >= 0.1) {
-            ctx.fillText(ber.toFixed(1), chartX - 5, py + 3);
-          } else {
-            const exp = Math.floor(Math.log10(ber));
-            ctx.fillText(`10^${exp}`, chartX - 5, py + 3);
-          }
+          ctx.fillText(ber.toFixed(1), chartX - 5, py + 3);
           ctx.textAlign = 'left';
         }
       });
@@ -372,8 +367,8 @@ export default function ReceiverCanvas() {
         curve.forEach((point, idx) => {
           if (point.ber < berMin || point.ber > berMax) return;
           const px = chartX + ((point.snr - snrMin) / (snrMax - snrMin)) * chartW;
-          const logRatio = (Math.log10(point.ber) - Math.log10(berMin)) / (Math.log10(berMax) - Math.log10(berMin));
-          const py = chartY + chartH - logRatio * chartH;
+          const ratio = (point.ber - berMin) / (berMax - berMin);
+          const py = chartY + chartH - ratio * chartH;
           if (!started) {
             ctx.moveTo(px, py);
             started = true;
@@ -388,8 +383,8 @@ export default function ReceiverCanvas() {
       const currentBer = theoreticalBer(modulationFormat, snr);
       if (currentBer >= berMin && currentBer <= berMax && snr >= snrMin && snr <= snrMax) {
         const px = chartX + ((snr - snrMin) / (snrMax - snrMin)) * chartW;
-        const logRatio = (Math.log10(currentBer) - Math.log10(berMin)) / (Math.log10(berMax) - Math.log10(berMin));
-        const py = chartY + chartH - logRatio * chartH;
+        const ratio = (currentBer - berMin) / (berMax - berMin);
+        const py = chartY + chartH - ratio * chartH;
 
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.lineWidth = 1;

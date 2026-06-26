@@ -287,8 +287,9 @@ export default function IQCanvas() {
 
     const outY = waveTop + (wH * 2 + wGap) * 2;
     const iqModSignal = (t: number) => I * Math.cos(t) + Q * Math.cos(t - P);
+    const modAmplitude = Math.sqrt(decodedI * decodedI + decodedQ * decodedQ);
     drawWave(wX, outY, wW, wH, '#00ff88',
-      '合成信号 s(t)', iqModSignal, Math.max(Math.abs(I), Math.abs(Q)) * AMP_SCALE || 1);
+      '合成信号 s(t)', iqModSignal, modAmplitude * AMP_SCALE || 1);
 
     // ── 解码波形 ──
     const decodeY = waveTop + (wH * 2 + wGap) * 3 + 10;

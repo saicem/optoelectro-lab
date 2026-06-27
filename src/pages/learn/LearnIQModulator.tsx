@@ -30,8 +30,9 @@ export default function LearnIQModulator() {
       playgroundPath={ROUTES.PLAYGROUND.IQ_MODULATOR}
       prevChapter={prevChapter}
       nextChapter={nextChapter}
+      sections={pageSections}
     >
-      <LearnSection icon={<BarChart3 className="w-5 h-5 text-laser-purple" />} title="什么是 IQ 调制？">
+      <LearnSection id="s-0" icon={<BarChart3 className="w-5 h-5 text-laser-purple" />} title="什么是 IQ 调制？">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-purple font-semibold">IQ 调制（<TermNote term="QAM 调制" />正交调制）</span>
@@ -306,7 +307,7 @@ export default function LearnIQModulator() {
         </div>
       </LearnSection>
 
-      <LearnSection title="IQ 调制器的偏置控制">
+      <LearnSection id="s-4" title="IQ 调制器的偏置控制">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             IQ 调制器有三个需要精确控制的偏置点，它们对调制器的性能至关重要：
@@ -356,7 +357,7 @@ export default function LearnIQModulator() {
         </div>
       </LearnSection>
 
-      <LearnSection title="IQ 不平衡及其影响">
+      <LearnSection id="s-5" title="IQ 不平衡及其影响">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             实际 IQ 调制器中，I 和 Q 两路可能存在幅度或相位的不平衡，

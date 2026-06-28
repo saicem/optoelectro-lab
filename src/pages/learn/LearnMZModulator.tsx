@@ -8,7 +8,7 @@ import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
 
 const pageSections = [
   { id: 's-0', title: '电光效应：调制器的物理基础' },
-  { id: 's-1', title: 'MZ 调制器的的基本结构' },
+  { id: 's-1', title: 'MZ 调制器的基本结构' },
   { id: 's-2', title: '工作原理与转移函数' },
   { id: 's-3', title: '三种调制模式' },
   { id: 's-4', title: '工作点与偏置' },
@@ -117,6 +117,13 @@ export default function LearnMZModulator() {
                     <td className="py-2 text-center">2-4 V</td>
                     <td className="py-2 text-center text-xs">可集成激光器</td>
                   </tr>
+                  <tr>
+                    <td className="py-2 text-lab-text font-medium text-laser-cyan">薄膜铌酸锂 (TFLN)</td>
+                    <td className="py-2 text-center text-laser-cyan">~30</td>
+                    <td className="py-2 text-center">~2.2</td>
+                    <td className="py-2 text-center text-laser-green">&lt; 2 V</td>
+                    <td className="py-2 text-center text-xs">尺寸小 10 倍、V_π 低</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -124,7 +131,7 @@ export default function LearnMZModulator() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-1" icon={<CircuitBoard className="w-5 h-5 text-laser-green" />} title="MZ 调制器的的基本结构">
+      <LearnSection id="s-1" icon={<CircuitBoard className="w-5 h-5 text-laser-green" />} title="MZ 调制器的基本结构">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-green font-semibold">马赫-曾德调制器 (MZM)</span>
@@ -427,6 +434,30 @@ export default function LearnMZModulator() {
               <p className="text-sm">
                 光通过调制器后的功率损失。包括耦合损耗、传播损耗等。
                 插入损耗越低，系统功率预算越充足。
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-2">行波电极 (Traveling-Wave Electrode)</h4>
+            <p className="text-sm">
+              高速 MZM 中普遍采用<TermNote term="行波电极" />结构：电极被设计为共面波导 (CPW) 传输线，
+              调制信号以行波形式沿电极传播，与光波在同方向传播，从而实现分布式的电光相互作用。
+            </p>
+            <p className="text-sm mt-2">
+              <span className="text-lab-text font-medium">速度匹配：</span>行波电极的关键要求是微波信号的速度与光波速度尽可能一致。
+              如果速度不匹配，光波在不同位置感受到的调制电场不同步，导致有效调制长度受限，带宽下降。
+            </p>
+            <p className="text-sm mt-2">
+              <span className="text-lab-text font-medium">微波损耗：</span>随频率升高，电极导体的趋肤效应和介质的介电损耗会逐渐增大，
+              使得微波信号沿电极传播时幅度衰减。微波损耗是限制调制带宽的主要因素之一，
+              现代设计通过优化电极几何尺寸和材料来降低损耗。
+            </p>
+            <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
+              <MathRenderer>{'$$f_{3dB} \\propto \\frac{1}{L \\cdot \\alpha_m}$$'}</MathRenderer>
+              <p className="text-xs mt-1">
+                其中 L 是电极长度，α_m 是微波损耗系数。更长的工作长度 → 更低的 V_π
+                但更小的带宽，因此 V_π 与带宽之间存在权衡。
               </p>
             </div>
           </div>

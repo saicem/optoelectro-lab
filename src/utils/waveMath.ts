@@ -1,8 +1,3 @@
-export interface WavePoint {
-  x: number;
-  y: number;
-}
-
 export function sineWave(
   x: number,
   amplitude: number,
@@ -31,18 +26,6 @@ export function interferenceIntensity(
   phaseDiff: number
 ): number {
   return I1 + I2 + 2 * Math.sqrt(I1 * I2) * Math.cos(phaseDiff);
-}
-
-export function doubleSlitIntensity(
-  x: number,
-  d: number,
-  L: number,
-  wavelength: number,
-  I0: number = 1
-): number {
-  const delta = (d * x) / L;
-  const phase = (2 * Math.PI * delta) / wavelength;
-  return I0 * Math.cos(phase / 2) ** 2;
 }
 
 export function wavelengthToColor(wavelength: number): string {

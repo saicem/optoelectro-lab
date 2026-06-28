@@ -137,6 +137,33 @@ export default function LearnIQModulator() {
               </div>
             </div>
           </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">从 I-MZM / Q-MZM 到 IQ 信号的数学推导</h4>
+            <p className="text-sm">
+              设输入光场为 E_in，经分束器后等分为两路。I 路进入 I-MZM，Q 路经 π/2 相移后进入 Q-MZM。
+              每个子 MZM 工作于推挽模式，分别由驱动电压 V_I 和 V_Q 控制。
+            </p>
+            <div className="space-y-2 mt-3">
+              <div className="bg-lab-bg/50 px-4 py-2 rounded-lg">
+                <p className="text-xs text-lab-muted mb-1">I-MZM 输出（推挽模式，偏置在 Null 点）：</p>
+                <MathRenderer>{'$$E_I = \\frac{E_{in}}{2\\sqrt{2}} \\left[ \\exp\\left( +j\\frac{\\pi V_I}{V_\\pi} \\right) + \\exp\\left( -j\\frac{\\pi V_I}{V_\\pi} \\right) \\right] = \\frac{E_{in}}{\\sqrt{2}} \\cos\\left( \\frac{\\pi V_I}{V_\\pi} \\right)$$'}</MathRenderer>
+              </div>
+              <div className="bg-lab-bg/50 px-4 py-2 rounded-lg">
+                <p className="text-xs text-lab-muted mb-1">Q-MZM 输出（同样的偏置和驱动，附加 π/2 相移）：</p>
+                <MathRenderer>{'$$E_Q = \\frac{E_{in}}{2\\sqrt{2}} \\left[ \\exp\\left( +j\\frac{\\pi V_Q}{V_\\pi} \\right) + \\exp\\left( -j\\frac{\\pi V_Q}{V_\\pi} \\right) \\right] \\cdot e^{j\\pi/2} = j \\cdot \\frac{E_{in}}{\\sqrt{2}} \\cos\\left( \\frac{\\pi V_Q}{V_\\pi} \\right)$$'}</MathRenderer>
+              </div>
+              <div className="bg-lab-bg/50 px-4 py-2 rounded-lg">
+                <p className="text-xs text-lab-muted mb-1">合束后的总输出场：</p>
+                <MathRenderer>{'$$E_{out} = E_I + E_Q = \\frac{E_{in}}{\\sqrt{2}} \\left[ \\cos\\left( \\frac{\\pi V_I}{V_\\pi} \\right) + j \\cos\\left( \\frac{\\pi V_Q}{V_\\pi} \\right) \\right]$$'}</MathRenderer>
+              </div>
+            </div>
+            <p className="text-sm mt-3">
+              当驱动电压在小信号范围（V &lt;&lt; V_π）内变化时，cos 函数近似线性：
+              cos(πV/V_π) ≈ 1 - (πV/V_π)²/2，交流耦合后可得 E_out ∝ V_I + j·V_Q，
+              即 I 路控制实部、Q 路控制虚部，实现了复平面上的任意点调制。
+            </p>
+          </div>
         </div>
       </LearnSection>
 
@@ -206,6 +233,38 @@ export default function LearnIQModulator() {
               驱动电压 V_I 和 V_Q 与 I/Q 值成正比。
               例如，对于 QPSK：V_I = +Vπ/2 或 -Vπ/2 分别对应 I = +1 或 -1。
             </p>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-2">格雷编码 (Gray Coding)</h4>
+            <p className="text-sm">
+              在星座图中，相邻星座点之间的比特映射通常采用<TermNote term="格雷编码" />（Gray Coding）：
+              任意两个相邻星座点（欧氏距离最小）的二进制码组仅相差 <strong>1 bit</strong>。
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 mt-3">
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-1">QPSK 格雷编码示例</h5>
+                <div className="text-xs space-y-1">
+                  <p><span className="text-laser-cyan">00</span> (I=-1, Q=-1) ↔ <span className="text-laser-green">01</span> (I=+1, Q=-1) → 仅 Q 反转</p>
+                  <p><span className="text-laser-cyan">00</span> (I=-1, Q=-1) ↔ <span className="text-laser-purple">10</span> (I=-1, Q=+1) → 仅 I 反转</p>
+                  <p><span className="text-laser-green">01</span> (I=+1, Q=-1) ↔ <span className="text-laser-red">11</span> (I=+1, Q=+1) → 仅 Q 反转</p>
+                </div>
+              </div>
+              <div>
+                <h5 className="font-medium text-lab-text mb-1">与 BER 的关系</h5>
+                <p className="text-sm">
+                  由于 AWGN 信道中最常见的错误是误判到相邻星座点，
+                  格雷编码确保每次符号错误只引起 <strong>1 bit</strong> 错误，
+                  而非多个比特同时错误。这使得 BER 与符号错误率 (SER) 的关系近似为：
+                </p>
+                <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
+                  <MathRenderer>{'$$\\text{BER} \\approx \\frac{\\text{SER}}{\\log_2 M}$$'}</MathRenderer>
+                </div>
+                <p className="text-xs text-lab-muted mt-1">
+                  其中 M 是调制阶数。如果未采用格雷编码，BER 可能高出数倍。
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">

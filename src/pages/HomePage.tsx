@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, FlaskConical, Waves, CircuitBoard, BarChart3, Compass, Lightbulb, Sparkles, Zap, Target, ArrowRight, Flame, Radio, BookText, Library } from 'lucide-react';
+import { BookOpen, FlaskConical, Waves, CircuitBoard, BarChart3, Compass, Sparkles, Zap, Target, ArrowRight, Flame, Radio, BookText, Cable, Network } from 'lucide-react';
 import { ROUTES } from '@/constants/routes';
 import { CHAPTERS } from '@/constants/chapters';
 
@@ -10,24 +10,17 @@ const parts = [
     description: '从最基础的物理量开始，逐步建立对光波的理解',
     modules: [
       {
-        title: '基础物理定义',
-        description: '回顾光通信中常用的物理量：光、场、功率、能量、电流、电压与电阻。',
+        title: '光波基础与物理量',
+        description: '从电磁波谱出发，理解光波的基本物理量、数学描述与折射率概念。',
         icon: <BookOpen className="w-7 h-7" />,
-        color: '#6366f1',
-        path: ROUTES.LEARN.PHYSICS_BASICS,
-      },
-      {
-        title: '光波基础',
-        description: '从光的本质出发，理解电磁波、波长、频率与相位的基本概念。',
-        icon: <Lightbulb className="w-7 h-7" />,
         color: '#00d4ff',
-        path: ROUTES.LEARN.LIGHT_BASICS,
+        path: ROUTES.LEARN.WAVE_BASICS,
       },
     ],
   },
   {
-    title: 'Part 2 · 光源篇',
-    description: '理解光的产生机制与激光器的工作原理',
+    title: 'Part 2 · 光源与传输篇',
+    description: '从光源的产生到光信号在光纤中的传输',
     modules: [
       {
         title: '激光器',
@@ -35,6 +28,13 @@ const parts = [
         icon: <Flame className="w-7 h-7" />,
         color: '#ff4444',
         path: ROUTES.LEARN.LASER,
+      },
+      {
+        title: '光纤与光波导',
+        description: '光纤结构、损耗、色散与非线性效应，光信号的传输介质。',
+        icon: <Cable className="w-7 h-7" />,
+        color: '#06b6d4',
+        path: ROUTES.LEARN.FIBER_OPTICS,
       },
     ],
   },
@@ -71,17 +71,24 @@ const parts = [
         path: ROUTES.LEARN.POLARIZATION,
       },
       {
-        title: '高级调制',
-        description: 'Nyquist 脉冲整形、OFDM、概率星座整形等现代高速光通信关键技术。',
+        title: 'Nyquist 与 OFDM',
+        description: '脉冲整形与多载波调制技术，提升频谱效率的关键方法。',
         icon: <Zap className="w-7 h-7" />,
         color: '#06b6d4',
-        path: ROUTES.LEARN.DUAL_POLARIZATION,
+        path: ROUTES.LEARN.NYQUIST_OFDM,
+      },
+      {
+        title: '概率星座整形与编码',
+        description: '概率星座整形与 LDPC 纠错编码，逼近香农极限的技术。',
+        icon: <BarChart3 className="w-7 h-7" />,
+        color: '#f59e0b',
+        path: ROUTES.LEARN.PCS_CODING,
       },
     ],
   },
   {
-    title: 'Part 4 · 接收篇',
-    description: '光信号的检测、恢复与数字信号处理',
+    title: 'Part 4 · 系统篇',
+    description: '从接收器到 WDM 系统，构建完整的光通信链路',
     modules: [
       {
         title: '光接收器',
@@ -89,6 +96,20 @@ const parts = [
         icon: <Radio className="w-7 h-7" />,
         color: '#22c55e',
         path: ROUTES.LEARN.RECEIVER,
+      },
+      {
+        title: 'WDM 与光放大器',
+        description: '波分复用技术与光放大器，实现超大容量传输的核心技术。',
+        icon: <Network className="w-7 h-7" />,
+        color: '#a855f7',
+        path: ROUTES.LEARN.WDM_AMPLIFIER,
+      },
+      {
+        title: '完整光通信系统',
+        description: '端到端 400G DP-16QAM 传输系统全景，串联所有知识点。',
+        icon: <BookOpen className="w-7 h-7" />,
+        color: '#00ff88',
+        path: ROUTES.LEARN.SYSTEM_OVERVIEW,
       },
     ],
   },
@@ -206,7 +227,7 @@ export default function HomePage() {
           className="flex flex-wrap justify-center gap-4"
         >
           <button
-            onClick={() => navigate(ROUTES.LEARN.PHYSICS_BASICS)}
+            onClick={() => navigate(ROUTES.LEARN.WAVE_BASICS)}
             className="flex items-center gap-2 px-6 py-3 bg-laser-cyan text-lab-bg font-semibold rounded-xl hover:bg-laser-cyan/90 transition-all hover:shadow-glow-cyan"
           >
             <BookOpen className="w-5 h-5" />

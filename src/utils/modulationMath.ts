@@ -20,21 +20,21 @@ export function iqPhase(i: number, q: number): number {
   return Math.atan2(q, i);
 }
 
-export const qpskSymbols: IQPoint[] = [
+const qpskSymbols: IQPoint[] = [
   { i: -1, q: -1 },
   { i: -1, q: 1 },
   { i: 1, q: -1 },
   { i: 1, q: 1 },
 ];
 
-export const qam16Symbols: IQPoint[] = [];
+const qam16Symbols: IQPoint[] = [];
 for (let i = -3; i <= 3; i += 2) {
   for (let q = -3; q <= 3; q += 2) {
     qam16Symbols.push({ i: i / 3, q: q / 3 });
   }
 }
 
-export const qam64Symbols: IQPoint[] = [];
+const qam64Symbols: IQPoint[] = [];
 for (let i = -7; i <= 7; i += 2) {
   for (let q = -7; q <= 7; q += 2) {
     qam64Symbols.push({ i: i / 7, q: q / 7 });

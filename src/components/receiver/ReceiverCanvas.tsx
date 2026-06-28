@@ -249,7 +249,6 @@ export default function ReceiverCanvas() {
           else ctx.lineTo(x + i, py);
         }
         ctx.stroke();
-        void lastPoint;
       }
 
       ctx.strokeStyle = color;

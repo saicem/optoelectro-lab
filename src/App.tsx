@@ -5,15 +5,18 @@ import Layout from "@/components/common/Layout";
 import HomePage from "@/pages/HomePage";
 import { ROUTES } from "@/constants/routes";
 
-import LearnPhysicsBasics from "@/pages/learn/LearnPhysicsBasics";
-import LearnLightBasics from "@/pages/learn/LearnLightBasics";
+import LearnWaveBasics from "@/pages/learn/LearnWaveBasics";
 import LearnLaser from "@/pages/learn/LearnLaser";
+import LearnFiberOptics from "@/pages/learn/LearnFiberOptics";
 import LearnInterference from "@/pages/learn/LearnInterference";
 import LearnMZModulator from "@/pages/learn/LearnMZModulator";
 import LearnIQModulator from "@/pages/learn/LearnIQModulator";
 import LearnPolarization from "@/pages/learn/LearnPolarization";
-import LearnDualPolarization from "@/pages/learn/LearnDualPolarization";
+import LearnNyquistOFDM from "@/pages/learn/LearnNyquistOFDM";
+import LearnPCSCoding from "@/pages/learn/LearnPCSCoding";
 import LearnReceiver from "@/pages/learn/LearnReceiver";
+import LearnWDMAmplifier from "@/pages/learn/LearnWDMAmplifier";
+import LearnSystemOverview from "@/pages/learn/LearnSystemOverview";
 import LearnGlossary from "@/pages/learn/LearnGlossary";
 
 import InterferencePage from "@/pages/playground/InterferencePage";
@@ -30,15 +33,18 @@ function AnimatedRoutes() {
         <Route element={<Layout />}>
           <Route path={ROUTES.HOME} element={<HomePage />} />
 
-          <Route path={ROUTES.LEARN.PHYSICS_BASICS} element={<LearnPhysicsBasics />} />
-          <Route path={ROUTES.LEARN.LIGHT_BASICS} element={<LearnLightBasics />} />
+          <Route path={ROUTES.LEARN.WAVE_BASICS} element={<LearnWaveBasics />} />
           <Route path={ROUTES.LEARN.LASER} element={<LearnLaser />} />
+          <Route path={ROUTES.LEARN.FIBER_OPTICS} element={<LearnFiberOptics />} />
           <Route path={ROUTES.LEARN.INTERFERENCE} element={<LearnInterference />} />
           <Route path={ROUTES.LEARN.MZ_MODULATOR} element={<LearnMZModulator />} />
           <Route path={ROUTES.LEARN.IQ_MODULATOR} element={<LearnIQModulator />} />
           <Route path={ROUTES.LEARN.POLARIZATION} element={<LearnPolarization />} />
-          <Route path={ROUTES.LEARN.DUAL_POLARIZATION} element={<LearnDualPolarization />} />
+          <Route path={ROUTES.LEARN.NYQUIST_OFDM} element={<LearnNyquistOFDM />} />
+          <Route path={ROUTES.LEARN.PCS_CODING} element={<LearnPCSCoding />} />
           <Route path={ROUTES.LEARN.RECEIVER} element={<LearnReceiver />} />
+          <Route path={ROUTES.LEARN.WDM_AMPLIFIER} element={<LearnWDMAmplifier />} />
+          <Route path={ROUTES.LEARN.SYSTEM_OVERVIEW} element={<LearnSystemOverview />} />
           <Route path={ROUTES.LEARN.GLOSSARY} element={<LearnGlossary />} />
 
           <Route path={ROUTES.PLAYGROUND.INTERFERENCE} element={<InterferencePage />} />

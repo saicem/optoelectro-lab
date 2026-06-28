@@ -9,6 +9,7 @@ import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
 const pageSections = [
   { id: 's-0', title: '光的偏振态' },
   { id: 's-1', title: '斯托克斯矢量与庞加莱球' },
+  { id: 's-1-5', title: '琼斯矩阵：偏振的另一种数学描述' },
   { id: 's-2', title: '偏振控制器件' },
   { id: 's-3', title: '偏振复用 (PDM) 技术' },
   { id: 's-4', title: '实际挑战：偏振模色散 (PMD) 与偏振相关损耗' },
@@ -173,6 +174,125 @@ export default function LearnPolarization() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </LearnSection>
+
+      <LearnSection id="s-1-5" title="琼斯矩阵：偏振的另一种数学描述">
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            <span className="text-laser-purple font-semibold">琼斯矢量 (Jones Vector)</span>
+            是用一个二维复矢量来表示光的偏振态的方法。沿 z 方向传播的光可以写为：
+          </p>
+          <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
+            <MathRenderer>{'$$\\vec{J} = \\begin{bmatrix} E_x e^{j\\phi_x} \\\\ E_y e^{j\\phi_y} \\end{bmatrix} = \\begin{bmatrix} A_x \\\\ A_y e^{j\\delta} \\end{bmatrix}$$'}</MathRenderer>
+          </div>
+          <p className="text-sm">
+            其中 A_x、A_y 是 x 和 y 分量的振幅（归一化后），δ = φ_y - φ_x 是两分量的相位差。
+            与斯托克斯矢量不同，琼斯矢量保留了<strong>绝对相位</strong>信息，因此适用于涉和叠加计算。
+          </p>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">常见偏振态的琼斯矢量</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-lab-border">
+                    <th className="text-left py-2 text-lab-muted font-medium">偏振态</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">琼斯矢量</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-laser-cyan">水平线偏振 (X)</td>
+                    <td className="py-2 text-center"><MathRenderer>{'$$\\begin{bmatrix}1\\\\0\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center text-xs">电场沿 x 方向振动</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-laser-green">垂直线偏振 (Y)</td>
+                    <td className="py-2 text-center"><MathRenderer>{'$$\\begin{bmatrix}0\\\\1\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center text-xs">电场沿 y 方向振动</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-laser-purple">45° 线偏振</td>
+                    <td className="py-2 text-center"><MathRenderer>{'$$\\frac{1}{\\sqrt{2}}\\begin{bmatrix}1\\\\1\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center text-xs">A_x = A_y, δ = 0</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-laser-red">右旋圆偏振 (RCP)</td>
+                    <td className="py-2 text-center"><MathRenderer>{'$$\\frac{1}{\\sqrt{2}}\\begin{bmatrix}1\\\\-j\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center text-xs">A_x = A_y, δ = -π/2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">琼斯矩阵：偏振器件的数学描述</h4>
+            <p className="text-sm">
+              偏振器件对入射光的作用可以用一个 2×2 复矩阵——<TermNote term="琼斯矩阵" /> (Jones Matrix) 来表示。
+              出射琼斯矢量 = 琼斯矩阵 × 入射琼斯矢量：
+            </p>
+            <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
+              <MathRenderer>{'$$\\vec{J}_{out} = \\mathbf{M} \\cdot \\vec{J}_{in} = \\begin{bmatrix} m_{11} & m_{12} \\\\ m_{21} & m_{22} \\end{bmatrix} \\begin{bmatrix} J_x \\\\ J_y \\end{bmatrix}$$'}</MathRenderer>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 mt-3">
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
+                <h5 className="font-semibold text-laser-cyan mb-1">偏振片的琼斯矩阵</h5>
+                <p className="text-xs">水平透偏轴：</p>
+                <MathRenderer>{'$$\\mathbf{M}_{pol} = \\begin{bmatrix} 1 & 0 \\\\ 0 & 0 \\end{bmatrix}$$'}</MathRenderer>
+                <p className="text-xs mt-1">仅允许 x 分量的光通过，y 分量被完全阻挡。</p>
+              </div>
+              <div className="border border-laser-purple/30 bg-laser-purple/5 p-3 rounded-lg">
+                <h5 className="font-semibold text-laser-purple mb-1">波片的琼斯矩阵</h5>
+                <p className="text-xs">快轴沿 x 方向，相位延迟 Γ：</p>
+                <MathRenderer>{'$$\\mathbf{M}_{wp} = \\begin{bmatrix} e^{j\\Gamma/2} & 0 \\\\ 0 & e^{-j\\Gamma/2} \\end{bmatrix}$$'}</MathRenderer>
+                <p className="text-xs mt-1">Γ = π/2 为 λ/4 波片，Γ = π 为 λ/2 波片。</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">琼斯矢量与斯托克斯矢量的对比</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-lab-border">
+                    <th className="text-left py-2 text-lab-muted font-medium">特性</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">琼斯矢量 / 矩阵</th>
+                    <th className="text-center py-2 text-lab-muted font-medium">斯托克斯矢量</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-lab-text">适用范围</td>
+                    <td className="py-2 text-center text-xs">仅完全偏振光</td>
+                    <td className="py-2 text-center text-xs">完全偏振光 + 部分偏振光 + 自然光</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-lab-text">相位信息</td>
+                    <td className="py-2 text-center text-xs text-laser-cyan">包含绝对相位</td>
+                    <td className="py-2 text-center text-xs text-laser-red">仅相位差，无绝对相位</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 text-lab-text">干涉计算</td>
+                    <td className="py-2 text-center text-xs text-laser-green">可直接用于干涉</td>
+                    <td className="py-2 text-center text-xs text-laser-red">不可直接用于干涉</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 text-lab-text">可测量性</td>
+                    <td className="py-2 text-center text-xs text-laser-red">不可直接测量</td>
+                    <td className="py-2 text-center text-xs text-laser-green">可直接测量（强度）</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-lab-muted mt-3">
+              简言之：琼斯方法适用于需要关心相位的相干系统（如干涉仪），
+              斯托克斯方法适用于更一般的偏振态描述和测量。
+            </p>
           </div>
         </div>
       </LearnSection>

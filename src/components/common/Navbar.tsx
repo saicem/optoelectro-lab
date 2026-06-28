@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   Waves, BookOpen, FlaskConical, Lightbulb, Flame, CircuitBoard,
-  BarChart3, Compass, Radio, BookText, ChevronDown, Menu, X, Home, Zap,
+  BarChart3, Compass, Radio, BookText, ChevronDown, Menu, X, Home, Zap, Cable, Network,
 } from 'lucide-react';
 import { useState } from 'react';
 import { ROUTES } from '@/constants/routes';
@@ -22,14 +22,14 @@ const learnParts: LearnPart[] = [
   {
     label: 'Part 1 · 基础篇',
     items: [
-      { path: ROUTES.LEARN.PHYSICS_BASICS, label: '基础物理定义', icon: BookOpen },
-      { path: ROUTES.LEARN.LIGHT_BASICS, label: '光波基础', icon: Lightbulb },
+      { path: ROUTES.LEARN.WAVE_BASICS, label: '光波基础与物理量', icon: BookOpen },
     ],
   },
   {
-    label: 'Part 2 · 光源篇',
+    label: 'Part 2 · 光源与传输篇',
     items: [
       { path: ROUTES.LEARN.LASER, label: '激光器', icon: Flame },
+      { path: ROUTES.LEARN.FIBER_OPTICS, label: '光纤与光波导', icon: Cable },
     ],
   },
   {
@@ -39,13 +39,16 @@ const learnParts: LearnPart[] = [
       { path: ROUTES.LEARN.MZ_MODULATOR, label: 'MZ 调制器', icon: CircuitBoard },
       { path: ROUTES.LEARN.IQ_MODULATOR, label: 'IQ 调制器', icon: BarChart3 },
       { path: ROUTES.LEARN.POLARIZATION, label: '偏振复用', icon: Compass },
-      { path: ROUTES.LEARN.DUAL_POLARIZATION, label: '高级调制', icon: Zap },
+      { path: ROUTES.LEARN.NYQUIST_OFDM, label: 'Nyquist 与 OFDM', icon: Zap },
+      { path: ROUTES.LEARN.PCS_CODING, label: '概率星座整形与编码', icon: BarChart3 },
     ],
   },
   {
-    label: 'Part 4 · 接收篇',
+    label: 'Part 4 · 系统篇',
     items: [
       { path: ROUTES.LEARN.RECEIVER, label: '光接收器', icon: Radio },
+      { path: ROUTES.LEARN.WDM_AMPLIFIER, label: 'WDM 与光放大器', icon: Network },
+      { path: ROUTES.LEARN.SYSTEM_OVERVIEW, label: '完整光通信系统', icon: BookOpen },
     ],
   },
   {

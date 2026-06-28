@@ -1,15 +1,18 @@
 export const ROUTES = {
   HOME: '/',
   LEARN: {
-    PHYSICS_BASICS: '/learn/physics-basics',
-    LIGHT_BASICS: '/learn/light-basics',
+    WAVE_BASICS: '/learn/wave-basics',
     LASER: '/learn/laser',
+    FIBER_OPTICS: '/learn/fiber-optics',
     INTERFERENCE: '/learn/interference',
     MZ_MODULATOR: '/learn/mz-modulator',
     IQ_MODULATOR: '/learn/iq-modulator',
     POLARIZATION: '/learn/polarization',
-    DUAL_POLARIZATION: '/learn/dual-polarization',
+    NYQUIST_OFDM: '/learn/nyquist-ofdm',
+    PCS_CODING: '/learn/pcs-coding',
     RECEIVER: '/learn/receiver',
+    WDM_AMPLIFIER: '/learn/wdm-amplifier',
+    SYSTEM_OVERVIEW: '/learn/system-overview',
     GLOSSARY: '/learn/glossary',
   },
   PLAYGROUND: {

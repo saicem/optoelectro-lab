@@ -11,6 +11,7 @@ const pageSections = [
   { id: 's-1', title: '粒子数反转与光放大' },
   { id: 's-2', title: '激光谐振腔' },
   { id: 's-3', title: '激光器的类型' },
+  { id: 's-3-5', title: '光通信专用激光器' },
   { id: 's-4', title: '激光的特性与应用' },
   { id: 's-5', title: '下一步：干涉原理' },
 ];
@@ -25,7 +26,7 @@ export default function LearnLaser() {
       subtitle="光的产生：受激辐射、激光谐振腔与常见激光器类型"
       currentIndex={currentIndex}
       totalChapters={TOTAL_CHAPTERS}
-      partTitle="Part 2 · 光源篇"
+      partTitle="Part 2 · 光源与传输篇"
       prevChapter={prevChapter}
       nextChapter={nextChapter}
       sections={pageSections}
@@ -275,6 +276,87 @@ export default function LearnLaser() {
         </div>
       </LearnSection>
 
+      <LearnSection id="s-3-5" title="光通信专用激光器">
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            在光通信系统中，激光器的选择直接影响系统性能。以下是两种最常用的光通信专用激光器。
+          </p>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-lab-bg/50 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-cyan mb-2">DFB 激光器（分布反馈）</h4>
+              <p className="text-sm">
+                DFB 激光器在增益介质内部集成<TermNote term="布拉格光栅" />（周期性折射率变化结构），
+                光栅只允许满足布拉格条件的特定波长获得反馈，从而实现<TermNote term="单纵模" />输出。
+              </p>
+              <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
+                <MathRenderer>{'$$\\lambda_B = 2 n_{\\text{eff}} \\Lambda$$'}</MathRenderer>
+                <p className="text-xs mt-1">其中 Λ 是光栅周期，n_eff 是有效折射率。</p>
+              </div>
+              <p className="text-sm mt-2">
+                DFB 激光器线宽窄（通常数百 kHz ~ 数 MHz）、波长稳定、可直接高速调制，
+                是长距离光通信系统的首选光源。
+              </p>
+            </div>
+            <div className="bg-lab-bg/50 p-4 rounded-xl">
+              <h4 className="font-semibold text-laser-green mb-2">VCSEL（垂直腔面发射激光器）</h4>
+              <p className="text-sm">
+                与边发射激光器不同，VCSEL 的谐振腔垂直于芯片表面，光从顶部垂直输出。
+                这种<TermNote term="垂直腔面发射" />结构带来了独特的优势。
+              </p>
+              <p className="text-sm mt-2">
+                <span className="text-lab-text font-medium">核心优势：</span><br />
+                • 低阈值电流、低功耗<br />
+                • 晶圆级测试，制造成本低<br />
+                • 圆形光束，光纤耦合效率高<br />
+                • 易于二维阵列集成
+              </p>
+              <p className="text-sm mt-2">
+                VCSEL 广泛应用于短距离数据中心互联（SR）、光互联和消费级传感器。
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">激光器线宽 (Linewidth)</h4>
+            <p className="text-sm">
+              激光器<TermNote term="线宽" />（光谱线宽）描述激光光谱的宽度，定义为光谱半高全宽 (FWHM)。
+              线宽越窄，激光的时间相干性越好。DFB 激光器线宽约为 100 kHz ~ 10 MHz，
+              而外腔激光器可将线宽压窄到 kHz 甚至 Hz 量级。
+            </p>
+            <p className="text-sm mt-2">
+              线宽由 Schawlow-Townes 公式给出（量子极限），实际中受相位噪声、载流子噪声等因素影响会进一步展宽。
+              在相干光通信系统中，激光器线宽直接决定了系统对相位噪声的容忍度。
+            </p>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">波长调谐机制</h4>
+            <p className="text-sm">
+              光通信中常需要调节激光器的输出波长，主要有两种方式：
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 mt-3">
+              <div className="border border-laser-red/30 bg-laser-red/5 p-3 rounded-lg">
+                <h5 className="font-semibold text-laser-red mb-1">温度调谐</h5>
+                <p className="text-sm">
+                  改变激光器的温度，半导体材料的折射率和带隙随温度变化，
+                  导致输出波长漂移。调谐速度慢（ms 级），调谐范围大（~10 nm）。
+                </p>
+              </div>
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
+                <h5 className="font-semibold text-laser-cyan mb-1">电流调谐</h5>
+                <p className="text-sm">
+                  改变注入电流，载流子浓度变化引起折射率变化，从而改变波长。
+                  调谐速度快（ns 级），调谐范围小（~1 nm），且会同时改变输出功率。
+                </p>
+              </div>
+            </div>
+            <p className="text-xs text-lab-muted mt-2">
+              在实际 WDM 系统中，常结合温度和电流调谐来实现波长的精确锁定和快速微调。
+            </p>
+          </div>
+        </div>
+      </LearnSection>
+
       <LearnSection title="激光的特性与应用">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <div className="grid md:grid-cols-2 gap-6">
@@ -319,6 +401,20 @@ export default function LearnLaser() {
                 </li>
               </ul>
             </div>
+          </div>
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-2">相对强度噪声 (RIN)</h4>
+            <p className="text-sm">
+              <TermNote term="相对强度噪声" />（Relative Intensity Noise, RIN）是衡量激光器输出功率稳定性的关键指标，
+              定义为光功率波动的均方值相对于平均光功率平方的比值，通常用 dB/Hz 表示。
+            </p>
+            <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
+              <MathRenderer>{'$$\\text{RIN} = \\frac{\\langle \\Delta P^2 \\rangle}{\\langle P \\rangle^2} \\quad [\\text{dB/Hz}]$$'}</MathRenderer>
+            </div>
+            <p className="text-sm mt-2">
+              RIN 的来源包括自发辐射噪声、载流子噪声和模式竞争等。在模拟光通信（如 RFoF）和高速数字通信中，
+              过高的 RIN 会限制系统的信噪比，因此低 RIN（通常 &lt; -150 dB/Hz）是高质量激光器的重要标志。
+            </p>
           </div>
         </div>
       </LearnSection>

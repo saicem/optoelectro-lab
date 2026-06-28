@@ -26,7 +26,7 @@ export default function LearnReceiver() {
       subtitle="光信号的检测：光电二极管、相干接收与数字信号处理"
       currentIndex={currentIndex}
       totalChapters={TOTAL_CHAPTERS}
-      partTitle="Part 4 · 接收篇"
+      partTitle="Part 4 · 系统篇"
       playgroundPath={ROUTES.PLAYGROUND.RECEIVER}
       prevChapter={prevChapter}
       nextChapter={nextChapter}
@@ -245,6 +245,25 @@ export default function LearnReceiver() {
             </div>
           </div>
 
+          {/* ASE 噪声 */}
+          <div className="border border-amber-500/30 bg-amber-500/5 p-4 rounded-xl mt-4">
+            <h4 className="font-semibold text-amber-500 mb-2"><TermNote term="ASE 噪声" />（放大的自发辐射）</h4>
+            <p className="text-sm mb-2">
+              在掺铒光纤放大器 (EDFA) 中，铒离子在放大信号光的同时也会产生自发辐射，
+              这些自发辐射光子随后被放大器放大，形成 ASE 噪声。ASE 噪声是光放大系统中限制信噪比的主要因素。
+            </p>
+            <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
+              <MathRenderer>{'$$S_{ASE} = (G-1) \\cdot n_{sp} \\cdot hf$$'}</MathRenderer>
+            </div>
+            <p className="text-xs text-lab-muted mt-2">
+              G 是放大器增益，n<sub>sp</sub> 是自发辐射因子（理想值 ≥ 1），hf 是光子能量。
+            </p>
+            <p className="text-sm mt-2">
+              ASE 噪声与信号光在光电检测中会产生两种差拍噪声：<strong className="text-lab-text">信号-ASE 差拍噪声</strong>和<strong className="text-lab-text">ASE-ASE 差拍噪声</strong>。
+              前者正比于信号光功率 × ASE 功率谱密度，是 ASE 受限系统中的主要噪声源。
+            </p>
+          </div>
+
           {/* 信噪比与灵敏度 */}
           <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
             <h4 className="font-semibold text-lab-text mb-3">信噪比 (SNR) 与接收灵敏度</h4>
@@ -298,32 +317,15 @@ export default function LearnReceiver() {
             </div>
           </div>
 
-          {/* 均衡算法详细说明 */}
-          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
-            <h4 className="font-semibold text-lab-text mb-3">自适应均衡算法详解</h4>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
-                <h5 className="font-semibold text-laser-cyan mb-2">恒模算法 (CMA)</h5>
-                <p className="text-sm">
-                  最常用的偏振解复用算法。利用星座点的恒定模值特性（如 QPSK），通过最小化输出模值的波动来分离两个偏振态。
-                </p>
-                <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
-                  <MathRenderer>{'$$\\vec{h}_{n+1} = \\vec{h}_n - \\mu \\cdot \\vec{x}_n \\cdot (|y_n|^2 - R^2)$$'}</MathRenderer>
-                </div>
-                <p className="text-xs text-lab-muted mt-2">
-                  μ 是步长参数，R² 是目标模值，y_n 是输出信号。
-                </p>
-              </div>
-              <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
-                <h5 className="font-semibold text-laser-purple mb-2">多模算法 (MMA)</h5>
-                <p className="text-sm">
-                  用于高阶 QAM（如 16QAM、64QAM）。星座点模值不恒定，需要根据符号的实际模值进行判决导向均衡。
-                </p>
-                <p className="text-xs text-lab-muted mt-2">
-                  MMA 在星座点的多个模值层之间进行判决，适应非恒模信号。
-                </p>
-              </div>
-            </div>
+          {/* 均衡算法简要说明 */}
+          <div className="bg-lab-bg/50 p-4 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-2">自适应均衡算法</h4>
+            <p className="text-sm">
+              偏振解复用通常使用自适应均衡算法来实现。<strong className="text-lab-text">恒模算法 (CMA)</strong> 适用于 QPSK 等恒模信号，
+              通过最小化输出模值误差来分离两个偏振态；<strong className="text-lab-text">多模算法 (MMA)</strong> 则是 CMA 在高阶 QAM 场景的扩展，
+              在多个模值层间进行判决导向均衡。两者的核心差异在于 CMA 使用单一的目标模值 R²，而 MMA 根据符号的判决结果动态选择目标模值。
+              实际系统中，CMA 常用于收敛阶段，随后切换为判决导向模式以获得更优的均衡效果。
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
@@ -396,6 +398,31 @@ export default function LearnReceiver() {
               通常要求 BER &lt; 10⁻¹²，对应的 Q 值约为 7 dB。
             </p>
           </div>
+
+          {/* 功率预算计算 */}
+          <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
+            <h4 className="font-semibold text-lab-text mb-3">功率预算计算</h4>
+            <p className="text-sm mb-3">
+              功率预算用于验证链路端到端的光功率是否满足接收灵敏度要求。基本公式为：
+            </p>
+            <div className="bg-lab-surface/50 p-3 rounded-lg text-xs mb-3">
+              <MathRenderer>{'$$P_{rx} = P_{tx} - \\alpha_{conn} - \\alpha_{fiber} \\cdot L - \\alpha_{splice} + G_{amp}$$'}</MathRenderer>
+            </div>
+            <p className="text-sm mb-3">
+              以 80 km 传输链路为例：
+            </p>
+            <div className="bg-lab-surface/50 p-3 rounded-lg text-xs space-y-1">
+              <p><strong className="text-laser-cyan">发射功率：</strong> P<sub>tx</sub> = 0 dBm</p>
+              <p><strong className="text-laser-green">光纤损耗：</strong> 0.2 dB/km × 80 km = 16 dB</p>
+              <p><strong className="text-laser-purple">连接器 + 接头损耗：</strong> 约 2 dB</p>
+              <p><strong className="text-amber-500">EDFA 增益：</strong> 每 80 km 放大 16 dB（补偿光纤损耗）</p>
+              <p className="pt-1 border-t border-lab-border/30"><strong className="text-lab-text">接收功率：</strong> P<sub>rx</sub> = 0 - 16 - 2 + 16 = <strong className="text-laser-green">-2 dBm</strong></p>
+            </div>
+            <p className="text-sm mt-3">
+              若接收灵敏度为 -20 dBm（BER = 10⁻¹²），则系统有约 18 dB 的功率余量，
+              足以支持更长的传输距离或应对器件老化带来的额外损耗。
+            </p>
+          </div>
         </div>
       </LearnSection>
 
@@ -445,6 +472,38 @@ export default function LearnReceiver() {
             其中，<strong>DP-IQ 调制器 + 相干接收</strong> 的组合，
             是当前高速光通信系统中频谱效率最高、应用最广泛的方案。
           </p>
+
+          {/* 知识点回顾 */}
+          <div className="bg-gradient-to-r from-laser-cyan/10 via-laser-purple/10 to-laser-green/10 border border-laser-cyan/30 p-5 rounded-xl mt-6">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">📖 知识点回顾</h4>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <span className="text-laser-cyan font-semibold">① 光电检测</span>
+                <p className="text-xs text-lab-muted mt-1">光电效应将光信号转为电信号；PIN/APD 是核心器件</p>
+              </div>
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <span className="text-laser-purple font-semibold">② 检测方式</span>
+                <p className="text-xs text-lab-muted mt-1">直接检测（强度）vs 相干检测（幅度+相位+偏振）</p>
+              </div>
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <span className="text-laser-green font-semibold">③ 相干结构</span>
+                <p className="text-xs text-lab-muted mt-1">PBS + 90° 混频器 + 平衡探测器，恢复 X/Y 偏振的 I/Q 分量</p>
+              </div>
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <span className="text-amber-500 font-semibold">④ 噪声与灵敏度</span>
+                <p className="text-xs text-lab-muted mt-1">散粒噪声、热噪声、ASE 噪声；功率预算决定传输距离</p>
+              </div>
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <span className="text-laser-red font-semibold">⑤ DSP 流程</span>
+                <p className="text-xs text-lab-muted mt-1">色散补偿 → 偏振解复用（CMA/MMA）→ 载波恢复 → 符号判决</p>
+              </div>
+              <div className="bg-lab-bg/50 p-3 rounded-lg">
+                <span className="text-laser-cyan font-semibold">⑥ 性能指标</span>
+                <p className="text-xs text-lab-muted mt-1">灵敏度、响应度、带宽、BER 与 Q 值的对应关系</p>
+              </div>
+            </div>
+          </div>
+
           <p className="text-center mt-6">
             <span className="text-laser-cyan font-semibold">🎉 恭喜你完成了全部学习！</span>
             <br />

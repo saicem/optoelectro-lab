@@ -40,18 +40,16 @@ export default function LearnFiberOptics() {
             纤芯的折射率略高于包层，这是实现光约束的关键。
           </p>
           <div className="bg-lab-bg/50 p-5 rounded-xl">
-            <h4 className="font-semibold text-lab-text mb-3 text-center">光纤三层结构</h4>
+            <h4 className="font-semibold text-lab-text mb-6 text-center">光纤三层结构</h4>
             <div className="flex items-center justify-center">
-              <div className="relative w-48 h-48">
-                <div className="absolute inset-0 rounded-full border-4 border-laser-purple/40 flex items-center justify-center">
-                  <div className="text-laser-purple text-xs">涂覆层 (250 μm)</div>
-                </div>
-                <div className="absolute inset-4 rounded-full border-4 border-laser-green/50 flex items-center justify-center">
-                  <div className="text-laser-green text-xs">包层 (125 μm)</div>
-                </div>
-                <div className="absolute inset-12 rounded-full border-4 border-laser-cyan/60 flex items-center justify-center">
-                  <div className="text-laser-cyan text-xs">纤芯 (8-50 μm)</div>
-                </div>
+              <div className="relative w-56 h-56">
+                <div className="absolute inset-0 rounded-full border-4 border-laser-purple/40"></div>
+                <div className="absolute inset-4 rounded-full border-4 border-laser-green/50"></div>
+                <div className="absolute inset-12 rounded-full border-4 border-laser-cyan/60"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-laser-cyan/30"></div>
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-laser-purple text-xs font-medium whitespace-nowrap">涂覆层 (250 μm)</div>
+                <div className="absolute top-1/2 -translate-y-1/2 -right-24 text-laser-green text-xs font-medium whitespace-nowrap">包层 (125 μm)</div>
+                <div className="absolute top-1/2 -translate-y-1/2 -left-20 text-laser-cyan text-xs font-medium whitespace-nowrap">纤芯 (8-50 μm)</div>
               </div>
             </div>
             <div className="grid md:grid-cols-3 gap-3 mt-4 text-xs">
@@ -78,7 +76,7 @@ export default function LearnFiberOptics() {
             从而被约束在纤芯中沿轴向传播。
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$\\theta_c = \\arcsin\\left(\\frac{n_2}{n_1}\\right)'}</MathRenderer>
+            <MathRenderer>{'$$\\theta_c = \\arcsin\\left(\\frac{n_2}{n_1}\\right)$$'}</MathRenderer>
             <p className="text-sm mt-2">
               临界角 θ_c 由纤芯折射率 n₁ 和包层折射率 n₂ 决定。只有当入射角 θ &gt; θ_c 时，才能发生全内反射。
             </p>
@@ -115,7 +113,7 @@ export default function LearnFiberOptics() {
             这一区别本质上由归一化频率（V 参数）决定：
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$V = \\frac{2\\pi a}{\\lambda} \\cdot \\text{NA} = \\frac{2\\pi a}{\\lambda} \\sqrt{n_1^2 - n_2^2}'}</MathRenderer>
+            <MathRenderer>{'$$V = \\frac{2\\pi a}{\\lambda} \\cdot \\text{NA} = \\frac{2\\pi a}{\\lambda} \\sqrt{n_1^2 - n_2^2}$$'}</MathRenderer>
             <p className="text-sm mt-2">
               其中 a 是纤芯半径，λ 是工作波长。当 V &lt; 2.405 时，光纤只支持基模（LP₀₁）传播，即单模光纤。
             </p>
@@ -152,14 +150,14 @@ export default function LearnFiberOptics() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-2">模场直径近似</h5>
-                <MathRenderer>{'$$2\\omega_0 \\approx 2a \\left(0.65 + \\frac{1.619}{V^{3/2}} + \\frac{2.879}{V^6}\\right)'}</MathRenderer>
+                <MathRenderer>{'$$2\\omega_0 \\approx 2a \\left(0.65 + \\frac{1.619}{V^{3/2}} + \\frac{2.879}{V^6}\\right)$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-2">
                   2ω₀ 为模场直径，a 为纤芯半径，V 为归一化频率。
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-2">截止波长</h5>
-                <MathRenderer>{'$$\\lambda_c = \\frac{2\\pi a}{2.405} \\cdot \\text{NA}'}</MathRenderer>
+                <MathRenderer>{'$$\\lambda_c = \\frac{2\\pi a}{2.405} \\cdot \\text{NA}$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-2">
                   当 λ &gt; λ_c 时，高阶模截止，光纤工作于单模状态。
                 </p>
@@ -180,7 +178,7 @@ export default function LearnFiberOptics() {
             损耗系数 α 的单位是 dB/km，定义为：
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$\\alpha \\left(\\frac{\\text{dB}}{\\text{km}}\\right) = \\frac{10}{L} \\log_{10}\\left(\\frac{P_{in}}{P_{out}}\\right)'}</MathRenderer>
+            <MathRenderer>{'$$\\alpha \\left(\\frac{\\text{dB}}{\\text{km}}\\right) = \\frac{10}{L} \\log_{10}\\left(\\frac{P_{in}}{P_{out}}\\right)$$'}</MathRenderer>
             <p className="text-sm mt-2">
               当代标准单模光纤在 1550 nm 窗口的损耗已低至 0.17 dB/km，这意味着传输 100 km 后光功率仅衰减约 97%。
             </p>
@@ -243,7 +241,7 @@ export default function LearnFiberOptics() {
                 瑞利散射损耗与 λ⁻⁴ 成正比，是光纤损耗的<strong>基本下限</strong>。
               </p>
               <div className="bg-lab-surface/50 px-3 py-2 rounded-lg mt-2 text-xs">
-                <MathRenderer>{'$$\\alpha_{Rayleigh} \\propto \\lambda^{-4}'}</MathRenderer>
+                <MathRenderer>{'$$\\alpha_{Rayleigh} \\propto \\lambda^{-4}$$'}</MathRenderer>
               </div>
             </div>
             <div className="bg-lab-bg/50 p-4 rounded-xl">
@@ -273,7 +271,7 @@ export default function LearnFiberOptics() {
             色度色散是限制高速光通信系统传输距离的关键因素之一。
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$D = D_m + D_w \\quad \\left( \\frac{\\text{ps}}{\\text{nm} \\cdot \\text{km}} \\right)'}</MathRenderer>
+            <MathRenderer>{'$$D = D_m + D_w \\quad \\left( \\frac{\\text{ps}}{\\text{nm} \\cdot \\text{km}} \\right)$$'}</MathRenderer>
             <p className="text-sm mt-2">
               总色散系数 D 是材料色散 D_m 与波导色散 D_w 之和。对于标准单模光纤 G.652，
               1550 nm 处的色散系数约为 17 ps/(nm·km)。
@@ -287,7 +285,7 @@ export default function LearnFiberOptics() {
                 材料色散的本质是光与光纤材料中电子的相互作用：
               </p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
-                <MathRenderer>{'$$D_m = -\\frac{\\lambda}{c} \\frac{d^2 n}{d\\lambda^2}'}</MathRenderer>
+                <MathRenderer>{'$$D_m = -\\frac{\\lambda}{c} \\frac{d^2 n}{d\\lambda^2}$$'}</MathRenderer>
               </div>
               <p className="text-xs text-lab-muted mt-2">
                 在 1270 nm 附近材料色散为零，称为零色散波长。
@@ -300,7 +298,7 @@ export default function LearnFiberOptics() {
                 使有效折射率随频率变化而产生色散。波导色散与光纤的折射率剖面设计密切相关。
               </p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-2 text-xs">
-                <MathRenderer>{'$$D_w = -\\frac{n_2\\Delta}{c\\lambda} V \\frac{d^2(Vb)}{dV^2}'}</MathRenderer>
+                <MathRenderer>{'$$D_w = -\\frac{n_2\\Delta}{c\\lambda} V \\frac{d^2(Vb)}{dV^2}$$'}</MathRenderer>
               </div>
               <p className="text-xs text-lab-muted mt-2">
                 b 为归一化传播常数，V 为归一化频率。
@@ -316,14 +314,14 @@ export default function LearnFiberOptics() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-2">色散斜率定义</h5>
-                <MathRenderer>{'$$S = \\frac{dD}{d\\lambda}'}</MathRenderer>
+                <MathRenderer>{'$$S = \\frac{dD}{d\\lambda}$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-2">
                   G.652 光纤在 1550 nm 处的斜率 S₀ ≈ 0.058 ps/(nm²·km)。
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-2">色散与波长的关系</h5>
-                <MathRenderer>{'$$D(\\lambda) = \\frac{S_0}{4}\\left(\\lambda - \\frac{\\lambda_0^4}{\\lambda^3}\\right)'}</MathRenderer>
+                <MathRenderer>{'$$D(\\lambda) = \\frac{S_0}{4}\\left(\\lambda - \\frac{\\lambda_0^4}{\\lambda^3}\\right)$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-2">
                   λ₀ 为零色散波长（约 1310 nm）。
                 </p>
@@ -371,13 +369,13 @@ export default function LearnFiberOptics() {
             折射率与光强的依赖关系可表示为：
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$n = n_0 + n_2 \\cdot I'}</MathRenderer>
+            <MathRenderer>{'$$n = n_0 + n_2 \\cdot I$$'}</MathRenderer>
             <p className="text-sm mt-2">
               其中 n₀ 是线性折射率，n₂ 是非线性折射率系数（石英玻璃约 2.6×10⁻²⁰ m²/W），
               I 是光强。非线性效应的强度用<span className="text-amber-400 font-mono">非线性系数 γ</span> 描述：
             </p>
             <div className="mt-2">
-              <MathRenderer>{'$$\\gamma = \\frac{2\\pi n_2}{\\lambda A_{eff}}'}</MathRenderer>
+              <MathRenderer>{'$$\\gamma = \\frac{2\\pi n_2}{\\lambda A_{eff}}$$'}</MathRenderer>
             </div>
             <p className="text-xs text-lab-muted mt-2">
               A_eff 是光纤的有效面积，标准 SMF 的 γ ≈ 1.1 W⁻¹·km⁻¹ (@1550 nm)。
@@ -391,7 +389,7 @@ export default function LearnFiberOptics() {
                 相位变化又通过时间导数产生频率啁啾，使脉冲频谱展宽。
               </p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
-                <MathRenderer>{'$$\\phi_{NL}(t) = \\gamma P(t) L_{eff}'}</MathRenderer>
+                <MathRenderer>{'$$\\phi_{NL}(t) = \\gamma P(t) L_{eff}$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-1">
                   P(t) 是瞬时功率，L_eff 是有效作用长度。
                 </p>
@@ -408,7 +406,7 @@ export default function LearnFiberOptics() {
                 在 WDM 系统中，XPM 是限制信道数量的重要因素。
               </p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
-                <MathRenderer>{'$$\\phi_{XPM}^{(j)} = 2\\gamma P_k(t) L_{eff}'}</MathRenderer>
+                <MathRenderer>{'$$\\phi_{XPM}^{(j)} = 2\\gamma P_k(t) L_{eff}$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-1">
                   XPM 的效率是 SPM 的两倍（系数 2）。
                 </p>
@@ -424,7 +422,7 @@ export default function LearnFiberOptics() {
                 在 WDM 系统中，FWM 会产生串扰，尤其在零色散波长附近最为严重。
               </p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">
-                <MathRenderer>{'$$\\omega_4 = \\omega_1 + \\omega_2 - \\omega_3'}</MathRenderer>
+                <MathRenderer>{'$$\\omega_4 = \\omega_1 + \\omega_2 - \\omega_3$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-1">
                   当 ω₁=ω₂≠ω₃ 时称为简并 FWM。
                 </p>
@@ -477,14 +475,14 @@ export default function LearnFiberOptics() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-2">双折射系数</h5>
-                <MathRenderer>{'$$B = |n_x - n_y|'}</MathRenderer>
+                <MathRenderer>{'$$B = |n_x - n_y|$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-2">
                   典型 PMF 的 B ≈ 10⁻⁴，比普通光纤高 2-3 个数量级。
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-2">拍长</h5>
-                <MathRenderer>{'$$L_B = \\frac{\\lambda}{B}'}</MathRenderer>
+                <MathRenderer>{'$$L_B = \\frac{\\lambda}{B}$$'}</MathRenderer>
                 <p className="text-xs text-lab-muted mt-2">
                   在 1550 nm 处，B=10⁻⁴ 时拍长约 1.5 cm。
                 </p>

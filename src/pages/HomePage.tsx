@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, FlaskConical, Waves, CircuitBoard, BarChart3, Compass, Sparkles, Zap, Target, ArrowRight, Flame, Radio, BookText, Cable, Network } from 'lucide-react';
+import { BookOpen, FlaskConical, Waves, CircuitBoard, BarChart3, Compass, Sparkles, Zap, Target, ArrowRight, Flame, Radio, BookText, Cable, Network, Atom } from 'lucide-react';
 import { ROUTES } from '@/constants/routes';
 import { CHAPTERS } from '@/constants/chapters';
 
@@ -35,6 +35,13 @@ const parts = [
         icon: <Cable className="w-7 h-7" />,
         color: '#06b6d4',
         path: ROUTES.LEARN.FIBER_OPTICS,
+      },
+      {
+        title: '光电材料',
+        description: '半导体、电光晶体与非线性光学材料，光通信系统的物理基础。',
+        icon: <Atom className="w-7 h-7" />,
+        color: '#a855f7',
+        path: ROUTES.LEARN.OPTOELECTRONIC_MATERIALS,
       },
     ],
   },

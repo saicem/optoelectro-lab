@@ -8,11 +8,13 @@ import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '半导体材料基础' },
-  { id: 's-1', title: '光电效应原理' },
-  { id: 's-2', title: '常见光电材料' },
-  { id: 's-3', title: '电光材料' },
-  { id: 's-4', title: '非线性光学材料' },
-  { id: 's-5', title: '材料特性对比与应用' },
+  { id: 's-1', title: 'PN 结原理' },
+  { id: 's-2', title: '光电效应原理' },
+  { id: 's-3', title: '光电二极管' },
+  { id: 's-4', title: '常见光电材料' },
+  { id: 's-5', title: '电光材料' },
+  { id: 's-6', title: '非线性光学材料' },
+  { id: 's-7', title: '材料特性对比与应用' },
 ];
 
 export default function LearnOptoelectronicMaterials() {
@@ -121,7 +123,129 @@ export default function LearnOptoelectronicMaterials() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-1" icon={<Zap className="w-5 h-5 text-laser-green" />} title="光电效应原理">
+      <LearnSection id="s-1" icon={<Cpu className="w-5 h-5 text-laser-purple" />} title="PN 结原理">
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            <span className="text-laser-purple font-semibold">PN 结（P-N Junction）</span>
+            是半导体器件的核心结构，由 P 型半导体和 N 型半导体结合而成。
+            它形成了半导体器件中的<span className="text-laser-cyan font-semibold">内建电场</span>，
+            是光电二极管、激光器等器件工作的物理基础。
+          </p>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">PN 结的形成</h4>
+            <p className="text-sm mb-3">
+              当 P 型半导体（含大量空穴）和 N 型半导体（含大量电子）接触时，
+              由于浓度差，N 区的电子向 P 区扩散，P 区的空穴向 N 区扩散。
+              这形成了<span className="text-laser-green font-semibold">扩散电流</span>。
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 text-xs">
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-2">扩散过程</h5>
+                <p className="text-lab-muted">
+                  电子从 N 区扩散到 P 区，与空穴复合消失。
+                  空穴从 P 区扩散到 N 区，与电子复合消失。
+                </p>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-green mb-2">空间电荷区</h5>
+                <p className="text-lab-muted">
+                  扩散后，N 区留下正电离子，P 区留下负电离子，
+                  形成<span className="text-laser-purple">耗尽区</span>或<span className="text-laser-purple">空间电荷区</span>。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">内建电场与势垒</h4>
+            <p className="text-sm mb-3">
+              空间电荷区形成了一个从 N 区指向 P 区的<span className="text-laser-purple font-semibold">内建电场 E</span>，
+              产生<span className="text-laser-purple font-semibold">势垒电压 V_bi</span>（也称接触电势或内建电势）。
+            </p>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="bg-lab-surface/50 p-3 rounded-lg text-xs">
+                <MathRenderer>{'$$V_{bi} = \\frac{k_B T}{q} \\ln\\left(\\frac{N_A N_D}{n_i^2}\\right)$$'}</MathRenderer>
+                <p className="text-lab-muted mt-1">热电压 kT/q ≈ 26 mV (300 K)</p>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg text-xs">
+                <div className="font-medium text-lab-text mb-1">典型值</div>
+                <ul className="text-lab-muted space-y-0.5">
+                  <li>• Si PN 结：0.6-0.7 V</li>
+                  <li>• Ge PN 结：0.2-0.3 V</li>
+                  <li>• GaAs PN 结：1.0-1.3 V</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">能带图</h4>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <div className="flex-1 text-center">
+                <div className="h-16 border-2 border-laser-green/50 rounded-l-lg bg-laser-green/10 flex flex-col justify-center">
+                  <span className="text-[10px] text-laser-green">N 区</span>
+                  <span className="text-xs text-laser-green">多子：电子</span>
+                </div>
+                <div className="text-xs text-lab-muted mt-1">E_F 靠近导带</div>
+              </div>
+              <div className="w-24 flex-shrink-0">
+                <div className="h-16 bg-laser-purple/10 border-y-2 border-laser-purple/50 flex flex-col justify-center items-center">
+                  <span className="text-[10px] text-laser-purple">耗尽区</span>
+                  <span className="text-xs text-lab-muted">空间电荷区</span>
+                </div>
+                <div className="text-xs text-lab-muted mt-1 text-center">内建电场</div>
+              </div>
+              <div className="flex-1 text-center">
+                <div className="h-16 border-2 border-laser-cyan/50 rounded-r-lg bg-laser-cyan/10 flex flex-col justify-center">
+                  <span className="text-[10px] text-laser-cyan">P 区</span>
+                  <span className="text-xs text-laser-cyan">多子：空穴</span>
+                </div>
+                <div className="text-xs text-lab-muted mt-1">E_F 靠近价带</div>
+              </div>
+            </div>
+            <p className="text-xs text-lab-muted text-center">
+              平衡时，费米能级 E_F 统一。N 区导带电子能量较高，P 区价带空穴能量较低
+            </p>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">PN 结的电流-电压特性</h4>
+            <p className="text-sm mb-3">
+              PN 结的电流电压关系由<span className="text-laser-green font-semibold">肖克利方程</span>描述：
+            </p>
+            <div className="bg-lab-surface/50 px-4 py-3 rounded-lg text-xs font-mono mb-3">
+              <MathRenderer>{'$$I = I_S \\left(e^{\\frac{qV}{k_B T}} - 1\\right)$$'}</MathRenderer>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 text-xs">
+              <div>
+                <p className="text-lab-text font-medium mb-1">反向偏置 (V &lt; 0)</p>
+                <p className="text-lab-muted">
+                  外加电压增强内建电场，耗尽区变宽，电流近似为零（只有微弱反向饱和电流 I_S）。
+                </p>
+              </div>
+              <div>
+                <p className="text-lab-text font-medium mb-1">正向偏置 (V &gt; 0)</p>
+                <p className="text-lab-muted">
+                  外加电压削弱内建电场，耗尽区变窄，电流指数增长。开启电压约 0.6-0.7 V（硅）。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="border border-laser-cyan/20 bg-laser-cyan/5 p-4 rounded-xl">
+            <h5 className="font-semibold text-laser-cyan mb-2 text-sm">PN 结在光通信中的重要性</h5>
+            <p className="text-xs text-lab-muted">
+              PN 结是几乎所有半导体光电器件的基石：
+              <span className="text-lab-text"> 光电二极管 </span>利用反向偏置下的光生载流子；
+              <span className="text-lab-text"> 半导体激光器 </span>利用正向偏置下的载流子注入；
+              <span className="text-lab-text"> 光伏电池 </span>利用光照下的光生电压。
+            </p>
+          </div>
+        </div>
+      </LearnSection>
+
+      <LearnSection id="s-2" icon={<Zap className="w-5 h-5 text-laser-green" />} title="光电效应原理">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-green font-semibold">光电效应（Photoelectric Effect）</span>
@@ -197,10 +321,10 @@ export default function LearnOptoelectronicMaterials() {
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
-                <h5 className="font-medium text-laser-purple mb-1 text-sm">光电二极管</h5>
+                <h5 className="font-medium text-laser-purple mb-1 text-sm">PIN 光电二极管</h5>
                 <p className="text-xs">
-                  在 PN 结上施加反向偏压，光生载流子被电场加速形成光电流。
-                  响应速度快，可用于高速通信。
+                  在 P 区和 N 区之间插入本征层（I层），增大耗尽区宽度，提高量子效率。
+                  响应速度快，广泛用于光通信接收器。
                 </p>
               </div>
             </div>
@@ -208,7 +332,176 @@ export default function LearnOptoelectronicMaterials() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-2" icon={<Layers className="w-5 h-5 text-laser-purple" />} title="常见光电材料">
+      <LearnSection id="s-3" icon={<Layers className="w-5 h-5 text-laser-purple" />} title="光电二极管">
+        <div className="space-y-4 text-lab-muted leading-relaxed">
+          <p>
+            <span className="text-laser-purple font-semibold">光电二极管（Photodiode）</span>
+            是将光信号转换为电信号的核心器件，广泛应用于光通信接收器、光纤传感和光功率测量等领域。
+            与普通二极管类似，光电二极管基于 PN 结结构，但工作于<span className="text-laser-green font-semibold">反向偏置</span>状态。
+          </p>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">工作原理</h4>
+            <p className="text-sm mb-3">
+              光电二极管工作于<span className="text-laser-cyan font-semibold">反向偏置</span>状态：
+              P 区接负极，N 区接正极。外加电场增强了内建电场，使耗尽区变宽。
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 text-xs">
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-2">光生载流子机制</h5>
+                <ol className="text-lab-muted space-y-1 list-decimal list-inside">
+                  <li>光子入射到半导体材料</li>
+                  <li>若 hν ≥ E_g，激发电子-空穴对</li>
+                  <li>载流子在耗尽区内被电场分离</li>
+                  <li>形成与光功率成正比的光电流</li>
+                </ol>
+              </div>
+              <div className="bg-lab-surface/50 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-green mb-2">电流-电压特性</h5>
+                <MathRenderer>{'$I = I_S \\left(e^{\\frac{qV}{k_B T}} - 1\\right) - I_L$'}</MathRenderer>
+                <p className="text-lab-muted mt-1">
+                  I_L：光生电流，与入射光功率成正比
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">主要性能参数</h4>
+            <div className="grid md:grid-cols-2 gap-4 text-xs">
+              <div className="space-y-3">
+                <div className="bg-lab-surface/50 p-3 rounded-lg">
+                  <h5 className="font-medium text-laser-cyan mb-1">响应度 (Responsivity)</h5>
+                  <MathRenderer>{'$R = \\frac{I_{ph}}{P_{opt}} \\quad \\text{[A/W]}$'}</MathRenderer>
+                  <p className="text-lab-muted mt-1">
+                    典型值：0.5-0.9 A/W (1550 nm, InGaAs)
+                  </p>
+                </div>
+                <div className="bg-lab-surface/50 p-3 rounded-lg">
+                  <h5 className="font-medium text-laser-green mb-1">量子效率 (QE)</h5>
+                  <MathRenderer>{'$QE = \\frac{I_{ph}/q}{P_{opt}/h\\nu} = R \\cdot \\frac{hc}{q\\lambda}$'}</MathRenderer>
+                  <p className="text-lab-muted mt-1">
+                    典型值：60-90%
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-3">
+                <div className="bg-lab-surface/50 p-3 rounded-lg">
+                  <h5 className="font-medium text-laser-purple mb-1">响应时间 / 带宽</h5>
+                  <p className="text-lab-muted">
+                    由载流子渡越时间和结电容决定。
+                    高速探测器可达 10-40 GHz。
+                  </p>
+                  <div className="bg-lab-bg/50 px-2 py-1 rounded mt-1">
+                    <MathRenderer>{'$f_{3dB} \\approx \\frac{0.35}{t_r}$'}</MathRenderer>
+                  </div>
+                </div>
+                <div className="bg-lab-surface/50 p-3 rounded-lg">
+                  <h5 className="font-medium text-laser-orange mb-1">暗电流 (Dark Current)</h5>
+                  <p className="text-lab-muted">
+                    无光照时的反向电流，由热激发载流子产生。
+                    温度每升高 10°C，暗电流约翻倍。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">常见类型</h4>
+            <div className="grid md:grid-cols-2 gap-3 text-xs">
+              <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-cyan mb-1">PIN 光电二极管</h5>
+                <p className="text-lab-muted">
+                  P-Intrinsic-N 结构。I 层增大耗尽区宽度，提高量子效率和响应速度。
+                  是光通信最常用的探测器类型。
+                </p>
+              </div>
+              <div className="border border-laser-green/30 bg-laser-green/5 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-green mb-1">雪崩光电二极管 (APD)</h5>
+                <p className="text-lab-muted">
+                  内部具有雪崩倍增效应，光电流被内部增益放大（增益 ~10-100）。
+                  高灵敏度，适用于长距离和弱光检测。
+                </p>
+              </div>
+              <div className="border border-laser-purple/30 bg-laser-purple/5 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-purple mb-1">肖特基光电二极管</h5>
+                <p className="text-lab-muted">
+                  金属-半导体结结构，响应速度快，适用于可见光和近红外。
+                  典型结构：GaAs PIN。
+                </p>
+              </div>
+              <div className="border border-laser-orange/30 bg-laser-orange/5 p-3 rounded-lg">
+                <h5 className="font-medium text-laser-orange mb-1">光电导探测器</h5>
+                <p className="text-lab-muted">
+                  无 PN 结，基于光电导效应。
+                  响应速度快，但噪声较大。
+                  用于高速光采样。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-lab-bg/50 p-5 rounded-xl">
+            <h4 className="font-semibold text-lab-text mb-3">PIN vs APD 对比</h4>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b border-lab-border">
+                    <th className="text-left py-2 px-3 text-lab-text">特性</th>
+                    <th className="text-center py-2 px-3 text-lab-text">PIN</th>
+                    <th className="text-center py-2 px-3 text-lab-text">APD</th>
+                  </tr>
+                </thead>
+                <tbody className="text-lab-muted">
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 px-3">内部增益</td>
+                    <td className="py-2 px-3 text-center">1</td>
+                    <td className="py-2 px-3 text-center">10-100</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 px-3">灵敏度</td>
+                    <td className="py-2 px-3 text-center">较低</td>
+                    <td className="py-2 px-3 text-center">高（高 10-20 dB）</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 px-3">响应速度</td>
+                    <td className="py-2 px-3 text-center">快（~10 GHz）</td>
+                    <td className="py-2 px-3 text-center">较快（~1 GHz）</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 px-3">偏置电压</td>
+                    <td className="py-2 px-3 text-center">5-15 V</td>
+                    <td className="py-2 px-3 text-center">100-400 V</td>
+                  </tr>
+                  <tr className="border-b border-lab-border/50">
+                    <td className="py-2 px-3">噪声</td>
+                    <td className="py-2 px-3 text-center">低</td>
+                    <td className="py-2 px-3 text-center">有雪崩噪声</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3">典型应用</td>
+                    <td className="py-2 px-3 text-center">城域网、数据通信</td>
+                    <td className="py-2 px-3 text-center">长距离骨干网、相干接收</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="border border-laser-cyan/20 bg-laser-cyan/5 p-4 rounded-xl">
+            <h5 className="font-semibold text-laser-cyan mb-2 text-sm">光电二极管的选择要点</h5>
+            <div className="text-xs text-lab-muted">
+              <p className="mb-1">1. <span className="text-lab-text">波长匹配</span>：选择与工作波段匹配的材料（Si: 400-1000 nm, InGaAs: 1000-1700 nm）</p>
+              <p className="mb-1">2. <span className="text-lab-text">带宽要求</span>：高速系统选择 PIN，短距低速可选 APD</p>
+              <p className="mb-1">3. <span className="text-lab-text">灵敏度要求</span>：长距离选择 APD，短距离 PIN 即可</p>
+              <p>4. <span className="text-lab-text">工作温度</span>：高温会增大暗电流，必要时需制冷</p>
+            </div>
+          </div>
+        </div>
+      </LearnSection>
+
+      <LearnSection id="s-4" icon={<Layers className="w-5 h-5 text-laser-purple" />} title="常见光电材料">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             光通信系统中常用的光电材料主要有<span className="text-laser-cyan font-semibold">硅 (Si)</span>、
@@ -313,7 +606,7 @@ export default function LearnOptoelectronicMaterials() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-3" icon={<Beaker className="w-5 h-5 text-laser-orange" />} title="电光材料">
+      <LearnSection id="s-5" icon={<Beaker className="w-5 h-5 text-laser-orange" />} title="电光材料">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-orange font-semibold">电光材料（Electro-optic Materials）</span>
@@ -404,7 +697,7 @@ export default function LearnOptoelectronicMaterials() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-4" icon={<Sparkles className="w-5 h-5 text-laser-red" />} title="非线性光学材料">
+      <LearnSection id="s-6" icon={<Sparkles className="w-5 h-5 text-laser-red" />} title="非线性光学材料">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-red font-semibold">非线性光学材料</span>
@@ -514,7 +807,7 @@ export default function LearnOptoelectronicMaterials() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-5" icon={<Gauge className="w-5 h-5 text-laser-cyan" />} title="材料特性对比与应用">
+      <LearnSection id="s-7" icon={<Gauge className="w-5 h-5 text-laser-cyan" />} title="材料特性对比与应用">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             不同应用场景对光电材料有不同的要求。以下是光通信系统中主要器件的材料选择概览：

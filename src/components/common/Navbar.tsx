@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   Waves, BookOpen, FlaskConical, Lightbulb, Flame, CircuitBoard,
-  BarChart3, Compass, Radio, BookText, ChevronDown, Menu, X, Home, Zap, Cable, Network,
+  BarChart3, Compass, Radio, BookText, ChevronDown, Menu, X, Home, Zap, Cable, Network, Cpu,
 } from 'lucide-react';
 import { useState } from 'react';
 import { ROUTES } from '@/constants/routes';
@@ -30,6 +30,7 @@ const learnParts: LearnPart[] = [
     items: [
       { path: ROUTES.LEARN.LASER, label: '激光器', icon: Flame },
       { path: ROUTES.LEARN.FIBER_OPTICS, label: '光纤与光波导', icon: Cable },
+      { path: ROUTES.LEARN.OPTOELECTRONIC_MATERIALS, label: '光电材料', icon: Cpu },
     ],
   },
   {

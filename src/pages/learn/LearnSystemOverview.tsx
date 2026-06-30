@@ -4,7 +4,7 @@ import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
 import TermNote from '@/components/common/TermNote';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '端到端光通信链路全景' },
@@ -17,18 +17,18 @@ const pageSections = [
 ];
 
 export default function LearnSystemOverview() {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.SYSTEM_OVERVIEW)
-  const prevChapter = currentIndex > 0 ? { path: CHAPTERS[currentIndex - 1].path, title: CHAPTERS[currentIndex - 1].title, icon: <Network className="w-4 h-4" /> } : undefined
-  const nextChapter = currentIndex < TOTAL_CHAPTERS - 1 ? { path: CHAPTERS[currentIndex + 1].path, title: CHAPTERS[currentIndex + 1].title, icon: <BookText className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.SYSTEM_OVERVIEW);
+  const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
+  const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
     <LearnLayout
       title="完整光通信系统"
       subtitle="将前面所学串联起来，端到端理解 400G DP-16QAM 光传输系统的全貌"
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="Part 4 · 系统篇"
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
+      prevChapter={prev}
+      nextChapter={next}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<Network className="w-5 h-5 text-laser-cyan" />} title="端到端光通信链路全景">

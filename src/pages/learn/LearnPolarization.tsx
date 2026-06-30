@@ -4,7 +4,7 @@ import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
 import TermNote from '@/components/common/TermNote';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '光的偏振态' },
@@ -17,19 +17,19 @@ const pageSections = [
 ];
 
 export default function LearnPolarization() {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.POLARIZATION)
-  const prevChapter = currentIndex > 0 ? { path: CHAPTERS[currentIndex - 1].path, title: CHAPTERS[currentIndex - 1].title, icon: <Compass className="w-4 h-4" /> } : undefined
-  const nextChapter = currentIndex < TOTAL_CHAPTERS - 1 ? { path: CHAPTERS[currentIndex + 1].path, title: CHAPTERS[currentIndex + 1].title, icon: <Compass className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.POLARIZATION);
+  const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
+  const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
     <LearnLayout
       title="偏振复用"
       subtitle="光的偏振态、斯托克斯矢量与偏振复用技术，让容量再翻一倍"
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="Part 3 · 调制器篇"
       playgroundPath={ROUTES.PLAYGROUND.POLARIZATION}
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
+      prevChapter={prev}
+      nextChapter={next}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<Compass className="w-5 h-5 text-laser-red" />} title="光的偏振态">

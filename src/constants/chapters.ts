@@ -1,3 +1,5 @@
+import { BookOpen, Flame, Cable, Cpu, Radio, Waves, CircuitBoard, BarChart3, Compass, Zap, Target, Network, BookText } from 'lucide-react';
+
 export const CHAPTERS = [
   { key: 'WAVE_BASICS',      path: '/learn/wave-basics',       title: '光波基础与物理量',   part: 'Part 1 · 基础篇' },
   { key: 'LASER',            path: '/learn/laser',              title: '激光器',             part: 'Part 2 · 光源与传输篇' },
@@ -17,3 +19,23 @@ export const CHAPTERS = [
 ] as const
 
 export const TOTAL_CHAPTERS = CHAPTERS.length
+
+export const CHAPTER_ICONS = {
+  WAVE_BASICS: BookOpen,
+  LASER: Flame,
+  FIBER_OPTICS: Cable,
+  OPTOELECTRONIC_MATERIALS: Cpu,
+  MODULATION_BASICS: Radio,
+  INTERFERENCE: Waves,
+  MZ_MODULATOR: CircuitBoard,
+  IQ_MODULATOR: BarChart3,
+  POLARIZATION: Compass,
+  NYQUIST_OFDM: Zap,
+  PCS_CODING: Target,
+  RECEIVER: Radio,
+  WDM_AMPLIFIER: Network,
+  SYSTEM_OVERVIEW: BookOpen,
+  GLOSSARY: BookText,
+} as const;
+
+export type ChapterKey = typeof CHAPTERS[number]['key'];

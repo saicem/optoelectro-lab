@@ -4,7 +4,7 @@ import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
 import TermNote from '@/components/common/TermNote';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '光电效应与光电二极管' },
@@ -17,19 +17,19 @@ const pageSections = [
 ];
 
 export default function LearnReceiver() {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.RECEIVER)
-  const prevChapter = currentIndex > 0 ? { path: CHAPTERS[currentIndex - 1].path, title: CHAPTERS[currentIndex - 1].title, icon: <Radio className="w-4 h-4" /> } : undefined
-  const nextChapter = currentIndex < TOTAL_CHAPTERS - 1 ? { path: CHAPTERS[currentIndex + 1].path, title: CHAPTERS[currentIndex + 1].title, icon: <Radio className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.RECEIVER);
+  const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
+  const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
     <LearnLayout
       title="光接收器"
       subtitle="光信号的检测：光电二极管、相干接收与数字信号处理"
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="Part 4 · 系统篇"
       playgroundPath={ROUTES.PLAYGROUND.RECEIVER}
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
+      prevChapter={prev}
+      nextChapter={next}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<Radio className="w-5 h-5 text-laser-green" />} title="光电效应与光电二极管">

@@ -4,7 +4,7 @@ import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
 import TermNote from '@/components/common/TermNote';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '电磁波谱与光通信波段' },
@@ -24,16 +24,16 @@ const bandData = [
 ];
 
 export default function LearnWaveBasics() {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.WAVE_BASICS)
-  const nextChapter = currentIndex < TOTAL_CHAPTERS - 1 ? { path: CHAPTERS[currentIndex + 1].path, title: CHAPTERS[currentIndex + 1].title, icon: <BookOpen className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, nextChapter, IconNext } = useChapterNavigation(ROUTES.LEARN.WAVE_BASICS);
+  const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
     <LearnLayout
       title="光波基础与物理量"
       subtitle="从电磁波谱出发，理解光波的基本物理量、数学描述与折射率概念"
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="Part 1 · 基础篇"
-      nextChapter={nextChapter}
+      nextChapter={next}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<Radio className="w-5 h-5 text-laser-cyan" />} title="电磁波谱与光通信波段">

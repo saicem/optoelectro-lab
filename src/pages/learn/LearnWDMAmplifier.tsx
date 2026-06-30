@@ -4,7 +4,7 @@ import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
 import TermNote from '@/components/common/TermNote';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: 'WDM 波分复用基本原理' },
@@ -16,18 +16,18 @@ const pageSections = [
 ];
 
 export default function LearnWDMAmplifier() {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.WDM_AMPLIFIER)
-  const prevChapter = currentIndex > 0 ? { path: CHAPTERS[currentIndex - 1].path, title: CHAPTERS[currentIndex - 1].title, icon: <Radio className="w-4 h-4" /> } : undefined
-  const nextChapter = currentIndex < TOTAL_CHAPTERS - 1 ? { path: CHAPTERS[currentIndex + 1].path, title: CHAPTERS[currentIndex + 1].title, icon: <Cable className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.WDM_AMPLIFIER);
+  const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
+  const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
     <LearnLayout
       title="WDM 与光放大器"
       subtitle="波分复用与光放大技术共同构建了现代大容量长距离光传输系统的基石"
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="Part 4 · 系统篇"
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
+      prevChapter={prev}
+      nextChapter={next}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<Network className="w-5 h-5 text-laser-cyan" />} title="WDM 波分复用基本原理">
@@ -70,7 +70,7 @@ export default function LearnWDMAmplifier() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             为了实现 WDM 系统的互操作性，<span className="text-laser-cyan font-semibold">ITU-T G.694.1</span>
-            标准定义了 DWDM 系统的频率栅格。所有 WDM 设备制造商都遵循这一标准，
+            标准定义了 <TermNote term="DWDM" /> 系统的频率栅格。所有 WDM 设备制造商都遵循这一标准，
             确保不同厂家的光模块和复用/解复用器可以协同工作。
           </p>
           <p>
@@ -85,8 +85,8 @@ export default function LearnWDMAmplifier() {
               <thead>
                 <tr className="border-b border-lab-border">
                   <th className="text-left py-2 px-3 text-lab-text font-semibold">参数</th>
-                  <th className="text-left py-2 px-3 text-lab-text font-semibold">DWDM</th>
-                  <th className="text-left py-2 px-3 text-lab-text font-semibold">CWDM</th>
+                  <th className="text-left py-2 px-3 text-lab-text font-semibold"><TermNote term="DWDM" /></th>
+                  <th className="text-left py-2 px-3 text-lab-text font-semibold"><TermNote term="CWDM" /></th>
                 </tr>
               </thead>
               <tbody>
@@ -159,7 +159,7 @@ export default function LearnWDMAmplifier() {
             </div>
           </div>
           <p>
-            AWG 是目前 DWDM 系统的首选方案，因为它可以在单个芯片上集成数十个信道，
+            AWG 是目前 <TermNote term="DWDM" /> 系统的首选方案，因为它可以在单个芯片上集成数十个信道，
             体积紧凑、成本低、一致性高。在接收端，AWG 作为<TermNote term="光分波器" />将各波长信道分离后，
             分别送入独立的相干接收机进行解调。
           </p>

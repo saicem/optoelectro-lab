@@ -5,7 +5,7 @@ import LearnLayout from '@/components/common/LearnLayout';
 import LearnSection from '@/components/common/LearnSection';
 import { glossaryData } from '@/data/glossaryData';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '光通信术语表' },
@@ -56,17 +56,17 @@ export default function LearnGlossary() {
 
   const totalTerms = glossaryData.reduce((sum, cat) => sum + cat.terms.length, 0);
 
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.GLOSSARY)
-  const prevChapter = currentIndex > 0 ? { path: CHAPTERS[currentIndex - 1].path, title: CHAPTERS[currentIndex - 1].title, icon: <BookOpen className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, prevChapter, IconPrev } = useChapterNavigation(ROUTES.LEARN.GLOSSARY);
+  const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
 
   return (
     <LearnLayout
       title="光通信术语表"
       subtitle={`快速查阅光通信领域的核心概念和术语，共 ${totalTerms} 个词条`}
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="附录"
-      prevChapter={prevChapter}
+      prevChapter={prev}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<BookText className="w-5 h-5 text-laser-cyan" />} title="光通信术语表">

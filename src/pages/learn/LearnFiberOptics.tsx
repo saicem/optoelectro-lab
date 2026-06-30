@@ -4,7 +4,7 @@ import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
 import TermNote from '@/components/common/TermNote';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS, TOTAL_CHAPTERS } from '@/constants/chapters';
+import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
 const pageSections = [
   { id: 's-0', title: '光纤的结构与原理' },
@@ -16,18 +16,18 @@ const pageSections = [
 ];
 
 export default function LearnFiberOptics() {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === ROUTES.LEARN.FIBER_OPTICS)
-  const prevChapter = currentIndex > 0 ? { path: CHAPTERS[currentIndex - 1].path, title: CHAPTERS[currentIndex - 1].title, icon: <Waves className="w-4 h-4" /> } : undefined
-  const nextChapter = currentIndex < TOTAL_CHAPTERS - 1 ? { path: CHAPTERS[currentIndex + 1].path, title: CHAPTERS[currentIndex + 1].title, icon: <Waves className="w-4 h-4" /> } : undefined
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.FIBER_OPTICS);
+  const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
+  const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
     <LearnLayout
       title="光纤与光波导"
       subtitle="光在光纤中的传播：全内反射、单模与多模、损耗、色散与非线性效应"
       currentIndex={currentIndex}
-      totalChapters={TOTAL_CHAPTERS}
+      totalChapters={totalChapters}
       partTitle="Part 2 · 光源与传输篇"
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
+      prevChapter={prev}
+      nextChapter={next}
       sections={pageSections}
     >
       <LearnSection id="s-0" icon={<Waves className="w-5 h-5 text-laser-cyan" />} title="光纤的结构与原理">

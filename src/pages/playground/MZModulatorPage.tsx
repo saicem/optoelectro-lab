@@ -68,6 +68,7 @@ export default function MZModulatorPage() {
       }
       learnPath={ROUTES.LEARN.MZ_MODULATOR}
       canvas={<MZCanvas />}
+      canvasMinHeight={480}
       controlPanel={
         <>
           <ControlPanel

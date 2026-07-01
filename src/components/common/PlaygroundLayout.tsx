@@ -11,6 +11,7 @@ interface PlaygroundLayoutProps {
   canvas: React.ReactNode;
   controlPanel: React.ReactNode;
   children?: React.ReactNode;
+  canvasMinHeight?: number;
 }
 
 export default function PlaygroundLayout({
@@ -22,6 +23,7 @@ export default function PlaygroundLayout({
   canvas,
   controlPanel,
   children,
+  canvasMinHeight = 450,
 }: PlaygroundLayoutProps) {
   const navigate = useNavigate();
 
@@ -72,7 +74,10 @@ export default function PlaygroundLayout({
       </div>
 
       <div className="grid lg:grid-cols-[1fr_320px] gap-6">
-        <div className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-4 min-h-[400px]">
+        <div
+          className="bg-lab-surface/50 backdrop-blur-sm border border-lab-border rounded-2xl p-4 overflow-hidden"
+          style={{ minHeight: `${canvasMinHeight}px`, height: `${canvasMinHeight}px` }}
+        >
           {canvas}
         </div>
 

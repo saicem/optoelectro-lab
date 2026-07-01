@@ -49,6 +49,7 @@ export default function ReceiverPage() {
       subtitle="AWGN 信道、星座图与误码率分析"
       learnPath={ROUTES.LEARN.RECEIVER}
       canvas={<ReceiverCanvas />}
+      canvasMinHeight={480}
       controlPanel={
         <>
           <ControlPanel

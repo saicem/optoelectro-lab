@@ -43,6 +43,7 @@ export default function IQModulatorPage() {
       subtitle="同相正交调制与星座图分析"
       learnPath={ROUTES.LEARN.IQ_MODULATOR}
       canvas={<IQCanvas />}
+      canvasMinHeight={520}
       controlPanel={
         <>
           <ControlPanel

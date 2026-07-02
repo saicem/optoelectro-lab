@@ -1,6 +1,5 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Navbar from './Navbar';
 
 function Loading() {
@@ -14,9 +13,18 @@ function Loading() {
 
 export default function Layout() {
   const location = useLocation();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  // Reset scroll position on mount — the playground Canvas may leave
+  // the scroll container at a non-zero position
+  useEffect(() => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
   }, [location.pathname]);
 
   return (
@@ -25,16 +33,11 @@ export default function Layout() {
       <Navbar />
       <main className="md:ml-56 pt-14 md:pt-0 pb-12 min-h-screen md:w-[calc(100%-14rem)] w-full">
         <div className="md:pt-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <motion.div
-            key={location.pathname}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.15 }}
-          >
+          <div ref={contentRef}>
             <Suspense fallback={<Loading />}>
               <Outlet />
             </Suspense>
-          </motion.div>
+          </div>
         </div>
       </main>
     </div>

@@ -89,27 +89,27 @@ export default function LearnLayout({
           <div className="flex items-start justify-between gap-4">
             <div>
               <motion.h1
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="text-3xl md:text-4xl font-bold font-display text-lab-text mb-2"
-              >
-                {title}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="text-lg text-lab-muted"
-              >
-                {subtitle}
-              </motion.p>
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.15 }}
+              className="text-3xl md:text-4xl font-bold font-display text-lab-text mb-2"
+            >
+              {title}
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.15, delay: 0.04 }}
+              className="text-lg text-lab-muted"
+            >
+              {subtitle}
+            </motion.p>
             </div>
             {playgroundPath && (
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
+                transition={{ duration: 0.15, delay: 0.08 }}
                 onClick={() => navigate(playgroundPath)}
                 className="flex items-center gap-2 px-4 py-2 bg-lab-surface border border-lab-border rounded-xl text-sm text-lab-muted hover:text-laser-cyan hover:border-laser-cyan/30 transition-all flex-shrink-0"
               >
@@ -123,9 +123,9 @@ export default function LearnLayout({
         <div className="xl:flex xl:gap-10">
           <div className="flex-1 min-w-0 max-w-[896px]">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.15 }}
               className="space-y-6"
             >
               {children}

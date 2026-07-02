@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
@@ -9,10 +9,9 @@ interface MathRendererProps {
 }
 
 export default function MathRenderer({ children, className = '', displayMode }: MathRendererProps) {
-  const [html, setHtml] = useState('');
   const isDisplay = useMemo(() => displayMode ?? children.startsWith('$$'), [displayMode, children]);
 
-  useEffect(() => {
+  const html = useMemo(() => {
     let tex = children;
 
     if (tex.startsWith('$$') && tex.endsWith('$$')) {
@@ -22,19 +21,16 @@ export default function MathRenderer({ children, className = '', displayMode }: 
     }
 
     try {
-      const rendered = katex.renderToString(tex, {
+      return katex.renderToString(tex, {
         displayMode: isDisplay,
         throwOnError: false,
         output: 'html',
         strict: false,
       });
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setHtml(rendered);
-    } catch (err) {
-      console.warn('KaTeX render error:', err);
-      setHtml(children);
+    } catch {
+      return children;
     }
-  }, [children, displayMode, isDisplay]);
+  }, [children, isDisplay]);
 
   if (isDisplay) {
     return (

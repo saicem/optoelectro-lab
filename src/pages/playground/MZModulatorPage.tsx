@@ -62,9 +62,11 @@ export default function MZModulatorPage() {
       iconColor="#22c55e"
       title="MZ 调制器"
       subtitle={
-        mode === 'single-arm' ? '仅调制下臂，上臂为参考臂' :
-        mode === 'dual-arm' ? '两臂独立调制，分别施加不同驱动信号' :
-        '两臂施加反相信号 (V, -V)，相位差加倍'
+        mode === 'single-arm'
+          ? '仅调制下臂，上臂为参考臂'
+          : mode === 'dual-arm'
+            ? '两臂独立调制，分别施加不同驱动信号'
+            : '两臂施加反相信号 (V, -V)，相位差加倍'
       }
       learnPath={ROUTES.LEARN.MZ_MODULATOR}
       canvas={<MZCanvas />}
@@ -150,7 +152,11 @@ export default function MZModulatorPage() {
               <InfoItem label="调制模式" value={modeLabels[mode]} color="#00d4ff" />
               <InfoItem label="输出光功率" value={outputPower.toFixed(3) + ' mW'} color="#00ff88" />
               <InfoItem label="两臂相位差" value={formatPiRad(totalPhaseDiff)} color="#f59e0b" />
-              <InfoItem label="有效 V_π" value={mode === 'single-arm' ? 'V_π' : mode === 'push-pull' ? 'V_π/2' : 'V_π (单臂)'} color="#a855f7" />
+              <InfoItem
+                label="有效 V_π"
+                value={mode === 'single-arm' ? 'V_π' : mode === 'push-pull' ? 'V_π/2' : 'V_π (单臂)'}
+                color="#a855f7"
+              />
               <InfoItem label="消光比" value={extinctionRatio.toFixed(1) + ' dB'} color="#ff3366" />
             </div>
           </div>
@@ -187,9 +193,8 @@ export default function MZModulatorPage() {
         <div className="bg-lab-surface/30 border border-laser-green/30 rounded-2xl p-6">
           <h3 className="font-display font-semibold text-lab-text mb-2">单臂调制</h3>
           <p className="text-sm text-lab-muted leading-relaxed">
-            仅在其中一臂施加调制电压，另一臂作为纯光程参考臂。
-            相位差 Δφ = φ₁ - φ₂ 完全由调制臂决定。等效半波电压等于 V_π。
-            结构最简单，但调制效率最低，且会产生啁啾。
+            仅在其中一臂施加调制电压，另一臂作为纯光程参考臂。 相位差 Δφ = φ₁ - φ₂ 完全由调制臂决定。等效半波电压等于
+            V_π。 结构最简单，但调制效率最低，且会产生啁啾。
           </p>
           <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
             <MathRenderer>{'$$\\Delta\\phi = \\frac{\\pi V}{V_\\pi}$$'}</MathRenderer>
@@ -212,9 +217,8 @@ export default function MZModulatorPage() {
         <div className="bg-lab-surface/30 border border-laser-orange/30 rounded-2xl p-6">
           <h3 className="font-display font-semibold text-lab-text mb-2">推挽调制</h3>
           <p className="text-sm text-lab-muted leading-relaxed">
-            双臂调制的特例：V₂ = -V₁（即反相驱动）。此时 Δφ = 2·π·V/V_π，
-            等效半波电压降至 V_π/2，调制效率翻倍。推挽结构还能有效抑制啁啾，
-            是高速光通信系统中最常用的 MZM 驱动方案。
+            双臂调制的特例：V₂ = -V₁（即反相驱动）。此时 Δφ = 2·π·V/V_π， 等效半波电压降至
+            V_π/2，调制效率翻倍。推挽结构还能有效抑制啁啾， 是高速光通信系统中最常用的 MZM 驱动方案。
           </p>
           <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
             <MathRenderer>{'$$\\Delta\\phi = \\frac{2\\pi V}{V_\\pi}$$'}</MathRenderer>
@@ -227,14 +231,22 @@ export default function MZModulatorPage() {
         <div className="space-y-3 text-sm text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-green font-semibold">推挽结构 (Push-Pull)：</span>
-            传统单臂调制仅在其中一臂施加电压，而推挽结构在两臂上施加极性相反的电压 (V 和 -V)。
-            两臂相位变化量分别为 +Δφ/2 和 -Δφ/2，总相位差 Δφ 加倍，从而使所需驱动电压减半。
+            传统单臂调制仅在其中一臂施加电压，而推挽结构在两臂上施加极性相反的电压 (V 和 -V)。 两臂相位变化量分别为
+            +Δφ/2 和 -Δφ/2，总相位差 Δφ 加倍，从而使所需驱动电压减半。
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$\\Delta\\phi = \\frac{2\\pi}{\\lambda} \\cdot [n(V) \\cdot L - n(-V) \\cdot L] = 2 \\cdot \\frac{2\\pi}{\\lambda} \\cdot \\Delta n \\cdot L$$'}</MathRenderer>
+            <MathRenderer>
+              {
+                '$$\\Delta\\phi = \\frac{2\\pi}{\\lambda} \\cdot [n(V) \\cdot L - n(-V) \\cdot L] = 2 \\cdot \\frac{2\\pi}{\\lambda} \\cdot \\Delta n \\cdot L$$'
+              }
+            </MathRenderer>
           </div>
           <p>
-            推挽结构的关键优势：<span className="text-laser-cyan">降低 V<sub>π</sub></span>（半波电压减半）、
+            推挽结构的关键优势：
+            <span className="text-laser-cyan">
+              降低 V<sub>π</sub>
+            </span>
+            （半波电压减半）、
             <span className="text-laser-cyan">消除残余啁啾</span>（两臂相位变化对称）、
             <span className="text-laser-cyan">提高调制带宽</span>（差分驱动降低 RC 常数）。
           </p>
@@ -244,10 +256,22 @@ export default function MZModulatorPage() {
               <span className="text-laser-purple font-semibold">偏置控制方法：</span>
             </p>
             <ul className="space-y-1 list-disc list-inside">
-              <li><span className="text-lab-text">热光调相 (Thermo-Optic)：</span> 通过微型加热器改变波导温度，从而改变折射率。功耗约数 mW，响应时间约 μs 级</li>
-              <li><span className="text-lab-text">电光调相 (Electro-Optic)：</span> 利用 Pockels 效应或载流子色散效应实现快速相位调制，响应时间可达 ns 甚至 ps 级</li>
-              <li><span className="text-lab-text">闭环反馈控制：</span> 通过监测输出光功率或导频信号，利用 PID 算法动态调整偏置点，补偿温度和老化漂移</li>
-              <li><span className="text-lab-text">差分驱动 (Differential Drive)：</span> 使用高速 DAC 产生互补的差分信号，提高信号质量并抑制共模噪声</li>
+              <li>
+                <span className="text-lab-text">热光调相 (Thermo-Optic)：</span>{' '}
+                通过微型加热器改变波导温度，从而改变折射率。功耗约数 mW，响应时间约 μs 级
+              </li>
+              <li>
+                <span className="text-lab-text">电光调相 (Electro-Optic)：</span> 利用 Pockels
+                效应或载流子色散效应实现快速相位调制，响应时间可达 ns 甚至 ps 级
+              </li>
+              <li>
+                <span className="text-lab-text">闭环反馈控制：</span> 通过监测输出光功率或导频信号，利用 PID
+                算法动态调整偏置点，补偿温度和老化漂移
+              </li>
+              <li>
+                <span className="text-lab-text">差分驱动 (Differential Drive)：</span> 使用高速 DAC
+                产生互补的差分信号，提高信号质量并抑制共模噪声
+              </li>
             </ul>
           </div>
         </div>
@@ -259,11 +283,13 @@ export default function MZModulatorPage() {
           <div className="space-y-3 text-sm text-lab-muted leading-relaxed">
             <p>
               <span className="text-laser-red font-semibold">偏置点漂移 (Bias Drift)：</span>
-              温度变化、波导老化、光折变效应会导致偏置点缓慢移动，使调制器偏离最佳工作点。
-              解决方法：使用 dithering 信号探测偏置点，通过锁相放大反馈稳定偏置。
+              温度变化、波导老化、光折变效应会导致偏置点缓慢移动，使调制器偏离最佳工作点。 解决方法：使用 dithering
+              信号探测偏置点，通过锁相放大反馈稳定偏置。
             </p>
             <div className="bg-lab-bg/50 px-4 py-2 rounded-lg">
-              <MathRenderer>{'$$\\text{锁定偏置点：} \\frac{dP_{out}}{dV}\\bigg|_{V=V_b} = 0 \\quad \\text{（工作于 Q 点）}$$'}</MathRenderer>
+              <MathRenderer>
+                {'$$\\text{锁定偏置点：} \\frac{dP_{out}}{dV}\\bigg|_{V=V_b} = 0 \\quad \\text{（工作于 Q 点）}$$'}
+              </MathRenderer>
             </div>
             <p>
               <span className="text-laser-red font-semibold">啁啾 (Chirp)：</span>
@@ -272,8 +298,8 @@ export default function MZModulatorPage() {
             </p>
             <p>
               <span className="text-laser-orange font-semibold">插入损耗与带宽：</span>
-              设计中需在损耗和带宽之间权衡：长波导可降低 V<sub>π</sub> 但增加损耗和寄生电容。
-              行波电极 (Travelling-Wave Electrode) 设计可突破 RC 限制，实现 40 GHz 以上调制带宽。
+              设计中需在损耗和带宽之间权衡：长波导可降低 V<sub>π</sub> 但增加损耗和寄生电容。 行波电极 (Travelling-Wave
+              Electrode) 设计可突破 RC 限制，实现 40 GHz 以上调制带宽。
             </p>
           </div>
         </div>

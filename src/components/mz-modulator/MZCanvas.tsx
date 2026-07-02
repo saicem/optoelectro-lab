@@ -8,10 +8,8 @@ import { setupCanvas, drawGrid } from '@/lib/utils';
 export default function MZCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resizeKey = useCanvasResize(canvasRef);
-  const {
-    modulationDepth, modulationDepth2, phaseShift, inputPower,
-    frequency, mode, isPlaying, time, setTime,
-  } = useMZStore();
+  const { modulationDepth, modulationDepth2, phaseShift, inputPower, frequency, mode, isPlaying, time, setTime } =
+    useMZStore();
 
   useAnimationFrame(
     (deltaTime) => {
@@ -19,7 +17,7 @@ export default function MZCanvas() {
         setTime(time + deltaTime * 0.001);
       }
     },
-    { autoStart: true }
+    { autoStart: true },
   );
 
   useEffect(() => {
@@ -253,11 +251,5 @@ export default function MZCanvas() {
     };
   }, [modulationDepth, modulationDepth2, phaseShift, inputPower, frequency, mode, time, resizeKey]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full rounded-xl"
-      style={{ display: 'block' }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full rounded-xl" style={{ display: 'block' }} />;
 }

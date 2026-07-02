@@ -1,9 +1,9 @@
 import { Radio, Info, RefreshCw, Zap, Gauge, Volume2 } from 'lucide-react';
-import { useReceiverStore, estimateBer } from '@/stores/useReceiverStore';
+import { useReceiverStore } from '@/stores/useReceiverStore';
 import ControlPanel, { SliderControl, SelectControl, InfoItem } from '@/components/common/ControlPanel';
 import ReceiverCanvas from '@/components/receiver/ReceiverCanvas';
 import type { ModulationFormat } from '@/types';
-import { calculateEVM } from '@/utils/modulationMath';
+import { calculateEVM, theoreticalBer } from '@/utils/modulationMath';
 import MathRenderer from '@/components/common/MathRenderer';
 import PlaygroundLayout from '@/components/common/PlaygroundLayout';
 import { ROUTES } from '@/constants/routes';
@@ -26,7 +26,7 @@ export default function ReceiverPage() {
     applyPreset,
   } = useReceiverStore();
 
-  const theoreticalBer = estimateBer(modulationFormat, snr);
+  const theoreticalBerValue = theoreticalBer(modulationFormat, snr);
   const measuredBer = totalSymbols > 0 ? errorCount / totalSymbols : 0;
   const bitsPerSymbol = { QPSK: 2, '16QAM': 4, '64QAM': 6 }[modulationFormat];
   const symbolCount = { QPSK: 4, '16QAM': 16, '64QAM': 64 }[modulationFormat];
@@ -153,22 +153,10 @@ export default function ReceiverPage() {
               <InfoItem label="星座点数" value={symbolCount.toString()} />
               <InfoItem label="每符号比特" value={`${bitsPerSymbol} bit`} color="#ff3366" />
               <InfoItem label="SNR" value={`${snr.toFixed(1)} dB`} color="#ff6b6b" />
-              <InfoItem
-                label="EVM"
-                value={totalSymbols > 0 ? `${evmPercent.toFixed(2)} %` : '—'}
-                color="#a855f7"
-              />
+              <InfoItem label="EVM" value={totalSymbols > 0 ? `${evmPercent.toFixed(2)} %` : '—'} color="#a855f7" />
               <div className="pt-2 mt-2 border-t border-lab-border/50">
-                <InfoItem
-                  label="理论 BER"
-                  value={formatBer(theoreticalBer)}
-                  color="#f59e0b"
-                />
-                <InfoItem
-                  label="实测 BER"
-                  value={totalSymbols > 0 ? formatBer(measuredBer) : '—'}
-                  color="#00ff88"
-                />
+                <InfoItem label="理论 BER" value={formatBer(theoreticalBerValue)} color="#f59e0b" />
+                <InfoItem label="实测 BER" value={totalSymbols > 0 ? formatBer(measuredBer) : '—'} color="#00ff88" />
                 <InfoItem label="发送符号数" value={totalSymbols.toString()} />
                 <InfoItem label="错误符号数" value={errorCount.toString()} color="#ff6b6b" />
               </div>
@@ -186,12 +174,13 @@ export default function ReceiverPage() {
               是通信系统中最基本的噪声模型。噪声功率与信号功率的比值用信噪比 (SNR) 表示：
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-              <MathRenderer>{'$$\\text{SNR (dB)} = 10 \\log_{10}\\left(\\frac{P_{signal}}{P_{noise}}\\right)$$'}</MathRenderer>
+              <MathRenderer>
+                {'$$\\text{SNR (dB)} = 10 \\log_{10}\\left(\\frac{P_{signal}}{P_{noise}}\\right)$$'}
+              </MathRenderer>
             </div>
             <p>
-              SNR 越高，噪声越小，接收信号越清晰，误码率越低。
-              不同调制格式对 SNR 的要求不同：高阶调制（如 64QAM）频谱效率更高，
-              但需要更高的 SNR 才能达到相同的误码率。
+              SNR 越高，噪声越小，接收信号越清晰，误码率越低。 不同调制格式对 SNR 的要求不同：高阶调制（如
+              64QAM）频谱效率更高， 但需要更高的 SNR 才能达到相同的误码率。
             </p>
           </div>
         </div>
@@ -206,15 +195,15 @@ export default function ReceiverPage() {
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
               <MathRenderer>{'$$\\text{BER} = \\frac{\\text{错误比特数}}{\\text{总比特数}}$$'}</MathRenderer>
             </div>
-            <p>
-              对于 QAM 调制，理论 BER 近似为：
-            </p>
+            <p>对于 QAM 调制，理论 BER 近似为：</p>
             <div className="bg-lab-bg/50 px-4 py-2 rounded-lg text-xs">
-              <MathRenderer>{'$$\\text{BER} \\approx \\frac{2(\\sqrt{M}-1)}{\\sqrt{M} \\log_2\\sqrt{M}} Q\\left(\\sqrt{\\frac{3 \\log_2 M}{M-1} \\cdot \\text{SNR}}\\right)$$'}</MathRenderer>
+              <MathRenderer>
+                {
+                  '$$\\text{BER} \\approx \\frac{2(\\sqrt{M}-1)}{\\sqrt{M} \\log_2\\sqrt{M}} Q\\left(\\sqrt{\\frac{3 \\log_2 M}{M-1} \\cdot \\text{SNR}}\\right)$$'
+                }
+              </MathRenderer>
             </div>
-            <p className="text-xs">
-              其中 M 是星座点数，Q 函数是高斯误差函数的补函数。
-            </p>
+            <p className="text-xs">其中 M 是星座点数，Q 函数是高斯误差函数的补函数。</p>
           </div>
         </div>
       </div>

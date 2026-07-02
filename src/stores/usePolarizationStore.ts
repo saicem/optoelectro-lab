@@ -43,17 +43,18 @@ export const usePolarizationStore = create<PolarizationState>((set, get) => ({
   setMultiplexing: (v) => set({ multiplexing: v }),
   setIsPlaying: (v) => set({ isPlaying: v }),
   setTime: (v) => set({ time: v }),
-  reset: () => set({
-    ex: 1,
-    ey: 1,
-    delta: Math.PI / 4,
-    rotationAngle: 0,
-    xPower: 1,
-    yPower: 0.8,
-    multiplexing: true,
-    isPlaying: true,
-    time: 0,
-  }),
+  reset: () =>
+    set({
+      ex: 1,
+      ey: 1,
+      delta: Math.PI / 4,
+      rotationAngle: 0,
+      xPower: 1,
+      yPower: 0.8,
+      multiplexing: true,
+      isPlaying: true,
+      time: 0,
+    }),
   getStokes: () => {
     const { ex, ey, delta } = get();
     return polarizationState(ex, ey, delta);

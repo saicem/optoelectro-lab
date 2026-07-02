@@ -47,7 +47,7 @@ export default function LearnLayout({
           }
         }
       },
-      { rootMargin: '-80px 0px -70% 0px' }
+      { rootMargin: '-80px 0px -70% 0px' },
     );
     for (const { id } of sections) {
       const el = document.getElementById(id);

@@ -1,8 +1,24 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, FlaskConical, Waves, CircuitBoard, BarChart3, Compass, Sparkles, Zap, Target, ArrowRight, Flame, Radio, BookText, Cable, Network, Atom } from 'lucide-react';
+import {
+  BookOpen,
+  FlaskConical,
+  Waves,
+  CircuitBoard,
+  BarChart3,
+  Compass,
+  Sparkles,
+  Zap,
+  Target,
+  ArrowRight,
+  Flame,
+  Radio,
+  BookText,
+  Cable,
+  Network,
+  Atom,
+} from 'lucide-react';
 import { ROUTES } from '@/constants/routes';
-import { CHAPTERS } from '@/constants/chapters';
 
 const parts = [
   {
@@ -204,11 +220,7 @@ export default function HomePage() {
   return (
     <div className="space-y-16">
       <section className="text-center py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-laser-cyan/10 border border-laser-cyan/20 text-laser-cyan text-sm font-medium mb-6">
             <Sparkles className="w-4 h-4" />
             OptoElectro Lab
@@ -230,8 +242,7 @@ export default function HomePage() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg text-lab-muted max-w-2xl mx-auto mb-8"
         >
-          从理论学习到动手实验，一站式掌握光通信调制技术。
-          系统学习从光波基础到高级调制的完整知识体系。
+          从理论学习到动手实验，一站式掌握光通信调制技术。 系统学习从光波基础到高级调制的完整知识体系。
         </motion.p>
 
         <motion.div
@@ -274,9 +285,7 @@ export default function HomePage() {
               <p className="text-sm text-lab-muted">系统学习光调制原理</p>
             </div>
           </div>
-          <p className="text-lab-muted mb-6 text-sm">
-            从基础到调制到系统，每一章都为下一章打下基础。
-          </p>
+          <p className="text-lab-muted mb-6 text-sm">从基础到调制到系统，每一章都为下一章打下基础。</p>
           <div className="space-y-8">
             {parts.map((part, partIndex) => {
               const flatStartIndex = parts.slice(0, partIndex).reduce((acc, p) => acc + p.modules.length, 0);
@@ -311,7 +320,9 @@ export default function HomePage() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2">
-                              <span className="text-xs font-mono text-lab-muted">{String(flatStartIndex + modIndex + 1).padStart(2, '0')}</span>
+                              <span className="text-xs font-mono text-lab-muted">
+                                {String(flatStartIndex + modIndex + 1).padStart(2, '0')}
+                              </span>
                               <span className="font-semibold text-lab-text group-hover:text-laser-cyan transition-colors">
                                 {mod.title}
                               </span>
@@ -345,8 +356,7 @@ export default function HomePage() {
             </div>
           </div>
           <p className="text-lab-muted mb-6 text-sm">
-            通过交互式动画深入理解各种光调制现象。实时调节参数，
-            观察输出变化，在实践中巩固理论知识。
+            通过交互式动画深入理解各种光调制现象。实时调节参数， 观察输出变化，在实践中巩固理论知识。
           </p>
           <div className="space-y-3">
             {playgroundModules.map((mod, index) => (
@@ -389,9 +399,7 @@ export default function HomePage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-2xl md:text-3xl font-bold font-display mb-3">
-            平台特色
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-bold font-display mb-3">平台特色</h2>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">

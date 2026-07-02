@@ -24,4 +24,4 @@ export const ROUTES = {
     POLARIZATION: '/playground/polarization',
     RECEIVER: '/playground/receiver',
   },
-} as const
+} as const;

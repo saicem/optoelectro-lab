@@ -1,15 +1,24 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Search, Lightbulb, CircuitBoard, Compass, BarChart3, Radio, Flame, Zap, BookText } from 'lucide-react';
+import {
+  BookOpen,
+  Search,
+  Lightbulb,
+  CircuitBoard,
+  Compass,
+  BarChart3,
+  Radio,
+  Flame,
+  Zap,
+  BookText,
+} from 'lucide-react';
 import LearnLayout from '@/components/common/LearnLayout';
 import LearnSection from '@/components/common/LearnSection';
 import { glossaryData } from '@/data/glossaryData';
 import { ROUTES } from '@/constants/routes';
 import { useChapterNavigation } from '@/hooks/useChapterNavigation';
 
-const pageSections = [
-  { id: 's-0', title: '光通信术语表' },
-];
+const pageSections = [{ id: 's-0', title: '光通信术语表' }];
 
 const iconMap: Record<string, React.ReactNode> = {
   Lightbulb: <Lightbulb className="w-5 h-5 text-laser-cyan" />,
@@ -36,7 +45,7 @@ export default function LearnGlossary() {
           (term) =>
             term.term.toLowerCase().includes(query) ||
             (term.english && term.english.toLowerCase().includes(query)) ||
-            term.definition.toLowerCase().includes(query)
+            term.definition.toLowerCase().includes(query),
         ),
       }))
       .filter((category) => category.terms.length > 0);
@@ -92,9 +101,7 @@ export default function LearnGlossary() {
               <h2 className="text-xl font-bold font-display text-lab-text mb-4 flex items-center gap-2">
                 {iconMap[category.iconName]}
                 {category.name}
-                <span className="text-sm font-normal text-lab-muted">
-                  ({category.terms.length} 个术语)
-                </span>
+                <span className="text-sm font-normal text-lab-muted">({category.terms.length} 个术语)</span>
               </h2>
 
               <div className="space-y-3">
@@ -119,9 +126,7 @@ export default function LearnGlossary() {
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-1">
                               <span className="font-bold text-lab-text">{term.term}</span>
-                              {term.english && (
-                                <span className="text-sm text-lab-muted font-mono">{term.english}</span>
-                              )}
+                              {term.english && <span className="text-sm text-lab-muted font-mono">{term.english}</span>}
                             </div>
                             <p className="text-lab-muted text-sm leading-relaxed">{term.definition}</p>
                           </div>

@@ -29,12 +29,13 @@ export const useInterferenceStore = create<InterferenceState>((set) => ({
   setPhaseDiff: (v) => set({ phaseDiff: v }),
   setIsPlaying: (v) => set({ isPlaying: v }),
   setTime: (v) => set({ time: v }),
-  reset: () => set({
-    wavelength: 550,
-    amplitude1: 1,
-    amplitude2: 1,
-    phaseDiff: 0,
-    isPlaying: true,
-    time: 0,
-  }),
+  reset: () =>
+    set({
+      wavelength: 550,
+      amplitude1: 1,
+      amplitude2: 1,
+      phaseDiff: 0,
+      isPlaying: true,
+      time: 0,
+    }),
 }));

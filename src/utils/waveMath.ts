@@ -1,17 +1,11 @@
-export function sineWave(
-  x: number,
-  amplitude: number,
-  wavelength: number,
-  phase: number,
-  offset: number = 0
-): number {
+export function sineWave(x: number, amplitude: number, wavelength: number, phase: number, offset: number = 0): number {
   return offset + amplitude * Math.sin((2 * Math.PI * x) / wavelength + phase);
 }
 
 export function superposeWaves(
   x: number,
   waves: { amplitude: number; wavelength: number; phase: number }[],
-  offset: number = 0
+  offset: number = 0,
 ): number {
   let sum = 0;
   for (const wave of waves) {
@@ -20,16 +14,14 @@ export function superposeWaves(
   return offset + sum;
 }
 
-export function interferenceIntensity(
-  I1: number,
-  I2: number,
-  phaseDiff: number
-): number {
+export function interferenceIntensity(I1: number, I2: number, phaseDiff: number): number {
   return I1 + I2 + 2 * Math.sqrt(I1 * I2) * Math.cos(phaseDiff);
 }
 
 export function wavelengthToColor(wavelength: number): string {
-  let r = 0, g = 0, b = 0;
+  let r = 0,
+    g = 0,
+    b = 0;
   if (wavelength >= 380 && wavelength < 440) {
     r = -(wavelength - 440) / (440 - 380);
     g = 0;
@@ -55,5 +47,11 @@ export function wavelengthToColor(wavelength: number): string {
     g = 0;
     b = 0;
   }
-  return `#${Math.round(r * 255).toString(16).padStart(2, '0')}${Math.round(g * 255).toString(16).padStart(2, '0')}${Math.round(b * 255).toString(16).padStart(2, '0')}`;
+  return `#${Math.round(r * 255)
+    .toString(16)
+    .padStart(2, '0')}${Math.round(g * 255)
+    .toString(16)
+    .padStart(2, '0')}${Math.round(b * 255)
+    .toString(16)
+    .padStart(2, '0')}`;
 }

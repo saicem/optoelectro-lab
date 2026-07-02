@@ -1,8 +1,23 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
-  Waves, BookOpen, FlaskConical, Lightbulb, Flame, CircuitBoard,
-  BarChart3, Compass, Radio, BookText, ChevronDown, Menu, X, Home, Zap, Cable, Network, Cpu,
+  Waves,
+  BookOpen,
+  FlaskConical,
+  Flame,
+  CircuitBoard,
+  BarChart3,
+  Compass,
+  Radio,
+  BookText,
+  ChevronDown,
+  Menu,
+  X,
+  Home,
+  Zap,
+  Cable,
+  Network,
+  Cpu,
 } from 'lucide-react';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { ROUTES } from '@/constants/routes';
@@ -21,9 +36,7 @@ interface LearnPart {
 const learnParts: LearnPart[] = [
   {
     label: 'Part 1 · 基础篇',
-    items: [
-      { path: ROUTES.LEARN.WAVE_BASICS, label: '光波基础与物理量', icon: BookOpen },
-    ],
+    items: [{ path: ROUTES.LEARN.WAVE_BASICS, label: '光波基础与物理量', icon: BookOpen }],
   },
   {
     label: 'Part 2 · 光源与传输篇',
@@ -55,9 +68,7 @@ const learnParts: LearnPart[] = [
   },
   {
     label: '附录',
-    items: [
-      { path: ROUTES.LEARN.GLOSSARY, label: '术语表', icon: BookText },
-    ],
+    items: [{ path: ROUTES.LEARN.GLOSSARY, label: '术语表', icon: BookText }],
   },
 ];
 
@@ -69,7 +80,17 @@ const playgroundItems = [
   { path: ROUTES.PLAYGROUND.RECEIVER, label: '光接收器', icon: Radio },
 ];
 
-function NavItem({ to, icon: Icon, label, active }: { to: string; icon: React.ElementType; label: string; active: boolean }) {
+function NavItem({
+  to,
+  icon: Icon,
+  label,
+  active,
+}: {
+  to: string;
+  icon: React.ElementType;
+  label: string;
+  active: boolean;
+}) {
   const isLearn = to.startsWith('/learn');
   return (
     <Link
@@ -77,8 +98,10 @@ function NavItem({ to, icon: Icon, label, active }: { to: string; icon: React.El
       className={cn(
         'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all',
         active
-          ? isLearn ? 'bg-laser-cyan/15 text-laser-cyan' : 'bg-laser-purple/15 text-laser-purple'
-          : 'text-lab-muted hover:text-lab-text hover:bg-lab-surface/50'
+          ? isLearn
+            ? 'bg-laser-cyan/15 text-laser-cyan'
+            : 'bg-laser-purple/15 text-laser-purple'
+          : 'text-lab-muted hover:text-lab-text hover:bg-lab-surface/50',
       )}
     >
       <Icon className="w-4 h-4 flex-shrink-0" />
@@ -95,8 +118,6 @@ export default function Navbar() {
   const navRef = useRef<HTMLDivElement>(null);
   const scrollTopRef = useRef(0);
 
-  const isLearn = location.pathname.startsWith('/learn');
-  const isPlayground = location.pathname.startsWith('/playground');
   const isActive = (path: string) => location.pathname === path;
 
   const handleNavScroll = useCallback(() => {
@@ -106,6 +127,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMobileOpen(false);
   }, [location.pathname]);
 
@@ -113,7 +135,7 @@ export default function Navbar() {
     if (navRef.current && navRef.current.scrollTop !== scrollTopRef.current) {
       navRef.current.scrollTop = scrollTopRef.current;
     }
-  });
+  }, [location.pathname]);
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
@@ -124,11 +146,7 @@ export default function Navbar() {
         <span className="font-display font-bold text-base text-lab-text whitespace-nowrap">OptoElectro Lab</span>
       </Link>
 
-      <nav
-        ref={navRef}
-        onScroll={handleNavScroll}
-        className="flex-1 overflow-y-auto p-3 space-y-5"
-      >
+      <nav ref={navRef} onScroll={handleNavScroll} className="flex-1 overflow-y-auto p-3 space-y-5">
         <NavItem to="/" icon={Home} label="首页" active={location.pathname === '/'} />
 
         <div>
@@ -150,7 +168,13 @@ export default function Navbar() {
                 </div>
                 <div className="space-y-0.5">
                   {part.items.map((item) => (
-                    <NavItem key={item.path} to={item.path} icon={item.icon} label={item.label} active={isActive(item.path)} />
+                    <NavItem
+                      key={item.path}
+                      to={item.path}
+                      icon={item.icon}
+                      label={item.label}
+                      active={isActive(item.path)}
+                    />
                   ))}
                 </div>
               </div>
@@ -171,7 +195,13 @@ export default function Navbar() {
           </button>
           <div className={cn('mt-1 space-y-0.5', !playgroundOpen && 'hidden')}>
             {playgroundItems.map((item) => (
-              <NavItem key={item.path} to={item.path} icon={item.icon} label={item.label} active={isActive(item.path)} />
+              <NavItem
+                key={item.path}
+                to={item.path}
+                icon={item.icon}
+                label={item.label}
+                active={isActive(item.path)}
+              />
             ))}
           </div>
         </div>
@@ -210,9 +240,7 @@ export default function Navbar() {
                 <X className="w-4 h-4" />
               </button>
             </div>
-            <div className="h-[calc(100%-3.5rem)] overflow-y-auto">
-              {sidebarContent}
-            </div>
+            <div className="h-[calc(100%-3.5rem)] overflow-y-auto">{sidebarContent}</div>
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import { CHAPTERS, TOTAL_CHAPTERS, CHAPTER_ICONS, ChapterKey } from '@/constants/chapters';
+import { CHAPTERS, CHAPTER_ICONS, ChapterKey } from '@/constants/chapters';
 
 export interface ChapterNavInfo {
   path: string;
@@ -7,7 +7,7 @@ export interface ChapterNavInfo {
 }
 
 export function useChapterNavigation(currentPath: string) {
-  const currentIndex = CHAPTERS.findIndex(c => c.path === currentPath);
+  const currentIndex = CHAPTERS.findIndex((c) => c.path === currentPath);
   const currentChapter = currentIndex >= 0 ? CHAPTERS[currentIndex] : undefined;
   const currentKey = currentChapter?.key as ChapterKey | undefined;
 
@@ -21,7 +21,7 @@ export function useChapterNavigation(currentPath: string) {
       : undefined;
 
   const nextChapter: ChapterNavInfo | undefined =
-    currentIndex < TOTAL_CHAPTERS - 1
+    currentIndex < CHAPTERS.length - 1
       ? {
           path: CHAPTERS[currentIndex + 1].path,
           title: CHAPTERS[currentIndex + 1].title,
@@ -31,7 +31,7 @@ export function useChapterNavigation(currentPath: string) {
 
   return {
     currentIndex,
-    totalChapters: TOTAL_CHAPTERS,
+    totalChapters: CHAPTERS.length,
     currentChapter,
     currentKey,
     prevChapter,

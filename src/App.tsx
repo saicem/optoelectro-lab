@@ -1,39 +1,31 @@
-import { lazy, Suspense } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "@/components/common/Layout";
-import { ROUTES } from "@/constants/routes";
+import { lazy } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from '@/components/common/Layout';
+import { ROUTES } from '@/constants/routes';
 
-const HomePage = lazy(() => import("@/pages/HomePage"));
+const HomePage = lazy(() => import('@/pages/HomePage'));
 
-const LearnWaveBasics = lazy(() => import("@/pages/learn/LearnWaveBasics"));
-const LearnLaser = lazy(() => import("@/pages/learn/LearnLaser"));
-const LearnFiberOptics = lazy(() => import("@/pages/learn/LearnFiberOptics"));
-const LearnOptoelectronicMaterials = lazy(() => import("@/pages/learn/LearnOptoelectronicMaterials"));
-const LearnModulationBasics = lazy(() => import("@/pages/learn/LearnModulationBasics"));
-const LearnInterference = lazy(() => import("@/pages/learn/LearnInterference"));
-const LearnMZModulator = lazy(() => import("@/pages/learn/LearnMZModulator"));
-const LearnIQModulator = lazy(() => import("@/pages/learn/LearnIQModulator"));
-const LearnPolarization = lazy(() => import("@/pages/learn/LearnPolarization"));
-const LearnNyquistOFDM = lazy(() => import("@/pages/learn/LearnNyquistOFDM"));
-const LearnPCSCoding = lazy(() => import("@/pages/learn/LearnPCSCoding"));
-const LearnReceiver = lazy(() => import("@/pages/learn/LearnReceiver"));
-const LearnWDMAmplifier = lazy(() => import("@/pages/learn/LearnWDMAmplifier"));
-const LearnSystemOverview = lazy(() => import("@/pages/learn/LearnSystemOverview"));
-const LearnGlossary = lazy(() => import("@/pages/learn/LearnGlossary"));
+const LearnWaveBasics = lazy(() => import('@/pages/learn/LearnWaveBasics'));
+const LearnLaser = lazy(() => import('@/pages/learn/LearnLaser'));
+const LearnFiberOptics = lazy(() => import('@/pages/learn/LearnFiberOptics'));
+const LearnOptoelectronicMaterials = lazy(() => import('@/pages/learn/LearnOptoelectronicMaterials'));
+const LearnModulationBasics = lazy(() => import('@/pages/learn/LearnModulationBasics'));
+const LearnInterference = lazy(() => import('@/pages/learn/LearnInterference'));
+const LearnMZModulator = lazy(() => import('@/pages/learn/LearnMZModulator'));
+const LearnIQModulator = lazy(() => import('@/pages/learn/LearnIQModulator'));
+const LearnPolarization = lazy(() => import('@/pages/learn/LearnPolarization'));
+const LearnNyquistOFDM = lazy(() => import('@/pages/learn/LearnNyquistOFDM'));
+const LearnPCSCoding = lazy(() => import('@/pages/learn/LearnPCSCoding'));
+const LearnReceiver = lazy(() => import('@/pages/learn/LearnReceiver'));
+const LearnWDMAmplifier = lazy(() => import('@/pages/learn/LearnWDMAmplifier'));
+const LearnSystemOverview = lazy(() => import('@/pages/learn/LearnSystemOverview'));
+const LearnGlossary = lazy(() => import('@/pages/learn/LearnGlossary'));
 
-const InterferencePage = lazy(() => import("@/pages/playground/InterferencePage"));
-const MZModulatorPage = lazy(() => import("@/pages/playground/MZModulatorPage"));
-const IQModulatorPage = lazy(() => import("@/pages/playground/IQModulatorPage"));
-const PolarizationPage = lazy(() => import("@/pages/playground/PolarizationPage"));
-const ReceiverPage = lazy(() => import("@/pages/playground/ReceiverPage"));
-
-function Loading() {
-  return (
-    <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-2 border-laser-cyan/30 border-t-laser-cyan rounded-full animate-spin" />
-    </div>
-  );
-}
+const InterferencePage = lazy(() => import('@/pages/playground/InterferencePage'));
+const MZModulatorPage = lazy(() => import('@/pages/playground/MZModulatorPage'));
+const IQModulatorPage = lazy(() => import('@/pages/playground/IQModulatorPage'));
+const PolarizationPage = lazy(() => import('@/pages/playground/PolarizationPage'));
+const ReceiverPage = lazy(() => import('@/pages/playground/ReceiverPage'));
 
 export default function App() {
   return (

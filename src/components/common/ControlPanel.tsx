@@ -25,10 +25,7 @@ export default function ControlPanel({
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5 }}
-      className={cn(
-        'bg-lab-surface/80 backdrop-blur-sm border border-lab-border rounded-2xl p-5',
-        className
-      )}
+      className={cn('bg-lab-surface/80 backdrop-blur-sm border border-lab-border rounded-2xl p-5', className)}
     >
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-display font-semibold text-lab-text text-lg">{title}</h3>
@@ -52,9 +49,7 @@ export default function ControlPanel({
         </div>
       </div>
 
-      <div className="space-y-4">
-        {children}
-      </div>
+      <div className="space-y-4">{children}</div>
     </motion.div>
   );
 }
@@ -83,17 +78,13 @@ export function SliderControl({
   valueFormatter,
 }: SliderControlProps) {
   const percentage = ((value - min) / (max - min)) * 100;
-  const displayValue = valueFormatter
-    ? valueFormatter(value)
-    : value.toFixed(step < 1 ? 2 : 0) + unit;
+  const displayValue = valueFormatter ? valueFormatter(value) : value.toFixed(step < 1 ? 2 : 0) + unit;
 
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
         <label className="text-sm text-lab-muted">{label}</label>
-        <span className="text-sm font-mono text-lab-text">
-          {displayValue}
-        </span>
+        <span className="text-sm font-mono text-lab-text">{displayValue}</span>
       </div>
       <div className="relative h-2 bg-lab-bg rounded-full overflow-hidden border border-lab-border">
         <div
@@ -121,12 +112,7 @@ interface SelectControlProps<T extends string> {
   onChange: (v: T) => void;
 }
 
-export function SelectControl<T extends string>({
-  label,
-  value,
-  options,
-  onChange,
-}: SelectControlProps<T>) {
+export function SelectControl<T extends string>({ label, value, options, onChange }: SelectControlProps<T>) {
   return (
     <div>
       <label className="block text-sm text-lab-muted mb-2">{label}</label>
@@ -139,7 +125,7 @@ export function SelectControl<T extends string>({
               'px-2 py-1.5 text-xs font-medium rounded-md transition-all',
               value === opt.value
                 ? 'bg-laser-cyan/20 text-laser-cyan border border-laser-cyan/30'
-                : 'text-lab-muted hover:text-lab-text hover:bg-lab-surface'
+                : 'text-lab-muted hover:text-lab-text hover:bg-lab-surface',
             )}
           >
             {opt.label}

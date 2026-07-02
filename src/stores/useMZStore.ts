@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-
-export type ModulationMode = 'single-arm' | 'dual-arm' | 'push-pull';
+import type { ModulationMode } from '@/types';
 
 interface MZState {
   modulationDepth: number;
@@ -39,14 +38,15 @@ export const useMZStore = create<MZState>((set) => ({
   setMode: (v) => set({ mode: v }),
   setIsPlaying: (v) => set({ isPlaying: v }),
   setTime: (v) => set({ time: v }),
-  reset: () => set({
-    modulationDepth: 1,
-    modulationDepth2: 1,
-    phaseShift: 0,
-    inputPower: 1,
-    frequency: 1,
-    mode: 'single-arm',
-    isPlaying: true,
-    time: 0,
-  }),
+  reset: () =>
+    set({
+      modulationDepth: 1,
+      modulationDepth2: 1,
+      phaseShift: 0,
+      inputPower: 1,
+      frequency: 1,
+      mode: 'single-arm',
+      isPlaying: true,
+      time: 0,
+    }),
 }));

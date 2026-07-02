@@ -161,8 +161,8 @@ export default function IQModulatorPage() {
           <div>
             <p className="mb-2">
               <span className="text-laser-cyan font-semibold">解调（接收端）：</span>
-              相干接收时，将接收信号分别与同相和正交的本振光相乘，
-              再经过低通滤波滤除二倍频分量，即可恢复出原始的 I 和 Q 信号。
+              相干接收时，将接收信号分别与同相和正交的本振光相乘， 再经过低通滤波滤除二倍频分量，即可恢复出原始的 I 和 Q
+              信号。
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
               <MathRenderer>{'$$s(t) \\cdot 2\\cos(\\omega t) \\xrightarrow{\\text{低通}} I$$'}</MathRenderer>
@@ -177,12 +177,13 @@ export default function IQModulatorPage() {
         <div className="grid md:grid-cols-2 gap-6 text-sm text-lab-muted leading-relaxed">
           <div>
             <p className="mb-2">
-              <span className="text-laser-green font-semibold">星座图：</span>
-              以 I 为横轴、Q 为纵轴的复平面表示。每个符号对应星座图上的一个点，
-              其位置决定了信号的幅度和相位。
+              <span className="text-laser-green font-semibold">星座图：</span>以 I 为横轴、Q
+              为纵轴的复平面表示。每个符号对应星座图上的一个点， 其位置决定了信号的幅度和相位。
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-              <MathRenderer>{'$$A = \\sqrt{I^2 + Q^2}, \\quad \\phi = \\arctan\\left(\\frac{Q}{I}\\right)$$'}</MathRenderer>
+              <MathRenderer>
+                {'$$A = \\sqrt{I^2 + Q^2}, \\quad \\phi = \\arctan\\left(\\frac{Q}{I}\\right)$$'}
+              </MathRenderer>
             </div>
           </div>
           <div>

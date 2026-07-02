@@ -3,13 +3,22 @@ import { useIQStore } from '@/stores/useIQStore';
 import { getSymbols } from '@/utils/modulationMath';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
 import { useCanvasResize } from '@/hooks/useCanvasResize';
+import { setupCanvas } from '@/lib/utils';
 
 export default function IQCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resizeKey = useCanvasResize(canvasRef);
   const {
-    modulationFormat, iComponent, qComponent, isPlaying, autoCycle, symbolIndex,
-    time, setTime, setSymbolIndex, pPhaseDiff,
+    modulationFormat,
+    iComponent,
+    qComponent,
+    isPlaying,
+    autoCycle,
+    symbolIndex,
+    time,
+    setTime,
+    setSymbolIndex,
+    pPhaseDiff,
   } = useIQStore();
   const lastSwitchRef = useRef(0);
 
@@ -28,7 +37,7 @@ export default function IQCanvas() {
         }
       }
     },
-    { autoStart: true }
+    { autoStart: true },
   );
 
   useEffect(() => {
@@ -38,13 +47,9 @@ export default function IQCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    const W = rect.width;
-    const H = rect.height;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    ctx.scale(dpr, dpr);
+    const dim = setupCanvas(canvas, ctx);
+    if (!dim) return;
+    const { width: W, height: H } = dim;
 
     ctx.fillStyle = '#0a0e17';
     ctx.fillRect(0, 0, W, H);
@@ -225,9 +230,14 @@ export default function IQCanvas() {
     const wGap = 12;
 
     function drawWave(
-      x: number, y: number, width: number, h: number,
-      color: string, label: string,
-      getValue: (t: number) => number, maxVal: number
+      x: number,
+      y: number,
+      width: number,
+      h: number,
+      color: string,
+      label: string,
+      getValue: (t: number) => number,
+      maxVal: number,
     ) {
       ctx.save();
 
@@ -268,9 +278,7 @@ export default function IQCanvas() {
     const w1Y = waveTop;
     const w2Y = waveTop + (wH * 2 + wGap);
 
-    drawWave(wX, w1Y, wW, wH, '#00d4ff',
-      `I 路: ${I.toFixed(2)}·cos(ωt)`,
-      (t) => I * Math.cos(t), 1);
+    drawWave(wX, w1Y, wW, wH, '#00d4ff', `I 路: ${I.toFixed(2)}·cos(ωt)`, (t) => I * Math.cos(t), 1);
 
     ctx.save();
     ctx.strokeStyle = 'rgba(100, 116, 139, 0.3)';
@@ -283,14 +291,29 @@ export default function IQCanvas() {
     ctx.setLineDash([]);
     ctx.restore();
 
-    drawWave(wX, w2Y, wW, wH, '#a855f7',
+    drawWave(
+      wX,
+      w2Y,
+      wW,
+      wH,
+      '#a855f7',
       `Q 路: ${Q.toFixed(2)}·cos(ωt - ${(P / Math.PI).toFixed(2)}π)`,
-      (t) => Q * Math.cos(t - P), 1);
+      (t) => Q * Math.cos(t - P),
+      1,
+    );
 
     const outY = waveTop + (wH * 2 + wGap) * 2;
     const iqModSignal = (t: number) => I * Math.cos(t) + Q * Math.cos(t - P);
-    drawWave(wX, outY, wW, wH, '#00ff88',
-      '合成信号 s(t)', iqModSignal, Math.max(Math.abs(I), Math.abs(Q)) * AMP_SCALE || 1);
+    drawWave(
+      wX,
+      outY,
+      wW,
+      wH,
+      '#00ff88',
+      '合成信号 s(t)',
+      iqModSignal,
+      Math.max(Math.abs(I), Math.abs(Q)) * AMP_SCALE || 1,
+    );
 
     // ── 解码波形 ──
     const decodeY = waveTop + (wH * 2 + wGap) * 3 + 10;
@@ -299,9 +322,14 @@ export default function IQCanvas() {
     const dQW = wW / 2 - 10;
 
     function drawDecodeWave(
-      x: number, y: number, width: number, h: number,
-      color: string, label: string, dcValue: number,
-      getValue: (t: number) => number
+      x: number,
+      y: number,
+      width: number,
+      h: number,
+      color: string,
+      label: string,
+      dcValue: number,
+      getValue: (t: number) => number,
     ) {
       ctx.save();
 
@@ -359,21 +387,13 @@ export default function IQCanvas() {
     const decodeIFn = (t: number) => iqModSignal(t) * Math.cos(t) * 2;
     const decodeQFn = (t: number) => iqModSignal(t) * Math.sin(t) * 2;
 
-    drawDecodeWave(wX, decodeY, dIW, dH, '#00d4ff',
-      '× cos(ωt) → 低通 → I', decodedI, decodeIFn);
-    drawDecodeWave(wX + dIW + 20, decodeY, dQW, dH, '#a855f7',
-      '× sin(ωt) → 低通 → Q', decodedQ, decodeQFn);
+    drawDecodeWave(wX, decodeY, dIW, dH, '#00d4ff', '× cos(ωt) → 低通 → I', decodedI, decodeIFn);
+    drawDecodeWave(wX + dIW + 20, decodeY, dQW, dH, '#a855f7', '× sin(ωt) → 低通 → Q', decodedQ, decodeQFn);
 
     return () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
     };
   }, [modulationFormat, iComponent, qComponent, time, symbolIndex, pPhaseDiff, resizeKey]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full rounded-xl"
-      style={{ display: 'block' }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full rounded-xl" style={{ display: 'block' }} />;
 }

@@ -6,7 +6,7 @@ interface UseAnimationFrameOptions {
 
 export function useAnimationFrame(
   callback: (deltaTime: number, timestamp: number) => void,
-  options: UseAnimationFrameOptions = {}
+  options: UseAnimationFrameOptions = {},
 ) {
   const requestRef = useRef<number>(undefined);
   const previousTimeRef = useRef<number>(undefined);
@@ -17,22 +17,23 @@ export function useAnimationFrame(
     callbackRef.current = callback;
   }, [callback]);
 
-  const animate = useCallback((time: number) => {
-    if (previousTimeRef.current !== undefined) {
-      const deltaTime = time - previousTimeRef.current;
-      callbackRef.current(deltaTime, time);
-    }
-    previousTimeRef.current = time;
-    requestRef.current = requestAnimationFrame(animate);
-  }, []);
-
   const start = useCallback(() => {
     if (!isRunningRef.current) {
       isRunningRef.current = true;
       previousTimeRef.current = undefined;
-      requestRef.current = requestAnimationFrame(animate);
+      const frame = (time: number) => {
+        if (previousTimeRef.current !== undefined) {
+          const deltaTime = time - previousTimeRef.current;
+          callbackRef.current(deltaTime, time);
+        }
+        previousTimeRef.current = time;
+        if (isRunningRef.current) {
+          requestRef.current = requestAnimationFrame(frame);
+        }
+      };
+      requestRef.current = requestAnimationFrame(frame);
     }
-  }, [animate]);
+  }, []);
 
   const stop = useCallback(() => {
     if (requestRef.current) {

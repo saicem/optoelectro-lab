@@ -5,7 +5,7 @@ export function mzOutputPower(inputPower: number, phaseShift: number): number {
 }
 
 export function mzTransferFunction(voltage: number, vPi: number = 1): number {
-  return Math.PI * voltage / vPi;
+  return (Math.PI * voltage) / vPi;
 }
 
 export function iqModulation(iComponent: number, qComponent: number, t: number): number {
@@ -43,9 +43,12 @@ for (let i = -7; i <= 7; i += 2) {
 
 export function getSymbols(format: ModulationFormat): IQPoint[] {
   switch (format) {
-    case 'QPSK': return qpskSymbols;
-    case '16QAM': return qam16Symbols;
-    case '64QAM': return qam64Symbols;
+    case 'QPSK':
+      return qpskSymbols;
+    case '16QAM':
+      return qam16Symbols;
+    case '64QAM':
+      return qam64Symbols;
   }
 }
 
@@ -89,9 +92,7 @@ function erfc(x: number): number {
   const a5 = 1.061405429;
   const p = 0.3275911;
   const t = 1.0 / (1.0 + p * x);
-  const y =
-    1.0 -
-    ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+  const y = 1.0 - ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
   return y;
 }
 
@@ -107,18 +108,14 @@ export function theoreticalBer(format: ModulationFormat, snrDb: number): number 
   const k = Math.sqrt(M);
   const avgEsN0 = snrLinear;
 
-  return (
-    (2 * (k - 1) / (k * Math.log2(k))) *
-    0.5 *
-    erfc(Math.sqrt((3 * avgEsN0 * Math.log2(k)) / (M - 1)))
-  );
+  return ((2 * (k - 1)) / (k * Math.log2(k))) * 0.5 * erfc(Math.sqrt((3 * avgEsN0 * Math.log2(k)) / (M - 1)));
 }
 
 export function generateBerCurve(
   format: ModulationFormat,
   snrMin: number = 0,
   snrMax: number = 30,
-  points: number = 100
+  points: number = 100,
 ): { snr: number; ber: number }[] {
   const result: { snr: number; ber: number }[] = [];
   const step = (snrMax - snrMin) / (points - 1);

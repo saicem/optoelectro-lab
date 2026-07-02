@@ -55,9 +55,7 @@ export default function PolarizationPage() {
               <span className="text-sm text-lab-muted">偏振复用模式</span>
               <button
                 onClick={() => setMultiplexing(!multiplexing)}
-                className={`text-2xl transition-colors ${
-                  multiplexing ? 'text-laser-purple' : 'text-lab-border'
-                }`}
+                className={`text-2xl transition-colors ${multiplexing ? 'text-laser-purple' : 'text-lab-border'}`}
               >
                 {multiplexing ? <ToggleRight className="w-8 h-8" /> : <ToggleLeft className="w-8 h-8" />}
               </button>
@@ -140,9 +138,7 @@ export default function PolarizationPage() {
               <InfoItem label="S₂ (45°/135°)" value={stokes.S2.toFixed(3)} color="#00ff88" />
               <InfoItem label="S₃ (旋向)" value={stokes.S3.toFixed(3)} color="#ff3366" />
               <InfoItem label="偏振度 DOP" value={(dop * 100).toFixed(1) + '%'} color="#a855f7" />
-              {multiplexing && (
-                <InfoItem label="总功率" value={(xPower + yPower).toFixed(2) + ' mW'} color="#f59e0b" />
-              )}
+              {multiplexing && <InfoItem label="总功率" value={(xPower + yPower).toFixed(2) + ' mW'} color="#f59e0b" />}
             </div>
           </div>
         </>
@@ -154,8 +150,8 @@ export default function PolarizationPage() {
           <div>
             <p className="mb-2">
               <span className="text-laser-red font-semibold">偏振态表示：</span>
-              完全偏振光的偏振态可由斯托克斯矢量 (S₀, S₁, S₂, S₃) 描述，
-              对应庞加莱球面上的一个点。偏振度 DOP 表示光的偏振程度。
+              完全偏振光的偏振态可由斯托克斯矢量 (S₀, S₁, S₂, S₃) 描述， 对应庞加莱球面上的一个点。偏振度 DOP
+              表示光的偏振程度。
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
               <MathRenderer>{'$$\\text{DOP} = \\frac{\\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}$$'}</MathRenderer>
@@ -168,7 +164,9 @@ export default function PolarizationPage() {
               可使光纤通信系统的容量翻倍，是现代高速光通信的关键技术。
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-              <MathRenderer>{'$$\\vec{E}(t) = E_x\\cos(\\omega t)\\hat{x} + E_y\\cos(\\omega t + \\delta)\\hat{y}$$'}</MathRenderer>
+              <MathRenderer>
+                {'$$\\vec{E}(t) = E_x\\cos(\\omega t)\\hat{x} + E_y\\cos(\\omega t + \\delta)\\hat{y}$$'}
+              </MathRenderer>
             </div>
           </div>
         </div>

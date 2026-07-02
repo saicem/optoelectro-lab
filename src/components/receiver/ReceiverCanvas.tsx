@@ -1,21 +1,22 @@
 import { useEffect, useRef } from 'react';
 import { useReceiverStore, addAwgnNoise, nearestSymbol } from '@/stores/useReceiverStore';
-import { getSymbols, iqAmplitude, iqPhase, iqModulation, generateBerCurve, theoreticalBer } from '@/utils/modulationMath';
+import {
+  getSymbols,
+  iqAmplitude,
+  iqPhase,
+  iqModulation,
+  generateBerCurve,
+  theoreticalBer,
+} from '@/utils/modulationMath';
 import type { ModulationFormat } from '@/types';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
 import { useCanvasResize } from '@/hooks/useCanvasResize';
+import { setupCanvas, drawGrid } from '@/lib/utils';
 
 export default function ReceiverCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resizeKey = useCanvasResize(canvasRef);
-  const {
-    modulationFormat,
-    snr,
-    noiseEnabled,
-    isPlaying,
-    receivedPoints,
-    addReceivedPoint,
-  } = useReceiverStore();
+  const { modulationFormat, snr, noiseEnabled, isPlaying, receivedPoints, addReceivedPoint } = useReceiverStore();
   const timeRef = useRef(0);
   const lastSampleRef = useRef(0);
   const currentSymbolIdxRef = useRef(0);
@@ -37,7 +38,7 @@ export default function ReceiverCanvas() {
         }
       }
     },
-    { autoStart: true }
+    { autoStart: true },
   );
 
   useEffect(() => {
@@ -47,33 +48,14 @@ export default function ReceiverCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    const W = rect.width;
-    const H = rect.height;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    ctx.scale(dpr, dpr);
+    const dim = setupCanvas(canvas, ctx);
+    if (!dim) return;
+    const { width: W, height: H } = dim;
 
     ctx.fillStyle = '#0a0e17';
     ctx.fillRect(0, 0, W, H);
 
-    ctx.save();
-    ctx.strokeStyle = 'rgba(51, 65, 85, 0.3)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < W; x += 30) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, H);
-      ctx.stroke();
-    }
-    for (let y = 0; y < H; y += 30) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(W, y);
-      ctx.stroke();
-    }
-    ctx.restore();
+    drawGrid(ctx, W, H, 30, 'rgba(51, 65, 85, 0.3)');
 
     const constellationSize = Math.min(W * 0.38, H * 0.5);
     const constellationR = constellationSize / 2 - 20;
@@ -88,7 +70,7 @@ export default function ReceiverCanvas() {
       title: string,
       titleColor: string,
       showIdeal: boolean,
-      showReceived: boolean
+      showReceived: boolean,
     ) {
       ctx.save();
       ctx.strokeStyle = '#334155';
@@ -220,7 +202,7 @@ export default function ReceiverCanvas() {
       label: string,
       getValue: (t: number) => number,
       maxVal: number = 1,
-      showNoisy: boolean = false
+      showNoisy: boolean = false,
     ) {
       ctx.save();
 
@@ -241,7 +223,6 @@ export default function ReceiverCanvas() {
         ctx.lineWidth = 1;
         ctx.beginPath();
         const cycles = 6;
-        const lastPoint = receivedPoints[receivedPoints.length - 1];
         for (let i = 0; i <= width; i++) {
           const t = (i / width) * cycles * 2 * Math.PI + timeRef.current * 3;
           const cleanVal = getValue(t);
@@ -287,7 +268,17 @@ export default function ReceiverCanvas() {
     drawWave(waveformX, waveY2, waveformW, waveH, '#a855f7', 'Q 路信号', (t) => sym.q * Math.sin(t), 1, true);
 
     const outWaveY = waveTop + (waveH * 2 + waveGap) * 2;
-    drawWave(waveformX, outWaveY, waveformW, waveH, '#00ff88', '合成 IQ 信号', (t) => iqModulation(sym.i, sym.q, t), Math.sqrt(2), true);
+    drawWave(
+      waveformX,
+      outWaveY,
+      waveformW,
+      waveH,
+      '#00ff88',
+      '合成 IQ 信号',
+      (t) => iqModulation(sym.i, sym.q, t),
+      Math.sqrt(2),
+      true,
+    );
 
     const symAmp = iqAmplitude(sym.i, sym.q);
     const symPhase = iqPhase(sym.i, sym.q);
@@ -365,7 +356,7 @@ export default function ReceiverCanvas() {
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         let started = false;
-        curve.forEach((point, idx) => {
+        curve.forEach((point) => {
           if (point.ber < berMin || point.ber > berMax) return;
           const px = chartX + ((point.snr - snrMin) / (snrMax - snrMin)) * chartW;
           const ratio = (point.ber - berMin) / (berMax - berMin);
@@ -376,7 +367,6 @@ export default function ReceiverCanvas() {
           } else {
             ctx.lineTo(px, py);
           }
-          void idx;
         });
         ctx.stroke();
       });
@@ -442,11 +432,5 @@ export default function ReceiverCanvas() {
     };
   }, [modulationFormat, snr, noiseEnabled, receivedPoints, resizeKey]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full rounded-xl"
-      style={{ display: 'block' }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full rounded-xl" style={{ display: 'block' }} />;
 }

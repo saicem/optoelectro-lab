@@ -1,4 +1,4 @@
-import { Atom, Zap, Layers, Lightbulb, Cpu, Beaker, Sparkles, Gauge } from 'lucide-react';
+import { Atom, Zap, Layers, Cpu, Beaker, Sparkles, Gauge } from 'lucide-react';
 import LearnLayout from '@/components/common/LearnLayout';
 import LearnSection from '@/components/common/LearnSection';
 import MathRenderer from '@/components/common/MathRenderer';
@@ -18,7 +18,9 @@ const pageSections = [
 ];
 
 export default function LearnOptoelectronicMaterials() {
-  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.OPTOELECTRONIC_MATERIALS);
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(
+    ROUTES.LEARN.OPTOELECTRONIC_MATERIALS,
+  );
   const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
   const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
@@ -43,9 +45,11 @@ export default function LearnOptoelectronicMaterials() {
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">能带结构</h4>
             <p className="text-sm mb-3">
-              半导体材料的电子在<span className="text-laser-green font-semibold">价带（Valence Band）</span>
-              和<span className="text-laser-cyan font-semibold">导带（Conduction Band）</span>之间运动，
-              中间被一个能量间隙（<TermNote term="带隙" />，Bandgap）隔开。
+              半导体材料的电子在<span className="text-laser-green font-semibold">价带（Valence Band）</span>和
+              <span className="text-laser-cyan font-semibold">导带（Conduction Band）</span>之间运动，
+              中间被一个能量间隙（
+              <TermNote term="带隙" />
+              ，Bandgap）隔开。
             </p>
             <div className="flex items-center justify-center gap-4 py-4">
               <div className="text-center">
@@ -75,8 +79,7 @@ export default function LearnOptoelectronicMaterials() {
             <div className="bg-lab-bg/50 p-4 rounded-xl">
               <h4 className="font-semibold text-lab-cyan mb-2 text-sm">本征半导体</h4>
               <p className="text-sm mb-2">
-                纯半导体，价带电子热激发到导带后产生电子-空穴对。
-                载流子浓度由材料本身决定。
+                纯半导体，价带电子热激发到导带后产生电子-空穴对。 载流子浓度由材料本身决定。
               </p>
               <div className="bg-lab-surface/50 px-3 py-2 rounded-lg text-xs">
                 <MathRenderer>{'$$n_i = \\sqrt{N_c N_v} \\exp\\left(-\\frac{E_g}{2k_B T}\\right)$$'}</MathRenderer>
@@ -101,22 +104,14 @@ export default function LearnOptoelectronicMaterials() {
               <div>
                 <p className="text-lab-text font-medium mb-1">漂移运动</p>
                 <p className="text-xs text-lab-muted">
-                  在外电场作用下，载流子定向运动。
-                  漂移速度 v_d = μE，其中 μ 为迁移率。
+                  在外电场作用下，载流子定向运动。 漂移速度 v_d = μE，其中 μ 为迁移率。
                 </p>
-                <div className="bg-lab-surface/50 px-3 py-1.5 rounded-lg mt-1 text-xs font-mono">
-                  v_d = μ · E
-                </div>
+                <div className="bg-lab-surface/50 px-3 py-1.5 rounded-lg mt-1 text-xs font-mono">v_d = μ · E</div>
               </div>
               <div>
                 <p className="text-lab-text font-medium mb-1">扩散运动</p>
-                <p className="text-xs text-lab-muted">
-                  浓度梯度导致载流子从高浓度向低浓度扩散。
-                  扩散电流 J ∝ dn/dx。
-                </p>
-                <div className="bg-lab-surface/50 px-3 py-1.5 rounded-lg mt-1 text-xs font-mono">
-                  J = q · D · dn/dx
-                </div>
+                <p className="text-xs text-lab-muted">浓度梯度导致载流子从高浓度向低浓度扩散。 扩散电流 J ∝ dn/dx。</p>
+                <div className="bg-lab-surface/50 px-3 py-1.5 rounded-lg mt-1 text-xs font-mono">J = q · D · dn/dx</div>
               </div>
             </div>
           </div>
@@ -127,31 +122,28 @@ export default function LearnOptoelectronicMaterials() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-purple font-semibold">PN 结（P-N Junction）</span>
-            是半导体器件的核心结构，由 P 型半导体和 N 型半导体结合而成。
-            它形成了半导体器件中的<span className="text-laser-cyan font-semibold">内建电场</span>，
-            是光电二极管、激光器等器件工作的物理基础。
+            是半导体器件的核心结构，由 P 型半导体和 N 型半导体结合而成。 它形成了半导体器件中的
+            <span className="text-laser-cyan font-semibold">内建电场</span>， 是光电二极管、激光器等器件工作的物理基础。
           </p>
 
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">PN 结的形成</h4>
             <p className="text-sm mb-3">
-              当 P 型半导体（含大量空穴）和 N 型半导体（含大量电子）接触时，
-              由于浓度差，N 区的电子向 P 区扩散，P 区的空穴向 N 区扩散。
-              这形成了<span className="text-laser-green font-semibold">扩散电流</span>。
+              当 P 型半导体（含大量空穴）和 N 型半导体（含大量电子）接触时， 由于浓度差，N 区的电子向 P 区扩散，P
+              区的空穴向 N 区扩散。 这形成了<span className="text-laser-green font-semibold">扩散电流</span>。
             </p>
             <div className="grid md:grid-cols-2 gap-4 text-xs">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-2">扩散过程</h5>
                 <p className="text-lab-muted">
-                  电子从 N 区扩散到 P 区，与空穴复合消失。
-                  空穴从 P 区扩散到 N 区，与电子复合消失。
+                  电子从 N 区扩散到 P 区，与空穴复合消失。 空穴从 P 区扩散到 N 区，与电子复合消失。
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-2">空间电荷区</h5>
                 <p className="text-lab-muted">
-                  扩散后，N 区留下正电离子，P 区留下负电离子，
-                  形成<span className="text-laser-purple">耗尽区</span>或<span className="text-laser-purple">空间电荷区</span>。
+                  扩散后，N 区留下正电离子，P 区留下负电离子， 形成<span className="text-laser-purple">耗尽区</span>或
+                  <span className="text-laser-purple">空间电荷区</span>。
                 </p>
               </div>
             </div>
@@ -160,8 +152,8 @@ export default function LearnOptoelectronicMaterials() {
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">内建电场与势垒</h4>
             <p className="text-sm mb-3">
-              空间电荷区形成了一个从 N 区指向 P 区的<span className="text-laser-purple font-semibold">内建电场 E</span>，
-              产生<span className="text-laser-purple font-semibold">势垒电压 V_bi</span>（也称接触电势或内建电势）。
+              空间电荷区形成了一个从 N 区指向 P 区的<span className="text-laser-purple font-semibold">内建电场 E</span>
+              ， 产生<span className="text-laser-purple font-semibold">势垒电压 V_bi</span>（也称接触电势或内建电势）。
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-lab-surface/50 p-3 rounded-lg text-xs">
@@ -257,8 +249,7 @@ export default function LearnOptoelectronicMaterials() {
             <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-green mb-2 text-sm">内光电效应</h4>
               <p className="text-xs mb-2">
-                光子被半导体材料吸收，在材料内部产生电子-空穴对。
-                这些载流子可以在材料内部自由移动，产生光电流。
+                光子被半导体材料吸收，在材料内部产生电子-空穴对。 这些载流子可以在材料内部自由移动，产生光电流。
               </p>
               <div className="bg-lab-bg/50 p-2 rounded-lg text-xs">
                 <div className="font-medium text-lab-text mb-1">应用</div>
@@ -271,10 +262,7 @@ export default function LearnOptoelectronicMaterials() {
             </div>
             <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-purple mb-2 text-sm">外光电效应</h4>
-              <p className="text-xs mb-2">
-                光子能量足够大时，电子逸出材料表面成为自由电子。
-                需要光子能量大于逸出功。
-              </p>
+              <p className="text-xs mb-2">光子能量足够大时，电子逸出材料表面成为自由电子。 需要光子能量大于逸出功。</p>
               <div className="bg-lab-bg/50 p-2 rounded-lg text-xs">
                 <div className="font-medium text-lab-text mb-1">应用</div>
                 <ul className="text-lab-muted space-y-0.5">
@@ -295,9 +283,7 @@ export default function LearnOptoelectronicMaterials() {
             <div className="bg-lab-surface/50 px-4 py-2 rounded-lg text-xs font-mono">
               <MathRenderer>{'$$I(x) = I_0 \\cdot e^{-\\alpha x}$$'}</MathRenderer>
             </div>
-            <p className="text-xs text-lab-muted mt-2">
-              吸收系数 α 与波长密切相关——这是选择光电器件材料的重要依据。
-            </p>
+            <p className="text-xs text-lab-muted mt-2">吸收系数 α 与波长密切相关——这是选择光电器件材料的重要依据。</p>
 
             <div className="bg-lab-bg/50 px-3 py-2 rounded-lg mt-3 text-xs">
               <span className="text-lab-text font-medium">量子效率 (QE)：</span>
@@ -309,22 +295,18 @@ export default function LearnOptoelectronicMaterials() {
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">光电导效应</h4>
             <p className="text-sm mb-3">
-              当光子照射到半导体上时，产生的光生载流子增加了材料的电导率。
-              这一现象称为<span className="text-laser-green font-semibold">光电导效应</span>。
+              当光子照射到半导体上时，产生的光生载流子增加了材料的电导率。 这一现象称为
+              <span className="text-laser-green font-semibold">光电导效应</span>。
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-1 text-sm">光敏电阻 (LDR)</h5>
-                <p className="text-xs">
-                  基于光电导效应，光照强度变化导致电阻变化。
-                  结构简单，但响应速度较慢。
-                </p>
+                <p className="text-xs">基于光电导效应，光照强度变化导致电阻变化。 结构简单，但响应速度较慢。</p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-purple mb-1 text-sm">PIN 光电二极管</h5>
                 <p className="text-xs">
-                  在 P 区和 N 区之间插入本征层（I层），增大耗尽区宽度，提高量子效率。
-                  响应速度快，广泛用于光通信接收器。
+                  在 P 区和 N 区之间插入本征层（I层），增大耗尽区宽度，提高量子效率。 响应速度快，广泛用于光通信接收器。
                 </p>
               </div>
             </div>
@@ -337,14 +319,15 @@ export default function LearnOptoelectronicMaterials() {
           <p>
             <span className="text-laser-purple font-semibold">光电二极管（Photodiode）</span>
             是将光信号转换为电信号的核心器件，广泛应用于光通信接收器、光纤传感和光功率测量等领域。
-            与普通二极管类似，光电二极管基于 PN 结结构，但工作于<span className="text-laser-green font-semibold">反向偏置</span>状态。
+            与普通二极管类似，光电二极管基于 PN 结结构，但工作于
+            <span className="text-laser-green font-semibold">反向偏置</span>状态。
           </p>
 
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">工作原理</h4>
             <p className="text-sm mb-3">
-              光电二极管工作于<span className="text-laser-cyan font-semibold">反向偏置</span>状态：
-              P 区接负极，N 区接正极。外加电场增强了内建电场，使耗尽区变宽。
+              光电二极管工作于<span className="text-laser-cyan font-semibold">反向偏置</span>状态： P 区接负极，N
+              区接正极。外加电场增强了内建电场，使耗尽区变宽。
             </p>
             <div className="grid md:grid-cols-2 gap-4 text-xs">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
@@ -359,9 +342,7 @@ export default function LearnOptoelectronicMaterials() {
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-2">电流-电压特性</h5>
                 <MathRenderer>{'$I = I_S \\left(e^{\\frac{qV}{k_B T}} - 1\\right) - I_L$'}</MathRenderer>
-                <p className="text-lab-muted mt-1">
-                  I_L：光生电流，与入射光功率成正比
-                </p>
+                <p className="text-lab-muted mt-1">I_L：光生电流，与入射光功率成正比</p>
               </div>
             </div>
           </div>
@@ -373,25 +354,20 @@ export default function LearnOptoelectronicMaterials() {
                 <div className="bg-lab-surface/50 p-3 rounded-lg">
                   <h5 className="font-medium text-laser-cyan mb-1">响应度 (Responsivity)</h5>
                   <MathRenderer>{'$R = \\frac{I_{ph}}{P_{opt}} \\quad \\text{[A/W]}$'}</MathRenderer>
-                  <p className="text-lab-muted mt-1">
-                    典型值：0.5-0.9 A/W (1550 nm, InGaAs)
-                  </p>
+                  <p className="text-lab-muted mt-1">典型值：0.5-0.9 A/W (1550 nm, InGaAs)</p>
                 </div>
                 <div className="bg-lab-surface/50 p-3 rounded-lg">
                   <h5 className="font-medium text-laser-green mb-1">量子效率 (QE)</h5>
-                  <MathRenderer>{'$QE = \\frac{I_{ph}/q}{P_{opt}/h\\nu} = R \\cdot \\frac{hc}{q\\lambda}$'}</MathRenderer>
-                  <p className="text-lab-muted mt-1">
-                    典型值：60-90%
-                  </p>
+                  <MathRenderer>
+                    {'$QE = \\frac{I_{ph}/q}{P_{opt}/h\\nu} = R \\cdot \\frac{hc}{q\\lambda}$'}
+                  </MathRenderer>
+                  <p className="text-lab-muted mt-1">典型值：60-90%</p>
                 </div>
               </div>
               <div className="space-y-3">
                 <div className="bg-lab-surface/50 p-3 rounded-lg">
                   <h5 className="font-medium text-laser-purple mb-1">响应时间 / 带宽</h5>
-                  <p className="text-lab-muted">
-                    由载流子渡越时间和结电容决定。
-                    高速探测器可达 10-40 GHz。
-                  </p>
+                  <p className="text-lab-muted">由载流子渡越时间和结电容决定。 高速探测器可达 10-40 GHz。</p>
                   <div className="bg-lab-bg/50 px-2 py-1 rounded mt-1">
                     <MathRenderer>{'$f_{3dB} \\approx \\frac{0.35}{t_r}$'}</MathRenderer>
                   </div>
@@ -399,8 +375,7 @@ export default function LearnOptoelectronicMaterials() {
                 <div className="bg-lab-surface/50 p-3 rounded-lg">
                   <h5 className="font-medium text-laser-orange mb-1">暗电流 (Dark Current)</h5>
                   <p className="text-lab-muted">
-                    无光照时的反向电流，由热激发载流子产生。
-                    温度每升高 10°C，暗电流约翻倍。
+                    无光照时的反向电流，由热激发载流子产生。 温度每升高 10°C，暗电流约翻倍。
                   </p>
                 </div>
               </div>
@@ -413,31 +388,24 @@ export default function LearnOptoelectronicMaterials() {
               <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-1">PIN 光电二极管</h5>
                 <p className="text-lab-muted">
-                  P-Intrinsic-N 结构。I 层增大耗尽区宽度，提高量子效率和响应速度。
-                  是光通信最常用的探测器类型。
+                  P-Intrinsic-N 结构。I 层增大耗尽区宽度，提高量子效率和响应速度。 是光通信最常用的探测器类型。
                 </p>
               </div>
               <div className="border border-laser-green/30 bg-laser-green/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-1">雪崩光电二极管 (APD)</h5>
                 <p className="text-lab-muted">
-                  内部具有雪崩倍增效应，光电流被内部增益放大（增益 ~10-100）。
-                  高灵敏度，适用于长距离和弱光检测。
+                  内部具有雪崩倍增效应，光电流被内部增益放大（增益 ~10-100）。 高灵敏度，适用于长距离和弱光检测。
                 </p>
               </div>
               <div className="border border-laser-purple/30 bg-laser-purple/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-purple mb-1">肖特基光电二极管</h5>
                 <p className="text-lab-muted">
-                  金属-半导体结结构，响应速度快，适用于可见光和近红外。
-                  典型结构：GaAs PIN。
+                  金属-半导体结结构，响应速度快，适用于可见光和近红外。 典型结构：GaAs PIN。
                 </p>
               </div>
               <div className="border border-laser-orange/30 bg-laser-orange/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-orange mb-1">光电导探测器</h5>
-                <p className="text-lab-muted">
-                  无 PN 结，基于光电导效应。
-                  响应速度快，但噪声较大。
-                  用于高速光采样。
-                </p>
+                <p className="text-lab-muted">无 PN 结，基于光电导效应。 响应速度快，但噪声较大。 用于高速光采样。</p>
               </div>
             </div>
           </div>
@@ -492,10 +460,19 @@ export default function LearnOptoelectronicMaterials() {
           <div className="border border-laser-cyan/20 bg-laser-cyan/5 p-4 rounded-xl">
             <h5 className="font-semibold text-laser-cyan mb-2 text-sm">光电二极管的选择要点</h5>
             <div className="text-xs text-lab-muted">
-              <p className="mb-1">1. <span className="text-lab-text">波长匹配</span>：选择与工作波段匹配的材料（Si: 400-1000 nm, InGaAs: 1000-1700 nm）</p>
-              <p className="mb-1">2. <span className="text-lab-text">带宽要求</span>：高速系统选择 PIN，短距低速可选 APD</p>
-              <p className="mb-1">3. <span className="text-lab-text">灵敏度要求</span>：长距离选择 APD，短距离 PIN 即可</p>
-              <p>4. <span className="text-lab-text">工作温度</span>：高温会增大暗电流，必要时需制冷</p>
+              <p className="mb-1">
+                1. <span className="text-lab-text">波长匹配</span>：选择与工作波段匹配的材料（Si: 400-1000 nm, InGaAs:
+                1000-1700 nm）
+              </p>
+              <p className="mb-1">
+                2. <span className="text-lab-text">带宽要求</span>：高速系统选择 PIN，短距低速可选 APD
+              </p>
+              <p className="mb-1">
+                3. <span className="text-lab-text">灵敏度要求</span>：长距离选择 APD，短距离 PIN 即可
+              </p>
+              <p>
+                4. <span className="text-lab-text">工作温度</span>：高温会增大暗电流，必要时需制冷
+              </p>
             </div>
           </div>
         </div>
@@ -568,23 +545,16 @@ export default function LearnOptoelectronicMaterials() {
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-1">响应波长匹配</h5>
                 <p className="text-lab-muted">
-                  材料带隙决定响应波长范围。
-                  光通信 C 波段 (1550 nm) 需要 InP、Ge 等材料。
+                  材料带隙决定响应波长范围。 光通信 C 波段 (1550 nm) 需要 InP、Ge 等材料。
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-1">载流子迁移率</h5>
-                <p className="text-lab-muted">
-                  高迁移率材料响应速度更快。
-                  GaAs 电子迁移率是 Si 的 5-6 倍。
-                </p>
+                <p className="text-lab-muted">高迁移率材料响应速度更快。 GaAs 电子迁移率是 Si 的 5-6 倍。</p>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-purple mb-1">工艺兼容性</h5>
-                <p className="text-lab-muted">
-                  CMOS 兼容的 Si 成本最低。
-                  InP 可单片集成光源和探测器。
-                </p>
+                <p className="text-lab-muted">CMOS 兼容的 Si 成本最低。 InP 可单片集成光源和探测器。</p>
               </div>
             </div>
           </div>
@@ -597,10 +567,10 @@ export default function LearnOptoelectronicMaterials() {
             </p>
             <div className="bg-lab-surface/50 p-3 rounded-lg text-xs">
               <div className="font-medium text-lab-text mb-2">能带工程</div>
-              <MathRenderer>{'$$E_g(x) = x \\cdot E_{GaAs} + (1-x) \\cdot E_{InP} - 1.247x(1-x) \\quad \\text{(InGaAs)}$$'}</MathRenderer>
-              <p className="text-lab-muted mt-1">
-                通过调整 In 和 Ga 的比例 x，可以获得任意所需的带隙能量
-              </p>
+              <MathRenderer>
+                {'$$E_g(x) = x \\cdot E_{GaAs} + (1-x) \\cdot E_{InP} - 1.247x(1-x) \\quad \\text{(InGaAs)}$$'}
+              </MathRenderer>
+              <p className="text-lab-muted mt-1">通过调整 In 和 Ga 的比例 x，可以获得任意所需的带隙能量</p>
             </div>
           </div>
         </div>
@@ -610,34 +580,31 @@ export default function LearnOptoelectronicMaterials() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-orange font-semibold">电光材料（Electro-optic Materials）</span>
-            能够在外加电场作用下改变其光学性质（折射率或吸收系数），
-            是制作光调制器的核心材料。
+            能够在外加电场作用下改变其光学性质（折射率或吸收系数）， 是制作光调制器的核心材料。
           </p>
 
           <div className="grid md:grid-cols-2 gap-4 mt-4">
             <div className="border border-laser-orange/30 bg-laser-orange/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-orange mb-2 text-sm">Pockels 效应（线性电光效应）</h4>
-              <p className="text-xs mb-2">
-                折射率变化与外加电场成正比。这是高速光调制器的主要机制。
-              </p>
+              <p className="text-xs mb-2">折射率变化与外加电场成正比。这是高速光调制器的主要机制。</p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs font-mono">
                 <MathRenderer>{'$$\\Delta n = -\\frac{1}{2} n^3 r E$$'}</MathRenderer>
               </div>
               <p className="text-xs text-lab-muted mt-2">
-                <span className="text-lab-text">r：</span>电光系数（pm/V）<br />
+                <span className="text-lab-text">r：</span>电光系数（pm/V）
+                <br />
                 代表材料：LiNbO₃、GaAs、KDP
               </p>
             </div>
             <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-purple mb-2 text-sm">Kerr 效应（二次电光效应）</h4>
-              <p className="text-xs mb-2">
-                折射率变化与外加电场的平方成正比。效果较弱，但响应速度快。
-              </p>
+              <p className="text-xs mb-2">折射率变化与外加电场的平方成正比。效果较弱，但响应速度快。</p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs font-mono">
                 <MathRenderer>{'$$\\Delta n = -\\frac{1}{2} n^3 K E^2$$'}</MathRenderer>
               </div>
               <p className="text-xs text-lab-muted mt-2">
-                <span className="text-lab-text">K：</span>克尔系数<br />
+                <span className="text-lab-text">K：</span>克尔系数
+                <br />
                 代表材料：硅（Si）、CS₂
               </p>
             </div>
@@ -649,32 +616,28 @@ export default function LearnOptoelectronicMaterials() {
               <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
                 <h5 className="font-semibold text-laser-cyan mb-1">铌酸锂 (LiNbO₃)</h5>
                 <p className="text-xs text-lab-muted">
-                  最成熟的电光材料，电光系数大 (~30 pm/V)，折射率高 (~2.2)。
-                  广泛应用于马赫-曾德调制器、相位调制器。
+                  最成熟的电光材料，电光系数大 (~30 pm/V)，折射率高 (~2.2)。 广泛应用于马赫-曾德调制器、相位调制器。
                   缺点：难以与硅基或 III-V 族器件单片集成。
                 </p>
               </div>
               <div className="border border-laser-green/30 bg-laser-green/5 p-3 rounded-lg">
                 <h5 className="font-semibold text-laser-green mb-1">砷化镓 (GaAs)</h5>
                 <p className="text-xs text-lab-muted">
-                  电光系数较小 (~1.4 pm/V)，但可与微波电路单片集成。
-                  适用于毫米波光通信和太赫兹波产生。
+                  电光系数较小 (~1.4 pm/V)，但可与微波电路单片集成。 适用于毫米波光通信和太赫兹波产生。
                 </p>
               </div>
               <div className="border border-laser-purple/30 bg-laser-purple/5 p-3 rounded-lg">
                 <h5 className="font-semibold text-laser-purple mb-1">硅 (Si) / 硅光 (Silicon Photonics)</h5>
                 <p className="text-xs text-lab-muted">
-                  主要依赖 Kerr 效应（二次），电光效应较弱。
-                  但 CMOS 兼容、可低成本大规模生产。
+                  主要依赖 Kerr 效应（二次），电光效应较弱。 但 CMOS 兼容、可低成本大规模生产。
                   与调制相关的机制：等离子体色散效应（Plasma Dispersion）。
                 </p>
               </div>
               <div className="border border-laser-orange/30 bg-laser-orange/5 p-3 rounded-lg">
                 <h5 className="font-semibold text-laser-orange mb-1">薄膜铌酸锂 (TFLN / Thin-film LiNbO₃)</h5>
                 <p className="text-xs text-lab-muted">
-                  新一代高性能电光材料，在绝缘体上薄膜化铌酸锂。
-                  兼具 LiNbO₃ 的优异电光特性和小型化优势。
-                  半波电压 V_π 可低至 1-2 V，带宽可达 100 GHz 以上。
+                  新一代高性能电光材料，在绝缘体上薄膜化铌酸锂。 兼具 LiNbO₃ 的优异电光特性和小型化优势。 半波电压 V_π
+                  可低至 1-2 V，带宽可达 100 GHz 以上。
                 </p>
               </div>
             </div>
@@ -689,9 +652,7 @@ export default function LearnOptoelectronicMaterials() {
               <MathRenderer>{'$$V_\\pi \\cdot L = \\frac{\\lambda}{2 n^3 r}$$'}</MathRenderer>
             </div>
             <p className="text-xs text-lab-muted mt-2">
-              V_π·L 越小，材料的电光调制效率越高。
-              LiNbO₃ 的 V_π·L ≈ 5-10 V·cm，
-              而 TFLN 可低至 1-2 V·cm。
+              V_π·L 越小，材料的电光调制效率越高。 LiNbO₃ 的 V_π·L ≈ 5-10 V·cm， 而 TFLN 可低至 1-2 V·cm。
             </p>
           </div>
         </div>
@@ -714,23 +675,13 @@ export default function LearnOptoelectronicMaterials() {
             <div className="grid md:grid-cols-2 gap-3">
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-1 text-sm">二次谐波产生 (SHG)</h5>
-                <p className="text-xs">
-                  频率为 ω 的光通过晶体后产生 2ω 的倍频光。
-                  是激光频率转换的基础。
-                </p>
-                <div className="bg-lab-bg/50 px-2 py-1 rounded mt-1 text-xs font-mono">
-                  ω + ω → 2ω
-                </div>
+                <p className="text-xs">频率为 ω 的光通过晶体后产生 2ω 的倍频光。 是激光频率转换的基础。</p>
+                <div className="bg-lab-bg/50 px-2 py-1 rounded mt-1 text-xs font-mono">ω + ω → 2ω</div>
               </div>
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-1 text-sm">光学参量振荡 (OPO)</h5>
-                <p className="text-xs">
-                  泵浦光在晶体中产生信号光和闲频光。
-                  可实现宽范围可调谐激光输出。
-                </p>
-                <div className="bg-lab-bg/50 px-2 py-1 rounded mt-1 text-xs font-mono">
-                  ω_p → ω_s + ω_i
-                </div>
+                <p className="text-xs">泵浦光在晶体中产生信号光和闲频光。 可实现宽范围可调谐激光输出。</p>
+                <div className="bg-lab-bg/50 px-2 py-1 rounded mt-1 text-xs font-mono">ω_p → ω_s + ω_i</div>
               </div>
             </div>
           </div>
@@ -738,30 +689,22 @@ export default function LearnOptoelectronicMaterials() {
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">三阶非线性光学效应</h4>
             <p className="text-sm mb-3">
-              三阶非线性极化率 χ⁽³⁾存在于所有材料中，与光强的平方成正比。
-              在光通信中既有应用价值，也带来一些不利影响：
+              三阶非线性极化率 χ⁽³⁾存在于所有材料中，与光强的平方成正比。 在光通信中既有应用价值，也带来一些不利影响：
             </p>
             <div className="grid md:grid-cols-2 gap-3">
               <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-1 text-sm">自相位调制 (SPM)</h5>
                 <p className="text-xs">
-                  光脉冲自身的强度变化引起相位变化，导致频谱展宽。
-                  在光纤中与色散相互作用，产生孤子效应。
+                  光脉冲自身的强度变化引起相位变化，导致频谱展宽。 在光纤中与色散相互作用，产生孤子效应。
                 </p>
               </div>
               <div className="border border-laser-green/30 bg-laser-green/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-1 text-sm">交叉相位调制 (XPM)</h5>
-                <p className="text-xs">
-                  一个信道的光强变化影响另一信道的相位。
-                  是 WDM 系统信道间串扰的重要来源。
-                </p>
+                <p className="text-xs">一个信道的光强变化影响另一信道的相位。 是 WDM 系统信道间串扰的重要来源。</p>
               </div>
               <div className="border border-laser-purple/30 bg-laser-purple/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-purple mb-1 text-sm">四波混频 (FWM)</h5>
-                <p className="text-xs">
-                  三个频率的光相互作用产生第四个频率的新光。
-                  可用于全光信号处理，也可产生串扰。
-                </p>
+                <p className="text-xs">三个频率的光相互作用产生第四个频率的新光。 可用于全光信号处理，也可产生串扰。</p>
               </div>
               <div className="border border-laser-orange/30 bg-laser-orange/5 p-3 rounded-lg">
                 <h5 className="font-medium text-laser-orange mb-1 text-sm">非线性折射率</h5>
@@ -779,28 +722,20 @@ export default function LearnOptoelectronicMaterials() {
               <div>
                 <p className="text-lab-text font-medium">周期性极化铌酸锂 (PPLN)</p>
                 <p className="text-lab-muted">
-                  通过周期性极化实现准相位匹配，显著提高转换效率。
-                  广泛用于波长转换和 OPO。
+                  通过周期性极化实现准相位匹配，显著提高转换效率。 广泛用于波长转换和 OPO。
                 </p>
               </div>
               <div>
                 <p className="text-lab-text font-medium">砷化镓 (GaAs)</p>
-                <p className="text-lab-muted">
-                  非线性系数大，适合制作光学超表面和片上非线性器件。
-                </p>
+                <p className="text-lab-muted">非线性系数大，适合制作光学超表面和片上非线性器件。</p>
               </div>
               <div>
                 <p className="text-lab-text font-medium">硫系玻璃</p>
-                <p className="text-lab-muted">
-                  非线性系数比石英高 100 倍以上，
-                  用于中红外光子学和全光开关。
-                </p>
+                <p className="text-lab-muted">非线性系数比石英高 100 倍以上， 用于中红外光子学和全光开关。</p>
               </div>
               <div>
                 <p className="text-lab-text font-medium">硅基氮化硅 (Si₃N₄)</p>
-                <p className="text-lab-muted">
-                  低损耗、高非线性，可用于微腔孤子和光学频率梳产生。
-                </p>
+                <p className="text-lab-muted">低损耗、高非线性，可用于微腔孤子和光学频率梳产生。</p>
               </div>
             </div>
           </div>
@@ -809,9 +744,7 @@ export default function LearnOptoelectronicMaterials() {
 
       <LearnSection id="s-7" icon={<Gauge className="w-5 h-5 text-laser-cyan" />} title="材料特性对比与应用">
         <div className="space-y-4 text-lab-muted leading-relaxed">
-          <p>
-            不同应用场景对光电材料有不同的要求。以下是光通信系统中主要器件的材料选择概览：
-          </p>
+          <p>不同应用场景对光电材料有不同的要求。以下是光通信系统中主要器件的材料选择概览：</p>
 
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -902,8 +835,7 @@ export default function LearnOptoelectronicMaterials() {
             <p className="text-xs text-lab-muted">
               光电材料是光通信技术的物理基础。从半导体物理到非线性光学，
               每一种材料特性都被巧妙利用来实现特定功能。随着材料科学的进步，
-              薄膜化、异构集成成为发展趋势，新型材料平台不断推动光通信系统向更高速率、
-              更低功耗、更低成本演进。
+              薄膜化、异构集成成为发展趋势，新型材料平台不断推动光通信系统向更高速率、 更低功耗、更低成本演进。
             </p>
           </div>
         </div>

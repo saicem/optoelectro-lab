@@ -17,7 +17,9 @@ const pageSections = [
 ];
 
 export default function LearnPolarization() {
-  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.POLARIZATION);
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(
+    ROUTES.LEARN.POLARIZATION,
+  );
   const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
   const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
@@ -39,11 +41,11 @@ export default function LearnPolarization() {
             <span className="text-laser-red font-semibold">偏振 (Polarization)</span>
             描述的是电场矢量的振动方向随时间变化的方式。
           </p>
-          <p>
-            沿 z 方向传播的单色平面波，其电场可以分解为 x 和 y 两个正交分量：
-          </p>
+          <p>沿 z 方向传播的单色平面波，其电场可以分解为 x 和 y 两个正交分量：</p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$\\vec{E}(t) = E_x\\cos(\\omega t)\\hat{x} + E_y\\cos(\\omega t + \\delta)\\hat{y}$$'}</MathRenderer>
+            <MathRenderer>
+              {'$$\\vec{E}(t) = E_x\\cos(\\omega t)\\hat{x} + E_y\\cos(\\omega t + \\delta)\\hat{y}$$'}
+            </MathRenderer>
           </div>
           <p>
             其中 E_x 和 E_y 是两个分量的振幅，δ 是 y 分量相对于 x 分量的相位差。
@@ -54,7 +56,8 @@ export default function LearnPolarization() {
               <h4 className="font-semibold text-laser-cyan mb-2">线偏振</h4>
               <div className="text-sm text-lab-muted">
                 当 δ = 0 或 π 时，电场矢量的端点在一条直线上运动。
-                <br /><br />
+                <br />
+                <br />
                 E_x 和 E_y 同相或反相。
               </div>
             </div>
@@ -62,15 +65,16 @@ export default function LearnPolarization() {
               <h4 className="font-semibold text-laser-purple mb-2">圆偏振</h4>
               <div className="text-sm text-lab-muted">
                 当 E_x = E_y 且 δ = ±π/2 时，电场矢量的端点做圆周运动。
-                <br /><br />
-                δ = π/2 右旋，δ = -π/2 左旋。
+                <br />
+                <br />δ = π/2 右旋，δ = -π/2 左旋。
               </div>
             </div>
             <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-green mb-2">椭圆偏振</h4>
               <div className="text-sm text-lab-muted">
                 一般情况下，电场矢量的端点做椭圆运动。
-                <br /><br />
+                <br />
+                <br />
                 线偏振和圆偏振是椭圆偏振的特例。
               </div>
             </div>
@@ -82,11 +86,14 @@ export default function LearnPolarization() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-green font-semibold">斯托克斯矢量 (Stokes Vector)</span>
-            是描述偏振态的一种常用方式，它由四个参数 (S₀, S₁, S₂, S₃) 组成，
-            可以方便地测量和计算。
+            是描述偏振态的一种常用方式，它由四个参数 (S₀, S₁, S₂, S₃) 组成， 可以方便地测量和计算。
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$\\vec{S} = \\begin{bmatrix} S_0 \\\\ S_1 \\\\ S_2 \\\\ S_3 \\end{bmatrix} = \\begin{bmatrix} I_x + I_y \\\\ I_x - I_y \\\\ I_{45} - I_{135} \\\\ I_R - I_L \\end{bmatrix}$$'}</MathRenderer>
+            <MathRenderer>
+              {
+                '$$\\vec{S} = \\begin{bmatrix} S_0 \\\\ S_1 \\\\ S_2 \\\\ S_3 \\end{bmatrix} = \\begin{bmatrix} I_x + I_y \\\\ I_x - I_y \\\\ I_{45} - I_{135} \\\\ I_R - I_L \\end{bmatrix}$$'
+              }
+            </MathRenderer>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -113,8 +120,7 @@ export default function LearnPolarization() {
             <div>
               <h3 className="font-semibold text-lab-text mb-2">归一化与偏振度：</h3>
               <p className="text-sm mb-2">
-                对于完全偏振光，有 S₀² = S₁² + S₂² + S₃²。
-                对于部分偏振光或自然光，这个等式不成立。
+                对于完全偏振光，有 S₀² = S₁² + S₂² + S₃²。 对于部分偏振光或自然光，这个等式不成立。
               </p>
               <p className="text-sm mb-2">
                 <span className="text-laser-cyan font-medium">偏振度 DOP</span>
@@ -123,9 +129,7 @@ export default function LearnPolarization() {
               <div className="bg-lab-bg/50 px-4 py-2 rounded-lg">
                 <MathRenderer>{'$$\\text{DOP} = \\frac{\\sqrt{S_1^2 + S_2^2 + S_3^2}}{S_0}$$'}</MathRenderer>
               </div>
-              <p className="text-sm mt-2">
-                DOP = 1 完全偏振光；DOP = 0 自然光。
-              </p>
+              <p className="text-sm mt-2">DOP = 1 完全偏振光；DOP = 0 自然光。</p>
             </div>
           </div>
 
@@ -155,22 +159,30 @@ export default function LearnPolarization() {
               <div className="space-y-3 text-sm">
                 <p>
                   <span className="text-laser-purple font-semibold">庞加莱球 (Poincaré Sphere)</span>
-                  是偏振态的几何表示：将归一化的 (S₁, S₂, S₃) 作为三维坐标，
-                  所有完全偏振态都分布在单位球面上。
+                  是偏振态的几何表示：将归一化的 (S₁, S₂, S₃) 作为三维坐标， 所有完全偏振态都分布在单位球面上。
                 </p>
                 <div className="bg-lab-surface/50 p-3 rounded-lg">
                   <h5 className="font-medium text-lab-text mb-1">球面上特殊点：</h5>
                   <ul className="text-xs space-y-1">
-                    <li><span className="text-laser-cyan">• 赤道上：</span>各种线偏振态</li>
-                    <li><span className="text-laser-cyan">• 北极 (S₃=1)：</span>右旋圆偏振</li>
-                    <li><span className="text-laser-cyan">• 南极 (S₃=-1)：</span>左旋圆偏振</li>
-                    <li><span className="text-laser-cyan">• 其他点：</span>椭圆偏振态</li>
-                    <li><span className="text-lab-muted">• 对径点：</span>正交偏振态（如 X 和 Y）</li>
+                    <li>
+                      <span className="text-laser-cyan">• 赤道上：</span>各种线偏振态
+                    </li>
+                    <li>
+                      <span className="text-laser-cyan">• 北极 (S₃=1)：</span>右旋圆偏振
+                    </li>
+                    <li>
+                      <span className="text-laser-cyan">• 南极 (S₃=-1)：</span>左旋圆偏振
+                    </li>
+                    <li>
+                      <span className="text-laser-cyan">• 其他点：</span>椭圆偏振态
+                    </li>
+                    <li>
+                      <span className="text-lab-muted">• 对径点：</span>正交偏振态（如 X 和 Y）
+                    </li>
                   </ul>
                 </div>
                 <p className="text-xs text-lab-muted">
-                  偏振态的变化可以用球面上的轨迹表示，
-                  光纤中的偏振演化对应于球面上的旋转。
+                  偏振态的变化可以用球面上的轨迹表示， 光纤中的偏振演化对应于球面上的旋转。
                 </p>
               </div>
             </div>
@@ -185,7 +197,11 @@ export default function LearnPolarization() {
             是用一个二维复矢量来表示光的偏振态的方法。沿 z 方向传播的光可以写为：
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-            <MathRenderer>{'$$\\vec{J} = \\begin{bmatrix} E_x e^{j\\phi_x} \\\\ E_y e^{j\\phi_y} \\end{bmatrix} = \\begin{bmatrix} A_x \\\\ A_y e^{j\\delta} \\end{bmatrix}$$'}</MathRenderer>
+            <MathRenderer>
+              {
+                '$$\\vec{J} = \\begin{bmatrix} E_x e^{j\\phi_x} \\\\ E_y e^{j\\phi_y} \\end{bmatrix} = \\begin{bmatrix} A_x \\\\ A_y e^{j\\delta} \\end{bmatrix}$$'
+              }
+            </MathRenderer>
           </div>
           <p className="text-sm">
             其中 A_x、A_y 是 x 和 y 分量的振幅（归一化后），δ = φ_y - φ_x 是两分量的相位差。
@@ -206,22 +222,30 @@ export default function LearnPolarization() {
                 <tbody>
                   <tr className="border-b border-lab-border/50">
                     <td className="py-2 text-laser-cyan">水平线偏振 (X)</td>
-                    <td className="py-2 text-center"><MathRenderer>{'$$\\begin{bmatrix}1\\\\0\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center">
+                      <MathRenderer>{'$$\\begin{bmatrix}1\\\\0\\end{bmatrix}$$'}</MathRenderer>
+                    </td>
                     <td className="py-2 text-center text-xs">电场沿 x 方向振动</td>
                   </tr>
                   <tr className="border-b border-lab-border/50">
                     <td className="py-2 text-laser-green">垂直线偏振 (Y)</td>
-                    <td className="py-2 text-center"><MathRenderer>{'$$\\begin{bmatrix}0\\\\1\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center">
+                      <MathRenderer>{'$$\\begin{bmatrix}0\\\\1\\end{bmatrix}$$'}</MathRenderer>
+                    </td>
                     <td className="py-2 text-center text-xs">电场沿 y 方向振动</td>
                   </tr>
                   <tr className="border-b border-lab-border/50">
                     <td className="py-2 text-laser-purple">45° 线偏振</td>
-                    <td className="py-2 text-center"><MathRenderer>{'$$\\frac{1}{\\sqrt{2}}\\begin{bmatrix}1\\\\1\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center">
+                      <MathRenderer>{'$$\\frac{1}{\\sqrt{2}}\\begin{bmatrix}1\\\\1\\end{bmatrix}$$'}</MathRenderer>
+                    </td>
                     <td className="py-2 text-center text-xs">A_x = A_y, δ = 0</td>
                   </tr>
                   <tr>
                     <td className="py-2 text-laser-red">右旋圆偏振 (RCP)</td>
-                    <td className="py-2 text-center"><MathRenderer>{'$$\\frac{1}{\\sqrt{2}}\\begin{bmatrix}1\\\\-j\\end{bmatrix}$$'}</MathRenderer></td>
+                    <td className="py-2 text-center">
+                      <MathRenderer>{'$$\\frac{1}{\\sqrt{2}}\\begin{bmatrix}1\\\\-j\\end{bmatrix}$$'}</MathRenderer>
+                    </td>
                     <td className="py-2 text-center text-xs">A_x = A_y, δ = -π/2</td>
                   </tr>
                 </tbody>
@@ -232,23 +256,31 @@ export default function LearnPolarization() {
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <h4 className="font-semibold text-lab-text mb-3">琼斯矩阵：偏振器件的数学描述</h4>
             <p className="text-sm">
-              偏振器件对入射光的作用可以用一个 2×2 复矩阵——<TermNote term="琼斯矩阵" /> (Jones Matrix) 来表示。
-              出射琼斯矢量 = 琼斯矩阵 × 入射琼斯矢量：
+              偏振器件对入射光的作用可以用一个 2×2 复矩阵——
+              <TermNote term="琼斯矩阵" /> (Jones Matrix) 来表示。 出射琼斯矢量 = 琼斯矩阵 × 入射琼斯矢量：
             </p>
             <div className="bg-lab-bg/50 px-4 py-2 rounded-lg mt-2">
-              <MathRenderer>{'$$\\vec{J}_{out} = \\mathbf{M} \\cdot \\vec{J}_{in} = \\begin{bmatrix} m_{11} & m_{12} \\\\ m_{21} & m_{22} \\end{bmatrix} \\begin{bmatrix} J_x \\\\ J_y \\end{bmatrix}$$'}</MathRenderer>
+              <MathRenderer>
+                {
+                  '$$\\vec{J}_{out} = \\mathbf{M} \\cdot \\vec{J}_{in} = \\begin{bmatrix} m_{11} & m_{12} \\\\ m_{21} & m_{22} \\end{bmatrix} \\begin{bmatrix} J_x \\\\ J_y \\end{bmatrix}$$'
+                }
+              </MathRenderer>
             </div>
             <div className="grid md:grid-cols-2 gap-4 mt-3">
               <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-3 rounded-lg">
                 <h5 className="font-semibold text-laser-cyan mb-1">偏振片的琼斯矩阵</h5>
                 <p className="text-xs">水平透偏轴：</p>
-                <MathRenderer>{'$$\\mathbf{M}_{pol} = \\begin{bmatrix} 1 & 0 \\\\ 0 & 0 \\end{bmatrix}$$'}</MathRenderer>
+                <MathRenderer>
+                  {'$$\\mathbf{M}_{pol} = \\begin{bmatrix} 1 & 0 \\\\ 0 & 0 \\end{bmatrix}$$'}
+                </MathRenderer>
                 <p className="text-xs mt-1">仅允许 x 分量的光通过，y 分量被完全阻挡。</p>
               </div>
               <div className="border border-laser-purple/30 bg-laser-purple/5 p-3 rounded-lg">
                 <h5 className="font-semibold text-laser-purple mb-1">波片的琼斯矩阵</h5>
                 <p className="text-xs">快轴沿 x 方向，相位延迟 Γ：</p>
-                <MathRenderer>{'$$\\mathbf{M}_{wp} = \\begin{bmatrix} e^{j\\Gamma/2} & 0 \\\\ 0 & e^{-j\\Gamma/2} \\end{bmatrix}$$'}</MathRenderer>
+                <MathRenderer>
+                  {'$$\\mathbf{M}_{wp} = \\begin{bmatrix} e^{j\\Gamma/2} & 0 \\\\ 0 & e^{-j\\Gamma/2} \\end{bmatrix}$$'}
+                </MathRenderer>
                 <p className="text-xs mt-1">Γ = π/2 为 λ/4 波片，Γ = π 为 λ/2 波片。</p>
               </div>
             </div>
@@ -290,8 +322,7 @@ export default function LearnPolarization() {
               </table>
             </div>
             <p className="text-xs text-lab-muted mt-3">
-              简言之：琼斯方法适用于需要关心相位的相干系统（如干涉仪），
-              斯托克斯方法适用于更一般的偏振态描述和测量。
+              简言之：琼斯方法适用于需要关心相位的相干系统（如干涉仪）， 斯托克斯方法适用于更一般的偏振态描述和测量。
             </p>
           </div>
         </div>
@@ -299,40 +330,28 @@ export default function LearnPolarization() {
 
       <LearnSection id="s-2" title="偏振控制器件">
         <div className="space-y-4 text-lab-muted leading-relaxed">
-          <p>
-            在光通信系统中，经常需要对光的偏振态进行控制和转换。
-            以下是几种常见的偏振控制器件：
-          </p>
+          <p>在光通信系统中，经常需要对光的偏振态进行控制和转换。 以下是几种常见的偏振控制器件：</p>
           <div className="grid md:grid-cols-3 gap-4 mt-4">
             <div className="border border-laser-cyan/30 bg-laser-cyan/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-cyan mb-2">偏振片 (Polarizer)</h4>
               <p className="text-sm">
-                只允许特定方向的线偏振光通过，将任意偏振态转换为线偏振光。
-                常用于偏振分析和偏振分束器中。
+                只允许特定方向的线偏振光通过，将任意偏振态转换为线偏振光。 常用于偏振分析和偏振分束器中。
               </p>
-              <p className="text-xs text-lab-muted mt-2">
-                透过轴方向决定输出偏振方向。
-              </p>
+              <p className="text-xs text-lab-muted mt-2">透过轴方向决定输出偏振方向。</p>
             </div>
             <div className="border border-laser-green/30 bg-laser-green/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-green mb-2">λ/4 波片 (Quarter-Wave Plate)</h4>
               <p className="text-sm">
-                对两个正交偏振分量产生 π/2 (90°) 的相位差。
-                可以将线偏振转换为圆偏振，或反过来。
+                对两个正交偏振分量产生 π/2 (90°) 的相位差。 可以将线偏振转换为圆偏振，或反过来。
               </p>
-              <p className="text-xs text-lab-muted mt-2">
-                轴与入射线偏振成 45° 时，输出为圆偏振。
-              </p>
+              <p className="text-xs text-lab-muted mt-2">轴与入射线偏振成 45° 时，输出为圆偏振。</p>
             </div>
             <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-purple mb-2">λ/2 波片 (Half-Wave Plate)</h4>
               <p className="text-sm">
-                对两个正交偏振分量产生 π (180°) 的相位差。
-                可以旋转线偏振的方向，不改变偏振类型。
+                对两个正交偏振分量产生 π (180°) 的相位差。 可以旋转线偏振的方向，不改变偏振类型。
               </p>
-              <p className="text-xs text-lab-muted mt-2">
-                轴与入射偏振成 θ 时，输出偏振旋转 2θ。
-              </p>
+              <p className="text-xs text-lab-muted mt-2">轴与入射偏振成 θ 时，输出偏振旋转 2θ。</p>
             </div>
           </div>
 
@@ -342,24 +361,16 @@ export default function LearnPolarization() {
               <div className="bg-lab-surface/50 p-4 rounded-lg">
                 <h5 className="font-medium text-laser-cyan mb-2">偏振控制器 (PC)</h5>
                 <p className="text-sm">
-                  由多个波片（或光纤挤压元件）组成的可调器件，
-                  可以将任意输入偏振态转换为所需的输出偏振态。
+                  由多个波片（或光纤挤压元件）组成的可调器件， 可以将任意输入偏振态转换为所需的输出偏振态。
                 </p>
                 <p className="text-xs text-lab-muted mt-2">
-                  在光通信中用于手动或自动调整信号偏振，
-                  使其与接收机的偏振要求匹配。
+                  在光通信中用于手动或自动调整信号偏振， 使其与接收机的偏振要求匹配。
                 </p>
               </div>
               <div className="bg-lab-surface/50 p-4 rounded-lg">
                 <h5 className="font-medium text-laser-green mb-2">偏振分束器 (PBS)</h5>
-                <p className="text-sm">
-                  将输入光分解为两个正交的线偏振分量，
-                  分别从两个端口输出。
-                </p>
-                <p className="text-xs text-lab-muted mt-2">
-                  在偏振复用系统中用于分离 X 和 Y 偏振信号，
-                  或将它们合路。
-                </p>
+                <p className="text-sm">将输入光分解为两个正交的线偏振分量， 分别从两个端口输出。</p>
+                <p className="text-xs text-lab-muted mt-2">在偏振复用系统中用于分离 X 和 Y 偏振信号， 或将它们合路。</p>
               </div>
             </div>
           </div>
@@ -376,8 +387,7 @@ export default function LearnPolarization() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-purple font-semibold">偏振复用 (Polarization Division Multiplexing, PDM)</span>
-            利用光的两个正交偏振态作为独立的信道传输数据，
-            可以在不增加频谱宽度的前提下，使系统的传输容量翻倍。
+            利用光的两个正交偏振态作为独立的信道传输数据， 可以在不增加频谱宽度的前提下，使系统的传输容量翻倍。
           </p>
           <div className="bg-lab-bg/50 p-5 rounded-xl">
             <div className="text-center mb-3 font-semibold text-lab-text">偏振复用系统示意图</div>
@@ -397,7 +407,9 @@ export default function LearnPolarization() {
                 <span className="text-lab-muted">↓</span>
               </div>
               <div className="flex items-center justify-center">
-                <span className="px-3 py-1 border border-laser-green/50 rounded bg-laser-green/10">偏振合束器 (PBC)</span>
+                <span className="px-3 py-1 border border-laser-green/50 rounded bg-laser-green/10">
+                  偏振合束器 (PBC)
+                </span>
               </div>
               <div className="flex items-center justify-center">
                 <span className="text-lab-muted">↓</span>
@@ -415,22 +427,18 @@ export default function LearnPolarization() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             在实际的光纤传输中，偏振态并不是一成不变的。光纤的不完善性
-            （如纤芯椭圆度、应力不对称等）会导致两个正交偏振模的传输特性不同，
-            给偏振复用系统带来挑战。
+            （如纤芯椭圆度、应力不对称等）会导致两个正交偏振模的传输特性不同， 给偏振复用系统带来挑战。
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border border-laser-red/30 bg-laser-red/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-red mb-2">偏振模色散 (PMD)</h4>
               <p className="text-sm">
-                两个正交偏振模在光纤中传输速度不同，导致脉冲展宽。
-                高速系统中需要用数字信号处理 (DSP) 来补偿。
+                两个正交偏振模在光纤中传输速度不同，导致脉冲展宽。 高速系统中需要用数字信号处理 (DSP) 来补偿。
               </p>
             </div>
             <div className="border border-amber-500/30 bg-amber-500/5 p-4 rounded-xl">
               <h4 className="font-semibold text-amber-400 mb-2">偏振相关损耗 (PDL)</h4>
-              <p className="text-sm">
-                器件对不同偏振态的损耗不同，导致两个信道的信噪比不平衡。
-              </p>
+              <p className="text-sm">器件对不同偏振态的损耗不同，导致两个信道的信噪比不平衡。</p>
             </div>
           </div>
           <p className="mt-4">
@@ -442,9 +450,7 @@ export default function LearnPolarization() {
 
       <LearnSection id="s-5" title="总结：从偏振复用走向高级调制">
         <div className="space-y-4 text-lab-muted leading-relaxed">
-          <p>
-            让我们回顾一下光调制技术的演进路径：
-          </p>
+          <p>让我们回顾一下光调制技术的演进路径：</p>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 rounded-lg bg-laser-cyan/20 text-laser-cyan flex items-center justify-center flex-shrink-0">
@@ -452,9 +458,7 @@ export default function LearnPolarization() {
               </div>
               <div>
                 <h4 className="font-semibold text-lab-text">强度调制 (OOK)</h4>
-                <p className="text-sm">
-                  最简单的调制方式，只利用光的强度。频谱效率 ~1 bit/s/Hz。
-                </p>
+                <p className="text-sm">最简单的调制方式，只利用光的强度。频谱效率 ~1 bit/s/Hz。</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -464,8 +468,7 @@ export default function LearnPolarization() {
               <div>
                 <h4 className="font-semibold text-lab-text">IQ 正交调制</h4>
                 <p className="text-sm">
-                  同时利用幅度和相位，支持 QPSK/QAM 等高阶格式。
-                  频谱效率提升到 2-8 bit/s/Hz 甚至更高。
+                  同时利用幅度和相位，支持 QPSK/QAM 等高阶格式。 频谱效率提升到 2-8 bit/s/Hz 甚至更高。
                 </p>
               </div>
             </div>
@@ -476,8 +479,7 @@ export default function LearnPolarization() {
               <div>
                 <h4 className="font-semibold text-lab-text">偏振复用 (PDM)</h4>
                 <p className="text-sm">
-                  利用两个正交偏振态作为独立信道，容量再翻一倍。
-                  PDM-16QAM 的频谱效率可达 ~8 bit/s/Hz。
+                  利用两个正交偏振态作为独立信道，容量再翻一倍。 PDM-16QAM 的频谱效率可达 ~8 bit/s/Hz。
                 </p>
               </div>
             </div>

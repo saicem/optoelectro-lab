@@ -2,14 +2,42 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import path from 'path'
 
 export default defineConfig({
   base: '/optoelectro-lab/',
   resolve: {
-    tsconfigPaths: true,
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   build: {
     sourcemap: false,
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              test: /node_modules\/(react|react-dom|react-router-dom)/,
+              name: 'vendor',
+            },
+            {
+              test: /node_modules\/katex/,
+              name: 'katex',
+            },
+            {
+              test: /node_modules\/framer-motion/,
+              name: 'motion',
+            },
+            {
+              test: /node_modules\/zustand/,
+              name: 'zustand',
+            },
+          ],
+        },
+      },
+    },
   },
   plugins: [
     react(),

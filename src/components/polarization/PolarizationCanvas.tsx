@@ -3,11 +3,13 @@ import { usePolarizationStore } from '@/stores/usePolarizationStore';
 import { stokesToPoincare, calculateDOP, rotateStokes, phaseRetarder } from '@/utils/polarizationMath';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
 import { useCanvasResize } from '@/hooks/useCanvasResize';
+import { setupCanvas, drawGrid } from '@/lib/utils';
 
 export default function PolarizationCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const resizeKey = useCanvasResize(canvasRef);
-  const { ex, ey, delta, rotationAngle, xPower, yPower, multiplexing, isPlaying, time, setTime, getStokes } = usePolarizationStore();
+  const { ex, ey, delta, rotationAngle, xPower, yPower, multiplexing, isPlaying, time, setTime, getStokes } =
+    usePolarizationStore();
 
   useAnimationFrame(
     (dt) => {
@@ -15,7 +17,7 @@ export default function PolarizationCanvas() {
         setTime(time + dt * 0.001);
       }
     },
-    { autoStart: true }
+    { autoStart: true },
   );
 
   useEffect(() => {
@@ -25,31 +27,16 @@ export default function PolarizationCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    const W = rect.width;
-    const H = rect.height;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    ctx.scale(dpr, dpr);
+    const dim = setupCanvas(canvas, ctx);
+    if (!dim) return;
+    const { width: W, height: H } = dim;
 
     ctx.fillStyle = '#0a0e17';
     ctx.fillRect(0, 0, W, H);
 
-    ctx.strokeStyle = 'rgba(51, 65, 85, 0.2)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < W; x += 30) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, H);
-      ctx.stroke();
-    }
-    for (let y = 0; y < H; y += 30) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(W, y);
-      ctx.stroke();
-    }
+    ctx.save();
+    drawGrid(ctx, W, H, 30, 'rgba(51, 65, 85, 0.2)');
+    ctx.restore();
 
     const poincareCX = W * 0.25;
     const poincareCY = H / 2;
@@ -142,7 +129,7 @@ export default function PolarizationCanvas() {
       height: number,
       label: string,
       color: string,
-      getY: (t: number) => number
+      getY: (t: number) => number,
     ) {
       ctx.save();
       ctx.strokeStyle = '#334155';
@@ -181,15 +168,17 @@ export default function PolarizationCanvas() {
     }
 
     if (multiplexing) {
-      drawWaveform(waveX, waveCenterY - 60, waveW, 40, 'X 偏振 (TE)', '#00d4ff',
-        (t) => -exAmp * Math.cos(t)
-      );
-      drawWaveform(waveX, waveCenterY + 60, waveW, 40, 'Y 偏振 (TM)', '#ff3366',
-        (t) => -eyAmp * Math.cos(t + delta)
-      );
+      drawWaveform(waveX, waveCenterY - 60, waveW, 40, 'X 偏振 (TE)', '#00d4ff', (t) => -exAmp * Math.cos(t));
+      drawWaveform(waveX, waveCenterY + 60, waveW, 40, 'Y 偏振 (TM)', '#ff3366', (t) => -eyAmp * Math.cos(t + delta));
     } else {
-      drawWaveform(waveX, waveCenterY, waveW, waveH / 2, '合成偏振态', '#00ff88',
-        (t) => -(exAmp * Math.cos(t) + eyAmp * Math.cos(t + delta)) * 0.5
+      drawWaveform(
+        waveX,
+        waveCenterY,
+        waveW,
+        waveH / 2,
+        '合成偏振态',
+        '#00ff88',
+        (t) => -(exAmp * Math.cos(t) + eyAmp * Math.cos(t + delta)) * 0.5,
       );
     }
 
@@ -292,11 +281,5 @@ export default function PolarizationCanvas() {
     };
   }, [ex, ey, delta, rotationAngle, xPower, yPower, multiplexing, time, getStokes, resizeKey]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full rounded-xl"
-      style={{ display: 'block' }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full rounded-xl" style={{ display: 'block' }} />;
 }

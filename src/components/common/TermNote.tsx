@@ -65,16 +65,12 @@ export default function TermNote({ term }: TermNoteProps) {
       className="hidden md:block w-60 p-3 rounded-lg bg-lab-bg border border-lab-border shadow-xl z-[9999] text-xs text-lab-muted leading-relaxed pointer-events-none"
     >
       <span className="inline-block w-1.5 h-1.5 bg-laser-cyan rounded-full mr-1.5 align-middle" />
-      <span className="font-semibold text-laser-cyan text-[11px]">{data.term}:</span>{' '}
-      {data.definition}
+      <span className="font-semibold text-laser-cyan text-[11px]">{data.term}:</span> {data.definition}
     </div>
   );
 
   const mobileOverlay = (
-    <div
-      className="md:hidden fixed inset-0 z-[9999] flex items-center justify-center p-6 bg-black/40"
-      onClick={hide}
-    >
+    <div className="md:hidden fixed inset-0 z-[9999] flex items-center justify-center p-6 bg-black/40" onClick={hide}>
       <div
         className="bg-lab-bg border border-lab-border rounded-xl p-4 max-w-xs text-xs text-lab-muted leading-relaxed shadow-2xl"
         onClick={(e) => e.stopPropagation()}
@@ -90,7 +86,13 @@ export default function TermNote({ term }: TermNoteProps) {
     <span ref={ref} className="relative inline">
       <span
         className="border-b border-dashed border-laser-cyan/40 cursor-help transition-colors hover:border-laser-cyan"
-        onClick={() => { if (open) { hide(); } else { show(); } }}
+        onClick={() => {
+          if (open) {
+            hide();
+          } else {
+            show();
+          }
+        }}
         onMouseEnter={show}
         onMouseLeave={hide}
       >

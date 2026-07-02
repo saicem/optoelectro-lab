@@ -11,7 +11,7 @@ export default function InterferenceCanvas() {
   const { wavelength, amplitude1, amplitude2, phaseDiff, isPlaying, time, setTime } = useInterferenceStore();
 
   const color = wavelengthToColor(wavelength);
-  const omega = 2 * Math.PI / (wavelength * 2);
+  const omega = (2 * Math.PI) / (wavelength * 2);
 
   useAnimationFrame(
     (deltaTime) => {
@@ -19,7 +19,7 @@ export default function InterferenceCanvas() {
         setTime(time + deltaTime * 0.001);
       }
     },
-    { autoStart: true }
+    { autoStart: true },
   );
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function InterferenceCanvas() {
       phase: number,
       label: string,
       waveColor: string,
-      dash: number[] = []
+      dash: number[] = [],
     ) {
       ctx.save();
       ctx.strokeStyle = waveColor;
@@ -85,14 +85,16 @@ export default function InterferenceCanvas() {
     ctx.shadowBlur = 15;
     ctx.beginPath();
     for (let x = 0; x < W; x++) {
-      const y = resultY + superposeWaves(
-        x,
-        [
-          { amplitude: amplitude1 * 25, wavelength: wavelength * 2, phase: omega * t },
-          { amplitude: amplitude2 * 25, wavelength: wavelength * 2, phase: phaseDiff + omega * t },
-        ],
-        0
-      );
+      const y =
+        resultY +
+        superposeWaves(
+          x,
+          [
+            { amplitude: amplitude1 * 25, wavelength: wavelength * 2, phase: omega * t },
+            { amplitude: amplitude2 * 25, wavelength: wavelength * 2, phase: phaseDiff + omega * t },
+          ],
+          0,
+        );
       if (x === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     }
@@ -111,7 +113,9 @@ export default function InterferenceCanvas() {
     const barWidth = 3;
     for (let x = 0; x < W; x += barWidth + 1) {
       const phaseAtX = (2 * Math.PI * x) / (wavelength * 2) + phaseDiff;
-      const intensity = (amplitude1 ** 2 + amplitude2 ** 2 + 2 * amplitude1 * amplitude2 * Math.cos(phaseAtX)) / ((amplitude1 + amplitude2) ** 2);
+      const intensity =
+        (amplitude1 ** 2 + amplitude2 ** 2 + 2 * amplitude1 * amplitude2 * Math.cos(phaseAtX)) /
+        (amplitude1 + amplitude2) ** 2;
       const barHeight = intensity * 40;
 
       const gradient = ctx.createLinearGradient(0, intensityY, 0, intensityY - barHeight);
@@ -130,13 +134,11 @@ export default function InterferenceCanvas() {
     ctx.stroke();
     ctx.setLineDash([]);
 
+    return () => {
+      const ctx = canvas.getContext('2d');
+      if (ctx) ctx.setTransform(1, 0, 0, 1, 0, 0);
+    };
   }, [wavelength, amplitude1, amplitude2, phaseDiff, time, color, omega, resizeKey]);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="w-full h-full rounded-xl"
-      style={{ display: 'block' }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full rounded-xl" style={{ display: 'block' }} />;
 }

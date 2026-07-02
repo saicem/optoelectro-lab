@@ -15,7 +15,9 @@ const pageSections = [
 ];
 
 export default function LearnNyquistOFDM() {
-  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(ROUTES.LEARN.NYQUIST_OFDM);
+  const { currentIndex, totalChapters, prevChapter, nextChapter, IconPrev, IconNext } = useChapterNavigation(
+    ROUTES.LEARN.NYQUIST_OFDM,
+  );
   const prev = prevChapter ? { ...prevChapter, icon: IconPrev && <IconPrev className="w-4 h-4" /> } : undefined;
   const next = nextChapter ? { ...nextChapter, icon: IconNext && <IconNext className="w-4 h-4" /> } : undefined;
   return (
@@ -33,9 +35,9 @@ export default function LearnNyquistOFDM() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             <span className="text-laser-cyan font-semibold">DP-IQ 调制器 (Dual-Polarization IQ Modulator)</span>
-            是高级调制技术的硬件基础。它将输入激光分为 X 和 Y 两个正交偏振态，
-            分别通过独立的 IQ 调制器进行调制，最后经
-            <TermNote term="偏振合束器 (PBC)" />输出，实现了单波长 200G/400G 的传输速率。
+            是高级调制技术的硬件基础。它将输入激光分为 X 和 Y 两个正交偏振态， 分别通过独立的 IQ 调制器进行调制，最后经
+            <TermNote term="偏振合束器 (PBC)" />
+            输出，实现了单波长 200G/400G 的传输速率。
           </p>
           <div className="grid md:grid-cols-2 gap-4 mt-2">
             <div className="bg-lab-bg/40 p-4 rounded-xl">
@@ -91,14 +93,22 @@ export default function LearnNyquistOFDM() {
       <LearnSection id="s-1" icon={<Zap className="w-5 h-5 text-laser-green" />} title="Nyquist 脉冲整形">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            在传统的<TermNote term="NRZ 调制" />中，矩形脉冲的频谱包含大量
-            <TermNote term="旁瓣" />，占用额外带宽。
+            在传统的
+            <TermNote term="NRZ 调制" />
+            中，矩形脉冲的频谱包含大量
+            <TermNote term="旁瓣" />
+            ，占用额外带宽。
             <span className="text-laser-green font-semibold">Nyquist 脉冲整形</span>
-            通过<strong>升余弦滤波器 (Raised-Cosine Filter)</strong> 在发送端对脉冲进行整形，
-            将信号带宽严格限制在<TermNote term="奈奎斯特频率" />以内。
+            通过<strong>升余弦滤波器 (Raised-Cosine Filter)</strong> 在发送端对脉冲进行整形， 将信号带宽严格限制在
+            <TermNote term="奈奎斯特频率" />
+            以内。
           </p>
           <div className="bg-lab-bg/40 p-4 rounded-lg">
-            <MathRenderer>{'$$H(f) = \\begin{cases} T, & |f| \\leq \\frac{1-\\alpha}{2T} \\\\ \\frac{T}{2} \\left[ 1 + \\cos\\left( \\frac{\\pi T}{\\alpha} \\left( |f| - \\frac{1-\\alpha}{2T} \\right) \\right) \\right], & \\frac{1-\\alpha}{2T} < |f| \\leq \\frac{1+\\alpha}{2T} \\\\ 0, & \\text{otherwise} \\end{cases}$$'}</MathRenderer>
+            <MathRenderer>
+              {
+                '$$H(f) = \\begin{cases} T, & |f| \\leq \\frac{1-\\alpha}{2T} \\\\ \\frac{T}{2} \\left[ 1 + \\cos\\left( \\frac{\\pi T}{\\alpha} \\left( |f| - \\frac{1-\\alpha}{2T} \\right) \\right) \\right], & \\frac{1-\\alpha}{2T} < |f| \\leq \\frac{1+\\alpha}{2T} \\\\ 0, & \\text{otherwise} \\end{cases}$$'
+              }
+            </MathRenderer>
           </div>
 
           <div className="bg-lab-bg/40 p-5 rounded-xl mt-4">
@@ -110,8 +120,7 @@ export default function LearnNyquistOFDM() {
                   <div className="h-16 relative flex items-center justify-center">
                     <div className="text-xs text-lab-muted">
                       sinc(t/T) 波形
-                      <br />
-                      在 t = ±T, ±2T... 处为零
+                      <br />在 t = ±T, ±2T... 处为零
                     </div>
                   </div>
                   <div className="text-xs text-lab-muted mt-2">带宽最小，但衰减慢</div>
@@ -145,33 +154,53 @@ export default function LearnNyquistOFDM() {
               </div>
             </div>
             <p className="text-xs text-center text-lab-muted mt-4">
-              关键特性：在采样点 t = 0, T, 2T, 3T... 处，所有波形值都在零点，
-              因此相邻符号在该点不产生干扰 → 消除 ISI
+              关键特性：在采样点 t = 0, T, 2T, 3T... 处，所有波形值都在零点， 因此相邻符号在该点不产生干扰 → 消除 ISI
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-lab-bg/40 p-4 rounded-xl">
-              <h4 className="font-semibold text-lab-text mb-2"><TermNote term="滚降因子 α" /></h4>
+              <h4 className="font-semibold text-lab-text mb-2">
+                <TermNote term="滚降因子 α" />
+              </h4>
               <ul className="space-y-1 text-sm">
-                <li className="flex items-start gap-2"><span className="text-laser-cyan">•</span><span><strong>α = 0</strong>：理想 Nyquist，带宽 = 1/(2T)，不可实现</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-green">•</span><span><strong>α = 0.1 ~ 0.2</strong>：高速光通信常用，频谱效率高</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-purple">•</span><span><strong>α = 0.5 ~ 1</strong>：带宽宽，但抗定时误差强</span></li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-cyan">•</span>
+                  <span>
+                    <strong>α = 0</strong>：理想 Nyquist，带宽 = 1/(2T)，不可实现
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-green">•</span>
+                  <span>
+                    <strong>α = 0.1 ~ 0.2</strong>：高速光通信常用，频谱效率高
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-purple">•</span>
+                  <span>
+                    <strong>α = 0.5 ~ 1</strong>：带宽宽，但抗定时误差强
+                  </span>
+                </li>
               </ul>
             </div>
             <div className="bg-lab-bg/40 p-4 rounded-xl">
-              <h4 className="font-semibold text-lab-text mb-2"><TermNote term="Nyquist-WDM" /></h4>
+              <h4 className="font-semibold text-lab-text mb-2">
+                <TermNote term="Nyquist-WDM" />
+              </h4>
               <p className="text-sm">
                 对每个波长的信号进行 Nyquist 整形后，可以将波长间隔压缩到接近信号
-                <TermNote term="波特率" />，实现超高频谱效率的波分复用系统。
+                <TermNote term="波特率" />
+                ，实现超高频谱效率的波分复用系统。
               </p>
             </div>
           </div>
           <div className="bg-lab-bg/40 px-4 py-3 rounded-lg border border-laser-green/30 mt-2">
             <p className="text-sm">
-              <strong>核心优势</strong>：消除<TermNote term="码间干扰 (ISI)" />的同时，
-              将<TermNote term="频谱效率" />推向理论极限 2 baud/Hz，
-              是当前高速相干光通信系统的基石技术。
+              <strong>核心优势</strong>：消除
+              <TermNote term="码间干扰 (ISI)" />
+              的同时， 将<TermNote term="频谱效率" />
+              推向理论极限 2 baud/Hz， 是当前高速相干光通信系统的基石技术。
             </p>
           </div>
         </div>
@@ -180,9 +209,13 @@ export default function LearnNyquistOFDM() {
       <LearnSection id="s-2" icon={<Waves className="w-5 h-5 text-laser-purple" />} title="光 OFDM">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            <span className="text-laser-purple font-semibold"><TermNote term="OFDM" /></span>
+            <span className="text-laser-purple font-semibold">
+              <TermNote term="OFDM" />
+            </span>
             （正交频分复用）是一种多载波调制技术，它将高速数据流分配到多个<strong>正交子载波</strong>上并行传输。
-            每个子载波上的符号速率较低，因此对<TermNote term="色散" />和<TermNote term="偏振模色散 (PMD)" />有天然的容忍度。
+            每个子载波上的符号速率较低，因此对
+            <TermNote term="色散" />和<TermNote term="偏振模色散 (PMD)" />
+            有天然的容忍度。
           </p>
 
           <div className="bg-lab-bg/40 p-5 rounded-xl mt-4">
@@ -195,7 +228,7 @@ export default function LearnNyquistOFDM() {
                     style={{
                       height: '60px',
                       borderTop: '3px solid',
-                      borderTopColor: idx % 2 === 0 ? 'rgb(168, 85, 247)' : 'rgb(139, 92, 246)'
+                      borderTopColor: idx % 2 === 0 ? 'rgb(168, 85, 247)' : 'rgb(139, 92, 246)',
                     }}
                   />
                   <div className="text-xs text-lab-muted mt-1">{carrier}</div>
@@ -216,38 +249,68 @@ export default function LearnNyquistOFDM() {
               <div className="bg-lab-surface/50 p-3 rounded-lg">
                 <h5 className="font-semibold text-lab-text text-sm mb-1">循环前缀 (CP)</h5>
                 <p className="text-xs text-lab-muted">
-                  将每个 OFDM 符号尾部的一部分复制到头部作为保护间隔，用于抵抗色散引起的符号间干扰。
-                  CP 长度需大于信道最大时延扩展。
+                  将每个 OFDM 符号尾部的一部分复制到头部作为保护间隔，用于抵抗色散引起的符号间干扰。 CP
+                  长度需大于信道最大时延扩展。
                 </p>
               </div>
             </div>
           </div>
 
           <div className="bg-lab-bg/40 p-4 rounded-lg">
-            <MathRenderer>{'$$s(t) = \\sum_{k=0}^{N-1} X_k \\cdot e^{j2\\pi k \\Delta f t}, \\quad 0 \\leq t \\leq T_{sym}$$'}</MathRenderer>
+            <MathRenderer>
+              {'$$s(t) = \\sum_{k=0}^{N-1} X_k \\cdot e^{j2\\pi k \\Delta f t}, \\quad 0 \\leq t \\leq T_{sym}$$'}
+            </MathRenderer>
             <p className="text-sm mt-2">
-              OFDM 信号可通过 <TermNote term="IFFT" /> 高效生成，接收端通过 <TermNote term="FFT" /> 恢复每个子载波上的调制符号。
-              这一计算效率是 OFDM 得以广泛应用的关键原因。
+              OFDM 信号可通过 <TermNote term="IFFT" /> 高效生成，接收端通过 <TermNote term="FFT" />{' '}
+              恢复每个子载波上的调制符号。 这一计算效率是 OFDM 得以广泛应用的关键原因。
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 mt-4">
             <div className="bg-lab-bg/40 p-4 rounded-xl">
-              <h4 className="font-semibold text-lab-text mb-2"><TermNote term="CO-OFDM" /></h4>
+              <h4 className="font-semibold text-lab-text mb-2">
+                <TermNote term="CO-OFDM" />
+              </h4>
               <ul className="space-y-1 text-sm">
-                <li className="flex items-start gap-2"><span className="text-laser-cyan">•</span><span>使用相干接收，恢复完整的电场信息</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-green">•</span><span>频谱效率接近 Nyquist 单载波</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-purple">•</span><span>可通过 FFT/IFFT 高效实现</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-red">•</span><span>无需复杂的时域均衡器</span></li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-cyan">•</span>
+                  <span>使用相干接收，恢复完整的电场信息</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-green">•</span>
+                  <span>频谱效率接近 Nyquist 单载波</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-purple">•</span>
+                  <span>可通过 FFT/IFFT 高效实现</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-red">•</span>
+                  <span>无需复杂的时域均衡器</span>
+                </li>
               </ul>
             </div>
             <div className="bg-lab-bg/40 p-4 rounded-xl">
               <h4 className="font-semibold text-lab-text mb-2">优劣势</h4>
               <ul className="space-y-1 text-sm">
-                <li className="flex items-start gap-2"><span className="text-laser-green">✓</span><span>对色散容忍度高</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-green">✓</span><span>频谱利用率高</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-red">✗</span><span><TermNote term="峰均功率比 (PAPR)" />高</span></li>
-                <li className="flex items-start gap-2"><span className="text-laser-red">✗</span><span>对光纤非线性敏感</span></li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-green">✓</span>
+                  <span>对色散容忍度高</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-green">✓</span>
+                  <span>频谱利用率高</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-red">✗</span>
+                  <span>
+                    <TermNote term="峰均功率比 (PAPR)" />高
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-laser-red">✗</span>
+                  <span>对光纤非线性敏感</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -310,9 +373,8 @@ export default function LearnNyquistOFDM() {
           </div>
           <div className="bg-lab-bg/40 px-4 py-3 rounded-lg mt-4">
             <p className="text-sm">
-              <strong>现状</strong>：商用高速相干光系统（100G/400G/800G）以 Nyquist 单载波为主流方案，
-              因其 PAPR 低、实现成熟。光 OFDM 则在长距离传输和弹性光网络中展现出独特优势，
-              两者在未来系统中将长期共存。
+              <strong>现状</strong>：商用高速相干光系统（100G/400G/800G）以 Nyquist 单载波为主流方案， 因其 PAPR
+              低、实现成熟。光 OFDM 则在长距离传输和弹性光网络中展现出独特优势， 两者在未来系统中将长期共存。
             </p>
           </div>
         </div>
@@ -321,8 +383,9 @@ export default function LearnNyquistOFDM() {
       <LearnSection id="s-4" icon={<Zap className="w-5 h-5 text-laser-red" />} title="下一步：概率星座整形与编码">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            Nyquist 脉冲整形和光 OFDM 解决了"如何高效利用频谱"的问题。
-            然而，要逼近<TermNote term="香农极限" />，还需要回答另一个关键问题：
+            Nyquist 脉冲整形和光 OFDM 解决了"如何高效利用频谱"的问题。 然而，要逼近
+            <TermNote term="香农极限" />
+            ，还需要回答另一个关键问题：
             <strong>"如何最优化地利用发射功率"</strong>。
           </p>
           <div className="grid md:grid-cols-2 gap-4 mt-2">

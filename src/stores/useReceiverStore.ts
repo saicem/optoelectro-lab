@@ -1,11 +1,6 @@
 import { create } from 'zustand';
-import type { ModulationFormat } from '@/types';
-import { getSymbols, theoreticalBer } from '@/utils/modulationMath';
-
-export interface ReceivedPoint {
-  i: number;
-  q: number;
-}
+import type { ModulationFormat, IQPoint } from '@/types';
+import { getSymbols } from '@/utils/modulationMath';
 
 export type PresetName = 'back-to-back' | 'critical' | 'low-snr';
 
@@ -14,7 +9,7 @@ interface ReceiverState {
   snr: number;
   noiseEnabled: boolean;
   isPlaying: boolean;
-  receivedPoints: ReceivedPoint[];
+  receivedPoints: IQPoint[];
   maxReceivedPoints: number;
   errorCount: number;
   totalSymbols: number;
@@ -22,7 +17,7 @@ interface ReceiverState {
   setSnr: (v: number) => void;
   setNoiseEnabled: (v: boolean) => void;
   setIsPlaying: (v: boolean) => void;
-  addReceivedPoint: (point: ReceivedPoint, isError: boolean) => void;
+  addReceivedPoint: (point: IQPoint, isError: boolean) => void;
   clearReceivedPoints: () => void;
   reset: () => void;
   applyPreset: (preset: PresetName) => void;
@@ -111,7 +106,7 @@ export const useReceiverStore = create<ReceiverState>((set, get) => ({
   },
 }));
 
-export function addAwgnNoise(i: number, q: number, snrDb: number, noiseEnabled: boolean): ReceivedPoint {
+export function addAwgnNoise(i: number, q: number, snrDb: number, noiseEnabled: boolean): IQPoint {
   if (!noiseEnabled) {
     return { i, q };
   }
@@ -125,7 +120,7 @@ export function addAwgnNoise(i: number, q: number, snrDb: number, noiseEnabled: 
   };
 }
 
-export function nearestSymbol(point: ReceivedPoint, format: ModulationFormat): { i: number; q: number; index: number } {
+export function nearestSymbol(point: IQPoint, format: ModulationFormat): { i: number; q: number; index: number } {
   const symbols = getSymbols(format);
   let minDist = Infinity;
   let nearest = symbols[0];
@@ -139,8 +134,4 @@ export function nearestSymbol(point: ReceivedPoint, format: ModulationFormat): {
     }
   });
   return { i: nearest.i, q: nearest.q, index: nearestIdx };
-}
-
-export function estimateBer(modulationFormat: ModulationFormat, snrDb: number): number {
-  return theoreticalBer(modulationFormat, snrDb);
 }

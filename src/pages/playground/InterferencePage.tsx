@@ -28,9 +28,8 @@ export default function InterferencePage() {
   const currentIntensity = interferenceIntensity(I1, I2, phaseDiff);
   const maxIntensity = interferenceIntensity(I1, I2, 0);
   const minIntensity = interferenceIntensity(I1, I2, Math.PI);
-  const visibility = maxIntensity + minIntensity > 0
-    ? (maxIntensity - minIntensity) / (maxIntensity + minIntensity)
-    : 0;
+  const visibility =
+    maxIntensity + minIntensity > 0 ? (maxIntensity - minIntensity) / (maxIntensity + minIntensity) : 0;
 
   const formatPiRad = (v: number) => (v / Math.PI).toFixed(2) + ' π rad';
 
@@ -118,7 +117,9 @@ export default function InterferencePage() {
               当两列或多列波在空间相遇时，在相遇区域内每一点的振动是各列波单独作用于该点所产生的振动的合成。
             </p>
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
-              <MathRenderer>{'$E = E_1 + E_2 = A_1\\cos(\\omega t + \\phi_1) + A_2\\cos(\\omega t + \\phi_2)$'}</MathRenderer>
+              <MathRenderer>
+                {'$E = E_1 + E_2 = A_1\\cos(\\omega t + \\phi_1) + A_2\\cos(\\omega t + \\phi_2)$'}
+              </MathRenderer>
             </div>
           </div>
           <div>

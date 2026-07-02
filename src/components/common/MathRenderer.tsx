@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
@@ -9,50 +9,41 @@ interface MathRendererProps {
 }
 
 export default function MathRenderer({ children, className = '', displayMode }: MathRendererProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [html, setHtml] = useState('');
+  const isDisplay = useMemo(() => displayMode ?? children.startsWith('$$'), [displayMode, children]);
 
   useEffect(() => {
     let tex = children;
-    let isDisplay = displayMode;
 
     if (tex.startsWith('$$') && tex.endsWith('$$')) {
       tex = tex.slice(2, -2);
-      isDisplay = true;
     } else if (tex.startsWith('$') && tex.endsWith('$')) {
       tex = tex.slice(1, -1);
-      isDisplay = isDisplay ?? false;
     }
 
     try {
       const rendered = katex.renderToString(tex, {
-        displayMode: isDisplay ?? false,
+        displayMode: isDisplay,
         throwOnError: false,
         output: 'html',
         strict: false,
       });
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setHtml(rendered);
     } catch (err) {
       console.warn('KaTeX render error:', err);
       setHtml(children);
     }
-  }, [children, displayMode]);
+  }, [children, displayMode, isDisplay]);
 
-  if (displayMode || children.startsWith('$$')) {
+  if (isDisplay) {
     return (
       <div
-        ref={containerRef}
         className={`katex-display-wrapper w-full overflow-x-auto overflow-y-hidden py-2 ${className}`}
         dangerouslySetInnerHTML={{ __html: html }}
       />
     );
   }
 
-  return (
-    <span
-      ref={containerRef}
-      className={`katex-inline-wrapper ${className}`}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+  return <span className={`katex-inline-wrapper ${className}`} dangerouslySetInnerHTML={{ __html: html }} />;
 }

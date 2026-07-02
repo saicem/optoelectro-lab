@@ -36,12 +36,7 @@ export default function PlaygroundLayout({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="space-y-6"
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div
@@ -81,9 +76,7 @@ export default function PlaygroundLayout({
           {canvas}
         </div>
 
-        <div className="space-y-6">
-          {controlPanel}
-        </div>
+        <div className="space-y-6">{controlPanel}</div>
       </div>
 
       {children}

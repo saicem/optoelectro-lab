@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import { scheduleKaTeX } from '@/lib/kaTeXScheduler';
 
 interface MathRendererProps {
   children: string;
@@ -9,9 +10,10 @@ interface MathRendererProps {
 }
 
 export default function MathRenderer({ children, className = '', displayMode }: MathRendererProps) {
+  const [html, setHtml] = useState('');
   const isDisplay = useMemo(() => displayMode ?? children.startsWith('$$'), [displayMode, children]);
 
-  const html = useMemo(() => {
+  useEffect(() => {
     let tex = children;
 
     if (tex.startsWith('$$') && tex.endsWith('$$')) {
@@ -20,17 +22,20 @@ export default function MathRenderer({ children, className = '', displayMode }: 
       tex = tex.slice(1, -1);
     }
 
-    try {
-      return katex.renderToString(tex, {
-        displayMode: isDisplay,
-        throwOnError: false,
-        output: 'html',
-        strict: false,
-      });
-    } catch {
-      return children;
-    }
-  }, [children, isDisplay]);
+    scheduleKaTeX(() => {
+      try {
+        const result = katex.renderToString(tex, {
+          displayMode: isDisplay,
+          throwOnError: false,
+          output: 'html',
+          strict: false,
+        });
+        setHtml(result);
+      } catch {
+        setHtml(children);
+      }
+    });
+  }, [children, displayMode, isDisplay]);
 
   if (isDisplay) {
     return (

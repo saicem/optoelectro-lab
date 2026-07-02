@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { ModulationFormat, IQPoint } from '@/types';
 import { getSymbols } from '@/utils/modulationMath';
 
-export type PresetName = 'back-to-back' | 'critical' | 'low-snr';
+type PresetName = 'back-to-back' | 'critical' | 'low-snr';
 
 interface ReceiverState {
   modulationFormat: ModulationFormat;

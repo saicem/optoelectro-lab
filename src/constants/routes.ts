@@ -1,5 +1,4 @@
 export const ROUTES = {
-  HOME: '/',
   LEARN: {
     WAVE_BASICS: '/learn/wave-basics',
     LASER: '/learn/laser',

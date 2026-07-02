@@ -28,7 +28,3 @@ export function scheduleKaTeX(render: () => void, priority = 0) {
   queue.push({ render, priority });
   if (!scheduled) schedule();
 }
-
-export function hasPendingTasks(): boolean {
-  return queue.length > 0;
-}

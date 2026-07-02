@@ -5,7 +5,7 @@ export interface TermData {
   detail?: string;
 }
 
-export interface CategoryData {
+interface CategoryData {
   id: string;
   name: string;
   iconName: string;

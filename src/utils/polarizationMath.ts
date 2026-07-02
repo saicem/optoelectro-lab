@@ -1,4 +1,4 @@
-export interface StokesParams {
+interface StokesParams {
   S0: number;
   S1: number;
   S2: number;

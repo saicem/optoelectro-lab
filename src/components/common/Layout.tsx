@@ -5,8 +5,9 @@ import Navbar from './Navbar';
 
 function Loading() {
   return (
-    <div className="flex items-center justify-center py-20">
-      <div className="w-8 h-8 border-2 border-laser-cyan/30 border-t-laser-cyan rounded-full animate-spin" />
+    <div className="flex flex-col items-center justify-center py-32 gap-3">
+      <div className="w-10 h-10 border-[3px] border-laser-cyan/20 border-t-laser-cyan rounded-full animate-spin" />
+      <span className="text-xs text-lab-muted/60 font-medium tracking-wider">加载中...</span>
     </div>
   );
 }

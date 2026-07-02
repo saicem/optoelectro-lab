@@ -2,30 +2,36 @@ import { lazy } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/common/Layout';
 import { ROUTES } from '@/constants/routes';
+import { registerLoader } from '@/lib/routeLoaders';
+
+function lazyWithPreload(path: string, imp: () => Promise<{ default: React.ComponentType }>) {
+  registerLoader(path, imp);
+  return lazy(imp);
+}
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
 
-const LearnWaveBasics = lazy(() => import('@/pages/learn/LearnWaveBasics'));
-const LearnLaser = lazy(() => import('@/pages/learn/LearnLaser'));
-const LearnFiberOptics = lazy(() => import('@/pages/learn/LearnFiberOptics'));
-const LearnOptoelectronicMaterials = lazy(() => import('@/pages/learn/LearnOptoelectronicMaterials'));
-const LearnModulationBasics = lazy(() => import('@/pages/learn/LearnModulationBasics'));
-const LearnInterference = lazy(() => import('@/pages/learn/LearnInterference'));
-const LearnMZModulator = lazy(() => import('@/pages/learn/LearnMZModulator'));
-const LearnIQModulator = lazy(() => import('@/pages/learn/LearnIQModulator'));
-const LearnPolarization = lazy(() => import('@/pages/learn/LearnPolarization'));
-const LearnNyquistOFDM = lazy(() => import('@/pages/learn/LearnNyquistOFDM'));
-const LearnPCSCoding = lazy(() => import('@/pages/learn/LearnPCSCoding'));
-const LearnReceiver = lazy(() => import('@/pages/learn/LearnReceiver'));
-const LearnWDMAmplifier = lazy(() => import('@/pages/learn/LearnWDMAmplifier'));
-const LearnSystemOverview = lazy(() => import('@/pages/learn/LearnSystemOverview'));
-const LearnGlossary = lazy(() => import('@/pages/learn/LearnGlossary'));
+const LearnWaveBasics = lazyWithPreload(ROUTES.LEARN.WAVE_BASICS, () => import('@/pages/learn/LearnWaveBasics'));
+const LearnLaser = lazyWithPreload(ROUTES.LEARN.LASER, () => import('@/pages/learn/LearnLaser'));
+const LearnFiberOptics = lazyWithPreload(ROUTES.LEARN.FIBER_OPTICS, () => import('@/pages/learn/LearnFiberOptics'));
+const LearnOptoelectronicMaterials = lazyWithPreload(ROUTES.LEARN.OPTOELECTRONIC_MATERIALS, () => import('@/pages/learn/LearnOptoelectronicMaterials'));
+const LearnModulationBasics = lazyWithPreload(ROUTES.LEARN.MODULATION_BASICS, () => import('@/pages/learn/LearnModulationBasics'));
+const LearnInterference = lazyWithPreload(ROUTES.LEARN.INTERFERENCE, () => import('@/pages/learn/LearnInterference'));
+const LearnMZModulator = lazyWithPreload(ROUTES.LEARN.MZ_MODULATOR, () => import('@/pages/learn/LearnMZModulator'));
+const LearnIQModulator = lazyWithPreload(ROUTES.LEARN.IQ_MODULATOR, () => import('@/pages/learn/LearnIQModulator'));
+const LearnPolarization = lazyWithPreload(ROUTES.LEARN.POLARIZATION, () => import('@/pages/learn/LearnPolarization'));
+const LearnNyquistOFDM = lazyWithPreload(ROUTES.LEARN.NYQUIST_OFDM, () => import('@/pages/learn/LearnNyquistOFDM'));
+const LearnPCSCoding = lazyWithPreload(ROUTES.LEARN.PCS_CODING, () => import('@/pages/learn/LearnPCSCoding'));
+const LearnReceiver = lazyWithPreload(ROUTES.LEARN.RECEIVER, () => import('@/pages/learn/LearnReceiver'));
+const LearnWDMAmplifier = lazyWithPreload(ROUTES.LEARN.WDM_AMPLIFIER, () => import('@/pages/learn/LearnWDMAmplifier'));
+const LearnSystemOverview = lazyWithPreload(ROUTES.LEARN.SYSTEM_OVERVIEW, () => import('@/pages/learn/LearnSystemOverview'));
+const LearnGlossary = lazyWithPreload(ROUTES.LEARN.GLOSSARY, () => import('@/pages/learn/LearnGlossary'));
 
-const InterferencePage = lazy(() => import('@/pages/playground/InterferencePage'));
-const MZModulatorPage = lazy(() => import('@/pages/playground/MZModulatorPage'));
-const IQModulatorPage = lazy(() => import('@/pages/playground/IQModulatorPage'));
-const PolarizationPage = lazy(() => import('@/pages/playground/PolarizationPage'));
-const ReceiverPage = lazy(() => import('@/pages/playground/ReceiverPage'));
+const InterferencePage = lazyWithPreload(ROUTES.PLAYGROUND.INTERFERENCE, () => import('@/pages/playground/InterferencePage'));
+const MZModulatorPage = lazyWithPreload(ROUTES.PLAYGROUND.MZ_MODULATOR, () => import('@/pages/playground/MZModulatorPage'));
+const IQModulatorPage = lazyWithPreload(ROUTES.PLAYGROUND.IQ_MODULATOR, () => import('@/pages/playground/IQModulatorPage'));
+const PolarizationPage = lazyWithPreload(ROUTES.PLAYGROUND.POLARIZATION, () => import('@/pages/playground/PolarizationPage'));
+const ReceiverPage = lazyWithPreload(ROUTES.PLAYGROUND.RECEIVER, () => import('@/pages/playground/ReceiverPage'));
 
 export default function App() {
   return (

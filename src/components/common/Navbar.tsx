@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { prefetch } from '@/lib/routeLoaders';
 import {
   Waves,
   BookOpen,
@@ -139,7 +140,7 @@ export default function Navbar() {
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      <Link to="/" className="flex items-center gap-3 px-4 h-16 border-b border-lab-border flex-shrink-0">
+      <Link to="/" className="flex items-center gap-3 px-4 h-16 border-b border-lab-border flex-shrink-0" onMouseEnter={() => prefetch('/')}>
         <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-laser-cyan to-laser-purple flex items-center justify-center flex-shrink-0">
           <Waves className="w-5 h-5 text-white" />
         </div>
@@ -222,7 +223,7 @@ export default function Navbar() {
         >
           <Menu className="w-5 h-5" />
         </button>
-        <Link to="/" className="font-display font-bold text-sm text-lab-text">
+        <Link to="/" className="font-display font-bold text-sm text-lab-text" onMouseEnter={() => prefetch('/')}>
           光电实验室
         </Link>
       </div>

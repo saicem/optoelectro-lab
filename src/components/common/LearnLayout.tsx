@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, ChevronRight, FlaskConical, List } from 'lucide-react';
-import { prefetch } from '@/lib/routeLoaders';
 
 export interface LearnChapter {
   path: string;
@@ -129,7 +128,6 @@ export default function LearnLayout({
                 {nextChapter && (
                   <Link
                     to={nextChapter.path}
-                    onMouseEnter={() => prefetch(nextChapter.path)}
                     className="block p-5 bg-lab-surface/50 border border-lab-border rounded-xl hover:border-laser-purple/50 transition-all group"
                   >
                     <div className="flex items-center justify-end gap-2 text-sm text-lab-muted mb-2">

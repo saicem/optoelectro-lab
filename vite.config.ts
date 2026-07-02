@@ -12,23 +12,10 @@ export default defineConfig({
   },
   build: {
     sourcemap: false,
-    cssCodeSplit: true,
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom') || id.includes('node_modules/react/')) {
-            return 'vendor'
-          }
-          if (id.includes('node_modules/katex')) {
-            return 'katex'
-          }
-          if (id.includes('node_modules/framer-motion')) {
-            return 'motion'
-          }
-          if (id.includes('node_modules/zustand')) {
-            return 'zustand'
-          }
-        },
+        manualChunks: undefined,
       },
     },
   },

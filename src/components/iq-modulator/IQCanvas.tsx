@@ -2,9 +2,11 @@ import { useEffect, useRef } from 'react';
 import { useIQStore } from '@/stores/useIQStore';
 import { getSymbols } from '@/utils/modulationMath';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
+import { useCanvasResize } from '@/hooks/useCanvasResize';
 
 export default function IQCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeKey = useCanvasResize(canvasRef);
   const {
     modulationFormat, iComponent, qComponent, isPlaying, autoCycle, symbolIndex,
     time, setTime, setSymbolIndex, pPhaseDiff,
@@ -365,7 +367,7 @@ export default function IQCanvas() {
     return () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
     };
-  }, [modulationFormat, iComponent, qComponent, time, symbolIndex, pPhaseDiff]);
+  }, [modulationFormat, iComponent, qComponent, time, symbolIndex, pPhaseDiff, resizeKey]);
 
   return (
     <canvas

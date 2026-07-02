@@ -2,9 +2,11 @@ import { useEffect, useRef } from 'react';
 import { usePolarizationStore } from '@/stores/usePolarizationStore';
 import { stokesToPoincare, calculateDOP, rotateStokes, phaseRetarder } from '@/utils/polarizationMath';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
+import { useCanvasResize } from '@/hooks/useCanvasResize';
 
 export default function PolarizationCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeKey = useCanvasResize(canvasRef);
   const { ex, ey, delta, rotationAngle, xPower, yPower, multiplexing, isPlaying, time, setTime, getStokes } = usePolarizationStore();
 
   useAnimationFrame(
@@ -288,7 +290,7 @@ export default function PolarizationCanvas() {
     return () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
     };
-  }, [ex, ey, delta, rotationAngle, xPower, yPower, multiplexing, time, getStokes]);
+  }, [ex, ey, delta, rotationAngle, xPower, yPower, multiplexing, time, getStokes, resizeKey]);
 
   return (
     <canvas

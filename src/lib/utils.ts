@@ -11,12 +11,16 @@ export function setupCanvas(
 ): { width: number; height: number } | null {
   const rect = canvas.getBoundingClientRect()
   const dpr = window.devicePixelRatio || 1
-  const W = rect.width
-  const H = rect.height
+  const W = Math.floor(rect.width)
+  const H = Math.floor(rect.height)
   if (W === 0 || H === 0) return null
-  canvas.width = W * dpr
-  canvas.height = H * dpr
-  ctx.scale(dpr, dpr)
+  const bw = W * dpr
+  const bh = H * dpr
+  if (canvas.width !== bw || canvas.height !== bh) {
+    canvas.width = bw
+    canvas.height = bh
+  }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
   return { width: W, height: H }
 }
 

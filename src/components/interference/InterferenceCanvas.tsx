@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useInterferenceStore } from '@/stores/useInterferenceStore';
 import { sineWave, superposeWaves, wavelengthToColor } from '@/utils/waveMath';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
+import { useCanvasResize } from '@/hooks/useCanvasResize';
 import { setupCanvas, drawGrid } from '@/lib/utils';
 
 export default function InterferenceCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeKey = useCanvasResize(canvasRef);
   const { wavelength, amplitude1, amplitude2, phaseDiff, isPlaying, time, setTime } = useInterferenceStore();
 
   const color = wavelengthToColor(wavelength);
@@ -128,7 +130,7 @@ export default function InterferenceCanvas() {
     ctx.stroke();
     ctx.setLineDash([]);
 
-  }, [wavelength, amplitude1, amplitude2, phaseDiff, time, color, omega]);
+  }, [wavelength, amplitude1, amplitude2, phaseDiff, time, color, omega, resizeKey]);
 
   return (
     <canvas

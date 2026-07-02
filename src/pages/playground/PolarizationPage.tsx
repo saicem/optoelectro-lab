@@ -42,7 +42,7 @@ export default function PolarizationPage() {
       subtitle="偏振态可视化与双通道复用技术"
       learnPath={ROUTES.LEARN.POLARIZATION}
       canvas={<PolarizationCanvas />}
-      canvasMinHeight={500}
+      canvasMinHeight={480}
       controlPanel={
         <>
           <ControlPanel

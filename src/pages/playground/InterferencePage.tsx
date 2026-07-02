@@ -42,7 +42,7 @@ export default function InterferencePage() {
       subtitle="双光束干涉的实时可视化"
       learnPath={ROUTES.LEARN.INTERFERENCE}
       canvas={<InterferenceCanvas />}
-      canvasMinHeight={480}
+      canvasMinHeight={400}
       controlPanel={
         <>
           <ControlPanel

@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react';
 import { useMZStore } from '@/stores/useMZStore';
 import { mzOutputPower } from '@/utils/modulationMath';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
+import { useCanvasResize } from '@/hooks/useCanvasResize';
 import { setupCanvas, drawGrid } from '@/lib/utils';
 
 export default function MZCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeKey = useCanvasResize(canvasRef);
   const {
     modulationDepth, modulationDepth2, phaseShift, inputPower,
     frequency, mode, isPlaying, time, setTime,
@@ -249,7 +251,7 @@ export default function MZCanvas() {
     return () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
     };
-  }, [modulationDepth, modulationDepth2, phaseShift, inputPower, frequency, mode, time]);
+  }, [modulationDepth, modulationDepth2, phaseShift, inputPower, frequency, mode, time, resizeKey]);
 
   return (
     <canvas

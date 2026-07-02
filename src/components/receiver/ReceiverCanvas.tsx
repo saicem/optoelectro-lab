@@ -3,9 +3,11 @@ import { useReceiverStore, addAwgnNoise, nearestSymbol } from '@/stores/useRecei
 import { getSymbols, iqAmplitude, iqPhase, iqModulation, generateBerCurve, theoreticalBer } from '@/utils/modulationMath';
 import type { ModulationFormat } from '@/types';
 import { useAnimationFrame } from '@/hooks/useAnimationFrame';
+import { useCanvasResize } from '@/hooks/useCanvasResize';
 
 export default function ReceiverCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const resizeKey = useCanvasResize(canvasRef);
   const {
     modulationFormat,
     snr,
@@ -438,7 +440,7 @@ export default function ReceiverCanvas() {
     return () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
     };
-  }, [modulationFormat, snr, noiseEnabled, receivedPoints]);
+  }, [modulationFormat, snr, noiseEnabled, receivedPoints, resizeKey]);
 
   return (
     <canvas

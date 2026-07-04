@@ -240,7 +240,7 @@ export default function LearnOptoelectronicMaterials() {
       <LearnSection id="s-2" icon={<Zap className="w-5 h-5 text-laser-green" />} title="光电效应原理">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            <span className="text-laser-green font-semibold">光电效应（Photoelectric Effect）</span>
+            <span className="text-laser-green font-semibold"><TermNote term="光电效应" /></span>
             是光子与物质相互作用的基本现象，也是光探测器工作的核心原理。
             当光子能量大于材料带隙时，可以将电子从价带激发到导带，产生光生载流子。
           </p>
@@ -317,7 +317,7 @@ export default function LearnOptoelectronicMaterials() {
       <LearnSection id="s-3" icon={<Layers className="w-5 h-5 text-laser-purple" />} title="光电二极管">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            <span className="text-laser-purple font-semibold">光电二极管（Photodiode）</span>
+            <span className="text-laser-purple font-semibold"><TermNote term="光电二极管" /></span>
             是将光信号转换为电信号的核心器件，广泛应用于光通信接收器、光纤传感和光功率测量等领域。
             与普通二极管类似，光电二极管基于 PN 结结构，但工作于
             <span className="text-laser-green font-semibold">反向偏置</span>状态。
@@ -352,7 +352,7 @@ export default function LearnOptoelectronicMaterials() {
             <div className="grid md:grid-cols-2 gap-4 text-xs">
               <div className="space-y-3">
                 <div className="bg-lab-surface/50 p-3 rounded-lg">
-                  <h5 className="font-medium text-laser-cyan mb-1">响应度 (Responsivity)</h5>
+                  <h5 className="font-medium text-laser-cyan mb-1"><TermNote term="响应度" /></h5>
                   <MathRenderer>{'$R = \\frac{I_{ph}}{P_{opt}} \\quad \\text{[A/W]}$'}</MathRenderer>
                   <p className="text-lab-muted mt-1">典型值：0.5-0.9 A/W (1550 nm, InGaAs)</p>
                 </div>

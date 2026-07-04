@@ -38,7 +38,7 @@ export default function LearnPolarization() {
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             光是横电磁波，电场矢量的振动方向与传播方向垂直。
-            <span className="text-laser-red font-semibold">偏振 (Polarization)</span>
+            <span className="text-laser-red font-semibold"><TermNote term="偏振态" /></span>
             描述的是电场矢量的振动方向随时间变化的方式。
           </p>
           <p>沿 z 方向传播的单色平面波，其电场可以分解为 x 和 y 两个正交分量：</p>
@@ -85,7 +85,7 @@ export default function LearnPolarization() {
       <LearnSection id="s-1" title="斯托克斯矢量与庞加莱球">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            <span className="text-laser-green font-semibold">斯托克斯矢量 (Stokes Vector)</span>
+            <span className="text-laser-green font-semibold"><TermNote term="斯托克斯矢量" /></span>
             是描述偏振态的一种常用方式，它由四个参数 (S₀, S₁, S₂, S₃) 组成， 可以方便地测量和计算。
           </p>
           <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
@@ -135,7 +135,7 @@ export default function LearnPolarization() {
 
           {/* 庞加莱球示意图 */}
           <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
-            <h4 className="font-semibold text-lab-text mb-3 text-center">庞加莱球：偏振态的几何表示</h4>
+            <h4 className="font-semibold text-lab-text mb-3 text-center"><TermNote term="庞加莱球" />：偏振态的几何表示</h4>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex justify-center items-center">
                 {/* 简化的庞加莱球示意图 */}
@@ -386,7 +386,7 @@ export default function LearnPolarization() {
       <LearnSection id="s-3" title="偏振复用 (PDM) 技术">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
-            <span className="text-laser-purple font-semibold">偏振复用 (Polarization Division Multiplexing, PDM)</span>
+            <span className="text-laser-purple font-semibold"><TermNote term="偏振复用" /></span>
             利用光的两个正交偏振态作为独立的信道传输数据， 可以在不增加频谱宽度的前提下，使系统的传输容量翻倍。
           </p>
           <div className="bg-lab-bg/50 p-5 rounded-xl">

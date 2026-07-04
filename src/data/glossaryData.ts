@@ -101,6 +101,13 @@ export const glossaryData: CategoryData[] = [
         detail:
           '光调制器是光通信发射端的核心器件。按调制原理分有电光调制器、热光调制器、声光调制器等；按调制方式分有强度调制器、相位调制器、IQ 调制器等。',
       },
+      {
+        term: '相干长度',
+        english: 'Coherence Length',
+        definition: '光源保持足够相位相干性的最大传播距离，即光波能够产生稳定干涉的最大光程差。',
+        detail:
+          '相干长度 L_c = c / Δν，其中 Δν 是光源的线宽。DFB 激光器的相干长度可达数公里，LED 的相干长度只有几十微米。相干长度越长，光源越适合用于干涉测量和高速相干通信。',
+      },
     ],
   },
   {
@@ -144,7 +151,7 @@ export const glossaryData: CategoryData[] = [
           '光 OFDM (O-OFDM) 通过多个正交子载波承载数据，对色散和 PMD 有良好的容忍度，频谱利用率高。缺点是峰均功率比 (PAPR) 较高，对非线性效应敏感。',
       },
       {
-        term: '概率星座整形',
+        term: '概率星座整形 (PCS)',
         english: 'Probabilistic Constellation Shaping (PCS)',
         definition: '通过不等概率使用星座点来逼近香农极限的调制优化技术。',
         detail:
@@ -221,6 +228,20 @@ export const glossaryData: CategoryData[] = [
         detail:
           '硅光的核心优势是成本低、集成度高、可与电子芯片共封装。但硅本身没有电光效应，需通过载流子色散效应实现调制，或与其他材料（如铌酸锂薄膜）异质集成。',
       },
+      {
+        term: '行波电极',
+        english: 'Traveling-Wave Electrode (TWE)',
+        definition: '调制器中与光波导并行传播的微波电极结构，使电信号与光信号在传播过程中持续有效交互。',
+        detail:
+          '传统集总电极的调制带宽受 RC 时间常数限制（~GHz），而行波电极将电极设计为传输线结构，电信号与光信号同步传播，可突破 RC 瓶颈，实现 50+ GHz 的带宽。行波电极的设计需要精确匹配微波与光波的相速度。',
+      },
+      {
+        term: '格雷编码',
+        english: 'Gray Coding',
+        definition: '一种相邻符号（星座点）之间仅相差 1 比特的编码方式，使最常见的错误（判决到相邻星座点）只导致 1 比特错误。',
+        detail:
+          '格雷编码在 QAM 调制系统中至关重要。如果不使用格雷编码，相邻星座点之间可能对应多个比特位差异，判决到相邻点会导致过多比特错误，BER 性能会显著恶化。',
+      },
     ],
   },
   {
@@ -283,6 +304,13 @@ export const glossaryData: CategoryData[] = [
         definition: '将输入光按两个正交偏振态分开输出的无源器件。',
         detail:
           'PBS 在偏振复用光收发模块中用于分离 X 和 Y 偏振态的光。通常与偏振旋转器配合使用，将分离后的光耦合到对应的调制器或探测器。',
+      },
+      {
+        term: '琼斯矩阵',
+        english: 'Jones Matrix',
+        definition: '用 2×2 复矩阵描述光学器件对光偏振态（琼斯矢量）线性变换的数学工具。',
+        detail:
+          '琼斯矩阵只能描述完全偏振光（不包括非偏振光），但计算简便、直观。例如偏振旋转器的琼斯矩阵是旋转矩阵，波片的琼斯矩阵是对角阵。多个级联器件的总效应是各琼斯矩阵相乘。',
       },
     ],
   },
@@ -440,6 +468,13 @@ export const glossaryData: CategoryData[] = [
         detail:
           '灵敏度越高（数值越小），接收机越能检测微弱信号。APD 接收机灵敏度通常优于 PIN 接收机 5-15 dB。相干接收机灵敏度接近量子极限。',
       },
+      {
+        term: '噪声等效功率 (NEP)',
+        english: 'Noise Equivalent Power (NEP)',
+        definition: '光电探测器信噪比等于 1 时所需的最小光功率，衡量探测器检测微弱信号的能力。',
+        detail:
+          'NEP 越小表示探测器越灵敏。典型值：PIN 管 ~1 pW/√Hz，APD ~0.1 pW/√Hz。NEP 与探测器的暗电流、带宽和工作温度密切相关，低温可降低 NEP。',
+      },
     ],
   },
   {
@@ -565,6 +600,34 @@ export const glossaryData: CategoryData[] = [
         detail:
           'ASE 噪声功率谱密度在整个放大带宽内近似均匀分布，可近似为加性高斯白噪声 (AWGN)。ASE 是限制长距离光传输信噪比的根本因素。',
       },
+      {
+        term: '布拉格光栅',
+        english: 'Bragg Grating',
+        definition: '折射率周期性变化的器件，在满足布拉格条件的波长处产生强反射。',
+        detail:
+          '布拉格光栅在 DFB 激光器中用作腔内选频元件，只反射满足布拉格条件的特定波长。光纤布拉格光栅 (FBG) 广泛用于光纤激光器、波分复用器、色散补偿等。',
+      },
+      {
+        term: '单纵模',
+        english: 'Single Longitudinal Mode',
+        definition: '激光器只输出单一纵模（单一波长）的工作状态，是相干光通信系统对光源的基本要求。',
+        detail:
+          '单纵模激光器（如 DFB、ECL）通过光栅选频抑制其他纵模，线宽通常小于 10 MHz。多纵模激光器的输出包含多个波长，在色散光纤中会显著展宽脉冲，不适用于高速长距离传输。',
+      },
+      {
+        term: '垂直腔面发射',
+        english: 'VCSEL (Vertical-Cavity Surface-Emitting Laser)',
+        definition: '光垂直于芯片表面发射的半导体激光器，谐振腔由上下两个分布式布拉格反射镜 (DBR) 构成。',
+        detail:
+          'VCSEL 的谐振腔极短（~λ），因此天然支持单纵模工作。主要优势：低阈值电流、低功耗、圆形光斑易于光纤耦合、可二维阵列集成、制造成本低。主要限制：输出功率较低（~mW 量级），主要用于短距离数据通信（如数据中心）。',
+      },
+      {
+        term: '相对强度噪声 (RIN)',
+        english: 'Relative Intensity Noise (RIN)',
+        definition: '激光器输出光功率的随机波动，反映了激光器的强度稳定性。',
+        detail:
+          'RIN 定义为光功率波动的均方值除以平均光功率的平方，单位为 dB/Hz。RIN 是光通信系统的重要噪声源之一，在低速系统中影响尤为显著。高品质 DFB 激光器的 RIN 通常在 -155 dB/Hz 以下。',
+      },
     ],
   },
   {
@@ -608,10 +671,22 @@ export const glossaryData: CategoryData[] = [
           '非线性效应是限制长距离大容量光传输的关键因素。自相位调制 (SPM) 导致脉冲相位畸变，四波混频 (FWM) 在 WDM 系统中产生串扰。可通过降低入纤功率、采用大有效面积光纤等方式缓解。',
       },
       {
+        term: '自相位调制',
+        english: 'Self-Phase Modulation (SPM)',
+        definition: '光脉冲自身的强度变化引起光纤折射率变化，从而调制脉冲自身相位的现象。',
+        detail: 'SPM 会导致脉冲频谱展宽，与色散相互作用可能加剧或缓解脉冲畸变，取决于色散符号和啁啾方向。',
+      },
+      {
         term: '自相位调制 (SPM)',
         english: 'Self-Phase Modulation (SPM)',
         definition: '光脉冲自身的强度变化引起光纤折射率变化，从而调制脉冲自身相位的现象。',
         detail: 'SPM 会导致脉冲频谱展宽，与色散相互作用可能加剧或缓解脉冲畸变，取决于色散符号和啁啾方向。',
+      },
+      {
+        term: '交叉相位调制',
+        english: 'Cross-Phase Modulation (XPM)',
+        definition: '不同波长或偏振的信号相互引起相位调制，在 WDM 系统中产生信道间串扰。',
+        detail: 'XPM 主要发生在相邻波长信道之间，可通过增大信道间隔或降低功率来减轻。',
       },
       {
         term: '交叉相位调制 (XPM)',
@@ -620,11 +695,81 @@ export const glossaryData: CategoryData[] = [
         detail: 'XPM 主要发生在相邻波长信道之间，可通过增大信道间隔或降低功率来减轻。',
       },
       {
+        term: '四波混频',
+        english: 'Four-Wave Mixing (FWM)',
+        definition: '三个或更多光波在光纤非线性介质中相互作用产生新的频率分量的现象。',
+        detail:
+          'FWM 在色散较小的波段（如零色散点附近）尤为严重，产生的寄生波长会干扰原有信道。增大信道间隔或使用色散管理可有效抑制 FWM。',
+      },
+      {
         term: '四波混频 (FWM)',
         english: 'Four-Wave Mixing (FWM)',
         definition: '三个或更多光波在光纤非线性介质中相互作用产生新的频率分量的现象。',
         detail:
           'FWM 在色散较小的波段（如零色散点附近）尤为严重，产生的寄生波长会干扰原有信道。增大信道间隔或使用色散管理可有效抑制 FWM。',
+      },
+      {
+        term: '全内反射',
+        english: 'Total Internal Reflection (TIR)',
+        definition: '光从光密介质射向光疏介质时，当入射角超过临界角后全部能量被反射回光密介质的现象。',
+        detail:
+          '全内反射是光在光纤中传播的基本原理。光纤芯的折射率略高于包层，当入射角满足全内反射条件时，光被束缚在纤芯内沿光纤轴向传播。',
+      },
+      {
+        term: '数值孔径',
+        english: 'Numerical Aperture (NA)',
+        definition: '衡量光纤接受光能力的参数，NA = √(n₁² - n₂²)，n₁ 为纤芯折射率，n₂ 为包层折射率。',
+        detail:
+          '数值孔径越大，光纤接受光的角度越宽，但模式色散也越大。单模光纤的 NA 通常为 0.1-0.14，多模光纤的 NA 为 0.2-0.3。NA 由纤芯和包层的折射率差决定。',
+      },
+      {
+        term: '模场直径',
+        english: 'Mode Field Diameter (MFD)',
+        definition: '单模光纤中光场能量在横向分布的宽度，通常大于纤芯直径。',
+        detail:
+          '对于单模光纤，光场并非完全局限在纤芯内，会有一部分扩展到包层（倏逝波）。MFD 是比纤芯直径更准确地描述光纤中光场分布的参数。G.652 光纤在 1550 nm 的 MFD 约 10.4 μm。',
+      },
+      {
+        term: '瑞利散射',
+        english: 'Rayleigh Scattering',
+        definition: '光在介质中传播时，遇到尺寸远小于波长的微小折射率起伏引起的散射。',
+        detail:
+          '瑞利散射是光纤损耗的主要来源，损耗比例与波长的四次方成反比 (∝ λ⁻⁴)。这也是为什么长波长（1550 nm）的损耗低于短波长（1310 nm）。',
+      },
+      {
+        term: '吸收损耗',
+        english: 'Absorption Loss',
+        definition: '光纤材料对光能量的吸收，包括本征吸收（紫外/红外吸收带）和杂质吸收（如 OH⁻ 离子）。',
+        detail:
+          'OH⁻ 吸收峰在 1383 nm 附近，是早期光纤损耗谱的重要特征。现代光纤通过脱水工艺可有效抑制 OH⁻ 吸收，实现全波段低损耗传输。',
+      },
+      {
+        term: '材料色散',
+        english: 'Material Dispersion',
+        definition: '光纤材料的折射率随波长变化引起的色散。不同波长的光在材料中传播速度不同。',
+        detail:
+          '材料色散是色度色散的两个组成部分之一（另一个是波导色散）。石英光纤在 1310 nm 附近有零材料色散点。标准单模光纤在 1550 nm 的总色散 ~17 ps/(nm·km)，其中大部分来自材料色散。',
+      },
+      {
+        term: '波导色散',
+        english: 'Waveguide Dispersion',
+        definition: '由于光纤波导结构（纤芯/包层折射率分布）导致光场分布随波长变化而引起的色散。',
+        detail:
+          '波导色散取决于光纤的折射率剖面设计，可以通过改变纤芯直径和折射率分布来调节。色散移位光纤 (DSF) 就是通过增大波导色散将零色散点从 1310 nm 移到 1550 nm。',
+      },
+      {
+        term: '色散补偿光纤',
+        english: 'Dispersion-Compensating Fiber (DCF)',
+        definition: '具有负色散系数的特种光纤，用于补偿标准单模光纤的正色散。',
+        detail:
+          'DCF 的色散系数通常为 -80 到 -150 ps/(nm·km)，几公里 DCF 即可补偿几十公里 SMF 的色散。但 DCF 的非线性效应和插入损耗较大，现代系统更多使用数字色散补偿 (DSP)。',
+      },
+      {
+        term: '保偏光纤',
+        english: 'Polarization-Maintaining Fiber (PMF)',
+        definition: '通过在纤芯两侧引入应力区（熊猫眼或领结型结构），使两个偏振模式的折射率差增大到不相互耦合的特种光纤。',
+        detail:
+          'PMF 能保持输入光的偏振态沿快轴或慢轴传输而不发生偏振耦合，对偏振敏感的系统极为重要。但 PMF 与标准 SMF 的连接需要精确对准偏振主轴，工艺复杂、成本较高。',
       },
     ],
   },
@@ -800,10 +945,16 @@ export const glossaryData: CategoryData[] = [
           '补偿信道失真（色散、PMD 等）的数字信号处理模块。OFDM 将宽带信道分割为多个窄带子信道，每个子信道近似平坦，因此无需复杂的时域均衡。',
       },
       {
-        term: 'FFT/IFFT',
-        english: 'Fast Fourier Transform / Inverse FFT',
+        term: 'FFT',
+        english: 'Fast Fourier Transform (FFT)',
         definition:
-          '快速傅里叶变换/逆变换。OFDM 的调制解调可通过 FFT/IFFT 在数字域高效实现，复杂度远低于传统多载波方案。',
+          '快速傅里叶变换，将时域信号高效转换到频域的算法。在 OFDM 系统中用于 OFDM 解调，将时域采样转换为频域子载波上的幅度/相位值。',
+      },
+      {
+        term: 'IFFT',
+        english: 'Inverse Fast Fourier Transform (IFFT)',
+        definition:
+          '快速傅里叶逆变换，将频域信号转换回时域的算法。在 OFDM 系统中用于 OFDM 调制，将频域子载波数据转换为时域采样点。',
       },
       {
         term: 'CO-OFDM',
@@ -850,6 +1001,56 @@ export const glossaryData: CategoryData[] = [
         term: '旁瓣',
         english: 'Sidelobe',
         definition: '频谱主峰（主瓣）两侧的次要能量分布。旁瓣越宽，信号占用的总带宽越大，相邻波道之间的串扰越严重。',
+      },
+      {
+        term: 'LDPC 码',
+        english: 'Low-Density Parity-Check Code (LDPC)',
+        definition:
+          '一种接近香农极限的线性分组信道编码方案，其校验矩阵是稀疏的。LDPC 已被 ITU-T 采纳为光通信标准 FEC 方案。',
+        detail:
+          'LDPC 的译码采用迭代置信传播算法，可以在合理复杂度下逼近香农极限，净编码增益 (NCG) 可达 10-11 dB。不同码率（如 7/8、8/9、9/10）的 LDPC 码在编码效率和纠错能力之间提供了灵活选择。',
+      },
+      {
+        term: '外腔激光器 (ECL)',
+        english: 'External Cavity Laser (ECL)',
+        definition: '将增益介质与外部谐振腔（含窄带滤波元件）结合的激光器，可实现极窄线宽输出。',
+        detail:
+          'ECL 通过更长的腔长和外部滤波元件将线宽压缩到 kHz 量级，是相干光通信的优选光源。但结构复杂、成本高，主要用于高速长距离系统。',
+      },
+      {
+        term: '带隙',
+        english: 'Band Gap',
+        definition: '半导体中价带顶部与导带底部之间的能量间隔，单位为电子伏特 (eV)，决定了材料的本征吸收和发光波长。',
+        detail:
+          '禁带宽度 Eg 与截止波长 λ_c 的关系为 λ_c = 1240/Eg (nm)。例如硅的 Eg = 1.12 eV → λ_c ≈ 1107 nm（仅红外），因此硅不适合可见光探测。InGaAs 的禁带可调谐到适合 1550 nm 光通信。',
+      },
+      {
+        term: '前向纠错码 (FEC)',
+        english: 'Forward Error Correction (FEC)',
+        definition: '在发送端为信息比特添加冗余校验比特，使接收端能够检测并纠正传输错误的技术。',
+        detail:
+          'FEC 是光通信系统实现长距离高速传输的关键技术。硬判决 FEC（如 RS 码、BCH 码）处理二进制判决，软判决 FEC（如 LDPC、Turbo 码）利用对数似然比信息，可获得 1-2 dB 的额外编码增益。',
+      },
+      {
+        term: '编码增益',
+        english: 'Coding Gain',
+        definition: '在相同误码率下，使用 FEC 后信噪比需求的降低量，以 dB 表示。',
+        detail:
+          '净编码增益 (NCG) 考虑了编码开销导致的速率损失。现代 LDPC 码的 NCG 可达 10-11 dB，相当于同等 SNR 下传输距离翻倍或更多。编码增益以 FEC 的冗余度（开销）为代价。',
+      },
+      {
+        term: '互信息',
+        english: 'Mutual Information',
+        definition: '信息论中衡量两个随机变量之间相关性的量，表示接收端从接收信号中获得的关于发送信息的信息量。',
+        detail:
+          '互信息 I(X;Y) 是信道容量的理论基础，单位为 bit/symbol。广义互信息 (GMI) 用于评估编码调制系统的性能上限，是 PCS 等信道编码优化目标函数。',
+      },
+      {
+        term: '开销 (Overhead)',
+        english: 'FEC Overhead',
+        definition: 'FEC 编码中冗余比特数与原始信息比特数的比值，通常用百分比表示。',
+        detail:
+          '开销 = (n-k)/k × 100%，其中 n 为编码后的总比特数，k 为原始信息比特数。常见的 FEC 开销有 7%、15%、20% 等。开销越大纠错能力越强，但有效数据速率越低。',
       },
     ],
   },

@@ -29,7 +29,7 @@ export default function ReceiverCanvas() {
           const symbols = getSymbols(modulationFormat);
           currentSymbolIdxRef.current = (currentSymbolIdxRef.current + 1) % symbols.length;
           const sym = symbols[currentSymbolIdxRef.current];
-          const noisy = addAwgnNoise(sym.i, sym.q, snr, noiseEnabled);
+          const noisy = addAwgnNoise(sym.i, sym.q, snr, noiseEnabled, modulationFormat);
           const nearest = nearestSymbol(noisy, modulationFormat);
           const isError = nearest.index !== currentSymbolIdxRef.current;
           addReceivedPoint(noisy, isError);

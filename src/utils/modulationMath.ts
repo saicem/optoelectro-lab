@@ -100,15 +100,25 @@ export function theoreticalBer(format: ModulationFormat, snrDb: number): number 
   const snrLinear = Math.pow(10, snrDb / 10);
 
   if (format === 'QPSK') {
-    return 0.5 * erfc(Math.sqrt(snrLinear));
+    return 0.5 * erfc(Math.sqrt(snrLinear / 2));
   }
 
   const bitsPerSymbol = { '16QAM': 4, '64QAM': 6 }[format] || 4;
   const M = Math.pow(2, bitsPerSymbol);
   const k = Math.sqrt(M);
-  const avgEsN0 = snrLinear;
 
-  return ((2 * (k - 1)) / (k * Math.log2(k))) * 0.5 * erfc(Math.sqrt((3 * avgEsN0 * Math.log2(k)) / (M - 1)));
+  return ((2 * (k - 1)) / (k * Math.log2(k))) * 0.5 * erfc(Math.sqrt((3 * snrLinear) / (2 * (M - 1))));
+}
+
+export function avgSymbolEnergy(format: ModulationFormat): number {
+  switch (format) {
+    case 'QPSK':
+      return 2;
+    case '16QAM':
+      return 10 / 9;
+    case '64QAM':
+      return 6 / 7;
+  }
 }
 
 export function generateBerCurve(

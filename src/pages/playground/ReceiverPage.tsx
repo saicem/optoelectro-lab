@@ -27,8 +27,9 @@ export default function ReceiverPage() {
   } = useReceiverStore();
 
   const theoreticalBerValue = theoreticalBer(modulationFormat, snr);
-  const measuredBer = totalSymbols > 0 ? errorCount / totalSymbols : 0;
-  const bitsPerSymbol = { QPSK: 2, '16QAM': 4, '64QAM': 6 }[modulationFormat];
+  const bps = { QPSK: 2, '16QAM': 4, '64QAM': 6 }[modulationFormat];
+  const measuredSer = totalSymbols > 0 ? errorCount / totalSymbols : 0;
+  const measuredBer = measuredSer / bps;
   const symbolCount = { QPSK: 4, '16QAM': 16, '64QAM': 64 }[modulationFormat];
   const evm = calculateEVM(receivedPoints, modulationFormat);
   const evmPercent = evm * 100;
@@ -151,7 +152,7 @@ export default function ReceiverPage() {
             <div className="space-y-1">
               <InfoItem label="调制格式" value={modulationFormat} color="#a855f7" />
               <InfoItem label="星座点数" value={symbolCount.toString()} />
-              <InfoItem label="每符号比特" value={`${bitsPerSymbol} bit`} color="#ff3366" />
+              <InfoItem label="每符号比特" value={`${bps} bit`} color="#ff3366" />
               <InfoItem label="SNR" value={`${snr.toFixed(1)} dB`} color="#ff6b6b" />
               <InfoItem label="EVM" value={totalSymbols > 0 ? `${evmPercent.toFixed(2)} %` : '—'} color="#a855f7" />
               <div className="pt-2 mt-2 border-t border-lab-border/50">

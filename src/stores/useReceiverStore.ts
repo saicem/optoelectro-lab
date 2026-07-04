@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import type { ModulationFormat, IQPoint } from '@/types';
-import { getSymbols, avgSymbolEnergy } from '@/utils/modulationMath';
+import { getSymbols, awgnNoiseStd } from '@/utils/modulationMath';
 
 type PresetName = 'back-to-back' | 'critical' | 'low-snr';
 
@@ -110,10 +110,7 @@ export function addAwgnNoise(i: number, q: number, snrDb: number, noiseEnabled: 
   if (!noiseEnabled) {
     return { i, q };
   }
-  const snrLinear = Math.pow(10, snrDb / 10);
-  const avgEnergy = avgSymbolEnergy(format);
-  const noisePower = avgEnergy / (2 * snrLinear);
-  const noiseStd = Math.sqrt(noisePower);
+  const noiseStd = awgnNoiseStd(snrDb, format);
   return {
     i: i + gaussianRandom() * noiseStd,
     q: q + gaussianRandom() * noiseStd,

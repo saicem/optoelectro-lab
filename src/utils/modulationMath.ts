@@ -1,5 +1,17 @@
 import type { IQPoint, ModulationFormat } from '@/types';
 
+function erfc(x: number): number {
+  if (x < 0) return 2 - erfc(-x);
+  const a1 = 0.254829592;
+  const a2 = -0.284496736;
+  const a3 = 1.421413741;
+  const a4 = -1.453152027;
+  const a5 = 1.061405429;
+  const p = 0.3275911;
+  const t = 1.0 / (1.0 + p * x);
+  return 1 - ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+}
+
 export function mzOutputPower(inputPower: number, phaseShift: number): number {
   return inputPower * Math.cos(phaseShift / 2) ** 2;
 }
@@ -83,31 +95,12 @@ export function calculateEVM(receivedPoints: IQPoint[], format: ModulationFormat
   return rmse / rmsIdeal;
 }
 
-function erfc(x: number): number {
-  if (x < 0) return 2 - erfc(-x);
-  const a1 = 0.254829592;
-  const a2 = -0.284496736;
-  const a3 = 1.421413741;
-  const a4 = -1.453152027;
-  const a5 = 1.061405429;
-  const p = 0.3275911;
-  const t = 1.0 / (1.0 + p * x);
-  const y = 1.0 - ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
-  return y;
+function esN0Linear(snrDb: number): number {
+  return Math.pow(10, snrDb / 10);
 }
 
-export function theoreticalBer(format: ModulationFormat, snrDb: number): number {
-  const snrLinear = Math.pow(10, snrDb / 10);
-
-  if (format === 'QPSK') {
-    return 0.5 * erfc(Math.sqrt(snrLinear / 2));
-  }
-
-  const bitsPerSymbol = { '16QAM': 4, '64QAM': 6 }[format] || 4;
-  const M = Math.pow(2, bitsPerSymbol);
-  const k = Math.sqrt(M);
-
-  return ((k - 1) / (k * Math.log2(k))) * 0.5 * erfc(Math.sqrt((3 * snrLinear) / (2 * (M - 1))));
+export function bitsPerSymbol(format: ModulationFormat): number {
+  return { QPSK: 2, '16QAM': 4, '64QAM': 6 }[format] ?? 2;
 }
 
 export function avgSymbolEnergy(format: ModulationFormat): number {
@@ -119,6 +112,29 @@ export function avgSymbolEnergy(format: ModulationFormat): number {
     case '64QAM':
       return 6 / 7;
   }
+}
+
+export function awgnNoiseStd(esN0Db: number, format: ModulationFormat): number {
+  const esN0 = esN0Linear(esN0Db);
+  const avgEnergy = avgSymbolEnergy(format);
+  return Math.sqrt(avgEnergy / (2 * esN0));
+}
+
+export function theoreticalSer(format: ModulationFormat, esN0Db: number): number {
+  const esN0 = esN0Linear(esN0Db);
+
+  if (format === 'QPSK') {
+    return erfc(Math.sqrt(esN0 / 2));
+  }
+
+  const M = Math.pow(2, bitsPerSymbol(format));
+  const k = Math.sqrt(M);
+
+  return 4 * (1 - 1 / k) * 0.5 * erfc(Math.sqrt((3 * esN0) / (2 * (M - 1))));
+}
+
+export function theoreticalBer(format: ModulationFormat, esN0Db: number): number {
+  return theoreticalSer(format, esN0Db) / bitsPerSymbol(format);
 }
 
 export function generateBerCurve(

@@ -13,13 +13,22 @@
 ### 部署流程
 
 ```
-Push to main → Checkout → Install pnpm → Install deps → Build → Upload artifact → Deploy to Pages
+Push to main → Checkout → Install pnpm → Install deps → Build → Create .nojekyll → Upload artifact → Deploy to Pages
 ```
+
+### 构建说明
+
+- 使用 `pnpm build`（TypeScript 编译 + Vite 构建）
+- 构建产物位于 `dist/` 目录
+- 部署前创建 `dist/.nojekyll` 文件，确保 GitHub Pages 正确处理不带 `.html` 扩展名的路径
+- 所有页面静态 import 到单个 JS bundle
 
 ### Vite 配置
 
-- 构建时通过环境变量设置 base 路径
-- 使用 `HashRouter` 适配 GitHub Pages
+- `base: '/optoelectro-lab/'` 适配 GitHub Pages 子路径
+- `HashRouter` 无需服务端 URL 重写
+- `cssCodeSplit: false` 产生单个 CSS 文件
+- `manualChunks: undefined` 无代码分割
 
 ### 仓库设置
 

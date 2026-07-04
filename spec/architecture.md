@@ -5,7 +5,7 @@
 ```
 graph TB
     subgraph 前端层
-        Router["HashRouter + ScrollToTop"] --> Routes["React Router 页面路由"]
+        Router["HashRouter + Layout scrollToTop"] --> Routes["React Router 页面路由"]
         Routes --> Pages["页面组件（Learn / Playground）"]
         Pages --> Stores["Zustand 状态管理（5 个 store）"]
         Pages --> Util["数学工具函数（utils/）"]
@@ -19,13 +19,9 @@ graph TB
     subgraph 基础层
         Constants["constants/（路由 + 章节常量）"]
         Types["types/（IQPoint, ModulationFormat）"]
-        Lib["lib/（cn, setupCanvas, drawGrid）"]
+        Lib["lib/（cn, setupCanvas, drawGrid, kaTeXScheduler）"]
         Lucide["Lucide React 图标库"]
         Katex["KaTeX 数学公式渲染"]
-    end
-    subgraph PWA
-        SW["Service Worker（Workbox）"]
-        Manifest["Web App Manifest"]
     end
     Constants --> Routes
     Types --> Stores
@@ -37,15 +33,20 @@ graph TB
 | 技术 | 版本 | 用途 |
 |------|------|------|
 | React | 19.x | UI 框架 |
-| TypeScript | 6.x | 类型安全 |
+| TypeScript | 5.7 | 类型安全 |
 | Vite | 8.x | 构建工具 |
 | Tailwind CSS | 4.x | 样式框架 |
 | Zustand | 5.x | 状态管理 |
 | React Router | 7.x | 页面路由 |
 | Lucide React | 最新 | 图标库 |
-| Framer Motion | 12.x | 动画库 |
 | KaTeX | 最新 | 数学公式渲染 |
-| vite-plugin-pwa | 1.x | PWA Service Worker 生成 |
+
+## 打包策略
+
+- **单文件 bundle**：所有页面静态 import，无 `React.lazy` / 动态导入
+- **无 code-splitting**：`manualChunks: undefined`，单个 `index.js` 约 1.1 MB（319 kB gzip）
+- **单 CSS**：`cssCodeSplit: false`，一个 CSS 文件
+- **加载屏**：CSS-only 青色旋转 spinner + "LOADING" 文字，内联在 `index.html`，不依赖 JS
 
 ## 目录结构
 
@@ -53,9 +54,9 @@ graph TB
 src/
 ├── constants/       # 路由/章节常量（集中管理，避免硬编码）
 ├── types/           # 共享类型定义（IQPoint, ModulationFormat）
-├── lib/             # 基础工具函数（cn, setupCanvas, drawGrid）
-├── utils/           # 数学工具函数（waveMath, modulationMath）
-├── hooks/           # 自定义 Hook（useAnimationFrame）
+├── lib/             # 基础工具函数（cn, setupCanvas, drawGrid, kaTeXScheduler）
+├── utils/           # 数学工具函数（waveMath, modulationMath, polarizationMath）
+├── hooks/           # 自定义 Hook（useAnimationFrame, useChapterNavigation）
 ├── stores/          # Zustand 状态管理（5 个独立 store）
 ├── data/            # 数据源（glossaryData）
 ├── components/      # UI 组件
@@ -66,7 +67,7 @@ src/
 │   ├── polarization/
 │   └── receiver/
 └── pages/           # 页面组件
-    ├── learn/       # 10 个章节页面
+    ├── learn/       # 14 个章节页面
     └── playground/  # 5 个实验页面
 ```
 
@@ -83,4 +84,4 @@ src/
 - Canvas 绘制使用 `useEffect` + `useRef` 管理
 - 动画状态（time）单独管理
 - 使用 `createPortal` 处理弹层（TermNote）避免父容器裁剪
-- Workbox 预缓存 30 个静态资源，Google Fonts CacheFirst 运行时缓存
+- KaTeX 公式异步渲染，通过逐批调度避免阻塞主线程

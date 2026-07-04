@@ -22,10 +22,10 @@ All commits MUST follow [Conventional Commits](https://www.conventionalcommits.o
 - Chapter index is computed from `CHAPTERS` array in `src/constants/chapters.ts`.
 
 ## Architecture Notes
-- All page components are **statically imported** (no React.lazy / dynamic imports). Every page chunk is bundled into the main JS to eliminate network waterfall on navigation.
-- Single monolithic JS bundle: no manualChunks. Vite `inlineDynamicImports` prevents code-splitting entirely.
-- Loading screen is inlined in `index.html` (`<div id="app-loading">`): a CSS-only spinning loader with "LOADING" text, visible until React mounts and replaces the root content.
+- All page components are **statically imported** (no `React.lazy` / dynamic imports). Every page is bundled into a single `index.js` to eliminate network waterfall on navigation.
+- Single monolithic JS bundle: no `manualChunks`, no code-splitting. `cssCodeSplit: false` produces one CSS file.
+- Loading screen is inlined in `index.html` (`<div id="app-loading">`): a CSS-only spinning cyan spinner with "LOADING" text, visible until React mounts and replaces the `#root` content. No JS required to show it.
+- Route changes scroll to top via `window.scrollTo(0, 0)` and `contentRef.scrollTop = 0` in `Layout.tsx`.
 - Shared components: `LearnSection` (page section cards), `PlaygroundLayout` (experiment layout), `LearnLayout` (chapter layout with part breadcrumb).
-- Page per chapter navigation uses `window.scrollTo(0, 0)` on route change via `ScrollToTop` component.
 - State management: Zustand stores in `src/stores/`.
 - Canvas utilities: `setupCanvas()` for DPR scaling, `drawGrid()` for background grid.

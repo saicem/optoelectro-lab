@@ -107,7 +107,7 @@ export function theoreticalBer(format: ModulationFormat, snrDb: number): number 
   const M = Math.pow(2, bitsPerSymbol);
   const k = Math.sqrt(M);
 
-  return ((2 * (k - 1)) / (k * Math.log2(k))) * 0.5 * erfc(Math.sqrt((3 * snrLinear) / (2 * (M - 1))));
+  return ((k - 1) / (k * Math.log2(k))) * 0.5 * erfc(Math.sqrt((3 * snrLinear) / (2 * (M - 1))));
 }
 
 export function avgSymbolEnergy(format: ModulationFormat): number {

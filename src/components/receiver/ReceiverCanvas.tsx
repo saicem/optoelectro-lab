@@ -4,7 +4,6 @@ import {
   getSymbols,
   iqAmplitude,
   iqPhase,
-  iqModulation,
   generateBerCurve,
   theoreticalBer,
 } from '@/utils/modulationMath';
@@ -57,11 +56,10 @@ export default function ReceiverCanvas() {
 
     drawGrid(ctx, W, H, 30, 'rgba(51, 65, 85, 0.3)');
 
-    const constellationSize = Math.min(W * 0.38, H * 0.5);
-    const constellationR = constellationSize / 2 - 20;
-    const txConstX = W * 0.22;
-    const rxConstX = W * 0.72;
-    const constellationY = H * 0.3;
+    const constellationR = Math.min(W * 0.17, H * 0.2) - 10;
+    const txConstX = W * 0.25;
+    const rxConstX = W * 0.75;
+    const constellationY = H * 0.32;
 
     function drawConstellation(
       cx: number,
@@ -95,9 +93,8 @@ export default function ReceiverCanvas() {
       ctx.fillText('I', cx + r + 2, cy + 4);
       ctx.fillText('Q', cx + 4, cy - r - 4);
 
-      const symbols = getSymbols(modulationFormat);
-
       if (showIdeal) {
+        const symbols = getSymbols(modulationFormat);
         symbols.forEach((s) => {
           const px = cx + s.i * r;
           const py = cy - s.q * r;
@@ -157,7 +154,7 @@ export default function ReceiverCanvas() {
       ctx.restore();
     }
 
-    drawConstellation(txConstX, constellationY, constellationR, '理想星座图', '#00d4ff', true, false);
+    drawConstellation(txConstX, constellationY, constellationR, '发送端星座图', '#00d4ff', true, false);
     drawConstellation(rxConstX, constellationY, constellationR, '接收端星座图', '#ff6b6b', true, true);
 
     const arrowY = constellationY;
@@ -183,105 +180,10 @@ export default function ReceiverCanvas() {
     ctx.textAlign = 'left';
     ctx.restore();
 
-    const waveformX = W * 0.05;
-    const berChartW = 220;
-    const berChartH = 160;
-    const berChartX = W - berChartW - 15;
+    const berChartH = Math.min(H * 0.28, 160);
+    const berChartW = Math.min(W - 40, 560);
+    const berChartX = (W - berChartW) / 2;
     const berChartY = H * 0.62;
-    const waveformW = berChartX - waveformX - 15;
-    const waveTop = H * 0.6;
-    const waveH = 35;
-    const waveGap = 10;
-
-    function drawWave(
-      x: number,
-      y: number,
-      width: number,
-      height: number,
-      color: string,
-      label: string,
-      getValue: (t: number) => number,
-      maxVal: number = 1,
-      showNoisy: boolean = false,
-    ) {
-      ctx.save();
-
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(x, y - height, width, height * 2);
-
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x + width, y);
-      ctx.strokeStyle = 'rgba(51, 65, 85, 0.5)';
-      ctx.setLineDash([4, 4]);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      if (showNoisy && noiseEnabled && receivedPoints.length > 0) {
-        ctx.strokeStyle = 'rgba(255, 107, 107, 0.5)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        const cycles = 6;
-        for (let i = 0; i <= width; i++) {
-          const t = (i / width) * cycles * 2 * Math.PI + timeRef.current * 3;
-          const cleanVal = getValue(t);
-          const noisyVal = cleanVal + (Math.random() - 0.5) * 0.3 * (1 / Math.pow(10, snr / 20));
-          const py = y - (noisyVal / maxVal) * height * 0.7;
-          if (i === 0) ctx.moveTo(x + i, py);
-          else ctx.lineTo(x + i, py);
-        }
-        ctx.stroke();
-      }
-
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-      ctx.shadowColor = color;
-      ctx.shadowBlur = 6;
-      ctx.beginPath();
-
-      const cycles = 6;
-      for (let i = 0; i <= width; i++) {
-        const t = (i / width) * cycles * 2 * Math.PI + timeRef.current * 3;
-        const val = getValue(t);
-        const py = y - (val / maxVal) * height * 0.7;
-        if (i === 0) ctx.moveTo(x + i, py);
-        else ctx.lineTo(x + i, py);
-      }
-      ctx.stroke();
-
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '10px JetBrains Mono, monospace';
-      ctx.fillText(label, x + 5, y - height - 3);
-
-      ctx.restore();
-    }
-
-    const symbols = getSymbols(modulationFormat);
-    const sym = symbols[currentSymbolIdxRef.current % symbols.length];
-
-    const waveY1 = waveTop;
-    const waveY2 = waveTop + (waveH * 2 + waveGap);
-
-    drawWave(waveformX, waveY1, waveformW, waveH, '#00d4ff', 'I 路信号', (t) => sym.i * Math.cos(t), 1, true);
-    drawWave(waveformX, waveY2, waveformW, waveH, '#a855f7', 'Q 路信号', (t) => sym.q * Math.sin(t), 1, true);
-
-    const outWaveY = waveTop + (waveH * 2 + waveGap) * 2;
-    drawWave(
-      waveformX,
-      outWaveY,
-      waveformW,
-      waveH,
-      '#00ff88',
-      '合成 IQ 信号',
-      (t) => iqModulation(sym.i, sym.q, t),
-      Math.sqrt(2),
-      true,
-    );
-
-    const symAmp = iqAmplitude(sym.i, sym.q);
-    const symPhase = iqPhase(sym.i, sym.q);
 
     function drawBerChart(x: number, y: number, w: number, h: number) {
       ctx.save();
@@ -420,12 +322,32 @@ export default function ReceiverCanvas() {
 
     drawBerChart(berChartX, berChartY, berChartW, berChartH);
 
+    const symbols = getSymbols(modulationFormat);
+    const sym = symbols[currentSymbolIdxRef.current % symbols.length];
+    const symAmp = iqAmplitude(sym.i, sym.q);
+    const symPhase = iqPhase(sym.i, sym.q);
+
+    ctx.fillStyle = 'rgba(10, 14, 23, 0.7)';
+    ctx.fillRect(0, H - 28, W, 28);
+
     ctx.fillStyle = '#94a3b8';
-    ctx.font = '11px JetBrains Mono, monospace';
-    ctx.fillText(`幅度: ${symAmp.toFixed(3)}`, waveformX, outWaveY + waveH + 18);
-    ctx.fillText(`相位: ${(symPhase / Math.PI).toFixed(2)}π`, waveformX + 110, outWaveY + waveH + 18);
-    ctx.fillText(`SNR: ${snr.toFixed(1)} dB`, waveformX + 240, outWaveY + waveH + 18);
-    ctx.fillText(`采样数: ${receivedPoints.length}`, waveformX + 370, outWaveY + waveH + 18);
+    ctx.font = '12px JetBrains Mono, monospace';
+    const statusItems = [
+      { label: '幅度', value: symAmp.toFixed(3), color: '#00d4ff' },
+      { label: '相位', value: `${(symPhase / Math.PI).toFixed(2)}π`, color: '#a855f7' },
+      { label: 'SNR', value: `${snr.toFixed(1)} dB`, color: '#ff6b6b' },
+      { label: '采样数', value: receivedPoints.length.toString(), color: '#94a3b8' },
+    ];
+    let statusX = 15;
+    statusItems.forEach((item) => {
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(`${item.label}: `, statusX, H - 8);
+      statusX += ctx.measureText(`${item.label}: `).width;
+      ctx.fillStyle = item.color;
+      const valWidth = ctx.measureText(item.value).width;
+      ctx.fillText(item.value, statusX, H - 8);
+      statusX += valWidth + 25;
+    });
 
     return () => {
       ctx.setTransform(1, 0, 0, 1, 0, 0);

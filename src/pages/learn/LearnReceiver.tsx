@@ -391,7 +391,7 @@ export default function LearnReceiver() {
                 {'$$\\text{BER} \\approx \\frac{1}{2} \\text{erfc}\\left(\\frac{Q}{\\sqrt{2}}\\right)$$'}
               </MathRenderer>
             </div>
-            <p className="text-sm mt-2">通常要求 BER &lt; 10⁻¹²，对应的 Q 值约为 7 dB。</p>
+            <p className="text-sm mt-2">通常要求 BER &lt; 10⁻¹²，对应的 Q 值约为 7（线性值）。</p>
           </div>
 
           {/* 功率预算计算 */}

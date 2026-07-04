@@ -80,8 +80,8 @@ export default function LearnSystemOverview() {
           </div>
           <p>
             400G DP-16QAM 的关键参数：使用 <TermNote term="DP-IQ 调制器" /> 实现 X/Y 双偏振复用， 每偏振采用{' '}
-            <TermNote term="16QAM" /> 调制（每符号 4 比特），符号率为 ~64 GBaud。 总比特率 = 2 (偏振) × 4 (每符号比特) ×
-            64 (GBaud) = 512 Gb/s，扣除 FEC 开销后约 400 Gb/s 净速率。
+            <TermNote term="16QAM" /> 调制（每符号 4 比特），符号率为 ~60 GBaud。 总比特率 = 2 (偏振) × 4 (每符号比特) ×
+            60 (GBaud) = 480 Gb/s，扣除约 20% 的 FEC 开销后为 400 Gb/s 净速率。
           </p>
           <div className="grid md:grid-cols-3 gap-4 mt-2">
             <div className="bg-lab-bg/40 p-3 rounded-xl">
@@ -429,14 +429,9 @@ export default function LearnSystemOverview() {
                   <td className="py-2 px-3">-1.5 dB</td>
                   <td className="py-2 px-3">3 对连接器 × 0.5 dB</td>
                 </tr>
-                <tr className="border-b border-lab-border/50">
-                  <td className="py-2 px-3 text-laser-green">Inline EDFA 增益</td>
-                  <td className="py-2 px-3">+17.5 dB</td>
-                  <td className="py-2 px-3">补偿损耗 + 少量余量</td>
-                </tr>
                 <tr>
                   <td className="py-2 px-3 text-laser-purple">接收功率</td>
-                  <td className="py-2 px-3">-19 dBm</td>
+                  <td className="py-2 px-3">+1.5 dBm</td>
                   <td className="py-2 px-3">满足接收灵敏度要求</td>
                 </tr>
               </tbody>

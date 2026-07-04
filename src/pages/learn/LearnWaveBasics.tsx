@@ -355,8 +355,8 @@ export default function LearnWaveBasics() {
           </p>
 
           <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
-            <h4 className="font-semibold text-lab-text mb-3 text-center">光调制的三个维度</h4>
-            <div className="grid md:grid-cols-3 gap-4">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">光调制的物理维度</h4>
+            <div className="grid md:grid-cols-3 gap-4 mb-3">
               <div className="text-center">
                 <div className="bg-laser-cyan/10 p-4 rounded-lg border border-laser-cyan/30">
                   <div className="text-sm font-semibold text-laser-cyan mb-2">强度（幅度）</div>
@@ -369,7 +369,7 @@ export default function LearnWaveBasics() {
                 <div className="bg-laser-green/10 p-4 rounded-lg border border-laser-green/30">
                   <div className="text-sm font-semibold text-laser-green mb-2">相位</div>
                   <p className="text-xs text-lab-muted">
-                    通过改变折射率来控制光的相位。结合强度调制可实现 IQ 正交调制， 大幅提升频谱效率。
+                    通过 I/Q 两路信号协同控制，实现幅度和相位的联合调制，大幅提升频谱效率。
                   </p>
                 </div>
               </div>
@@ -382,6 +382,12 @@ export default function LearnWaveBasics() {
                 </div>
               </div>
             </div>
+            <p className="text-xs text-lab-muted/60 text-center border-t border-lab-border pt-3">
+              以上是单波长信道内的三个调制维度。此外，
+              <span className="text-lab-text">频率/波长</span>（WDM 波分复用）和
+              <span className="text-lab-text">空间</span>（多芯/少模光纤 SDM）
+              也是提升系统容量的重要复用维度。
+            </p>
           </div>
 
           <div className="space-y-3">

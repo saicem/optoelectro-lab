@@ -355,13 +355,13 @@ export default function LearnWaveBasics() {
           </p>
 
           <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
-            <h4 className="font-semibold text-lab-text mb-3 text-center">光调制的物理维度</h4>
-            <div className="grid md:grid-cols-3 gap-4 mb-3">
+            <h4 className="font-semibold text-lab-text mb-3 text-center">光调制的六大维度</h4>
+            <div className="grid md:grid-cols-3 gap-4 mb-4">
               <div className="text-center">
                 <div className="bg-laser-cyan/10 p-4 rounded-lg border border-laser-cyan/30">
                   <div className="text-sm font-semibold text-laser-cyan mb-2">强度（幅度）</div>
                   <p className="text-xs text-lab-muted">
-                    最简单的调制方式。控制光的亮/暗来表示 0/1。 直接调制和强度调制器都属于这类。
+                    控制光的亮/暗来表示 0/1。直接调制和强度调制器都属于这类。
                   </p>
                 </div>
               </div>
@@ -377,17 +377,35 @@ export default function LearnWaveBasics() {
                 <div className="bg-laser-purple/10 p-4 rounded-lg border border-laser-purple/30">
                   <div className="text-sm font-semibold text-laser-purple mb-2">偏振</div>
                   <p className="text-xs text-lab-muted">
-                    利用光的两个正交偏振态作为独立信道。偏振复用可使容量再翻一倍。
+                    利用光的两个正交偏振态作为独立信道，使容量再翻一倍。
+                  </p>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-red/10 p-4 rounded-lg border border-laser-red/30">
+                  <div className="text-sm font-semibold text-laser-red mb-2">频率 / 波长</div>
+                  <p className="text-xs text-lab-muted">
+                    不同波长承载不同数据流。WDM 波分复用是使光纤容量从 Gb/s 跃升至 Tb/s 的关键技术。
+                  </p>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-amber-500/10 p-4 rounded-lg border border-amber-500/30">
+                  <div className="text-sm font-semibold text-amber-400 mb-2">时间</div>
+                  <p className="text-xs text-lab-muted">
+                    将时间划分为多个时隙，每个时隙传输不同的信号。光时分复用 (OTDM) 可将单波长速率推向 Tb/s。
+                  </p>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="bg-laser-cyan/10 p-4 rounded-lg border border-laser-cyan/30">
+                  <div className="text-sm font-semibold text-laser-cyan mb-2">空间</div>
+                  <p className="text-xs text-lab-muted">
+                    多芯光纤 / 少模光纤 (SDM) 通过空间维度并行传输，是突破香农极限的终极手段。
                   </p>
                 </div>
               </div>
             </div>
-            <p className="text-xs text-lab-muted/60 text-center border-t border-lab-border pt-3">
-              以上是单波长信道内的三个调制维度。此外，
-              <span className="text-lab-text">频率/波长</span>（WDM 波分复用）和
-              <span className="text-lab-text">空间</span>（多芯/少模光纤 SDM）
-              也是提升系统容量的重要复用维度。
-            </p>
           </div>
 
           <div className="space-y-3">

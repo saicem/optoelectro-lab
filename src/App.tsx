@@ -3,7 +3,7 @@ import Layout from '@/components/common/Layout';
 import HomePage from '@/pages/HomePage';
 import { ROUTES } from '@/constants/routes';
 
-import LearnWaveBasics from '@/pages/learn/LearnWaveBasics';
+import LearnMarkdownPage from '@/pages/learn/LearnMarkdownPage';
 import LearnLaser from '@/pages/learn/LearnLaser';
 import LearnFiberOptics from '@/pages/learn/LearnFiberOptics';
 import LearnOptoelectronicMaterials from '@/pages/learn/LearnOptoelectronicMaterials';
@@ -19,6 +19,8 @@ import LearnWDMAmplifier from '@/pages/learn/LearnWDMAmplifier';
 import LearnSystemOverview from '@/pages/learn/LearnSystemOverview';
 import LearnGlossary from '@/pages/learn/LearnGlossary';
 
+import waveBasicsMd from '@/content/learn/wave-basics.md?raw';
+
 import InterferencePage from '@/pages/playground/InterferencePage';
 import MZModulatorPage from '@/pages/playground/MZModulatorPage';
 import IQModulatorPage from '@/pages/playground/IQModulatorPage';
@@ -31,7 +33,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path={ROUTES.LEARN.WAVE_BASICS} element={<LearnWaveBasics />} />
+          <Route path={ROUTES.LEARN.WAVE_BASICS} element={<LearnMarkdownPage chapterKey="WAVE_BASICS" mdContent={waveBasicsMd} />} />
           <Route path={ROUTES.LEARN.LASER} element={<LearnLaser />} />
           <Route path={ROUTES.LEARN.FIBER_OPTICS} element={<LearnFiberOptics />} />
           <Route path={ROUTES.LEARN.OPTOELECTRONIC_MATERIALS} element={<LearnOptoelectronicMaterials />} />

@@ -32,27 +32,27 @@ doc/
 │   ├── iq-modulator.md
 │   ├── polarization.md
 │   └── receiver.md
-└── learn/                        # 学习页面内容文档（按大章节分目录）
+└── learn/                        # 学习页面内容文档（按大章节分目录，序号表示章节顺序）
     ├── part1-basics/             # Part 1 · 基础篇
-    │   ├── wave-basics.md
-    │   ├── semiconductor-physics.md
-    │   ├── pn-junction.md
-    │   └── optoelectronic-materials.md
+    │   ├── 01-wave-basics.md
+    │   ├── 02-semiconductor-physics.md
+    │   ├── 03-pn-junction.md
+    │   └── 04-optoelectronic-materials.md
     ├── part2-source-transmission/ # Part 2 · 光源与传输篇
-    │   ├── laser.md
-    │   └── fiber-optics.md
+    │   ├── 01-laser.md
+    │   └── 02-fiber-optics.md
     ├── part3-modulator/          # Part 3 · 调制器篇
-    │   ├── modulation-basics.md
-    │   ├── interference.md
-    │   ├── mz-modulator.md
-    │   ├── iq-modulator.md
-    │   ├── polarization.md
-    │   ├── nyquist-ofdm.md
-    │   └── pcs-coding.md
+    │   ├── 01-modulation-basics.md
+    │   ├── 02-interference.md
+    │   ├── 03-mz-modulator.md
+    │   ├── 04-iq-modulator.md
+    │   ├── 05-polarization.md
+    │   ├── 06-nyquist-ofdm.md
+    │   └── 07-pcs-coding.md
     ├── part4-system/             # Part 4 · 系统篇
-    │   ├── receiver.md
-    │   ├── wdm-amplifier.md
-    │   └── system-overview.md
+    │   ├── 01-receiver.md
+    │   ├── 02-wdm-amplifier.md
+    │   └── 03-system-overview.md
     └── glossary.md               # 附录 · 术语表
 ```
 

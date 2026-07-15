@@ -33,11 +33,17 @@ doc/
 │   ├── polarization.md
 │   └── receiver.md
 └── learn/                        # 学习页面内容文档（按大章节分目录，序号表示章节顺序）
-    ├── part1-basics/             # Part 1 · 基础篇
+    ├── part1-basics/             # Part 1 · 基础篇（由浅入深：入门→中等→进阶→综合）
     │   ├── 01-wave-basics.md
-    │   ├── 02-semiconductor-physics.md
-    │   ├── 03-pn-junction.md
-    │   └── 04-optoelectronic-materials.md
+    │   ├── 02-crystal-structure.md
+    │   ├── 03-semiconductor-basics.md
+    │   ├── 04-pn-junction-basics.md
+    │   ├── 05-recombination.md
+    │   ├── 06-light-matter-interaction.md
+    │   ├── 07-heterojunction.md
+    │   ├── 08-semiconductor-equations.md
+    │   ├── 09-pn-junction-advanced.md
+    │   └── 10-optoelectronic-materials.md
     ├── part2-source-transmission/ # Part 2 · 光源与传输篇
     │   ├── 01-laser.md
     │   └── 02-fiber-optics.md

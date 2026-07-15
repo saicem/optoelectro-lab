@@ -40,11 +40,27 @@ export default function InterferenceCanvas() {
     drawGrid(ctx, W, H, 40, 'rgba(51, 65, 85, 0.3)');
 
     const centerY = H / 2;
-    const waveY1 = centerY - 80;
-    const waveY2 = centerY;
-    const resultY = centerY + 100;
+    const waveY1 = centerY - 110;
+    const waveY2 = centerY - 30;
+    const resultY = centerY + 50;
 
     const t = time * 2;
+
+    // 绘制各波的中轴线（振幅为 0 的参考轴）
+    function drawCentralAxis(yBase: number) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(100, 116, 139, 0.35)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(0, yBase);
+      ctx.lineTo(W, yBase);
+      ctx.stroke();
+      ctx.restore();
+    }
+    drawCentralAxis(waveY1);
+    drawCentralAxis(waveY2);
+    drawCentralAxis(resultY);
 
     function drawWave(
       yBase: number,
@@ -105,34 +121,17 @@ export default function InterferenceCanvas() {
     ctx.font = 'bold 12px JetBrains Mono, monospace';
     ctx.fillText('叠加波 (E₁ + E₂)', 10, resultY - 35);
 
-    const intensityY = H - 50;
+    // 干涉强度数值（仅显示数值，不绘制柱状图）
+    // 两束波空间频率相同，相位差恒为 phaseDiff（不随 x 变化）
+    const intensity =
+      (amplitude1 ** 2 + amplitude2 ** 2 + 2 * amplitude1 * amplitude2 * Math.cos(phaseDiff)) /
+      (amplitude1 + amplitude2) ** 2;
     ctx.fillStyle = '#94a3b8';
     ctx.font = '12px JetBrains Mono, monospace';
-    ctx.fillText('干涉强度分布', 10, intensityY - 55);
-
-    const barWidth = 3;
-    for (let x = 0; x < W; x += barWidth + 1) {
-      const phaseAtX = (2 * Math.PI * x) / (wavelength * 2) + phaseDiff;
-      const intensity =
-        (amplitude1 ** 2 + amplitude2 ** 2 + 2 * amplitude1 * amplitude2 * Math.cos(phaseAtX)) /
-        (amplitude1 + amplitude2) ** 2;
-      const barHeight = intensity * 40;
-
-      const gradient = ctx.createLinearGradient(0, intensityY, 0, intensityY - barHeight);
-      gradient.addColorStop(0, color + '66');
-      gradient.addColorStop(1, color);
-      ctx.fillStyle = gradient;
-      ctx.fillRect(x, intensityY - barHeight, barWidth, barHeight);
-    }
-
-    ctx.strokeStyle = '#334155';
-    ctx.lineWidth = 1;
-    ctx.setLineDash([3, 3]);
-    ctx.beginPath();
-    ctx.moveTo(0, centerY - 40);
-    ctx.lineTo(W, centerY - 40);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.fillText('干涉强度', 10, resultY + 40);
+    ctx.fillStyle = color;
+    ctx.font = 'bold 14px JetBrains Mono, monospace';
+    ctx.fillText((intensity * 100).toFixed(1) + '%', 80, resultY + 40);
 
     return () => {
       const ctx = canvas.getContext('2d');

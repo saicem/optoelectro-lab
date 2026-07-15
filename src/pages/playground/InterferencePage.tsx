@@ -26,10 +26,11 @@ export default function InterferencePage() {
   const I1 = amplitude1 ** 2;
   const I2 = amplitude2 ** 2;
   const currentIntensity = interferenceIntensity(I1, I2, phaseDiff);
-  const maxIntensity = interferenceIntensity(I1, I2, 0);
-  const minIntensity = interferenceIntensity(I1, I2, Math.PI);
+  // 条纹可见度直接由振幅计算：V = 2A₁A₂ / (A₁² + A₂²)
   const visibility =
-    maxIntensity + minIntensity > 0 ? (maxIntensity - minIntensity) / (maxIntensity + minIntensity) : 0;
+    amplitude1 ** 2 + amplitude2 ** 2 > 0
+      ? (2 * amplitude1 * amplitude2) / (amplitude1 ** 2 + amplitude2 ** 2)
+      : 0;
 
   const formatPiRad = (v: number) => (v / Math.PI).toFixed(2) + ' π rad';
 
@@ -100,8 +101,6 @@ export default function InterferencePage() {
               <InfoItem label="强度 1 (I₁)" value={I1.toFixed(3)} color={color} />
               <InfoItem label="强度 2 (I₂)" value={I2.toFixed(3)} color="#a855f7" />
               <InfoItem label="叠加波光强" value={currentIntensity.toFixed(3)} color="#00ff88" />
-              <InfoItem label="最大强度" value={maxIntensity.toFixed(3)} color="#00d4ff" />
-              <InfoItem label="最小强度" value={minIntensity.toFixed(3)} color="#ff3366" />
               <InfoItem label="条纹可见度" value={(visibility * 100).toFixed(1) + '%'} color="#a855f7" />
             </div>
           </div>
@@ -130,6 +129,17 @@ export default function InterferencePage() {
             <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
               <MathRenderer>{'$$I = I_1 + I_2 + 2\\sqrt{I_1 I_2}\\cos(\\Delta\\phi)$$'}</MathRenderer>
             </div>
+          </div>
+        </div>
+        <div className="mt-6 text-sm text-lab-muted leading-relaxed">
+          <p className="mb-2">
+            <span className="text-laser-purple font-semibold">条纹可见度 (Visibility)：</span>
+            描述干涉条纹的清晰程度，取值范围 0 ~ 1。当两束光振幅相等 (A₁ = A₂) 时可见度为 1，条纹最清晰；当其中一束光振幅远大于另一束时可见度趋近于 0，条纹模糊直至消失。
+          </p>
+          <div className="bg-lab-bg/50 px-4 py-3 rounded-lg">
+            <MathRenderer>
+              {'$$V = \\frac{I_{max} - I_{min}}{I_{max} + I_{min}} = \\frac{2A_1 A_2}{A_1^2 + A_2^2}$$'}
+            </MathRenderer>
           </div>
         </div>
       </div>

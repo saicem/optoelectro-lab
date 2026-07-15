@@ -27,6 +27,7 @@ All commits MUST follow [Conventional Commits](https://www.conventionalcommits.o
 - 内容变更时遵循**文档优先工作流**：先更新 `doc/` 中的 md 文档，再同步修改 `src/pages/` 中的页面组件，最后一起提交。
 - `doc/learn/` 按大章节分目录：`part1-basics/`、`part2-source-transmission/`、`part3-modulator/`、`part4-system/`，术语表 `glossary.md` 在根目录。
 - `doc/lab/` 包含 5 个交互实验的设计文档。
+- 修改 `doc/learn/` 内容时，必须对照 `doc/learn/_outline.md` 检查内容重叠、内容遗漏、顺序调整和章节衔接点；结构或内容重大变更后必须同步更新 `_outline.md`。
 
 ## Architecture Notes
 - All page components are **statically imported** (no `React.lazy` / dynamic imports). Every page is bundled into a single `index.js` to eliminate network waterfall on navigation.

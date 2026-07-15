@@ -1,6 +1,14 @@
 # 组件结构
 
 ```
+doc/                                # 内容文档（内容唯一权威来源，优先于页面）
+├── lab/                            # 实验设计文档
+└── learn/                          # 学习内容文档（按 Part 分目录）
+    ├── part1-basics/
+    ├── part2-source-transmission/
+    ├── part3-modulator/
+    ├── part4-system/
+    └── glossary.md
 src/
 ├── components/
 │   ├── common/

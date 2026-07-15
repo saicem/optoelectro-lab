@@ -20,7 +20,59 @@
 
 ---
 
+## 文档体系与优先级
+
+### 文档目录结构
+
+```
+doc/
+├── lab/                          # 实验设计文档（5 个实验）
+│   ├── interference.md
+│   ├── mz-modulator.md
+│   ├── iq-modulator.md
+│   ├── polarization.md
+│   └── receiver.md
+└── learn/                        # 学习页面内容文档（按大章节分目录）
+    ├── part1-basics/             # Part 1 · 基础篇
+    │   └── wave-basics.md
+    ├── part2-source-transmission/ # Part 2 · 光源与传输篇
+    │   ├── laser.md
+    │   ├── fiber-optics.md
+    │   └── optoelectronic-materials.md
+    ├── part3-modulator/          # Part 3 · 调制器篇
+    │   ├── modulation-basics.md
+    │   ├── interference.md
+    │   ├── mz-modulator.md
+    │   ├── iq-modulator.md
+    │   ├── polarization.md
+    │   ├── nyquist-ofdm.md
+    │   └── pcs-coding.md
+    ├── part4-system/             # Part 4 · 系统篇
+    │   ├── receiver.md
+    │   ├── wdm-amplifier.md
+    │   └── system-overview.md
+    └── glossary.md               # 附录 · 术语表
+```
+
+### 文档优先级原则
+
+1. **`doc/` 中的 Markdown 文档为内容唯一权威来源（Single Source of Truth）**
+2. 当 `doc/` 中的 md 文档与 `src/pages/` 中的 React 页面组件内容发生冲突时，**以 `doc/` 中的 md 文档为准**
+3. `spec/` 中的文档描述系统设计、架构和规范；`doc/` 中的文档描述具体学习和实验内容
+
+### 文档优先工作流
+
+内容变更时遵循以下顺序：
+
+1. **先更新文档**：在 `doc/` 中修改对应的 md 文档，确定内容正确性
+2. **再更新页面**：根据文档内容同步修改 `src/pages/` 中的 React 页面组件
+3. **最后提交**：文档和页面一起提交，保持一致性
+
+---
+
 ## 文档索引
+
+### spec/ — 系统设计文档
 
 | 文档 | 内容 |
 |------|------|
@@ -31,6 +83,13 @@
 | [design.md](design.md) | UI 设计风格、配色、字体 |
 | [math.md](math.md) | 核心数学函数与公式 |
 | [deploy.md](deploy.md) | 部署方案与 CI/CD 配置 |
+
+### doc/ — 学习与实验内容文档
+
+| 目录 | 内容 |
+|------|------|
+| `doc/learn/` | 15 个学习章节的 Markdown 文档，按 Part 分目录 |
+| `doc/lab/` | 5 个交互实验的设计文档（组件、参数、协同关系） |
 
 ---
 

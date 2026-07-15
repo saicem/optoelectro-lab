@@ -34,11 +34,13 @@ doc/
 │   └── receiver.md
 └── learn/                        # 学习页面内容文档（按大章节分目录）
     ├── part1-basics/             # Part 1 · 基础篇
-    │   └── wave-basics.md
+    │   ├── wave-basics.md
+    │   ├── semiconductor-physics.md
+    │   ├── pn-junction.md
+    │   └── optoelectronic-materials.md
     ├── part2-source-transmission/ # Part 2 · 光源与传输篇
     │   ├── laser.md
-    │   ├── fiber-optics.md
-    │   └── optoelectronic-materials.md
+    │   └── fiber-optics.md
     ├── part3-modulator/          # Part 3 · 调制器篇
     │   ├── modulation-basics.md
     │   ├── interference.md

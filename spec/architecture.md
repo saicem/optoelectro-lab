@@ -67,7 +67,7 @@ src/
 │   ├── polarization/
 │   └── receiver/
 └── pages/           # 页面组件
-    ├── learn/       # 14 个章节页面
+    ├── learn/       # 22 个章节页面
     └── playground/  # 5 个实验页面
 ```
 

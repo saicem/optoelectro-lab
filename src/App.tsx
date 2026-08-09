@@ -4,9 +4,17 @@ import HomePage from '@/pages/HomePage';
 import { ROUTES } from '@/constants/routes';
 
 import LearnWaveBasics from '@/pages/learn/LearnWaveBasics';
+import LearnCrystalStructure from '@/pages/learn/LearnCrystalStructure';
+import LearnSemiconductorBasics from '@/pages/learn/LearnSemiconductorBasics';
+import LearnPNJunctionBasics from '@/pages/learn/LearnPNJunctionBasics';
+import LearnRecombination from '@/pages/learn/LearnRecombination';
+import LearnLightMatterInteraction from '@/pages/learn/LearnLightMatterInteraction';
+import LearnHeterojunction from '@/pages/learn/LearnHeterojunction';
+import LearnSemiconductorEquations from '@/pages/learn/LearnSemiconductorEquations';
+import LearnPNJunctionAdvanced from '@/pages/learn/LearnPNJunctionAdvanced';
+import LearnOptoelectronicMaterials from '@/pages/learn/LearnOptoelectronicMaterials';
 import LearnLaser from '@/pages/learn/LearnLaser';
 import LearnFiberOptics from '@/pages/learn/LearnFiberOptics';
-import LearnOptoelectronicMaterials from '@/pages/learn/LearnOptoelectronicMaterials';
 import LearnModulationBasics from '@/pages/learn/LearnModulationBasics';
 import LearnInterference from '@/pages/learn/LearnInterference';
 import LearnMZModulator from '@/pages/learn/LearnMZModulator';
@@ -32,9 +40,17 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path={ROUTES.LEARN.WAVE_BASICS} element={<LearnWaveBasics />} />
+          <Route path={ROUTES.LEARN.CRYSTAL_STRUCTURE} element={<LearnCrystalStructure />} />
+          <Route path={ROUTES.LEARN.SEMICONDUCTOR_BASICS} element={<LearnSemiconductorBasics />} />
+          <Route path={ROUTES.LEARN.PN_JUNCTION_BASICS} element={<LearnPNJunctionBasics />} />
+          <Route path={ROUTES.LEARN.RECOMBINATION} element={<LearnRecombination />} />
+          <Route path={ROUTES.LEARN.LIGHT_MATTER_INTERACTION} element={<LearnLightMatterInteraction />} />
+          <Route path={ROUTES.LEARN.HETEROJUNCTION} element={<LearnHeterojunction />} />
+          <Route path={ROUTES.LEARN.SEMICONDUCTOR_EQUATIONS} element={<LearnSemiconductorEquations />} />
+          <Route path={ROUTES.LEARN.PN_JUNCTION_ADVANCED} element={<LearnPNJunctionAdvanced />} />
+          <Route path={ROUTES.LEARN.OPTOELECTRONIC_MATERIALS} element={<LearnOptoelectronicMaterials />} />
           <Route path={ROUTES.LEARN.LASER} element={<LearnLaser />} />
           <Route path={ROUTES.LEARN.FIBER_OPTICS} element={<LearnFiberOptics />} />
-          <Route path={ROUTES.LEARN.OPTOELECTRONIC_MATERIALS} element={<LearnOptoelectronicMaterials />} />
           <Route path={ROUTES.LEARN.MODULATION_BASICS} element={<LearnModulationBasics />} />
           <Route path={ROUTES.LEARN.INTERFERENCE} element={<LearnInterference />} />
           <Route path={ROUTES.LEARN.MZ_MODULATOR} element={<LearnMZModulator />} />

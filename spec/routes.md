@@ -7,9 +7,17 @@
 | 路由 key | 路径 | 页面组件 | 篇章 |
 |----------|------|----------|------|
 | `ROUTES.LEARN.WAVE_BASICS` | `/learn/wave-basics` | LearnWaveBasics | Part 1 · 基础篇 |
+| `ROUTES.LEARN.CRYSTAL_STRUCTURE` | `/learn/crystal-structure` | LearnCrystalStructure | Part 1 · 基础篇 |
+| `ROUTES.LEARN.SEMICONDUCTOR_BASICS` | `/learn/semiconductor-basics` | LearnSemiconductorBasics | Part 1 · 基础篇 |
+| `ROUTES.LEARN.PN_JUNCTION_BASICS` | `/learn/pn-junction-basics` | LearnPNJunctionBasics | Part 1 · 基础篇 |
+| `ROUTES.LEARN.RECOMBINATION` | `/learn/recombination` | LearnRecombination | Part 1 · 基础篇 |
+| `ROUTES.LEARN.LIGHT_MATTER_INTERACTION` | `/learn/light-matter-interaction` | LearnLightMatterInteraction | Part 1 · 基础篇 |
+| `ROUTES.LEARN.HETEROJUNCTION` | `/learn/heterojunction` | LearnHeterojunction | Part 1 · 基础篇 |
+| `ROUTES.LEARN.SEMICONDUCTOR_EQUATIONS` | `/learn/semiconductor-equations` | LearnSemiconductorEquations | Part 1 · 基础篇 |
+| `ROUTES.LEARN.PN_JUNCTION_ADVANCED` | `/learn/pn-junction-advanced` | LearnPNJunctionAdvanced | Part 1 · 基础篇 |
+| `ROUTES.LEARN.OPTOELECTRONIC_MATERIALS` | `/learn/optoelectronic-materials` | LearnOptoelectronicMaterials | Part 1 · 基础篇 |
 | `ROUTES.LEARN.LASER` | `/learn/laser` | LearnLaser | Part 2 · 光源与传输篇 |
 | `ROUTES.LEARN.FIBER_OPTICS` | `/learn/fiber-optics` | LearnFiberOptics | Part 2 · 光源与传输篇 |
-| `ROUTES.LEARN.OPTOELECTRONIC_MATERIALS` | `/learn/optoelectronic-materials` | LearnOptoelectronicMaterials | Part 2 · 光源与传输篇 |
 | `ROUTES.LEARN.MODULATION_BASICS` | `/learn/modulation-basics` | LearnModulationBasics | Part 3 · 调制器篇 |
 | `ROUTES.LEARN.INTERFERENCE` | `/learn/interference` | LearnInterference | Part 3 · 调制器篇 |
 | `ROUTES.LEARN.MZ_MODULATOR` | `/learn/mz-modulator` | LearnMZModulator | Part 3 · 调制器篇 |

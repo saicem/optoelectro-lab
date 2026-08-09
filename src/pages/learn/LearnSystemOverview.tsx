@@ -80,7 +80,7 @@ export default function LearnSystemOverview() {
           </div>
           <p>
             400G DP-16QAM 的关键参数：使用 <TermNote term="DP-IQ 调制器" /> 实现 X/Y 双偏振复用， 每偏振采用{' '}
-            <TermNote term="16QAM" /> 调制（每符号 4 比特），符号率为 ~60 GBaud。 总比特率 = 2 (偏振) × 4 (每符号比特) ×
+            <TermNote term="16QAM" /> 调制（每符号 4 比特），符号率约为 60 GBaud。 总比特率 = 2 (偏振) × 4 (每符号比特) ×
             60 (GBaud) = 480 Gb/s，扣除约 20% 的 FEC 开销后为 400 Gb/s 净速率。
           </p>
           <div className="grid md:grid-cols-3 gap-4 mt-2">
@@ -296,8 +296,8 @@ export default function LearnSystemOverview() {
           </div>
           <p>
             长距离传输中，光纤的 <TermNote term="非线性效应" /> 是限制系统性能的关键因素。 入纤功率过高会引发{' '}
-            <TermNote term="自相位调制 (SPM)" />、<TermNote term="交叉相位调制 (XPM)" /> 和
-            <TermNote term="四波混频 (FWM)" /> 等非线性损伤。对于 400G DP-16QAM，典型入纤功率约为 +17 dBm 到 +19 dBm
+            <TermNote term="自相位调制" /> (SPM)、<TermNote term="交叉相位调制" /> (XPM) 和
+            <TermNote term="四波混频" /> (FWM) 等非线性损伤。对于 400G DP-16QAM，典型入纤功率约为 +17 dBm 到 +19 dBm
             每信道，需要在 OSNR 和非线性之间取得平衡。
           </p>
           <div className="bg-lab-surface/30 border border-laser-cyan/20 p-4 rounded-lg">

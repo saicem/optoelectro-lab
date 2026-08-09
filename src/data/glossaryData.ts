@@ -677,32 +677,13 @@ export const glossaryData: CategoryData[] = [
         detail: 'SPM 会导致脉冲频谱展宽，与色散相互作用可能加剧或缓解脉冲畸变，取决于色散符号和啁啾方向。',
       },
       {
-        term: '自相位调制 (SPM)',
-        english: 'Self-Phase Modulation (SPM)',
-        definition: '光脉冲自身的强度变化引起光纤折射率变化，从而调制脉冲自身相位的现象。',
-        detail: 'SPM 会导致脉冲频谱展宽，与色散相互作用可能加剧或缓解脉冲畸变，取决于色散符号和啁啾方向。',
-      },
-      {
         term: '交叉相位调制',
         english: 'Cross-Phase Modulation (XPM)',
         definition: '不同波长或偏振的信号相互引起相位调制，在 WDM 系统中产生信道间串扰。',
         detail: 'XPM 主要发生在相邻波长信道之间，可通过增大信道间隔或降低功率来减轻。',
       },
       {
-        term: '交叉相位调制 (XPM)',
-        english: 'Cross-Phase Modulation (XPM)',
-        definition: '不同波长或偏振的信号相互引起相位调制，在 WDM 系统中产生信道间串扰。',
-        detail: 'XPM 主要发生在相邻波长信道之间，可通过增大信道间隔或降低功率来减轻。',
-      },
-      {
         term: '四波混频',
-        english: 'Four-Wave Mixing (FWM)',
-        definition: '三个或更多光波在光纤非线性介质中相互作用产生新的频率分量的现象。',
-        detail:
-          'FWM 在色散较小的波段（如零色散点附近）尤为严重，产生的寄生波长会干扰原有信道。增大信道间隔或使用色散管理可有效抑制 FWM。',
-      },
-      {
-        term: '四波混频 (FWM)',
         english: 'Four-Wave Mixing (FWM)',
         definition: '三个或更多光波在光纤非线性介质中相互作用产生新的频率分量的现象。',
         detail:
@@ -864,7 +845,7 @@ export const glossaryData: CategoryData[] = [
         term: '频谱效率',
         english: 'Spectral Efficiency',
         definition:
-          'Spectral Efficiency，每赫兹带宽每秒传输的信息量，单位 bit/s/Hz。是衡量调制格式和传输系统性能的核心指标。',
+          '每赫兹带宽每秒传输的信息量，单位 bit/s/Hz。是衡量调制格式和传输系统性能的核心指标。',
       },
       {
         term: '码间干扰 (ISI)',
@@ -972,7 +953,7 @@ export const glossaryData: CategoryData[] = [
         term: '信噪比 (SNR)',
         english: 'Signal-to-Noise Ratio (SNR)',
         definition:
-          'Signal-to-Noise Ratio，信号功率与噪声功率的比值，通常以 dB 表示。是决定通信系统误码率的核心参数。SNR 越高，可支持的调制阶数越高，传输速率越大。',
+          '信号功率与噪声功率的比值，通常以 dB 表示。是决定通信系统误码率的核心参数。SNR 越高，可支持的调制阶数越高，传输速率越大。',
       },
       {
         term: 'NRZ 调制',

@@ -423,7 +423,7 @@ export default function LearnPolarization() {
         </div>
       </LearnSection>
 
-      <LearnSection id="s-4" title="实际挑战：偏振模色散 (PMD)与偏振相关损耗">
+      <LearnSection id="s-4" title="实际挑战：偏振模色散 (PMD) 与偏振相关损耗">
         <div className="space-y-4 text-lab-muted leading-relaxed">
           <p>
             在实际的光纤传输中，偏振态并不是一成不变的。光纤的不完善性

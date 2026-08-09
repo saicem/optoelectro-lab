@@ -32,7 +32,7 @@ src/
 │       └── ReceiverCanvas.tsx     # 接收器 Canvas（星座图 + BER/SNR 曲线）
 ├── pages/
 │   ├── HomePage.tsx               # 首页（按篇章分组展示学习模块）
-│   ├── learn/                     # 14 个章节页面
+│   ├── learn/                     # 22 个章节页面
 │   └── playground/                # 5 个实验页面
 ├── stores/                        # Zustand 状态管理（5 个 store）
 ├── hooks/                         # 自定义 Hook（useAnimationFrame, useChapterNavigation）

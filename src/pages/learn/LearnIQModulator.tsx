@@ -200,6 +200,7 @@ export default function LearnIQModulator() {
               <div>
                 <h5 className="font-medium text-laser-cyan mb-2">QPSK 映射示例</h5>
                 <div className="bg-lab-surface/50 p-4 rounded-lg">
+                  <p className="text-sm mb-2">QPSK 有 4 个星座点：</p>
                   <div className="text-xs mb-3 text-center">
                     {/* 简化的 QPSK 星座图 */}
                     <div className="flex justify-center">

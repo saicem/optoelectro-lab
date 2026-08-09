@@ -1,9 +1,17 @@
 export const ROUTES = {
   LEARN: {
     WAVE_BASICS: '/learn/wave-basics',
+    CRYSTAL_STRUCTURE: '/learn/crystal-structure',
+    SEMICONDUCTOR_BASICS: '/learn/semiconductor-basics',
+    PN_JUNCTION_BASICS: '/learn/pn-junction-basics',
+    RECOMBINATION: '/learn/recombination',
+    LIGHT_MATTER_INTERACTION: '/learn/light-matter-interaction',
+    HETEROJUNCTION: '/learn/heterojunction',
+    SEMICONDUCTOR_EQUATIONS: '/learn/semiconductor-equations',
+    PN_JUNCTION_ADVANCED: '/learn/pn-junction-advanced',
+    OPTOELECTRONIC_MATERIALS: '/learn/optoelectronic-materials',
     LASER: '/learn/laser',
     FIBER_OPTICS: '/learn/fiber-optics',
-    OPTOELECTRONIC_MATERIALS: '/learn/optoelectronic-materials',
     MODULATION_BASICS: '/learn/modulation-basics',
     INTERFERENCE: '/learn/interference',
     MZ_MODULATOR: '/learn/mz-modulator',

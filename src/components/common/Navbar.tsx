@@ -18,6 +18,14 @@ import {
   Cable,
   Network,
   Cpu,
+  Boxes,
+  Atom,
+  GitMerge,
+  Merge,
+  Sun,
+  Layers2,
+  Sigma,
+  Microscope,
 } from 'lucide-react';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { ROUTES } from '@/constants/routes';
@@ -36,14 +44,24 @@ interface LearnPart {
 const learnParts: LearnPart[] = [
   {
     label: 'Part 1 · 基础篇',
-    items: [{ path: ROUTES.LEARN.WAVE_BASICS, label: '光波基础与物理量', icon: BookOpen }],
+    items: [
+      { path: ROUTES.LEARN.WAVE_BASICS, label: '光波基础与物理量', icon: BookOpen },
+      { path: ROUTES.LEARN.CRYSTAL_STRUCTURE, label: '晶体结构与缺陷', icon: Boxes },
+      { path: ROUTES.LEARN.SEMICONDUCTOR_BASICS, label: '半导体基础', icon: Atom },
+      { path: ROUTES.LEARN.PN_JUNCTION_BASICS, label: 'PN 结基础', icon: GitMerge },
+      { path: ROUTES.LEARN.RECOMBINATION, label: '载流子复合机制', icon: Merge },
+      { path: ROUTES.LEARN.LIGHT_MATTER_INTERACTION, label: '光与物质相互作用', icon: Sun },
+      { path: ROUTES.LEARN.HETEROJUNCTION, label: '异质结与能带对准', icon: Layers2 },
+      { path: ROUTES.LEARN.SEMICONDUCTOR_EQUATIONS, label: '半导体基本方程', icon: Sigma },
+      { path: ROUTES.LEARN.PN_JUNCTION_ADVANCED, label: 'PN 结进阶', icon: Microscope },
+      { path: ROUTES.LEARN.OPTOELECTRONIC_MATERIALS, label: '光电效应与光电器件', icon: Cpu },
+    ],
   },
   {
     label: 'Part 2 · 光源与传输篇',
     items: [
       { path: ROUTES.LEARN.LASER, label: '激光器', icon: Flame },
       { path: ROUTES.LEARN.FIBER_OPTICS, label: '光纤与光波导', icon: Cable },
-      { path: ROUTES.LEARN.OPTOELECTRONIC_MATERIALS, label: '光电材料', icon: Cpu },
     ],
   },
   {

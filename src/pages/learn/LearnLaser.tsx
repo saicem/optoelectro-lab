@@ -426,7 +426,7 @@ export default function LearnLaser() {
           <div className="bg-lab-bg/50 p-5 rounded-xl mt-4">
             <h4 className="font-semibold text-lab-text mb-2">相对强度噪声 (RIN)</h4>
             <p className="text-sm">
-              <TermNote term="相对强度噪声" />
+              <span className="text-laser-cyan font-semibold">相对强度噪声</span>
               （Relative Intensity Noise, RIN）是衡量激光器输出功率稳定性的关键指标，
               定义为光功率波动的均方值相对于平均光功率平方的比值，通常用 dB/Hz 表示。
             </p>

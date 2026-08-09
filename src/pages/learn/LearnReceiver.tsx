@@ -230,7 +230,7 @@ export default function LearnReceiver() {
             </div>
             <div className="border border-laser-purple/30 bg-laser-purple/5 p-4 rounded-xl">
               <h4 className="font-semibold text-laser-purple mb-2">
-                <TermNote term="噪声等效功率" /> (NEP)
+                <span className="text-laser-purple">噪声等效功率</span> (NEP)
               </h4>
               <p className="text-sm mb-2">产生与噪声电流相同大小的信号所需的光功率，是接收机噪声的综合指标。</p>
               <div className="bg-lab-bg/50 px-3 py-2 rounded-lg text-xs">

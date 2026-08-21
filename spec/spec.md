@@ -64,7 +64,11 @@ doc/
     │   ├── 02-power-meters.md
     │   ├── 03-integrating-sphere.md
     │   ├── 04-optical-switches.md
-    │   └── 05-spectrometers.md
+    │   ├── 05-spectrometers.md
+    │   ├── 06-fiber-testing.md
+    │   ├── 07-time-domain-testing.md
+    │   ├── 08-beam-polarization.md
+    │   └── 09-passive-components.md
     └── glossary.md               # 附录 · 术语表
 ```
 
@@ -113,7 +117,7 @@ doc/
 
 | 目录 | 内容 |
 |------|------|
-| `doc/learn/` | 27 个学习章节的 Markdown 文档，按 Part 分目录 |
+| `doc/learn/` | 31 个学习章节的 Markdown 文档，按 Part 分目录 |
 | `doc/lab/` | 5 个交互实验的设计文档（组件、参数、协同关系） |
 
 ---
@@ -122,7 +126,7 @@ doc/
 
 ### Learn · 学习路径
 
-共 27 个章节，按 5 个 Part + 附录分组：
+共 31 个章节，按 5 个 Part + 附录分组：
 
 **Part 1 · 基础篇**
 | 章节 | 内容 |
@@ -170,6 +174,10 @@ doc/
 | 积分球与光辐射测量 | 辐射/光度量、余弦修正、积分球原理、光通量测量 |
 | 光开关与光路由 | 机械/MEMS/热光/电光开关，开关矩阵/WSS |
 | 光谱仪与波长计 | 光栅/OSA/FTIR/波长计，RBW、动态范围、校准 |
+| 光纤参数测量与故障定位 | OTDR/CD/PMD 分析仪、端面检测、熔接机、截断法 |
+| 时域测试与误码分析 | 光示波器（眼图）、BERT、LCA、相位噪声与线宽 |
+| 光束表征与偏振测量 | 光束剖面仪、M² 分析仪、偏振计、PDL/PMD 分析仪 |
+| 无源光器件 | 衰减器/隔离器/环形器/分束器/滤波器，通用指标 |
 
 **附录**
 | 章节 | 内容 |

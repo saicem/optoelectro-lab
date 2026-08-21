@@ -59,6 +59,12 @@ doc/
     │   ├── 01-receiver.md
     │   ├── 02-wdm-amplifier.md
     │   └── 03-system-overview.md
+    ├── part5-instruments/       # Part 5 · 光学仪器篇
+    │   ├── 01-light-sources.md
+    │   ├── 02-power-meters.md
+    │   ├── 03-integrating-sphere.md
+    │   ├── 04-optical-switches.md
+    │   └── 05-spectrometers.md
     └── glossary.md               # 附录 · 术语表
 ```
 
@@ -107,7 +113,7 @@ doc/
 
 | 目录 | 内容 |
 |------|------|
-| `doc/learn/` | 22 个学习章节的 Markdown 文档，按 Part 分目录 |
+| `doc/learn/` | 27 个学习章节的 Markdown 文档，按 Part 分目录 |
 | `doc/lab/` | 5 个交互实验的设计文档（组件、参数、协同关系） |
 
 ---
@@ -116,7 +122,7 @@ doc/
 
 ### Learn · 学习路径
 
-共 22 个章节，按 4 个 Part + 附录分组：
+共 27 个章节，按 5 个 Part + 附录分组：
 
 **Part 1 · 基础篇**
 | 章节 | 内容 |
@@ -155,6 +161,15 @@ doc/
 | 光接收器 | 相干接收、SNR、BER、EVM、DSP |
 | WDM 与光放大器 | 波分复用、EDFA、ASE 噪声、Flex-Grid |
 | 完整光通信系统 | 400G DP-16QAM 端到端链路全景 |
+
+**Part 5 · 光学仪器篇**
+| 章节 | 内容 |
+|------|------|
+| 光源与发射设备 | LD/SLED/ASE/LED/白光源/超连续谱，选型与工程指标 |
+| 光功率计与探测器 | 热电堆/光电二极管，响应度、NEP、校准与选型 |
+| 积分球与光辐射测量 | 辐射/光度量、余弦修正、积分球原理、光通量测量 |
+| 光开关与光路由 | 机械/MEMS/热光/电光开关，开关矩阵/WSS |
+| 光谱仪与波长计 | 光栅/OSA/FTIR/波长计，RBW、动态范围、校准 |
 
 **附录**
 | 章节 | 内容 |
